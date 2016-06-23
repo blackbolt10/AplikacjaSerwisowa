@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:local="http://schemas.android.com/apk/res-auto">
+
+  <item android:id="@+id/synchronizacja_glowneOknoMenu"
+        android:title="Synchronizacja"/>
+
+  <item android:id="@+id/wyloguj_glowneOknoMenu"
+        android:title="Wyloguj"/>
+
+  <item android:id="@+id/zamknij_glowneOknoMenu"
+        android:title="Zamknij"/>
+</menu>

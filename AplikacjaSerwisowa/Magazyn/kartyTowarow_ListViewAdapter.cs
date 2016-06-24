@@ -21,6 +21,24 @@ namespace AplikacjaSerwisowa
         private Int32 mukrywanie;
 
         private Context mContext;
+        private kontrahenci_Activity kontrahenci_Activity;
+        private object p1;
+        private object p2;
+        private object p3;
+        private object p4;
+        private object p5;
+        private object p6;
+        private object p7;
+        private object p8;
+        private object p9;
+        private object p10;
+        private object p11;
+        private object p12;
+        private object p13;
+        private object p14;
+        private object p15;
+        private object p16;
+        private int v;
 
         public kartyTowarow_ListViewAdapter(Context context, List<string> twr_kod_List, List<string> twr_gidnumer_List, List<string> twr_typ_List, List<string> twr_nazwa_List, Int32 ukrywanie)
         {
@@ -32,6 +50,29 @@ namespace AplikacjaSerwisowa
 
             mContext = context;
         }
+
+        public kartyTowarow_ListViewAdapter(kontrahenci_Activity kontrahenci_Activity, object p1, object p2, object p3, object p4, object p5, object p6, object p7, object p8, object p9, object p10, object p11, object p12, object p13, object p14, object p15, object p16, int v)
+        {
+            this.kontrahenci_Activity = kontrahenci_Activity;
+            this.p1 = p1;
+            this.p2 = p2;
+            this.p3 = p3;
+            this.p4 = p4;
+            this.p5 = p5;
+            this.p6 = p6;
+            this.p7 = p7;
+            this.p8 = p8;
+            this.p9 = p9;
+            this.p10 = p10;
+            this.p11 = p11;
+            this.p12 = p12;
+            this.p13 = p13;
+            this.p14 = p14;
+            this.p15 = p15;
+            this.p16 = p16;
+            this.v = v;
+        }
+
         public override int Count
         {
             get

@@ -139,7 +139,7 @@ namespace AplikacjaSerwisowa
 
             try
             {
-                plikXML = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                plikXML = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
                 FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new System.Uri(server + "//" + fileName));
                 reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
                 reqFTP.UseBinary = true;
@@ -170,7 +170,7 @@ namespace AplikacjaSerwisowa
             }
             catch (Exception exc)
             {
-                messagebox(exc.Message,"B³¹d",0);
+                messagebox("Wyst¹pi³ b³¹d funkcji ustawienia_Activity.pobierzXML(): " + exc.Message,"B³¹d",0);
                 System.IO.File.Delete(documentsPath + "/" + fileName);
                 return false;
             }       

@@ -210,5 +210,87 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+
+
+
+
+
+
+
+
+
+
+
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela kontrahentow***************************|
+            *---------------------------------------------------------------------------------
+        */
+
+        public string stworzKntKartyTabele()
+        {
+            String output = "";
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+
+                try
+                {
+                    db.DropTable<KntKartyTable>();
+                }
+                catch(Exception) { }
+
+                db.CreateTable<KntKartyTable>();
+
+                output = "Tabela kontrahentow zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzKntKartyTabele() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+        public String kntKarty_InsertRecord(KntKartyTable item)
+        {
+            String output = "";
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+
+                db.Insert(item);
+                output = "Wpis dodany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.kntKarty_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+        public String kntKarty_GetAllRecords()
+        {
+            String output = "";
+
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+                var table = db.Table<KntKartyTable>();
+
+                foreach(var item in table)
+                {
+                    output += item.Id + ": GIDNum:" + item.Knt_GIDNumer + ", A:" + item.Knt_Akrnonim + "\n";
+                }
+            }
+            catch(Exception exc)
+            {
+                output += "DBRepository.kntKarty_GetAllRecords() Error: " + exc.Message;
+            }
+
+            return output;
+        }
     }
 }

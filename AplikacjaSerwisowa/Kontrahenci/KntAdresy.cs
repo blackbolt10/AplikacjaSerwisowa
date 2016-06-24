@@ -57,8 +57,5 @@ namespace AplikacjaSerwisowa
 
         [MaxLength(255)]
         public String Kna_email { get; set; }
-
-        [MaxLength(255)]
-        public String Kna_url { get; set; }
     }
 }

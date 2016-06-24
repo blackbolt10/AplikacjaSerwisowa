@@ -22,8 +22,11 @@ namespace AplikacjaSerwisowa
         EditText adresSerwera, instancjaSerwer, loginSerwer, hasloSerwer;
         Button zapiszButton, synchronizacja_Button, test2Button;
 
-        String documentsPath = "/sdcard/Download/";
-        String fileName = "karty_towarowe.xml";
+        String documentsPath = "/sdcard/Download";
+
+        String nazwaPlikuKartyTowarow = "karty_towarowe.xml";
+        String nazwaKntKarty = "knt_karty.xml";
+        String nazwaKnaAdresy= "kna_aarty.xml";
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -77,9 +80,13 @@ namespace AplikacjaSerwisowa
 
             if (isOnline)
             {
-                if (pobierzXML())
+                if (pobierzXML(nazwaPlikuKartyTowarow))
                 {
-                    odczytajXML();
+                    odczytajXML(nazwaPlikuKartyTowarow);
+                }
+                if(pobierzXML(nazwaKntKarty))
+                {
+                    odczytajXML(nazwaKntKarty);
                 }
             }
             else
@@ -88,20 +95,27 @@ namespace AplikacjaSerwisowa
             }
 
         }
-        private Boolean pobierzXML()
+        private Boolean pobierzXML(String nazwaPlikuXML)
         {
-            Toast.MakeText(this, "Pobieranie danych", ToastLength.Short).Show();
+            Toast.MakeText(this, "Pobieranie pliku "+ nazwaPlikuXML, ToastLength.Short).Show();
 
             String server = adresSerwera.Text;
             String userName = loginSerwer.Text;
             String password = hasloSerwer.Text;
 
-            var filePath = Path.Combine(documentsPath, fileName);
-            System.IO.FileStream plikXML = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            var filePath = Path.GetFullPath(documentsPath + "/" + nazwaPlikuXML);
+
+            System.IO.FileStream plikXML;
+            try
+            {
+                System.IO.File.Delete(documentsPath + "/" + nazwaPlikuXML);
+            }
+            catch(Exception) { }
 
             try
             {
-                FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new System.Uri(server + "/" + fileName));
+                plikXML = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite,FileShare.ReadWrite);
+                FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new System.Uri(server + "/" + nazwaPlikuXML));
                 reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
                 reqFTP.UseBinary = true;
                 reqFTP.Credentials = new NetworkCredential(userName, password);
@@ -119,17 +133,18 @@ namespace AplikacjaSerwisowa
                     readCount = ftpStream.Read(buffer, 0, bufferSize);
                 }
 
-                plikXML.Close();
+                ftpStream.Flush();
                 ftpStream.Close();
                 response.Close();
-                Toast.MakeText(this, "koniec odczytu!", ToastLength.Short).Show();
+                plikXML.Close();
+                Toast.MakeText(this, "Zamykanie pliku "+ nazwaPlikuXML, ToastLength.Short).Show();
 
                 return true;
             }
             catch (Exception exc)
             {
-                messagebox(exc.Message, "B³¹d", 0);
-                DeleteFile(filePath);
+                messagebox("Wyst¹pi³ b³¹d funkcji pobierzXML(" + nazwaPlikuXML + ") :" + exc.Message, "B³¹d", 0);
+                System.IO.File.Delete(documentsPath + "/" + nazwaPlikuXML);
                 return false;
             }
 
@@ -150,9 +165,9 @@ namespace AplikacjaSerwisowa
             Dialog dialog = alert.Create();
             dialog.Show();
         }
-        private void odczytajXML()
+        private void odczytajXML(String nazwaPlikuXML)
         {
-            var filePath = Path.Combine(documentsPath, fileName);
+            var filePath = Path.GetFullPath(documentsPath + "/" + nazwaPlikuXML);
             const Int32 BufferSize = 128; ;
             String plikXMLString = "";
             try
@@ -173,8 +188,29 @@ namespace AplikacjaSerwisowa
             }
             catch (Exception exc)
             {
-                messagebox("Wyst¹pi³ b³¹d podczas odczytu pliku: " + exc.Message);
+                messagebox("Wyst¹pi³ b³¹d funkcji odczytajXML(" + nazwaPlikuXML + ") :" + exc.Message,"B³¹d",0);
             }
+
+            if(nazwaPlikuXML == nazwaPlikuKartyTowarow)
+            {
+                wczytajPlikKartyTowarow(plikXMLString);
+            }
+            else if(nazwaPlikuXML == nazwaKntKarty)
+            {
+                wczytajPlikKntKarty(plikXMLString);
+            }
+            else if(nazwaPlikuXML == nazwaKnaAdresy)
+            {
+                wczytajPlikKnaAdresy(plikXMLString);
+            }
+            else
+            {
+                messagebox("Nie uda³o siê odczytaæ pliku XML. Nie rozpoznana nazwa pliku", "B³¹d", 0);
+            }            
+        }
+
+        private void wczytajPlikKartyTowarow(String plikXMLString)
+        {
             List<String> twrKodList = new List<String>();
             List<String> twrGidNumerList = new List<String>();
             List<String> twrTypList = new List<String>();
@@ -185,7 +221,7 @@ namespace AplikacjaSerwisowa
                 XmlDocument xml = new XmlDocument();
                 xml.LoadXml(plikXMLString);
                 XmlNodeList xnList = xml.SelectNodes("/root/towary/towar");
-                foreach (XmlNode xn in xnList)
+                foreach(XmlNode xn in xnList)
                 {
                     string twrKod = xn["twr_kod"].InnerText;
                     string twrGidNumer = xn["twr_gidnumer"].InnerText;
@@ -198,12 +234,12 @@ namespace AplikacjaSerwisowa
                     twrnazwaList.Add(twrNawa);
                 }
             }
-            catch (Exception exc)
+            catch(Exception exc)
             {
                 messagebox("Wyst¹pi³ b³¹d podczas odczytu xml: " + exc.Message);
             }
 
-            if (twrKodList.Count > 0 && twrGidNumerList.Count > 0 && twrTypList.Count > 0 && twrnazwaList.Count > 0)
+            if(twrKodList.Count > 0 && twrGidNumerList.Count > 0 && twrTypList.Count > 0 && twrnazwaList.Count > 0)
             {
                 zapiszKartyTowaroweWBazie(twrKodList, twrGidNumerList, twrTypList, twrnazwaList);
             }
@@ -229,7 +265,119 @@ namespace AplikacjaSerwisowa
                // Toast.MakeText(this, i + ": " + result, ToastLength.Short).Show();
             }
         }
-        private void test2()
+
+        private void wczytajPlikKntKarty(String plikXMLString)
+        {
+            List<string> knt_gidnumer_List = new List<string>();
+            List<string> knt_akronim_List = new List<string>();
+            List<string> knt_nazwa1_List = new List<string>();
+            List<string> knt_nazwa2_List = new List<string>();
+            List<string> knt_nazwa3_List = new List<string>();
+            List<string> knt_kodp_List = new List<string>();
+            List<string> knt_miasto_List = new List<string>();
+            List<string> knt_ulica_List = new List<string>();
+            List<string> knt_adresy_List = new List<string>();
+            List<string> knt_nip_List = new List<string>();
+            List<string> knt_telefon1_List = new List<string>();
+            List<string> knt_telefon2_List = new List<string>();
+            List<string> knt_telefon3_List = new List<string>();
+            List<string> knt_telex_List = new List<string>();
+            List<string> knt_fax_List = new List<string>();
+            List<string> knt_email_List = new List<string>();
+            List<string> knt_url_List = new List<string>();
+            
+            try
+            {
+                XmlDocument xml = new XmlDocument();
+                xml.LoadXml(plikXMLString);
+                XmlNodeList xnList = xml.SelectNodes("/root/kntkarty/karta");
+                foreach(XmlNode xn in xnList)
+                {
+                    knt_gidnumer_List.Add(xn["knt_gidnumer"].InnerText);
+                    knt_akronim_List.Add(xn["knt_akronim"].InnerText);
+                    knt_nazwa1_List.Add(xn["knt_nazwa1"].InnerText);
+                    knt_nazwa2_List.Add(xn["knt_nazwa2"].InnerText);
+                    knt_nazwa3_List.Add(xn["knt_nazwa3"].InnerText);
+                    knt_kodp_List.Add(xn["knt_kodp"].InnerText);
+                    knt_miasto_List.Add(xn["knt_miasto"].InnerText);
+                    knt_ulica_List.Add(xn["knt_ulica"].InnerText);
+                    knt_adresy_List.Add(xn["knt_adresy"].InnerText);
+                    knt_nip_List.Add(xn["knt_nip"].InnerText);
+                    knt_telefon1_List.Add(xn["knt_telefon1"].InnerText);
+                    knt_telefon2_List.Add(xn["knt_telefon2"].InnerText);
+                    knt_telefon3_List.Add(xn["knt_telefon3"].InnerText);
+                    knt_telex_List.Add(xn["knt_telex"].InnerText);
+                    knt_fax_List.Add(xn["knt_fax"].InnerText);
+                    knt_email_List.Add(xn["knt_email"].InnerText);
+                    knt_url_List.Add(xn["knt_url"].InnerText);                    
+                }
+            }
+
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d funkcji synchronizacja_Activity.wczytajPlikKntKarty(): " + exc.Message,"B³¹d",0);
+            }
+
+            if(knt_gidnumer_List.Count > 0)
+            {
+                zapiszKntKartyWBazie(knt_gidnumer_List, knt_akronim_List, knt_nazwa1_List, knt_nazwa2_List, knt_nazwa3_List, knt_kodp_List, knt_miasto_List, knt_ulica_List, knt_adresy_List, knt_nip_List, knt_telefon1_List, knt_telefon2_List, knt_telefon3_List, knt_telex_List, knt_fax_List, knt_email_List, knt_url_List);
+            }
+        }
+        private void zapiszKntKartyWBazie(List<string> knt_gidnumer_List, List<string> knt_akronim_List, List<string> knt_nazwa1_List, List<string> knt_nazwa2_List, List<string> knt_nazwa3_List, List<string> knt_kodp_List, List<string> knt_miasto_List, List<string> knt_ulica_List, List<string> knt_adresy_List, List<string> knt_nip_List, List<string> knt_telefon1_List, List<string> knt_telefon2_List, List<string> knt_telefon3_List, List<string> knt_telex_List, List<string> knt_fax_List, List<string> knt_email_List, List<string> knt_url_List)
+        {
+            DBRepository dbr = new DBRepository();
+            String result = dbr.createDB();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();            
+            result = dbr.stworzKntKartyTabele();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();
+
+            for(int i = 0; i < knt_gidnumer_List.Count; i++)
+            {
+                KntKartyTable kntKarta = new KntKartyTable();
+                kntKarta.Knt_GIDNumer = Convert.ToInt32(knt_gidnumer_List[i]);
+                kntKarta.Knt_Akrnonim = knt_akronim_List[i];
+                kntKarta.Knt_nazwa1 = knt_nazwa1_List[i];
+                kntKarta.Knt_nazwa2 = knt_nazwa2_List[i];
+                kntKarta.Knt_nazwa3 = knt_nazwa3_List[i];
+                kntKarta.Knt_KodP = knt_kodp_List[i];
+                kntKarta.Knt_miasto = knt_miasto_List[i];
+                kntKarta.Knt_ulica = knt_ulica_List[i];
+                kntKarta.Knt_Adres = knt_adresy_List[i];
+                kntKarta.Knt_nip = knt_nip_List[i];
+                kntKarta.Knt_telefon1 = knt_telefon1_List[i];
+                kntKarta.Knt_telefon2 = knt_telefon2_List[i];
+                kntKarta.Knt_telefon3 = knt_telefon3_List[i];
+                kntKarta.Knt_telex = knt_telex_List[i];
+                kntKarta.Knt_fax = knt_fax_List[i];
+                kntKarta.Knt_email = knt_email_List[i];
+                kntKarta.Knt_url = knt_url_List[i];
+
+                result = dbr.kntKarty_InsertRecord(kntKarta);
+                // Toast.MakeText(this, i + ": " + result, ToastLength.Short).Show();
+            }
+        }
+        private void wczytajPlikKnaAdresy(String plikXMLString)
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void test2()
         {
             DBRepository dbr = new DBRepository();
             String result = dbr.kartyTowarow_GetAllRecords();

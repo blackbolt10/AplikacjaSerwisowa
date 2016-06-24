@@ -5,8 +5,8 @@ using SQLite;
 
 namespace AplikacjaSerwisowa
 {
-    [Table("KntKarty")]
-    public class KntKarty
+    [Table("KntKartyTable")]
+    public class KntKartyTable
     {
         [PrimaryKey, AutoIncrement, Column("_Id")]
         public int Id { get; set; }
@@ -47,6 +47,8 @@ namespace AplikacjaSerwisowa
         [MaxLength(30)]
         public String Knt_telefon2 { get; set; }
 
+        [MaxLength(30)]
+        public String Knt_telefon3 { get; set; }
         [MaxLength(30)]
         public String Knt_telex { get; set; }
 

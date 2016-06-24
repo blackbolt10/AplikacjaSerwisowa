@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:weightSum="2"
+    android:paddingTop="5.0dp"
+    android:paddingBottom="5.0dp">
+    <TextView
+        android:text="Akronim kontrahenta"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/akronimKontrahenciRowTextView"
+        android:maxHeight="100.0dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/akronimKontrahenciRowTextView"
+        android:id="@+id/linearLayout2">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="33.0dp"
+            android:id="@+id/linearLayout1"
+            android:weightSum="2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <TextView
+                android:text="Ulica"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/ulicaKontrahenciRowTextView"
+                android:layout_weight="1" />
+            <TextView
+                android:text="Telefon1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/telefonKontrahenciRowTextView"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="33.0dp"
+            android:id="@+id/adresKontrahenciLinearLayout"
+            android:weightSum="3"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true">
+            <TextView
+                android:text="Adres+kodP"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/adresKodPKontrahenciRowTextView"
+                android:layout_weight="1" />
+            <TextView
+                android:text="Email"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/emailKontrahenciRowsTextView"
+                android:layout_weight="2" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="33.0dp"
+            android:id="@+id/parametryKontrahenciLinearLayout"
+            android:weightSum="2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true">
+            <TextView
+                android:text="GIDNumer"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/gidNumerKontrahenciRowTextView" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

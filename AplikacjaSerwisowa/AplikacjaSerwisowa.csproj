@@ -60,8 +60,9 @@
   <ItemGroup>
     <Compile Include="FragmentA.cs" />
     <Compile Include="glowneOkno_Activity.cs" />
+    <Compile Include="Kontrahenci\kntKarty_ListViewAdapter.cs" />
     <Compile Include="Kontrahenci\KntAdresy.cs" />
-    <Compile Include="Kontrahenci\KntKarty.cs" />
+    <Compile Include="Kontrahenci\KntKartyTable.cs" />
     <Compile Include="Magazyn\kartyTowarowTable.cs" />
     <Compile Include="Magazyn\kartyTowarow_ListViewAdapter.cs" />
     <Compile Include="Kontrahenci\kontrahenci_Activity.cs" />
@@ -80,6 +81,9 @@
     <Compile Include="ustawienia_Activity.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\layout\kontrahenci_row.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />

@@ -90,23 +90,20 @@ namespace AplikacjaSerwisowa
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060011
-			public const int adresKodPKontrahenciRowTextView = 2131099665;
+			// aapt resource value: 0x7f060012
+			public const int adresKodPKontrahenciRowTextView = 2131099666;
 			
-			// aapt resource value: 0x7f060010
-			public const int adresKontrahenciLinearLayout = 2131099664;
+			// aapt resource value: 0x7f060028
+			public const int adresSerwerSynchronizacja_EditText = 2131099688;
+			
+			// aapt resource value: 0x7f060031
+			public const int adresSerwer_EditText = 2131099697;
 			
 			// aapt resource value: 0x7f060027
-			public const int adresSerwerSynchronizacja_EditText = 2131099687;
+			public const int adresSerwer_textView = 2131099687;
 			
-			// aapt resource value: 0x7f060030
-			public const int adresSerwer_EditText = 2131099696;
-			
-			// aapt resource value: 0x7f060026
-			public const int adresSerwer_textView = 2131099686;
-			
-			// aapt resource value: 0x7f06001b
-			public const int adresTextView = 2131099675;
+			// aapt resource value: 0x7f06001c
+			public const int adresTextView = 2131099676;
 			
 			// aapt resource value: 0x7f060005
 			public const int akronimKartyTowaroweRowTextView = 2131099653;
@@ -114,44 +111,50 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06000d
 			public const int akronimKontrahenciRowTextView = 2131099661;
 			
-			// aapt resource value: 0x7f060018
-			public const int dataTextView = 2131099672;
+			// aapt resource value: 0x7f06000e
+			public const int daneKontrahenta1inearLayout = 2131099662;
 			
-			// aapt resource value: 0x7f060012
-			public const int emailKontrahenciRowsTextView = 2131099666;
+			// aapt resource value: 0x7f060011
+			public const int daneKontrahenta2LinearLayout = 2131099665;
+			
+			// aapt resource value: 0x7f060019
+			public const int dataTextView = 2131099673;
+			
+			// aapt resource value: 0x7f060013
+			public const int emailKontrahenciRowsTextView = 2131099667;
 			
 			// aapt resource value: 0x7f06000a
 			public const int gidNumerKartyTowaroweRowTextView = 2131099658;
 			
-			// aapt resource value: 0x7f060014
-			public const int gidNumerKontrahenciRowTextView = 2131099668;
-			
-			// aapt resource value: 0x7f06001c
-			public const int godzinaTextView = 2131099676;
-			
-			// aapt resource value: 0x7f06002c
-			public const int hasloSerwerSynchronizacja_EditText = 2131099692;
-			
-			// aapt resource value: 0x7f060033
-			public const int hasloSerwer_EditText = 2131099699;
-			
-			// aapt resource value: 0x7f060021
-			public const int haslo_EditText = 2131099681;
-			
-			// aapt resource value: 0x7f060020
-			public const int haslo_textView = 2131099680;
-			
-			// aapt resource value: 0x7f060029
-			public const int instancjaSerwerSynchronizacja_EditText = 2131099689;
-			
-			// aapt resource value: 0x7f060031
-			public const int instancjaSerwer_EditText = 2131099697;
-			
-			// aapt resource value: 0x7f060028
-			public const int instancjaSerwer_textView = 2131099688;
+			// aapt resource value: 0x7f060015
+			public const int gidNumerKontrahenciRowTextView = 2131099669;
 			
 			// aapt resource value: 0x7f06001d
-			public const int kartyTowarowListView = 2131099677;
+			public const int godzinaTextView = 2131099677;
+			
+			// aapt resource value: 0x7f06002d
+			public const int hasloSerwerSynchronizacja_EditText = 2131099693;
+			
+			// aapt resource value: 0x7f060034
+			public const int hasloSerwer_EditText = 2131099700;
+			
+			// aapt resource value: 0x7f060022
+			public const int haslo_EditText = 2131099682;
+			
+			// aapt resource value: 0x7f060021
+			public const int haslo_textView = 2131099681;
+			
+			// aapt resource value: 0x7f06002a
+			public const int instancjaSerwerSynchronizacja_EditText = 2131099690;
+			
+			// aapt resource value: 0x7f060032
+			public const int instancjaSerwer_EditText = 2131099698;
+			
+			// aapt resource value: 0x7f060029
+			public const int instancjaSerwer_textView = 2131099689;
+			
+			// aapt resource value: 0x7f06001e
+			public const int kartyTowarowListView = 2131099678;
 			
 			// aapt resource value: 0x7f06000c
 			public const int kontrahenciListView = 2131099660;
@@ -159,8 +162,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060003
 			public const int kontrahenci_Button = 2131099651;
 			
-			// aapt resource value: 0x7f060017
-			public const int kontrahentTextView = 2131099671;
+			// aapt resource value: 0x7f060018
+			public const int kontrahentTextView = 2131099672;
 			
 			// aapt resource value: 0x7f060007
 			public const int linearLayout1 = 2131099655;
@@ -168,29 +171,29 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060006
 			public const int linearLayout2 = 2131099654;
 			
-			// aapt resource value: 0x7f06001a
-			public const int linearLayout3 = 2131099674;
+			// aapt resource value: 0x7f06001b
+			public const int linearLayout3 = 2131099675;
 			
-			// aapt resource value: 0x7f060015
-			public const int listView1 = 2131099669;
+			// aapt resource value: 0x7f060016
+			public const int listView1 = 2131099670;
 			
 			// aapt resource value: 0x7f060002
 			public const int listaZlecen_Button = 2131099650;
 			
-			// aapt resource value: 0x7f060023
-			public const int loadingPanel = 2131099683;
+			// aapt resource value: 0x7f060024
+			public const int loadingPanel = 2131099684;
+			
+			// aapt resource value: 0x7f06002c
+			public const int loginSerwerSynchronizacja_EditText = 2131099692;
+			
+			// aapt resource value: 0x7f060033
+			public const int loginSerwer_EditText = 2131099699;
 			
 			// aapt resource value: 0x7f06002b
-			public const int loginSerwerSynchronizacja_EditText = 2131099691;
+			public const int loginSerwer_textView = 2131099691;
 			
-			// aapt resource value: 0x7f060032
-			public const int loginSerwer_EditText = 2131099698;
-			
-			// aapt resource value: 0x7f06002a
-			public const int loginSerwer_textView = 2131099690;
-			
-			// aapt resource value: 0x7f06001f
-			public const int login_EditText = 2131099679;
+			// aapt resource value: 0x7f060020
+			public const int login_EditText = 2131099680;
 			
 			// aapt resource value: 0x7f060004
 			public const int magazyn_Button = 2131099652;
@@ -204,71 +207,71 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060009
 			public const int parametryKartyTowarowLinearLayout = 2131099657;
 			
-			// aapt resource value: 0x7f060013
-			public const int parametryKontrahenciLinearLayout = 2131099667;
+			// aapt resource value: 0x7f060014
+			public const int parametryKontrahenciLinearLayout = 2131099668;
 			
-			// aapt resource value: 0x7f060016
-			public const int realizacjaImageView = 2131099670;
+			// aapt resource value: 0x7f060017
+			public const int realizacjaImageView = 2131099671;
 			
 			// aapt resource value: 0x7f060000
 			public const int relativeLayout1 = 2131099648;
 			
-			// aapt resource value: 0x7f060035
-			public const int synchronizacjaButton = 2131099701;
-			
-			// aapt resource value: 0x7f06002e
-			public const int synchronizacjaSynchronizacjaButton = 2131099694;
-			
-			// aapt resource value: 0x7f060037
-			public const int synchronizacja_glowneOknoMenu = 2131099703;
-			
-			// aapt resource value: 0x7f06000f
-			public const int telefonKontrahenciRowTextView = 2131099663;
-			
-			// aapt resource value: 0x7f060019
-			public const int telefonTextView = 2131099673;
+			// aapt resource value: 0x7f060036
+			public const int synchronizacjaButton = 2131099702;
 			
 			// aapt resource value: 0x7f06002f
-			public const int test2Synchronizacja_button = 2131099695;
+			public const int synchronizacjaSynchronizacjaButton = 2131099695;
 			
-			// aapt resource value: 0x7f060036
-			public const int test2_button = 2131099702;
+			// aapt resource value: 0x7f060038
+			public const int synchronizacja_glowneOknoMenu = 2131099704;
+			
+			// aapt resource value: 0x7f060010
+			public const int telefonKontrahenciRowTextView = 2131099664;
+			
+			// aapt resource value: 0x7f06001a
+			public const int telefonTextView = 2131099674;
+			
+			// aapt resource value: 0x7f060030
+			public const int test2Synchronizacja_button = 2131099696;
+			
+			// aapt resource value: 0x7f060037
+			public const int test2_button = 2131099703;
 			
 			// aapt resource value: 0x7f06000b
 			public const int typKartyTowaroweRowsTextView = 2131099659;
 			
-			// aapt resource value: 0x7f06000e
-			public const int ulicaKontrahenciRowTextView = 2131099662;
-			
-			// aapt resource value: 0x7f06003a
-			public const int ustawienia_mainActivityMenu = 2131099706;
-			
-			// aapt resource value: 0x7f060025
-			public const int uzupelnijTestButton = 2131099685;
-			
-			// aapt resource value: 0x7f060024
-			public const int wszyscyButton = 2131099684;
-			
-			// aapt resource value: 0x7f060038
-			public const int wyloguj_glowneOknoMenu = 2131099704;
-			
-			// aapt resource value: 0x7f060022
-			public const int zaloguj_Button = 2131099682;
-			
-			// aapt resource value: 0x7f06001e
-			public const int zaloguj_textView = 2131099678;
-			
-			// aapt resource value: 0x7f060039
-			public const int zamknij_glowneOknoMenu = 2131099705;
+			// aapt resource value: 0x7f06000f
+			public const int ulicaKontrahenciRowTextView = 2131099663;
 			
 			// aapt resource value: 0x7f06003b
-			public const int zamknij_mainActivityMenu = 2131099707;
+			public const int ustawienia_mainActivityMenu = 2131099707;
 			
-			// aapt resource value: 0x7f06002d
-			public const int zapiszSerwerSynchronizacja_Button = 2131099693;
+			// aapt resource value: 0x7f060026
+			public const int uzupelnijTestButton = 2131099686;
 			
-			// aapt resource value: 0x7f060034
-			public const int zapiszSerwer_Button = 2131099700;
+			// aapt resource value: 0x7f060025
+			public const int wszyscyButton = 2131099685;
+			
+			// aapt resource value: 0x7f060039
+			public const int wyloguj_glowneOknoMenu = 2131099705;
+			
+			// aapt resource value: 0x7f060023
+			public const int zaloguj_Button = 2131099683;
+			
+			// aapt resource value: 0x7f06001f
+			public const int zaloguj_textView = 2131099679;
+			
+			// aapt resource value: 0x7f06003a
+			public const int zamknij_glowneOknoMenu = 2131099706;
+			
+			// aapt resource value: 0x7f06003c
+			public const int zamknij_mainActivityMenu = 2131099708;
+			
+			// aapt resource value: 0x7f06002e
+			public const int zapiszSerwerSynchronizacja_Button = 2131099694;
+			
+			// aapt resource value: 0x7f060035
+			public const int zapiszSerwer_Button = 2131099701;
 			
 			static Id()
 			{

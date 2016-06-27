@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Xml;
 
 using Android.App;
@@ -26,7 +27,9 @@ namespace AplikacjaSerwisowa
 
         String nazwaPlikuKartyTowarow = "karty_towarowe.xml";
         String nazwaKntKarty = "knt_karty.xml";
-        String nazwaKnaAdresy= "kna_aarty.xml";
+        String nazwaKntAdresy= "kna_adresy.xml";
+
+        ProgressDialog progrssDialog;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -72,32 +75,56 @@ namespace AplikacjaSerwisowa
             loginSerwer.Text = prefs.GetString("loginSerwera", "");
             hasloSerwer.Text = prefs.GetString("hasloSerwera", "");
         }
-        private void synchronizacja()
+
+        private void PobieranieIParsowanie()
         {
             ConnectivityManager connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
             NetworkInfo activeConnection = connectivityManager.ActiveNetworkInfo;
             bool isOnline = (activeConnection != null) && activeConnection.IsConnected;
 
-            if (isOnline)
+            if(isOnline)
             {
-                if (pobierzXML(nazwaPlikuKartyTowarow))
+                if(pobierzXML(nazwaPlikuKartyTowarow))
                 {
                     odczytajXML(nazwaPlikuKartyTowarow);
                 }
+
                 if(pobierzXML(nazwaKntKarty))
                 {
                     odczytajXML(nazwaKntKarty);
+                }
+
+                if(pobierzXML(nazwaKntAdresy))
+                {
+                    odczytajXML(nazwaKntAdresy);
                 }
             }
             else
             {
                 Toast.MakeText(this, "Brak dostêpu do internetu", ToastLength.Short).Show();
             }
+            progrssDialog.Dismiss();
+        }
 
+        private void synchronizacja()
+        {
+            progrssDialog = new ProgressDialog(this);
+            progrssDialog.SetTitle("Pobieranie");
+            progrssDialog.SetMessage("Proszê czekaæ...");
+            progrssDialog.SetProgressStyle(ProgressDialogStyle.Horizontal);
+            progrssDialog.SetCancelable(false);
+            progrssDialog.Show();
+
+            Thread th = new Thread(() => PobieranieIParsowanie());
+            th.Start();   
         }
         private Boolean pobierzXML(String nazwaPlikuXML)
         {
-            Toast.MakeText(this, "Pobieranie pliku "+ nazwaPlikuXML, ToastLength.Short).Show();
+            //Toast.MakeText(this, "Pobieranie pliku "+ nazwaPlikuXML, ToastLength.Short).Show();
+
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie pliku "+nazwaPlikuXML));
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = 1);
 
             String server = adresSerwera.Text;
             String userName = loginSerwer.Text;
@@ -137,7 +164,7 @@ namespace AplikacjaSerwisowa
                 ftpStream.Close();
                 response.Close();
                 plikXML.Close();
-                Toast.MakeText(this, "Zamykanie pliku "+ nazwaPlikuXML, ToastLength.Short).Show();
+                //Toast.MakeText(this, "Zamykanie pliku "+ nazwaPlikuXML, ToastLength.Short).Show();
 
                 return true;
             }
@@ -167,6 +194,8 @@ namespace AplikacjaSerwisowa
         }
         private void odczytajXML(String nazwaPlikuXML)
         {
+            RunOnUiThread(() => progrssDialog.SetMessage("Odczytywanie pliku " + nazwaPlikuXML));
+
             var filePath = Path.GetFullPath(documentsPath + "/" + nazwaPlikuXML);
             const Int32 BufferSize = 128; ;
             String plikXMLString = "";
@@ -199,7 +228,7 @@ namespace AplikacjaSerwisowa
             {
                 wczytajPlikKntKarty(plikXMLString);
             }
-            else if(nazwaPlikuXML == nazwaKnaAdresy)
+            else if(nazwaPlikuXML == nazwaKntAdresy)
             {
                 wczytajPlikKnaAdresy(plikXMLString);
             }
@@ -237,7 +266,7 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 messagebox("Wyst¹pi³ b³¹d podczas odczytu xml: " + exc.Message);
-            }
+            }            
 
             if(twrKodList.Count > 0 && twrGidNumerList.Count > 0 && twrTypList.Count > 0 && twrnazwaList.Count > 0)
             {
@@ -253,8 +282,13 @@ namespace AplikacjaSerwisowa
             result = dbr.stworzKartyTowarowTabele();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = twrGidNumerList.Count);
+
             for (int i = 0; i < twrKodList.Count; i++)
             {
+                RunOnUiThread(() => progrssDialog.Progress++);
+
                 kartyTowarowTable kartaTowarowa = new kartyTowarowTable();
                 kartaTowarowa.TWR_GIDNumer = Convert.ToInt32(twrGidNumerList[i]);
                 kartaTowarowa.TWR_Kod = twrKodList[i];
@@ -331,8 +365,13 @@ namespace AplikacjaSerwisowa
             result = dbr.stworzKntKartyTabele();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = knt_gidnumer_List.Count);
+
             for(int i = 0; i < knt_gidnumer_List.Count; i++)
             {
+                RunOnUiThread(() => progrssDialog.Progress++);
+
                 KntKartyTable kntKarta = new KntKartyTable();
                 kntKarta.Knt_GIDNumer = Convert.ToInt32(knt_gidnumer_List[i]);
                 kntKarta.Knt_Akrnonim = knt_akronim_List[i];
@@ -358,24 +397,96 @@ namespace AplikacjaSerwisowa
         }
         private void wczytajPlikKnaAdresy(String plikXMLString)
         {
+            List<string> knt_gidnumer_List = new List<string>();
+            List<string> knt_kntNumer_List = new List<string>();
+            List<string> knt_akronim_List = new List<string>();
+            List<string> knt_nazwa1_List = new List<string>();
+            List<string> knt_nazwa2_List = new List<string>();
+            List<string> knt_nazwa3_List = new List<string>();
+            List<string> knt_kodp_List = new List<string>();
+            List<string> knt_miasto_List = new List<string>();
+            List<string> knt_ulica_List = new List<string>();
+            List<string> knt_adresy_List = new List<string>();
+            List<string> knt_nip_List = new List<string>();
+            List<string> knt_telefon1_List = new List<string>();
+            List<string> knt_telefon2_List = new List<string>();
+            List<string> knt_telex_List = new List<string>();
+            List<string> knt_fax_List = new List<string>();
+            List<string> knt_email_List = new List<string>();
 
+            try
+            {
+                XmlDocument xml = new XmlDocument();
+                xml.LoadXml(plikXMLString);
+                XmlNodeList xnList = xml.SelectNodes("/root/knaadresy/karta");
+                foreach(XmlNode xn in xnList)
+                {
+                    knt_gidnumer_List.Add(xn["kna_gidnumer"].InnerText);
+                    knt_kntNumer_List.Add(xn["kna_kntnumer"].InnerText);
+                    knt_akronim_List.Add(xn["kna_akronim"].InnerText);
+                    knt_nazwa1_List.Add(xn["kna_nazwa1"].InnerText);
+                    knt_nazwa2_List.Add(xn["kna_nazwa2"].InnerText);
+                    knt_nazwa3_List.Add(xn["kna_nazwa3"].InnerText);
+                    knt_kodp_List.Add(xn["kna_kodp"].InnerText);
+                    knt_miasto_List.Add(xn["kna_miasto"].InnerText);
+                    knt_ulica_List.Add(xn["kna_ulica"].InnerText);
+                    knt_adresy_List.Add(xn["kna_adresy"].InnerText);
+                    knt_nip_List.Add(xn["kna_nip"].InnerText);
+                    knt_telefon1_List.Add(xn["kna_telefon1"].InnerText);
+                    knt_telefon2_List.Add(xn["kna_telefon2"].InnerText);
+                    knt_telex_List.Add(xn["kna_telex"].InnerText);
+                    knt_fax_List.Add(xn["kna_fax"].InnerText);
+                    knt_email_List.Add(xn["kna_email"].InnerText);
+                }
+            }
+
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d funkcji synchronizacja_Activity.wczytajPlikKntKarty(): " + exc.Message, "B³¹d", 0);
+            }
+
+            if(knt_gidnumer_List.Count > 0)
+            {
+                zapiszKntAdresyWBazie(knt_gidnumer_List, knt_kntNumer_List, knt_akronim_List, knt_nazwa1_List, knt_nazwa2_List, knt_nazwa3_List, knt_kodp_List, knt_miasto_List, knt_ulica_List, knt_adresy_List, knt_nip_List, knt_telefon1_List, knt_telefon2_List, knt_telex_List, knt_fax_List, knt_email_List);
+            }
         }
 
+        private void zapiszKntAdresyWBazie(List<string> kna_gidnumer_List, List<string> kna_kntNumer_List, List<string> kna_akronim_List, List<string> kna_nazwa1_List, List<string> kna_nazwa2_List, List<string> kna_nazwa3_List, List<string> kna_kodp_List, List<string> kna_miasto_List, List<string> kna_ulica_List, List<string> kna_adresy_List, List<string> kna_nip_List, List<string> kna_telefon1_List, List<string> kna_telefon2_List, List<string> kna_telex_List, List<string> kna_fax_List, List<string> kna_email_List)
+        {
+            DBRepository dbr = new DBRepository();
+            String result = dbr.createDB();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();            
+            result = dbr.stworzKntAdresyTabele();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();
 
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = kna_gidnumer_List.Count);
 
+            for(int i = 0; i < kna_gidnumer_List.Count; i++)
+            {
+                RunOnUiThread(() => progrssDialog.Progress++);
 
+                KntAdresyTable kntAdres = new KntAdresyTable();
+                kntAdres.Kna_GIDNumer = Convert.ToInt32(kna_gidnumer_List[i]);
+                kntAdres.Kna_KntNumer = Convert.ToInt32(kna_kntNumer_List[i]);                kntAdres.Kna_Akrnonim = kna_akronim_List[i];
+                kntAdres.Kna_nazwa1 = kna_nazwa1_List[i];
+                kntAdres.Kna_nazwa2 = kna_nazwa2_List[i];
+                kntAdres.Kna_nazwa3 = kna_nazwa3_List[i];
+                kntAdres.Kna_KodP = kna_kodp_List[i];
+                kntAdres.Kna_miasto = kna_miasto_List[i];
+                kntAdres.Kna_ulica = kna_ulica_List[i];
+                kntAdres.Kna_Adres = kna_adresy_List[i];
+                kntAdres.Kna_nip = kna_nip_List[i];
+                kntAdres.Kna_telefon1 = kna_telefon1_List[i];
+                kntAdres.Kna_telefon2 = kna_telefon2_List[i];
+                kntAdres.Kna_telex = kna_telex_List[i];
+                kntAdres.Kna_fax = kna_fax_List[i];
+                kntAdres.Kna_email = kna_email_List[i];
 
-
-
-
-
-
-
-
-
-
-
-
+                result = dbr.kntAdresy_InsertRecord(kntAdres);
+                // Toast.MakeText(this, i + ": " + result, ToastLength.Short).Show();
+            }
+        }
 
     private void test2()
         {

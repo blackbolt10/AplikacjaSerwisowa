@@ -292,5 +292,92 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela kontrahentowAdresy*********************|
+            *---------------------------------------------------------------------------------
+        */
+
+        public string stworzKntAdresyTabele()
+        {
+            String output = "";
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+
+                try
+                {
+                    db.DropTable<KntAdresyTable>();
+                }
+                catch(Exception) { }
+
+                db.CreateTable<KntAdresyTable>();
+
+                output = "Tabela kontrahentow adresy zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzKntAdresyTabele() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+        public String kntAdresy_InsertRecord(KntAdresyTable item)
+        {
+            String output = "";
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+
+                db.Insert(item);
+                output = "Wpis dodany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.kntAdresy_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+        public String kntAdresy_GetAllRecords()
+        {
+            String output = "";
+
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+                var table = db.Table<KntAdresyTable>();
+
+                foreach(var item in table)
+                {
+                    output += item.Id + ": GIDNum:" + item.Kna_GIDNumer + ", KntNumer:" + item.Kna_KntNumer + ", A:" + item.Kna_Akrnonim + "\n";
+                }
+            }
+            catch(Exception exc)
+            {
+                output += "DBRepository.kntAdresy_GetAllRecords() Error: " + exc.Message;
+            }
+
+            return output;
+        }
     }
 }

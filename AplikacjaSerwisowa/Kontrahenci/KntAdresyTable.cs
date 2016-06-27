@@ -5,8 +5,8 @@ using SQLite;
 
 namespace AplikacjaSerwisowa
 {
-    [Table("KntAdresy")]
-    public class KntAdresy
+    [Table("KntAdresyTable")]
+    public class KntAdresyTable
     {
         [PrimaryKey, AutoIncrement, Column("_Id")]
         public int Id { get; set; }

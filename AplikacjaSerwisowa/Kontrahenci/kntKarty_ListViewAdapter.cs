@@ -90,14 +90,33 @@ namespace AplikacjaSerwisowa
             TextView knt_telefon_TextView = row.FindViewById<TextView>(Resource.Id.telefonKontrahenciRowTextView);
             TextView knt_email_TextView = row.FindViewById<TextView>(Resource.Id.emailKontrahenciRowsTextView);
             LinearLayout param_LinearLayout = row.FindViewById<LinearLayout>(Resource.Id.parametryKontrahenciLinearLayout);
-
-            int test = position;
+            LinearLayout daneKontrahenta1_LinearLayout = row.FindViewById<LinearLayout>(Resource.Id.daneKontrahenta1inearLayout);
+            LinearLayout daneKontrahenta2_LinearLayout = row.FindViewById<LinearLayout>(Resource.Id.daneKontrahenta2LinearLayout);
+            
             knt_akronimNazwa_TextView.Text = "["+mkna_akronim_List[position]+"]"+mkna_nazwa1_List[position];
             knt_gidnumer_TextView.Text = mkna_gidnumer_List[position];
-            knt_adres_TextView.Text = mkna_kodp_List[position]+" "+mkna_miasto_List[position];
-            knt_ulica_TextView.Text = mkna_adresy_List[position];
-            knt_telefon_TextView.Text = mkna_telefon1_List[position];
-            knt_email_TextView.Text = mkna_email_List[position];
+
+            if(mkna_ulica_List[position] == "" && mkna_telefon1_List[position] == "")
+            {
+                daneKontrahenta1_LinearLayout.Visibility = ViewStates.Gone;
+            }
+            else
+            {
+                daneKontrahenta1_LinearLayout.Visibility = ViewStates.Visible;
+                knt_ulica_TextView.Text = mkna_ulica_List[position];
+                knt_telefon_TextView.Text = mkna_telefon1_List[position];
+            }
+
+            if(mkna_email_List[position] == "" && mkna_kodp_List[position] == "" && mkna_miasto_List[position] == "")
+            {
+                daneKontrahenta2_LinearLayout.Visibility = ViewStates.Gone;
+            }
+            else
+            {
+                daneKontrahenta2_LinearLayout.Visibility = ViewStates.Visible;
+                knt_adres_TextView.Text = mkna_kodp_List[position] + " " + mkna_miasto_List[position];
+                knt_email_TextView.Text = mkna_email_List[position];
+            }
 
             if(mukrywanie == 1)
             {

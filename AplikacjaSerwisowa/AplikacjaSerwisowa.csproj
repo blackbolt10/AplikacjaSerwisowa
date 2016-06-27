@@ -61,7 +61,7 @@
     <Compile Include="FragmentA.cs" />
     <Compile Include="glowneOkno_Activity.cs" />
     <Compile Include="Kontrahenci\kntKarty_ListViewAdapter.cs" />
-    <Compile Include="Kontrahenci\KntAdresy.cs" />
+    <Compile Include="Kontrahenci\KntAdresyTable.cs" />
     <Compile Include="Kontrahenci\KntKartyTable.cs" />
     <Compile Include="Magazyn\kartyTowarowTable.cs" />
     <Compile Include="Magazyn\kartyTowarow_ListViewAdapter.cs" />
@@ -71,12 +71,12 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Lista Zlecen\listaZlecen_ListViewAdapter.cs" />
     <Compile Include="noweZlecenie_Activity.cs" />
-    <Compile Include="ORM\DBRepository.cs" />
-    <Compile Include="ORM\OperatorzyTable.cs" />
+    <Compile Include="DataBase\DBRepository.cs" />
+    <Compile Include="DataBase\OperatorzyTable.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ORM\SQLite.cs" />
-    <Compile Include="ORM\SQLiteAsync.cs" />
+    <Compile Include="DataBase\SQLite.cs" />
+    <Compile Include="DataBase\SQLiteAsync.cs" />
     <Compile Include="synchronizacja_Activity.cs" />
     <Compile Include="ustawienia_Activity.cs" />
   </ItemGroup>

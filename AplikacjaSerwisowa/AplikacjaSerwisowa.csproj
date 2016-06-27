@@ -56,10 +56,14 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FragmentA.cs" />
     <Compile Include="glowneOkno_Activity.cs" />
+    <Compile Include="kontrahenciInformacje.cs" />
     <Compile Include="Kontrahenci\kntKarty_ListViewAdapter.cs" />
     <Compile Include="Kontrahenci\KntAdresyTable.cs" />
     <Compile Include="Kontrahenci\KntKartyTable.cs" />
@@ -77,6 +81,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataBase\SQLite.cs" />
     <Compile Include="DataBase\SQLiteAsync.cs" />
+    <Compile Include="SlidingTabFragment.cs" />
+    <Compile Include="SlidingTabStrip\SlidingTabScrollView.cs" />
+    <Compile Include="SlidingTabStrip\SlidingTabStrip.cs" />
     <Compile Include="synchronizacja_Activity.cs" />
     <Compile Include="ustawienia_Activity.cs" />
   </ItemGroup>
@@ -112,6 +119,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\kartyTowarow_row.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\kontrahenciInformacje.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_simple.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -164,6 +177,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\kontrahenci.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="xamandroidsupportv4-18">
+      <Visible>False</Visible>
+      <Version>23.1.1.1</Version>
+    </XamarinComponentReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

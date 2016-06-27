@@ -24,7 +24,7 @@ namespace AplikacjaSerwisowa
             SetContentView(Resource.Layout.kontrahenci);
 
             listaKontrahentow = FindViewById<ListView>(Resource.Id.kontrahenciListView);
-            listaKontrahentow.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs e) { };// itemClick_Function(sender, e); };
+            listaKontrahentow.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs e) { listaKontrahentowItemClick_Function(sender, e); };
 
             List<string> kna_gidnumer_List = new List<string>();
             List<string> kna_akronim_List = new List<string>();
@@ -103,6 +103,11 @@ namespace AplikacjaSerwisowa
 
             Dialog dialog = alert.Create();
             dialog.Show();
+        }
+
+        private void listaKontrahentowItemClick_Function(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            StartActivity(typeof(kontrahenciInformacje));
         }
     }
 }

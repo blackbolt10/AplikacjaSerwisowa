@@ -20,6 +20,11 @@ namespace AplikacjaSerwisowa
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.kontrahenciInformacje);
             // Create your application here
+
+            FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            SlidingTabsFragment fragment = new SlidingTabsFragment();
+            transaction.Replace(Resource.Id.sample_content_fragment, fragment);
+            transaction.Commit();
         }
     }
 }

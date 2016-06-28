@@ -7,18 +7,19 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V4.View;
+using Android.Util;
 
 namespace AplikacjaSerwisowa
 {
     public class SlidingTabScrollView : HorizontalScrollView
     {
+
         private const int TITLE_OFFSET_DIPS = 24;
         private const int TAB_VIEW_PADDING_DIPS = 16;
-            private const int TAB_VIEW_TEXT_SIZE_SP = 12;
+        private const int TAB_VIEW_TEXT_SIZE_SP = 12;
 
         private int mTitleOffset;
 
@@ -26,9 +27,9 @@ namespace AplikacjaSerwisowa
         private int mTabViewTextViewID;
 
         private ViewPager mViewPager;
-        private ViewPager.IOnPageChangeListener mViewPageChangeListener;
+        private ViewPager.IOnPageChangeListener mViewPagerPageChangeListener;
 
-        private static SlidingTabStrip mtabStrip;
+        private static SlidingTabStrip mTabStrip;
 
         private int mScrollState;
 
@@ -44,85 +45,88 @@ namespace AplikacjaSerwisowa
 
         public SlidingTabScrollView(Context context, IAttributeSet attrs, int defaultStyle) : base(context, attrs, defaultStyle)
         {
-            float density = 1.5f;
-
-            //disable the scroll bar
+            //Disable the scroll bar
             HorizontalScrollBarEnabled = false;
 
-            //make sure the tab strip fill the view
+            //Make sure the tab strips fill the view
             FillViewport = true;
-            this.SetBackgroundColor(Android.Graphics.Color.Rgb(0xE5, 0xE5, 0xE5)); //grey color
+            this.SetBackgroundColor(Android.Graphics.Color.Rgb(0xE5, 0xE5, 0xE5)); //Gray color
 
-            mTitleOffset = (int)(TITLE_OFFSET_DIPS* density);
+            mTitleOffset = (int)(TITLE_OFFSET_DIPS * Resources.DisplayMetrics.Density);
 
-            mtabStrip = new SlidingTabStrip(context);
-            this.AddView(mtabStrip, LayoutParams.MatchParent, LayoutParams.MatchParent);
+            mTabStrip = new SlidingTabStrip(context);
+            this.AddView(mTabStrip, LayoutParams.MatchParent, LayoutParams.MatchParent);
         }
 
         public TabColorizer CustomTabColorizer
         {
-            set { mtabStrip.CustomTabColorizer = value; }
+            set { mTabStrip.CustomTabColorizer = value; }
         }
 
-        public int [] SelectedIndicatorColor
+        public int[] SelectedIndicatorColor
         {
-            set { mtabStrip.SelectedIndicatorColors = value; }
+            set { mTabStrip.SelectedIndicatorColors = value; }
         }
 
-        public int [] DividerColors
+        public int[] DividerColors
         {
-            set { mtabStrip.DividerColors = value;}
+            set { mTabStrip.DividerColors = value; }
         }
 
         public ViewPager.IOnPageChangeListener OnPageListener
         {
-            set { mViewPageChangeListener = value; }
+            set { mViewPagerPageChangeListener = value; }
         }
 
         public ViewPager ViewPager
         {
             set
             {
-                mtabStrip.RemoveAllViews();
+                mTabStrip.RemoveAllViews();
 
                 mViewPager = value;
                 if(value != null)
                 {
                     value.PageSelected += value_PageSelected;
-                    value.PageScrollStateChanged += value_PageScrollStateChange;
+                    value.PageScrollStateChanged += value_PageScrollStateChanged;
                     value.PageScrolled += value_PageScrolled;
+                    PopulateTabStrip();
                 }
             }
         }
 
-        private void value_PageScrolled(object sender, ViewPager.PageScrolledEventArgs e)
+        void value_PageScrolled(object sender, ViewPager.PageScrolledEventArgs e)
         {
-            int tabCount = mtabStrip.ChildCount;
+            int tabCount = mTabStrip.ChildCount;
 
-            if(tabCount == 0 || e.Position < 0 || e.Position >= tabCount)
+            if((tabCount == 0) || (e.Position < 0) || (e.Position >= tabCount))
             {
+                //if any of these conditions apply, return, no need to scroll
                 return;
             }
 
-            mtabStrip.OnViewPagerPageChange(e.Position, e.PositionOffset);
+            mTabStrip.OnViewPagerPageChanged(e.Position, e.PositionOffset);
 
-            View selectedTitle = mtabStrip.GetChildAt(e.Position);
-            int extraOffset = (selectedTitle != null ? (e.Position * selectedTitle.Width) : 0);
-            scrollToTab(e.Position, extraOffset);
+            View selectedTitle = mTabStrip.GetChildAt(e.Position);
 
-            if(mViewPageChangeListener != null)
+            int extraOffset = (selectedTitle != null ? (int)(e.Position * selectedTitle.Width) : 0);
+
+            ScrollToTab(e.Position, extraOffset);
+
+            if(mViewPagerPageChangeListener != null)
             {
-                mViewPageChangeListener.OnPageScrolled(e.Position,e.PositionOffset,e.PositionOffsetPixels);
+                mViewPagerPageChangeListener.OnPageScrolled(e.Position, e.PositionOffset, e.PositionOffsetPixels);
             }
+
         }
 
-        private void value_PageScrollStateChange(object sender, ViewPager.PageScrollStateChangedEventArgs e)
+        void value_PageScrollStateChanged(object sender, ViewPager.PageScrollStateChangedEventArgs e)
         {
             mScrollState = e.State;
 
-            if(mViewPageChangeListener != null)
+            if(mViewPagerPageChangeListener != null)
             {
-                mViewPageChangeListener.OnPageScrollStateChanged(e.State);
+                mViewPagerPageChangeListener.OnPageScrollStateChanged(e.State);
             }
         }
 
@@ -130,41 +134,42 @@ namespace AplikacjaSerwisowa
         {
             if(mScrollState == ViewPager.ScrollStateIdle)
             {
-                mtabStrip.OnViewPagerPageChange(e.Position, 0f);
-                scrollToTab(e.Position, 0);
+                mTabStrip.OnViewPagerPageChanged(e.Position, 0f);
+                ScrollToTab(e.Position, 0);
+
             }
 
-            if(mViewPageChangeListener != null)
+            if(mViewPagerPageChangeListener != null)
             {
-                mViewPageChangeListener.OnPageSelected(e.Position);
+                mViewPagerPageChangeListener.OnPageSelected(e.Position);
             }
         }
 
         private void PopulateTabStrip()
         {
             PagerAdapter adapter = mViewPager.Adapter;
-            for(int i=0;i<adapter.Count;i++)
+
+            for(int i = 0; i < adapter.Count; i++)
             {
                 TextView tabView = CreateDefaultTabView(Context);
-                tabView.Text = i.ToString();
+                tabView.Text = ((SlidingTabsFragment.SamplePagerAdapter)adapter).GetHeaderTitle(i);
                 tabView.SetTextColor(Android.Graphics.Color.Black);
                 tabView.Tag = i;
                 tabView.Click += tabView_Click;
-                mtabStrip.AddView(tabView);
+                mTabStrip.AddView(tabView);
             }
+
         }
 
-        private void tabView_Click(object sender, EventArgs e)
+        void tabView_Click(object sender, EventArgs e)
         {
             TextView clickTab = (TextView)sender;
             int pageToScrollTo = (int)clickTab.Tag;
             mViewPager.CurrentItem = pageToScrollTo;
         }
 
-        private TextView CreateDefaultTabView(Context context)
+        private TextView CreateDefaultTabView(Android.Content.Context context)
         {
-            float density = 1.5f;
-
             TextView textView = new TextView(context);
             textView.Gravity = GravityFlags.Center;
             textView.SetTextSize(ComplexUnitType.Sp, TAB_VIEW_TEXT_SIZE_SP);
@@ -182,7 +187,7 @@ namespace AplikacjaSerwisowa
                 textView.SetAllCaps(true);
             }
 
-            int padding = (int)(TAB_VIEW_PADDING_DIPS * density);
+            int padding = (int)(TAB_VIEW_PADDING_DIPS * Resources.DisplayMetrics.Density);
             textView.SetPadding(padding, padding, padding, padding);
 
             return textView;
@@ -194,32 +199,34 @@ namespace AplikacjaSerwisowa
 
             if(mViewPager != null)
             {
-                scrollToTab(mViewPager.CurrentItem, 0);
+                ScrollToTab(mViewPager.CurrentItem, 0);
             }
         }
 
-        private void scrollToTab(int tabIndex, int extraOffset)
+        private void ScrollToTab(int tabIndex, int extraOffset)
         {
-            int tabCount = mtabStrip.ChildCount;
-            if(tabCount == 0|| tabIndex<0 || tabIndex>=tabCount)
+            int tabCount = mTabStrip.ChildCount;
+
+            if(tabCount == 0 || tabIndex < 0 || tabIndex >= tabCount)
             {
-                // no need to go
+                //No need to go further, dont scroll
                 return;
             }
 
-
-            View selectedChild = mtabStrip.GetChildAt(tabCount);
+            View selectedChild = mTabStrip.GetChildAt(tabIndex);
             if(selectedChild != null)
             {
                 int scrollAmountX = selectedChild.Left + extraOffset;
 
-                if(tabCount>0|| extraOffset > 0)
+                if(tabIndex > 0 || extraOffset > 0)
                 {
                     scrollAmountX -= mTitleOffset;
                 }
 
                 this.ScrollTo(scrollAmountX, 0);
             }
+
         }
+
     }
 }

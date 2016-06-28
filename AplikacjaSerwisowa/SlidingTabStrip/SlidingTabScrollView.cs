@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V4.View;
 using Android.Util;
+using Android.Support.V4.App;
 
 namespace AplikacjaSerwisowa
 {
@@ -152,7 +153,7 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < adapter.Count; i++)
             {
                 TextView tabView = CreateDefaultTabView(Context);
-                tabView.Text = ((SlidingTabsFragment.SamplePagerAdapter)adapter).GetHeaderTitle(i);
+                tabView.Text = ((FragmentPagerAdapter)adapter).GetItem(i).ToString();
                 tabView.SetTextColor(Android.Graphics.Color.Black);
                 tabView.Tag = i;
                 tabView.Click += tabView_Click;
@@ -174,6 +175,7 @@ namespace AplikacjaSerwisowa
             textView.Gravity = GravityFlags.Center;
             textView.SetTextSize(ComplexUnitType.Sp, TAB_VIEW_TEXT_SIZE_SP);
             textView.Typeface = Android.Graphics.Typeface.DefaultBold;
+            //textView.LayoutParameters = new TableLayout.LayoutParams(LayoutParams.MatchParent, LayoutParams.WrapContent, 50.0f);
 
             if(Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Honeycomb)
             {
@@ -229,4 +231,4 @@ namespace AplikacjaSerwisowa
         }
 
     }
-}
+    }

@@ -87,14 +87,16 @@ namespace AplikacjaSerwisowa
                 }
             }
         }
+
         public override long GetItemId(int position)
         {
             return position;
         }
+
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             View row = convertView;
-            if (row == null)
+            if(row == null)
             {
                 row = LayoutInflater.From(mContext).Inflate(Resource.Layout.kartyTowarow_row, null, false);
             }
@@ -110,7 +112,7 @@ namespace AplikacjaSerwisowa
             typ_TextView.Text = mtwr_typ_List[position];
             nazwa_TextView.Text = mtwr_nazwa_List[position];
 
-            if(mukrywanie ==1)
+            if(mukrywanie == 1)
             {
                 param_LinearLayout.Visibility = ViewStates.Visible;
             }
@@ -123,7 +125,7 @@ namespace AplikacjaSerwisowa
         }
         public override string this[int position]
         {
-            get { return mtwr_kod_List[position]; }
+            get { return mtwr_gidnumer_List[position]; }
         }
     }
 }

@@ -56,6 +56,7 @@ namespace AplikacjaSerwisowa
         {
             SetWillNotDraw(false);
 
+            //this.WeightSum = 100;
             float density = Resources.DisplayMetrics.Density;
 
             TypedValue outValue = new TypedValue();

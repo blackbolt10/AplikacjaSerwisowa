@@ -81,7 +81,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataBase\SQLite.cs" />
     <Compile Include="DataBase\SQLiteAsync.cs" />
-    <Compile Include="SlidingTabStrip\SlidingTabsFragment.cs" />
     <Compile Include="SlidingTabStrip\SlidingTabScrollView.cs" />
     <Compile Include="SlidingTabStrip\SlidingTabStrip.cs" />
     <Compile Include="synchronizacja_Activity.cs" />
@@ -128,6 +127,15 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\pager_item.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Frag1Layout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Frag2Layout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Frag3Layout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

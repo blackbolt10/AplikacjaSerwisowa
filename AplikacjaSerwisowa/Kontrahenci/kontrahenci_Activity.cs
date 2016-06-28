@@ -17,7 +17,25 @@ namespace AplikacjaSerwisowa
     [Activity(Label = "Kontrahenci", Icon = "@drawable/kontrahenci")]
     public class kontrahenci_Activity : Activity
     {
-        ListView listaKontrahentow;
+        private ListView listaKontrahentow;
+        private Int32 mUkrywanieGidNmer = 1;
+
+        private List<string> kna_gidnumer_List = new List<string>();
+        private List<string> kna_akronim_List = new List<string>();
+        private List<string> kna_nazwa1_List = new List<string>();
+        private List<string> kna_nazwa2_List = new List<string>();
+        private List<string> kna_nazwa3_List = new List<string>();
+        private List<string> kna_kodp_List = new List<string>();
+        private List<string> kna_miasto_List = new List<string>();
+        private List<string> kna_ulica_List = new List<string>();
+        private List<string> kna_adresy_List = new List<string>();
+        private List<string> kna_nip_List = new List<string>();
+        private List<string> kna_telefon1_List = new List<string>();
+        private List<string> kna_telefon2_List = new List<string>();
+        private List<string> kna_telefon3_List = new List<string>();
+        private List<string> kna_telex_List = new List<string>();
+        private List<string> kna_fax_List = new List<string>();
+        private List<string> kna_email_List = new List<string>();
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -26,22 +44,6 @@ namespace AplikacjaSerwisowa
             listaKontrahentow = FindViewById<ListView>(Resource.Id.kontrahenciListView);
             listaKontrahentow.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs e) { listaKontrahentowItemClick_Function(sender, e); };
 
-            List<string> kna_gidnumer_List = new List<string>();
-            List<string> kna_akronim_List = new List<string>();
-            List<string> kna_nazwa1_List = new List<string>();
-            List<string> kna_nazwa2_List = new List<string>();
-            List<string> kna_nazwa3_List = new List<string>();
-            List<string> kna_kodp_List = new List<string>();
-            List<string> kna_miasto_List = new List<string>();
-            List<string> kna_ulica_List = new List<string>();
-            List<string> kna_adresy_List = new List<string>();
-            List<string> kna_nip_List = new List<string>();
-            List<string> kna_telefon1_List = new List<string>();
-            List<string> kna_telefon2_List = new List<string>();
-            List<string> kna_telefon3_List = new List<string>();
-            List<string> kna_telex_List = new List<string>();
-            List<string> kna_fax_List = new List<string>();
-            List<string> kna_email_List = new List<string>();
 
             // Create your application here
 
@@ -80,11 +82,11 @@ namespace AplikacjaSerwisowa
 
             if (kna_gidnumer_List.Count > 0 && kna_akronim_List.Count > 0 )
             {
-                adapter = new kntKarty_ListViewAdapter(this, kna_gidnumer_List, kna_akronim_List, kna_nazwa1_List, kna_nazwa2_List, kna_nazwa3_List, kna_kodp_List, kna_miasto_List, kna_ulica_List, kna_adresy_List, kna_nip_List, kna_telefon1_List, kna_telefon2_List, kna_telefon3_List, kna_telex_List, kna_fax_List, kna_email_List, 0);
+                adapter = new kntKarty_ListViewAdapter(this, kna_gidnumer_List, kna_akronim_List, kna_nazwa1_List, kna_nazwa2_List, kna_nazwa3_List, kna_kodp_List, kna_miasto_List, kna_ulica_List, kna_adresy_List, kna_nip_List, kna_telefon1_List, kna_telefon2_List, kna_telefon3_List, kna_telex_List, kna_fax_List, kna_email_List, mUkrywanieGidNmer);
             }
             else
             {
-                adapter = new kntKarty_ListViewAdapter(this, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0);
+                adapter = new kntKarty_ListViewAdapter(this, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, mUkrywanieGidNmer);
             }
             listaKontrahentow.Adapter = adapter;
         }
@@ -107,7 +109,9 @@ namespace AplikacjaSerwisowa
 
         private void listaKontrahentowItemClick_Function(object sender, AdapterView.ItemClickEventArgs e)
         {
-            StartActivity(typeof(kontrahenciInformacje));
+            Intent kontrahentInformacjeActivity= new Intent(this, typeof(kontrahenciInformacje));
+            kontrahentInformacjeActivity.PutExtra("kna_gidnumer", kna_gidnumer_List[e.Position]);
+            StartActivity(kontrahentInformacjeActivity);
         }
     }
 }

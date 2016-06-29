@@ -9,6 +9,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4;
 using Android.Support.V4.View;
 using Android.Support.V4.App;
 using Android.Views;
@@ -16,7 +17,7 @@ using Android.Widget;
 
 namespace AplikacjaSerwisowa
 {
-    [Activity(Label = "kontrahenciInformacje")]
+    [Activity(Label = "Informacje o kontrahencie")]
     public class kontrahenciInformacje : FragmentActivity
     {
         private ViewPager mViewPager;
@@ -29,7 +30,7 @@ namespace AplikacjaSerwisowa
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.kontrahenciInformacje);
-
+            
             // Create your application here
             kna_gidnumer = Intent.GetStringExtra("kna_gidnumer") ?? "no data avalible";
             kontekst = this;
@@ -217,15 +218,66 @@ namespace AplikacjaSerwisowa
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public class Fragment2 : Android.Support.V4.App.Fragment
     {
-        private EditText mTxt;
+        private ListView mkontrahecniAdresyListView;    
+        private Context kontekstGlowny;
+        private String mGidNumerKontrahenta;
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.Frag2Layout, container, false);
 
-            mTxt = view.FindViewById<EditText>(Resource.Id.editText1);
-            mTxt.Text = "Fragment 2 Class :)";
+            mGidNumerKontrahenta = kontrahenciInformacje.GetKnt_GidNumer();
+            kontekstGlowny = kontrahenciInformacje.GetContext();
+
+            //mkontrahecniAdresyListView = view.FindViewById<ListView>(Resource.Id.kontrahecniAdresyListView);
+            //mkontrahecniAdresyListView.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs e) { itemClick_Function(sender, e); };
+
+            List<string> mItems = new List<string>();
+            mItems.Add("test");
+            mItems.Add("test1");
+            mItems.Add("test2");
+            mItems.Add("test3");
+            mItems.Add("test4");
+            mItems.Add("test5");
+            mItems.Add("test6");
+            mItems.Add("test7");
+            mItems.Add("test8");
+            mItems.Add("test9");
+            mItems.Add("test10");
+
+            List<string> wykonane_List = new List<string>();
+            wykonane_List.Add("1");
+            wykonane_List.Add("1");
+            wykonane_List.Add("0");
+            wykonane_List.Add("1");
+            wykonane_List.Add("0");
+            wykonane_List.Add("1");
+            wykonane_List.Add("0");
+            wykonane_List.Add("0");
+            wykonane_List.Add("1");
+            wykonane_List.Add("0");
+            wykonane_List.Add("1");
+
+            //kontrahenciAdresy_ListViewAdapter adapter = new kontrahenciAdresy_ListViewAdapter(kontekstGlowny, mItems, mItems, mItems, mItems, mItems, wykonane_List);
+
+            //mkontrahecniAdresyListView.Adapter = adapter;
+
             return view;
         }
 
@@ -233,7 +285,30 @@ namespace AplikacjaSerwisowa
         {
             return "Adresy";
         }
+
+        private void itemClick_Function(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            ListView test = (ListView)sender;
+            String test1 = test.GetItemAtPosition(Convert.ToInt32(e.Id)).ToString();
+            
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public class Fragment3 : Android.Support.V4.App.Fragment
     {

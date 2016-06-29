@@ -5,9 +5,9 @@
     android:layout_height="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-  <Button
-      android:text="Button in Fragment Class 3"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/button1" />
+    <Button
+        android:text="Button in Fragment Class 3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1" />
 </LinearLayout>

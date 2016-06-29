@@ -51,7 +51,7 @@ namespace AplikacjaSerwisowa
 
             //Make sure the tab strips fill the view
             FillViewport = true;
-            this.SetBackgroundColor(Android.Graphics.Color.Rgb(0xE5, 0xE5, 0xE5)); //Gray color
+            this.SetBackgroundColor(Android.Graphics.Color.Rgb(0, 0, 0)); //Gray color
 
             mTitleOffset = (int)(TITLE_OFFSET_DIPS * Resources.DisplayMetrics.Density);
 
@@ -154,7 +154,7 @@ namespace AplikacjaSerwisowa
             {
                 TextView tabView = CreateDefaultTabView(Context);
                 tabView.Text = ((FragmentPagerAdapter)adapter).GetItem(i).ToString();
-                tabView.SetTextColor(Android.Graphics.Color.Black);
+                tabView.SetTextColor(Android.Graphics.Color.White);
                 tabView.Tag = i;
                 tabView.Click += tabView_Click;
                 mTabStrip.AddView(tabView);

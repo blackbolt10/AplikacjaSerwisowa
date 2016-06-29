@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using SQLite;
@@ -294,9 +295,49 @@ namespace AplikacjaSerwisowa
         }
 
 
+        
 
+        public List<String> kntKarty_GetRecord(String knt_GidNumer)
+        {
+            List<String> output = new List<String>();
 
+            if(knt_GidNumer.Length > 0)
+            {
+                try
+                {
+                    String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                    SQLiteConnection db = new SQLiteConnection(dbPath);
+                    var table = db.Table<KntKartyTable>();
 
+                    var result = db.Query<KntKartyTable>("select * from KntKartyTable where Knt_GIDNumer = " + knt_GidNumer);
+
+                    if(result.Count > 0)
+                    {
+                        output.Add(result[0].Knt_GIDNumer.ToString());
+                        output.Add(result[0].Knt_Akrnonim.ToString());
+                        output.Add(result[0].Knt_nazwa1.ToString());
+                        output.Add(result[0].Knt_nazwa2.ToString());
+                        output.Add(result[0].Knt_nazwa3.ToString());
+                        output.Add(result[0].Knt_KodP.ToString());
+                        output.Add(result[0].Knt_miasto.ToString());
+                        output.Add(result[0].Knt_ulica.ToString());
+                        output.Add(result[0].Knt_Adres.ToString());
+                        output.Add(result[0].Knt_nip.ToString());
+                        output.Add(result[0].Knt_telefon1.ToString());
+                        output.Add(result[0].Knt_telefon2.ToString());
+                        output.Add(result[0].Knt_telefon3.ToString());
+                        output.Add(result[0].Knt_telex.ToString());
+                        output.Add(result[0].Knt_fax.ToString());
+                        output.Add(result[0].Knt_email.ToString());
+                        output.Add(result[0].Knt_url.ToString());
+                    }
+                }
+                catch(Exception)
+                {}
+            }
+
+            return output;
+        }
 
 
 

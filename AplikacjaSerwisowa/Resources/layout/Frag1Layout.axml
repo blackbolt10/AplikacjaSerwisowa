@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="#000000">
     <RelativeLayout
         android:minWidth="25px"
         android:minHeight="25px"
@@ -15,24 +16,153 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView1" />
         <TextView
-            android:text="Medium Text"
+            android:text="Akronim"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView1"
-            android:id="@+id/textView2" />
+            android:id="@+id/akronimFrag1TextView" />
         <TextView
-            android:text="Text"
+            android:text="Nazwa:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView2"
-            android:id="@+id/textView3" />
+            android:layout_below="@id/akronimFrag1TextView"
+            android:id="@+id/nazwaTextView" />
         <TextView
-            android:text="Medium Text"
+            android:text="Nazwa"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView3"
-            android:id="@+id/textView4" />
+            android:layout_below="@id/nazwaTextView"
+            android:id="@+id/nazwaFrag1TextView" />
+        <TextView
+            android:text="Adres:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nazwaFrag1TextView"
+            android:id="@+id/textView5" />
+        <TextView
+            android:text="Ulica"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView5"
+            android:id="@+id/ulicaFrag1TextView" />
+        <TextView
+            android:text="KodP + Miasto"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ulicaFrag1TextView"
+            android:id="@+id/kodPMiastoFrag1TextView" />
+        <TextView
+            android:text="Nip:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/kodPMiastoFrag1TextView"
+            android:id="@+id/textView8" />
+        <TextView
+            android:text="Nip"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView8"
+            android:id="@+id/nipFrag1TextView" />
+        <TextView
+            android:text="Telefon:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nipFrag1TextView"
+            android:id="@+id/telefonNazwaFrag1TextView" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/telefonNazwaFrag1TextView"
+            android:id="@+id/linearLayout1"
+            android:weightSum="2">
+            <TextView
+                android:text="Telefon1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/telefon1Frag1TextView"
+                android:layout_weight="1" />
+            <TextView
+                android:text="Telefon2"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/telefon2Frag1TextView"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearLayout1"
+            android:id="@+id/linearLayout2"
+            android:weightSum="2">
+            <TextView
+                android:text="Telex"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/telexFrag1TextView"
+                android:layout_weight="1" />
+            <TextView
+                android:text="Telefon3"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/telefon3Frag1TextView"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <TextView
+            android:text="Fax:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearLayout2"
+            android:id="@+id/faxNazwaFrag1TextView" />
+        <TextView
+            android:text="Fax"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/faxNazwaFrag1TextView"
+            android:id="@+id/faxFrag1TextView" />
+        <TextView
+            android:text="Email:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/faxFrag1TextView"
+            android:id="@+id/emailNazwaFrag1TextView" />
+        <TextView
+            android:text="Email"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailNazwaFrag1TextView"
+            android:id="@+id/emailFrag1TextView" />
+        <TextView
+            android:text="URL:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailFrag1TextView"
+            android:id="@+id/urlNazwaFrag1TextView" />
+        <TextView
+            android:text="URL"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/urlNazwaFrag1TextView"
+            android:id="@+id/urlFrag1TextView" />
+        <TextView
+            android:text="GIDNumer"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/urlFrag1TextView"
+            android:id="@+id/gidNumerFrag1TextView" />
     </RelativeLayout>
 </ScrollView>

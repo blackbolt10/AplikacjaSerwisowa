@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:padding="25px"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+        <TextView
+            android:text="Adres serwera:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/adresSerwer_textView"
+            android:layout_alignParentLeft="true" />
+        <EditText
+            android:id="@+id/adresSerwerSynchronizacja_EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.0dp"
+            android:layout_below="@id/adresSerwer_textView"
+            android:paddingTop="10px"
+            android:paddingBottom="10px"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true" />
+        <TextView
+            android:id="@+id/instancjaSerwer_textView"
+            android:text="Instancja:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/adresSerwerSynchronizacja_EditText" />
+        <EditText
+            android:id="@+id/instancjaSerwerSynchronizacja_EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.0dp"
+            android:layout_below="@id/instancjaSerwer_textView"
+            android:paddingBottom="10px"
+            android:paddingTop="10px"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true" />
+        <TextView
+            android:text="Login:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/instancjaSerwerSynchronizacja_EditText"
+            android:id="@+id/loginSerwer_textView" />
+        <EditText
+            android:id="@+id/loginSerwerSynchronizacja_EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.0dp"
+            android:layout_below="@id/loginSerwer_textView"
+            android:paddingBottom="10px"
+            android:paddingTop="10px"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true" />
+        <TextView
+            android:id="@+id/haslo_textView"
+            android:text="Hasło:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loginSerwerSynchronizacja_EditText"
+            android:layout_alignParentLeft="true" />
+        <EditText
+            android:id="@+id/hasloSerwerSynchronizacja_EditText"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.0dp"
+            android:layout_below="@id/haslo_textView"
+            android:paddingBottom="10px"
+            android:paddingTop="10px"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true" />
+        <Button
+            android:text="Zapisz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hasloSerwerSynchronizacja_EditText"
+            android:id="@+id/zapiszSerwerSynchronizacja_Button"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true" />
+        <Button
+            android:text="Synchronizacja"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/zapiszSerwerSynchronizacja_Button"
+            android:id="@+id/synchronizacjaSynchronizacjaButton" />
+        <Button
+            android:text="Synchronizacja z pliku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/synchronizacjaSynchronizacjaButton"
+            android:id="@+id/test2Synchronizacja_button"
+            android:layout_marginRight="0.0dp" />
+    </RelativeLayout>
+</ScrollView>

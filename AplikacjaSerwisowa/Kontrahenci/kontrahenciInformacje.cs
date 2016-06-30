@@ -237,6 +237,24 @@ namespace AplikacjaSerwisowa
         private ListView mkontrahecniAdresyListView;    
         private Context kontekstGlowny;
         private String mGidNumerKontrahenta;
+        private Int32 mUkrywanieGidNmer = 1;
+
+        private List<string> kna_gidnumer_List = new List<string>();
+        private List<string> kna_kntnumer = new List<string>();
+        private List<string> kna_akronim_List = new List<string>();
+        private List<string> kna_nazwa1_List = new List<string>();
+        private List<string> kna_nazwa2_List = new List<string>();
+        private List<string> kna_nazwa3_List = new List<string>();
+        private List<string> kna_kodp_List = new List<string>();
+        private List<string> kna_miasto_List = new List<string>();
+        private List<string> kna_ulica_List = new List<string>();
+        private List<string> kna_adresy_List = new List<string>();
+        private List<string> kna_nip_List = new List<string>();
+        private List<string> kna_telefon1_List = new List<string>();
+        private List<string> kna_telefon2_List = new List<string>();
+        private List<string> kna_telex_List = new List<string>();
+        private List<string> kna_fax_List = new List<string>();
+        private List<string> kna_email_List = new List<string>();
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -245,38 +263,42 @@ namespace AplikacjaSerwisowa
             mGidNumerKontrahenta = kontrahenciInformacje.GetKnt_GidNumer();
             kontekstGlowny = kontrahenciInformacje.GetContext();
 
-            //mkontrahecniAdresyListView = view.FindViewById<ListView>(Resource.Id.kontrahecniAdresyListView);
-            //mkontrahecniAdresyListView.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs e) { itemClick_Function(sender, e); };
+            mkontrahecniAdresyListView = view.FindViewById<ListView>(Resource.Id.kontrahecniAdresyFrag2ListView);
+            mkontrahecniAdresyListView.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs e) { itemClick_Function(sender, e); };
 
-            List<string> mItems = new List<string>();
-            mItems.Add("test");
-            mItems.Add("test1");
-            mItems.Add("test2");
-            mItems.Add("test3");
-            mItems.Add("test4");
-            mItems.Add("test5");
-            mItems.Add("test6");
-            mItems.Add("test7");
-            mItems.Add("test8");
-            mItems.Add("test9");
-            mItems.Add("test10");
+            try
+            {
+                String dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+                var result = db.Query<KntAdresyTable>("select * from KntAdresyTable where Kna_KntNumer = " + mGidNumerKontrahenta);
+                
+                foreach(var item in result)
+                {
+                    kna_gidnumer_List.Add(item.Kna_GIDNumer.ToString());
+                    kna_kntnumer.Add(item.Kna_KntNumer.ToString());
+                    kna_akronim_List.Add(item.Kna_Akrnonim);
+                    kna_nazwa1_List.Add(item.Kna_nazwa1);
+                    kna_nazwa2_List.Add(item.Kna_nazwa2);
+                    kna_nazwa3_List.Add(item.Kna_nazwa3);
+                    kna_kodp_List.Add(item.Kna_KodP);
+                    kna_miasto_List.Add(item.Kna_miasto);
+                    kna_ulica_List.Add(item.Kna_ulica);
+                    kna_adresy_List.Add(item.Kna_Adres);
+                    kna_nip_List.Add(item.Kna_nip);
+                    kna_telefon1_List.Add(item.Kna_telefon1);
+                    kna_telefon2_List.Add(item.Kna_telefon2);
+                    kna_telex_List.Add(item.Kna_telex);
+                    kna_fax_List.Add(item.Kna_fax);
+                    kna_email_List.Add(item.Kna_email);
+                }
+            }
+            catch(Exception exc)
+            {
+                messagebox("B³¹d Adresy.PobierzAdresy():\n" + exc.Message, "B³¹d", 0);
+            }
 
-            List<string> wykonane_List = new List<string>();
-            wykonane_List.Add("1");
-            wykonane_List.Add("1");
-            wykonane_List.Add("0");
-            wykonane_List.Add("1");
-            wykonane_List.Add("0");
-            wykonane_List.Add("1");
-            wykonane_List.Add("0");
-            wykonane_List.Add("0");
-            wykonane_List.Add("1");
-            wykonane_List.Add("0");
-            wykonane_List.Add("1");
-
-            //kontrahenciAdresy_ListViewAdapter adapter = new kontrahenciAdresy_ListViewAdapter(kontekstGlowny, mItems, mItems, mItems, mItems, mItems, wykonane_List);
-
-            //mkontrahecniAdresyListView.Adapter = adapter;
+            kontrahenciAdresy_ListViewAdapter adapter = new kontrahenciAdresy_ListViewAdapter(kontekstGlowny, kna_gidnumer_List, kna_kntnumer, kna_akronim_List, kna_nazwa1_List, kna_nazwa2_List, kna_nazwa3_List, kna_kodp_List, kna_miasto_List, kna_ulica_List, kna_adresy_List, kna_nip_List, kna_telefon1_List, kna_telefon2_List, kna_telex_List, kna_fax_List, kna_email_List, mUkrywanieGidNmer);
+            mkontrahecniAdresyListView.Adapter = adapter;
 
             return view;
         }
@@ -290,7 +312,23 @@ namespace AplikacjaSerwisowa
         {
             ListView test = (ListView)sender;
             String test1 = test.GetItemAtPosition(Convert.ToInt32(e.Id)).ToString();
-            
+        }
+
+        private void messagebox(String tekst, String tytul = "", Int32 icon = 1)
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(kontekstGlowny);
+
+            if(icon == 0)
+            {
+                alert.SetIconAttribute(Android.Resource.Attribute.AlertDialogIcon);
+            }
+
+            alert.SetTitle(tytul);
+            alert.SetMessage(tekst);
+            alert.SetPositiveButton("OK", (senderAlert, args) => { });
+
+            Dialog dialog = alert.Create();
+            dialog.Show();
         }
     }
 

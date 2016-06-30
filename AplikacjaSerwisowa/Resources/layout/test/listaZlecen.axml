@@ -13,6 +13,6 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/kartyTowarowListView" />
+            android:id="@+id/listView1" />
     </RelativeLayout>
 </ScrollView>

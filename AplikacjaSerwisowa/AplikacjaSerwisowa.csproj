@@ -93,9 +93,7 @@
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\Frag1Layout.axml" />
     <AndroidResource Include="Resources\layout\Frag2Layout.axml" />
-    <AndroidResource Include="Resources\layout\Frag3Layout.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Frag3Layout.axml" />
     <AndroidResource Include="Resources\layout\fragment_sample.axml" />
     <AndroidResource Include="Resources\layout\glowneOkno.axml" />
     <AndroidResource Include="Resources\layout\kartyTowarow_row.axml" />

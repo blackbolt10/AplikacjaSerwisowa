@@ -6,88 +6,72 @@
     android:minWidth="25px"
     android:minHeight="25px"
     android:weightSum="2"
-    android:paddingTop="5.0dp"
     android:paddingBottom="5.0dp"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:gridSpec="1|12|#0093eeff|K:#ee8700ff:16,l:72,l:16,r|S:#83ee00ff:16,0,l:16,56,l:16,0,r">
+    android:paddingTop="5.0dp"
+    android:paddingLeft="5.0dp">
+    <ImageView
+        android:src="@android:drawable/ic_menu_gallery"
+        android:layout_width="32.0dp"
+        android:layout_height="32.0dp"
+        android:id="@+id/realizacjaImageView" />
     <TextView
-        android:text="Akronim kontrahenta"
+        android:text="Duży kontrahent"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/akronimKontrahenciAdresyRowTextView"
-        android:maxHeight="100.0dp" />
+        android:id="@+id/kontrahentTextView"
+        android:layout_toRightOf="@id/realizacjaImageView"
+        android:maxHeight="100.0dp"
+        android:paddingLeft="10.0dp"
+        android:paddingBottom="10.0dp" />
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/akronimKontrahenciAdresyRowTextView"
+        android:layout_below="@id/kontrahentTextView"
         android:id="@+id/linearLayout2">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="33.0dp"
-            android:id="@+id/daneKontrahentaAdresy1inearLayout"
+            android:id="@+id/linearLayout1"
             android:weightSum="2"
             android:layout_alignParentRight="true"
-            android:layout_alignParentLeft="true"
-            android:minWidth="25px"
-            android:minHeight="25px">
+            android:layout_alignParentLeft="true">
             <TextView
-                android:text="Ulica"
+                android:text="Data"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/ulicaKontrahenciAdresyRowTextView"
+                android:id="@+id/dataTextView"
                 android:layout_weight="1" />
             <TextView
-                android:text="Telefon1"
+                android:text="Telefon"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/telefonKontrahenciAdresyRowTextView"
+                android:id="@+id/telefonTextView"
                 android:layout_weight="1" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="33.0dp"
-            android:id="@+id/daneKontrahentaAdresy2LinearLayout"
-            android:weightSum="3"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentLeft="true">
-            <TextView
-                android:text="Adres+kodP"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/adresKodPKontrahenciAdresyRowTextView"
-                android:layout_weight="1" />
-            <TextView
-                android:text="Email"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/emailKontrahenciAdresyRowsTextView"
-                android:layout_weight="2" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="33.0dp"
-            android:id="@+id/parametryKontrahenciAdresyLinearLayout"
+            android:id="@+id/linearLayout3"
             android:weightSum="2"
             android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true">
             <TextView
-                android:text="GIDNumer"
+                android:text="Adres"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/gidNumerKontrahenciAdresyRowTextView"
+                android:id="@+id/adresTextView"
                 android:layout_weight="1" />
             <TextView
-                android:text="KntNumer"
+                android:text="Godzina"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/kntNumerKontrahenciAdresyRowTextView"
+                android:id="@+id/godzinaTextView"
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>

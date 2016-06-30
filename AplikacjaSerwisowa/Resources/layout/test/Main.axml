@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:padding="50px"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+        <TextView
+            android:text="Login:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/zaloguj_textView"
+            android:layout_alignParentLeft="true" />
+        <EditText
+            android:id="@+id/login_EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.0dp"
+            android:layout_below="@id/zaloguj_textView"
+            android:paddingTop="10px"
+            android:paddingBottom="10px"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true" />
+        <TextView
+            android:id="@+id/haslo_textView"
+            android:text="Hasło:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_EditText"
+            android:layout_alignParentLeft="true" />
+        <EditText
+            android:id="@+id/haslo_EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.0dp"
+            android:layout_below="@id/haslo_textView"
+            android:paddingBottom="10px"
+            android:paddingTop="10px"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true" />
+        <Button
+            android:text="Zaloguj"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/haslo_EditText"
+            android:id="@+id/zaloguj_Button"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true" />
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+        </RelativeLayout>
+        <Button
+            android:text="Wszyscy uzytkownicy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/zaloguj_Button"
+            android:id="@+id/wszyscyButton" />
+        <Button
+            android:text="Uzupełnij test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/wszyscyButton"
+            android:id="@+id/uzupelnijTestButton" />
+    </RelativeLayout>
+</ScrollView>

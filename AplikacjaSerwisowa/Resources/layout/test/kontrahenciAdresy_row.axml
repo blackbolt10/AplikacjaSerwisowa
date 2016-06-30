@@ -7,9 +7,7 @@
     android:minHeight="25px"
     android:weightSum="2"
     android:paddingTop="5.0dp"
-    android:paddingBottom="5.0dp"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:gridSpec="1|12|#0093eeff|K:#ee8700ff:16,l:72,l:16,r|S:#83ee00ff:16,0,l:16,56,l:16,0,r">
+    android:paddingBottom="5.0dp">
     <TextView
         android:text="Akronim kontrahenta"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -81,14 +79,7 @@
                 android:text="GIDNumer"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/gidNumerKontrahenciAdresyRowTextView"
-                android:layout_weight="1" />
-            <TextView
-                android:text="KntNumer"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/kntNumerKontrahenciAdresyRowTextView"
-                android:layout_weight="1" />
+                android:id="@+id/gidNumerKontrahenciAdresyRowTextView" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.operatorzyButton = new System.Windows.Forms.Button();
+            this.kntKartyButton = new System.Windows.Forms.Button();
+            this.kntAdresyButton = new System.Windows.Forms.Button();
+            this.twrKartyCzynnosciButton = new System.Windows.Forms.Button();
+            this.twrKartySkladnkiButton = new System.Windows.Forms.Button();
             this.operatorzyPictureBox = new System.Windows.Forms.PictureBox();
             this.twrKartySkladnikiPictureBox = new System.Windows.Forms.PictureBox();
             this.twrKartyCzynnosciPictureBox = new System.Windows.Forms.PictureBox();
@@ -51,55 +51,55 @@
             ((System.ComponentModel.ISupportInitialize)(this.kntKartyPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // operatorzyButton
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 32);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Operatorzy";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.operatorzyButton_Click);
+            this.operatorzyButton.Location = new System.Drawing.Point(12, 12);
+            this.operatorzyButton.Name = "operatorzyButton";
+            this.operatorzyButton.Size = new System.Drawing.Size(115, 32);
+            this.operatorzyButton.TabIndex = 0;
+            this.operatorzyButton.Text = "Operatorzy";
+            this.operatorzyButton.UseVisualStyleBackColor = true;
+            this.operatorzyButton.Click += new System.EventHandler(this.operatorzyButton_Click);
             // 
-            // button2
+            // kntKartyButton
             // 
-            this.button2.Location = new System.Drawing.Point(12, 50);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 32);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "KntKarty";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.kntKartyButton_Click);
+            this.kntKartyButton.Location = new System.Drawing.Point(12, 50);
+            this.kntKartyButton.Name = "kntKartyButton";
+            this.kntKartyButton.Size = new System.Drawing.Size(115, 32);
+            this.kntKartyButton.TabIndex = 1;
+            this.kntKartyButton.Text = "KntKarty";
+            this.kntKartyButton.UseVisualStyleBackColor = true;
+            this.kntKartyButton.Click += new System.EventHandler(this.kntKartyButton_Click);
             // 
-            // button3
+            // kntAdresyButton
             // 
-            this.button3.Location = new System.Drawing.Point(12, 88);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(115, 32);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "KntAdresy";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.kntAdresyButton_Click);
+            this.kntAdresyButton.Location = new System.Drawing.Point(12, 88);
+            this.kntAdresyButton.Name = "kntAdresyButton";
+            this.kntAdresyButton.Size = new System.Drawing.Size(115, 32);
+            this.kntAdresyButton.TabIndex = 2;
+            this.kntAdresyButton.Text = "KntAdresy";
+            this.kntAdresyButton.UseVisualStyleBackColor = true;
+            this.kntAdresyButton.Click += new System.EventHandler(this.kntAdresyButton_Click);
             // 
-            // button4
+            // twrKartyCzynnosciButton
             // 
-            this.button4.Location = new System.Drawing.Point(12, 126);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(115, 32);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "TwrKartyCzynności";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.twrKartyCzynnosciButton_Click);
+            this.twrKartyCzynnosciButton.Location = new System.Drawing.Point(12, 126);
+            this.twrKartyCzynnosciButton.Name = "twrKartyCzynnosciButton";
+            this.twrKartyCzynnosciButton.Size = new System.Drawing.Size(115, 32);
+            this.twrKartyCzynnosciButton.TabIndex = 3;
+            this.twrKartyCzynnosciButton.Text = "TwrKartyCzynności";
+            this.twrKartyCzynnosciButton.UseVisualStyleBackColor = true;
+            this.twrKartyCzynnosciButton.Click += new System.EventHandler(this.twrKartyCzynnosciButton_Click);
             // 
-            // button5
+            // twrKartySkladnkiButton
             // 
-            this.button5.Location = new System.Drawing.Point(12, 164);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(115, 32);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "TwrKartySkladniki";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.twrKartySkladnikiButton_Click);
+            this.twrKartySkladnkiButton.Location = new System.Drawing.Point(12, 164);
+            this.twrKartySkladnkiButton.Name = "twrKartySkladnkiButton";
+            this.twrKartySkladnkiButton.Size = new System.Drawing.Size(115, 32);
+            this.twrKartySkladnkiButton.TabIndex = 4;
+            this.twrKartySkladnkiButton.Text = "TwrKartySkladniki";
+            this.twrKartySkladnkiButton.UseVisualStyleBackColor = true;
+            this.twrKartySkladnkiButton.Click += new System.EventHandler(this.twrKartySkladnikiButton_Click);
             // 
             // operatorzyPictureBox
             // 
@@ -216,11 +216,11 @@
             this.Controls.Add(this.twrKartyCzynnosciPictureBox);
             this.Controls.Add(this.twrKartySkladnikiPictureBox);
             this.Controls.Add(this.operatorzyPictureBox);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.twrKartySkladnkiButton);
+            this.Controls.Add(this.twrKartyCzynnosciButton);
+            this.Controls.Add(this.kntAdresyButton);
+            this.Controls.Add(this.kntKartyButton);
+            this.Controls.Add(this.operatorzyButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
             this.Text = "Aplikacja serwisowa";
@@ -237,11 +237,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button operatorzyButton;
+        private System.Windows.Forms.Button kntKartyButton;
+        private System.Windows.Forms.Button kntAdresyButton;
+        private System.Windows.Forms.Button twrKartyCzynnosciButton;
+        private System.Windows.Forms.Button twrKartySkladnkiButton;
         private System.Windows.Forms.PictureBox operatorzyPictureBox;
         private System.Windows.Forms.PictureBox twrKartySkladnikiPictureBox;
         private System.Windows.Forms.PictureBox twrKartyCzynnosciPictureBox;

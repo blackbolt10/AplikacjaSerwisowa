@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -18,8 +19,7 @@ namespace AplikacjaSerwisowaKomp
         private static MainWindow MainWindowForm;
         private static SqlConnection uchwytBD;
         private static SqlCommand polecenieSQL;
-
-
+        private static Boolean pobieranieDanych = false;
 
 
         public MainWindow()
@@ -85,8 +85,8 @@ namespace AplikacjaSerwisowaKomp
 
         private void pobierzOperatorow()
         {
-            AktualizujMainWindow(operatorzyLabel, "Odczyt z bazy danych...", operatorzyPictureBox, true);
-            
+            AktualizujMainWindow(operatorzyLabel, "Odczyt z bazy danych...", operatorzyPictureBox, true, operatorzyButton, false);
+
             DataTable pomDataTable = new DataTable();
             try
             {
@@ -98,20 +98,24 @@ namespace AplikacjaSerwisowaKomp
             {
                 MessageBox.Show("Wystąpił błąd podczas wykonywania funkcji MainWindow.pobierzOperatorow() :\n" + exc.Message);
 
-                AktualizujMainWindow(operatorzyLabel, "Błąd...", operatorzyPictureBox, false);
+                AktualizujMainWindow(operatorzyLabel, "Błąd...", operatorzyPictureBox, false, operatorzyButton, false);
             }
 
             if(pomDataTable.Rows.Count > 0)
             {
-                AktualizujMainWindow(operatorzyLabel, "Odczyt z bazy danych...", operatorzyPictureBox, true);
+                AktualizujMainWindow(operatorzyLabel, "Tworzenie pliku...", operatorzyPictureBox, true);
 
-                wygenerujPlikXML("operatorzy", "operator", pomDataTable);
+                wygenerujPlikXML("Operatorzy.xml", "operator", pomDataTable);
 
-                AktualizujMainWindow(operatorzyLabel, "Wykonano...", operatorzyPictureBox, false);
+                AktualizujMainWindow(operatorzyLabel, "Wysyłanie na serwer...", operatorzyPictureBox, true);
+
+                sendToFtp("operatorzy.xml");
+
+                AktualizujMainWindow(operatorzyLabel, "Wykonano...", operatorzyPictureBox, false, operatorzyButton, false);
             }
             else
             {
-                AktualizujMainWindow(operatorzyLabel, "Brak wierszy do zapisania...", operatorzyPictureBox, false);
+                AktualizujMainWindow(operatorzyLabel, "Brak wierszy do zapisania...", operatorzyPictureBox, false, operatorzyButton, false);
             }
         }
 
@@ -133,7 +137,7 @@ namespace AplikacjaSerwisowaKomp
 
         private void pobierzKntKarty()
         {
-            AktualizujMainWindow(kntKartyLabel, "Odczyt z bazy danych...", kntKartyPictureBox, true);
+            AktualizujMainWindow(kntKartyLabel, "Odczyt z bazy danych...", kntKartyPictureBox, true,kntKartyButton,false);
 
             DataTable pomDataTable = new DataTable();
             try
@@ -146,7 +150,7 @@ namespace AplikacjaSerwisowaKomp
             {
                 MessageBox.Show("Wystąpił błąd podczas wykonywania funkcji MainWindow.pobierzKntKarty() :\n" + exc.Message);
 
-                AktualizujMainWindow(kntKartyLabel, "Błąd...", kntKartyPictureBox, false);
+                AktualizujMainWindow(kntKartyLabel, "Błąd...", kntKartyPictureBox, false, kntKartyButton, true);
             }
 
             if(pomDataTable.Rows.Count > 0)
@@ -155,11 +159,16 @@ namespace AplikacjaSerwisowaKomp
 
                 wygenerujPlikXML("KntKarty", "KntKarta", pomDataTable);
 
-                AktualizujMainWindow(kntKartyLabel, "Wykonano...", kntKartyPictureBox, false);
+                AktualizujMainWindow(kntKartyLabel, "Wysyłanie na serwer...", kntKartyPictureBox, true);
+
+                sendToFtp("KntKarty.xml");
+
+                AktualizujMainWindow(kntKartyLabel, "Wykonano...", kntKartyPictureBox, false, kntKartyButton, true);
+
             }
             else
             {
-                AktualizujMainWindow(kntKartyLabel, "Brak wierszy do zapisania...", kntKartyPictureBox, false);
+                AktualizujMainWindow(kntKartyLabel, "Brak wierszy do zapisania...", kntKartyPictureBox, false, kntKartyButton, true);
             }
         }
 
@@ -171,7 +180,7 @@ namespace AplikacjaSerwisowaKomp
 
         private void pobierzKntAdresy()
         {
-            AktualizujMainWindow(kntAdresyLabel, "Odczyt z bazy danych...", kntAdresyPictureBox, true);
+            AktualizujMainWindow(kntAdresyLabel, "Odczyt z bazy danych...", kntAdresyPictureBox, true, kntAdresyButton, false);
             
             DataTable pomDataTable = new DataTable();
             try
@@ -184,7 +193,7 @@ namespace AplikacjaSerwisowaKomp
             {
                 MessageBox.Show("Wystąpił błąd podczas wykonywania funkcji MainWindow.pobierzKntAdresy() :\n" + exc.Message);
 
-                AktualizujMainWindow(kntAdresyLabel, "Błąd...", kntAdresyPictureBox, false);
+                AktualizujMainWindow(kntAdresyLabel, "Błąd...", kntAdresyPictureBox, false, kntAdresyButton, true);
             }
 
             if(pomDataTable.Rows.Count > 0)
@@ -193,11 +202,15 @@ namespace AplikacjaSerwisowaKomp
 
                 wygenerujPlikXML("KntAdresy", "KntAdres", pomDataTable);
 
-                AktualizujMainWindow(kntAdresyLabel, "Wykonano...", kntAdresyPictureBox, false);
+                AktualizujMainWindow(kntAdresyLabel, "Wysyłanie na serwer...", kntAdresyPictureBox, true);
+
+                sendToFtp("KntAdresy.xml");
+
+                AktualizujMainWindow(kntAdresyLabel, "Wykonano...", kntAdresyPictureBox, false, kntAdresyButton, true);
             }
             else
             {
-                AktualizujMainWindow(kntAdresyLabel, "Brak wierszy do zapisania...", kntAdresyPictureBox, false);
+                AktualizujMainWindow(kntAdresyLabel, "Brak wierszy do zapisania...", kntAdresyPictureBox, false, kntAdresyButton, true);
             }
         }
 
@@ -209,7 +222,7 @@ namespace AplikacjaSerwisowaKomp
 
         private void pobierzTwrKartyCzynnosci()
         {
-            AktualizujMainWindow(twrKartyCzynnosciLabel, "Odczyt z bazy danych...", twrKartyCzynnosciPictureBox, true);
+            AktualizujMainWindow(twrKartyCzynnosciLabel, "Odczyt z bazy danych...", twrKartyCzynnosciPictureBox, true, twrKartyCzynnosciButton, false);
 
             DataTable pomDataTable = new DataTable();
             try
@@ -222,7 +235,7 @@ namespace AplikacjaSerwisowaKomp
             {
                 MessageBox.Show("Wystąpił błąd podczas wykonywania funkcji MainWindow.pobierzTwrKartyCzynnosci() :\n" + exc.Message);
 
-                AktualizujMainWindow(twrKartyCzynnosciLabel, "Błąd...", twrKartyCzynnosciPictureBox, false);
+                AktualizujMainWindow(twrKartyCzynnosciLabel, "Błąd...", twrKartyCzynnosciPictureBox, false, twrKartyCzynnosciButton, true);
             }
 
             if(pomDataTable.Rows.Count > 0)
@@ -231,11 +244,15 @@ namespace AplikacjaSerwisowaKomp
 
                 wygenerujPlikXML("TwrKartyCzynnosci", "TwrKartyCzynnosc", pomDataTable);
 
-                AktualizujMainWindow(twrKartyCzynnosciLabel, "Wykonano...", twrKartyCzynnosciPictureBox, false);
+                AktualizujMainWindow(twrKartyCzynnosciLabel, "Wysyłanie na serwer...", twrKartyCzynnosciPictureBox, true);
+
+                sendToFtp("TwrKartyCzynnosci.xml");
+
+                AktualizujMainWindow(twrKartyCzynnosciLabel, "Wykonano...", twrKartyCzynnosciPictureBox, false, twrKartyCzynnosciButton, true);
             }
             else
             {
-                AktualizujMainWindow(twrKartyCzynnosciLabel, "Brak wierszy do zapisania...", twrKartyCzynnosciPictureBox, false);
+                AktualizujMainWindow(twrKartyCzynnosciLabel, "Brak wierszy do zapisania...", twrKartyCzynnosciPictureBox, false, twrKartyCzynnosciButton, true);
             }
         }
 
@@ -247,7 +264,7 @@ namespace AplikacjaSerwisowaKomp
 
         private void pobierzTwrKartySkladniki()
         {
-            AktualizujMainWindow(twrKartySkladnikiLabel, "Odczyt z bazy danych...", twrKartySkladnikiPictureBox, true);
+            AktualizujMainWindow(twrKartySkladnikiLabel, "Odczyt z bazy danych...", twrKartySkladnikiPictureBox, true, twrKartySkladnkiButton, false);
 
             DataTable pomDataTable = new DataTable();
             try
@@ -260,7 +277,7 @@ namespace AplikacjaSerwisowaKomp
             {
                 MessageBox.Show("Wystąpił błąd podczas wykonywania funkcji MainWindow.pobierzTwrKartyCzynnosci() :\n" + exc.Message);
 
-                AktualizujMainWindow(twrKartySkladnikiLabel, "Błąd...", twrKartySkladnikiPictureBox, false);
+                AktualizujMainWindow(twrKartySkladnikiLabel, "Błąd...", twrKartySkladnikiPictureBox, false, twrKartySkladnkiButton, true);
             }
 
             if(pomDataTable.Rows.Count > 0)
@@ -269,15 +286,19 @@ namespace AplikacjaSerwisowaKomp
 
                 wygenerujPlikXML("TwrKartySkladniki", "TwrKartySkladnik", pomDataTable);
 
-                AktualizujMainWindow(twrKartySkladnikiLabel, "Wykonano...", twrKartySkladnikiPictureBox, false);
+                AktualizujMainWindow(twrKartySkladnikiLabel, "Wysyłanie na serwer...", twrKartySkladnikiPictureBox, true);
+
+                sendToFtp("TwrKartySkladniki.xml");
+
+                AktualizujMainWindow(twrKartySkladnikiLabel, "Wykonano...", twrKartySkladnikiPictureBox, false, twrKartySkladnkiButton, true);
             }
             else
             {
-                AktualizujMainWindow(twrKartySkladnikiLabel, "Brak wierszy do zapisania...", twrKartySkladnikiPictureBox, false);
+                AktualizujMainWindow(twrKartySkladnikiLabel, "Brak wierszy do zapisania...", twrKartySkladnikiPictureBox, false, twrKartySkladnkiButton, true);
             }
         }
 
-        private static void AktualizujMainWindow(Label pomLabel, String tekst, PictureBox pomPictureBox, Boolean status)
+        private static void AktualizujMainWindow(Label pomLabel, String tekst, PictureBox pomPictureBox, Boolean status, Button pomButton = null, Boolean buttonStatus = true)
         {
             MainWindowForm.BeginInvoke(new EventHandler(delegate
             {
@@ -291,8 +312,36 @@ namespace AplikacjaSerwisowaKomp
                     pomPictureBox.Enabled = status;
                     pomPictureBox.Image = null;
                 }
+
+            if(pomButton != null)
+            {
+                pomButton.Enabled = buttonStatus;
+            }
+
                 pomLabel.Text = tekst;
             }));
         }
+        private void sendToFtp(String nazwaPliku)
+        {
+            hasla haslo = new hasla();
+
+            using(WebClient client = new WebClient())
+            {
+                client.Credentials = new NetworkCredential(haslo.GetFtpUserName(), haslo.GetFtpPassword());
+                client.UploadFile(haslo.GetFtp()+"\\"+nazwaPliku, "STOR", nazwaPliku);
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
 }

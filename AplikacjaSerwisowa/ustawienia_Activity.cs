@@ -24,7 +24,7 @@ namespace AplikacjaSerwisowa
         Button zapiszButton, synchronizacja_Button, test2Button;
         
         String documentsPath = "/sdcard/Download";
-        String fileName = "uzytkownicy.xml";
+        String fileName = "operatorzy.xml";
 
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -209,7 +209,7 @@ namespace AplikacjaSerwisowa
             {
                 XmlDocument xml = new XmlDocument();
                 xml.LoadXml(plikXMLString);
-                XmlNodeList xnList = xml.SelectNodes("/root/operatorzy/uzytkownik");
+                XmlNodeList xnList = xml.SelectNodes("/operatorzy/operator");
                 foreach (XmlNode xn in xnList)
                 {
                     string akronim = xn["akronim"].InnerText;

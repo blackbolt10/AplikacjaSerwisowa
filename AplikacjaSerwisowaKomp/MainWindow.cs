@@ -87,9 +87,15 @@ namespace AplikacjaSerwisowaKomp
         {
             AktualizujMainWindow(operatorzyLabel, "Odczyt z bazy danych...", operatorzyPictureBox, true, operatorzyButton, false);
 
+            while(pobieranieDanych)
+            {
+                Thread.Sleep(1000);
+            }
+
             DataTable pomDataTable = new DataTable();
             try
             {
+                pobieranieDanych = true;
                 String zapytanieString = "";
                 SqlDataAdapter da = zapytanie(zapytanieString);
                 da.Fill(pomDataTable);
@@ -101,21 +107,23 @@ namespace AplikacjaSerwisowaKomp
                 AktualizujMainWindow(operatorzyLabel, "Błąd...", operatorzyPictureBox, false, operatorzyButton, false);
             }
 
+            pobieranieDanych = false;
+
             if(pomDataTable.Rows.Count > 0)
             {
                 AktualizujMainWindow(operatorzyLabel, "Tworzenie pliku...", operatorzyPictureBox, true);
 
-                wygenerujPlikXML("Operatorzy.xml", "operator", pomDataTable);
+                wygenerujPlikXML("operatorzy", "operator", pomDataTable);
 
                 AktualizujMainWindow(operatorzyLabel, "Wysyłanie na serwer...", operatorzyPictureBox, true);
 
                 sendToFtp("operatorzy.xml");
 
-                AktualizujMainWindow(operatorzyLabel, "Wykonano...", operatorzyPictureBox, false, operatorzyButton, false);
+                AktualizujMainWindow(operatorzyLabel, "Wykonano...", operatorzyPictureBox, false, operatorzyButton, true);
             }
             else
             {
-                AktualizujMainWindow(operatorzyLabel, "Brak wierszy do zapisania...", operatorzyPictureBox, false, operatorzyButton, false);
+                AktualizujMainWindow(operatorzyLabel, "Brak wierszy do zapisania...", operatorzyPictureBox, false, operatorzyButton, true);
             }
         }
 
@@ -139,9 +147,16 @@ namespace AplikacjaSerwisowaKomp
         {
             AktualizujMainWindow(kntKartyLabel, "Odczyt z bazy danych...", kntKartyPictureBox, true,kntKartyButton,false);
 
+            while(pobieranieDanych)
+            {
+                Thread.Sleep(1000);
+            }
+
             DataTable pomDataTable = new DataTable();
             try
             {
+                pobieranieDanych = true;
+
                 String zapytanieString = "select knt.knt_GIDNumer, knt.knt_Akronim, knt.knt_nazwa1, knt.knt_nazwa2, knt.knt_nazwa3, knt.knt_KodP, knt.knt_miasto, knt.knt_ulica, knt.knt_Adres, knt.knt_nip, knt.knt_telefon1, knt.knt_telefon2, knt.knt_telex, knt.knt_fax, knt.knt_email, knt.knt_url from cdn.kntkarty knt";
                 SqlDataAdapter da = zapytanie(zapytanieString);
                 da.Fill(pomDataTable);
@@ -152,6 +167,8 @@ namespace AplikacjaSerwisowaKomp
 
                 AktualizujMainWindow(kntKartyLabel, "Błąd...", kntKartyPictureBox, false, kntKartyButton, true);
             }
+
+            pobieranieDanych = false;
 
             if(pomDataTable.Rows.Count > 0)
             {
@@ -181,10 +198,17 @@ namespace AplikacjaSerwisowaKomp
         private void pobierzKntAdresy()
         {
             AktualizujMainWindow(kntAdresyLabel, "Odczyt z bazy danych...", kntAdresyPictureBox, true, kntAdresyButton, false);
-            
+
+            while(pobieranieDanych)
+            {
+                Thread.Sleep(1000);
+            }
+
             DataTable pomDataTable = new DataTable();
             try
             {
+                pobieranieDanych = true;
+
                 String zapytanieString = "select kna_GIDNumer, kna_kntnumer, kna_Akronim, kna_nazwa1, kna_nazwa2, kna_nazwa3, kna_KodP, kna_miasto, kna_ulica, kna_Adres, kna_nip, kna_telefon1, kna_telefon2, kna_telex, kna_fax, kna_email from cdn.kntadresy";
                 SqlDataAdapter da = zapytanie(zapytanieString);
                 da.Fill(pomDataTable);
@@ -195,6 +219,8 @@ namespace AplikacjaSerwisowaKomp
 
                 AktualizujMainWindow(kntAdresyLabel, "Błąd...", kntAdresyPictureBox, false, kntAdresyButton, true);
             }
+
+            pobieranieDanych = false;
 
             if(pomDataTable.Rows.Count > 0)
             {
@@ -224,9 +250,16 @@ namespace AplikacjaSerwisowaKomp
         {
             AktualizujMainWindow(twrKartyCzynnosciLabel, "Odczyt z bazy danych...", twrKartyCzynnosciPictureBox, true, twrKartyCzynnosciButton, false);
 
+            while(pobieranieDanych)
+            {
+                Thread.Sleep(1000);
+            }
+
             DataTable pomDataTable = new DataTable();
             try
             {
+                pobieranieDanych = true;
+
                 String zapytanieString = "select twr_gidnumer, twr_kod, twr_typ, twr_nazwa, twr_nazwa1 from cdn.twrkarty where twr_typ = 4 order by twr_kod";
                 SqlDataAdapter da = zapytanie(zapytanieString);
                 da.Fill(pomDataTable);
@@ -237,6 +270,8 @@ namespace AplikacjaSerwisowaKomp
 
                 AktualizujMainWindow(twrKartyCzynnosciLabel, "Błąd...", twrKartyCzynnosciPictureBox, false, twrKartyCzynnosciButton, true);
             }
+
+            pobieranieDanych = false;
 
             if(pomDataTable.Rows.Count > 0)
             {
@@ -266,9 +301,16 @@ namespace AplikacjaSerwisowaKomp
         {
             AktualizujMainWindow(twrKartySkladnikiLabel, "Odczyt z bazy danych...", twrKartySkladnikiPictureBox, true, twrKartySkladnkiButton, false);
 
+            while(pobieranieDanych)
+            {
+                Thread.Sleep(1000);
+            }
+
             DataTable pomDataTable = new DataTable();
             try
             {
+                pobieranieDanych = true;
+
                 String zapytanieString = "select twr_gidnumer, twr_kod, twr_typ, twr_nazwa, twr_nazwa1  from cdn.twrkarty where twr_typ in (1,2) order by twr_kod";
                 SqlDataAdapter da = zapytanie(zapytanieString);
                 da.Fill(pomDataTable);
@@ -279,6 +321,8 @@ namespace AplikacjaSerwisowaKomp
 
                 AktualizujMainWindow(twrKartySkladnikiLabel, "Błąd...", twrKartySkladnikiPictureBox, false, twrKartySkladnkiButton, true);
             }
+
+            pobieranieDanych = false;
 
             if(pomDataTable.Rows.Count > 0)
             {

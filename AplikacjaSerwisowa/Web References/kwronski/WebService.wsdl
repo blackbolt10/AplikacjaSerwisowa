@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://kwronski.hostingasp.pl/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://kwronski.hostingasp.pl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://kwronski.hostingasp.pl/">
+      <s:element name="GettestClassXML">
+        <s:complexType />
+      </s:element>
+      <s:element name="GettestClassXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GettestClassXMLResult" type="tns:ArrayOfTestClass" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTestClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="testClass" nillable="true" type="tns:testClass" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="testClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Salary" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GettestClassJSON">
+        <s:complexType />
+      </s:element>
+      <s:element name="GettestClassJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GettestClassJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HelloWorld">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="test" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="lama">
+        <s:complexType />
+      </s:element>
+      <s:element name="lamaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="lamaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="test">
+        <s:complexType />
+      </s:element>
+      <s:element name="testResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="testResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jsonString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZwrocListeZlecenSerwisowychNaglowki">
+        <s:complexType />
+      </s:element>
+      <s:element name="ZwrocListeZlecenSerwisowychNaglowkiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZwrocListeZlecenSerwisowychNaglowkiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfTestClass" nillable="true" type="tns:ArrayOfTestClass" />
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GettestClassXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GettestClassXML" />
+  </wsdl:message>
+  <wsdl:message name="GettestClassXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GettestClassXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GettestClassJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:GettestClassJSON" />
+  </wsdl:message>
+  <wsdl:message name="GettestClassJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:GettestClassJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="lamaSoapIn">
+    <wsdl:part name="parameters" element="tns:lama" />
+  </wsdl:message>
+  <wsdl:message name="lamaSoapOut">
+    <wsdl:part name="parameters" element="tns:lamaResponse" />
+  </wsdl:message>
+  <wsdl:message name="testSoapIn">
+    <wsdl:part name="parameters" element="tns:test" />
+  </wsdl:message>
+  <wsdl:message name="testSoapOut">
+    <wsdl:part name="parameters" element="tns:testResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetDataSoapIn">
+    <wsdl:part name="parameters" element="tns:SetData" />
+  </wsdl:message>
+  <wsdl:message name="SetDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiSoapIn">
+    <wsdl:part name="parameters" element="tns:ZwrocListeZlecenSerwisowychNaglowki" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiSoapOut">
+    <wsdl:part name="parameters" element="tns:ZwrocListeZlecenSerwisowychNaglowkiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GettestClassXMLHttpGetIn" />
+  <wsdl:message name="GettestClassXMLHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTestClass" />
+  </wsdl:message>
+  <wsdl:message name="GettestClassJSONHttpGetIn" />
+  <wsdl:message name="GettestClassJSONHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn">
+    <wsdl:part name="test" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="lamaHttpGetIn" />
+  <wsdl:message name="lamaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="testHttpGetIn" />
+  <wsdl:message name="testHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SetDataHttpGetIn">
+    <wsdl:part name="jsonString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiHttpGetIn" />
+  <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GettestClassXMLHttpPostIn" />
+  <wsdl:message name="GettestClassXMLHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTestClass" />
+  </wsdl:message>
+  <wsdl:message name="GettestClassJSONHttpPostIn" />
+  <wsdl:message name="GettestClassJSONHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn">
+    <wsdl:part name="test" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="lamaHttpPostIn" />
+  <wsdl:message name="lamaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="testHttpPostIn" />
+  <wsdl:message name="testHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SetDataHttpPostIn">
+    <wsdl:part name="jsonString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiHttpPostIn" />
+  <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+    <wsdl:operation name="GettestClassXML">
+      <wsdl:input message="tns:GettestClassXMLSoapIn" />
+      <wsdl:output message="tns:GettestClassXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GettestClassJSON">
+      <wsdl:input message="tns:GettestClassJSONSoapIn" />
+      <wsdl:output message="tns:GettestClassJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">HelloWorld</wsdl:documentation>
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="lama">
+      <wsdl:input message="tns:lamaSoapIn" />
+      <wsdl:output message="tns:lamaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <wsdl:input message="tns:testSoapIn" />
+      <wsdl:output message="tns:testSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetData">
+      <wsdl:input message="tns:SetDataSoapIn" />
+      <wsdl:output message="tns:SetDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
+      <wsdl:input message="tns:ZwrocListeZlecenSerwisowychNaglowkiSoapIn" />
+      <wsdl:output message="tns:ZwrocListeZlecenSerwisowychNaglowkiSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WebServiceHttpGet">
+    <wsdl:operation name="GettestClassXML">
+      <wsdl:input message="tns:GettestClassXMLHttpGetIn" />
+      <wsdl:output message="tns:GettestClassXMLHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GettestClassJSON">
+      <wsdl:input message="tns:GettestClassJSONHttpGetIn" />
+      <wsdl:output message="tns:GettestClassJSONHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">HelloWorld</wsdl:documentation>
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="lama">
+      <wsdl:input message="tns:lamaHttpGetIn" />
+      <wsdl:output message="tns:lamaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <wsdl:input message="tns:testHttpGetIn" />
+      <wsdl:output message="tns:testHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetData">
+      <wsdl:input message="tns:SetDataHttpGetIn" />
+      <wsdl:output message="tns:SetDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
+      <wsdl:input message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpGetIn" />
+      <wsdl:output message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WebServiceHttpPost">
+    <wsdl:operation name="GettestClassXML">
+      <wsdl:input message="tns:GettestClassXMLHttpPostIn" />
+      <wsdl:output message="tns:GettestClassXMLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GettestClassJSON">
+      <wsdl:input message="tns:GettestClassJSONHttpPostIn" />
+      <wsdl:output message="tns:GettestClassJSONHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">HelloWorld</wsdl:documentation>
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="lama">
+      <wsdl:input message="tns:lamaHttpPostIn" />
+      <wsdl:output message="tns:lamaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <wsdl:input message="tns:testHttpPostIn" />
+      <wsdl:output message="tns:testHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetData">
+      <wsdl:input message="tns:SetDataHttpPostIn" />
+      <wsdl:output message="tns:SetDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
+      <wsdl:input message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpPostIn" />
+      <wsdl:output message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GettestClassXML">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/GettestClassXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GettestClassJSON">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/GettestClassJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lama">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/lama" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetData">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/SetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychNaglowki" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GettestClassXML">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/GettestClassXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GettestClassJSON">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/GettestClassJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lama">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/lama" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/test" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetData">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/SetData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychNaglowki" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceHttpGet" type="tns:WebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GettestClassXML">
+      <http:operation location="/GettestClassXML" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GettestClassJSON">
+      <http:operation location="/GettestClassJSON" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lama">
+      <http:operation location="/lama" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <http:operation location="/test" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetData">
+      <http:operation location="/SetData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
+      <http:operation location="/ZwrocListeZlecenSerwisowychNaglowki" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceHttpPost" type="tns:WebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GettestClassXML">
+      <http:operation location="/GettestClassXML" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GettestClassJSON">
+      <http:operation location="/GettestClassJSON" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lama">
+      <http:operation location="/lama" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <http:operation location="/test" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetData">
+      <http:operation location="/SetData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
+      <http:operation location="/ZwrocListeZlecenSerwisowychNaglowki" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="http://kwronski.hostingasp.pl/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="http://kwronski.hostingasp.pl/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceHttpGet" binding="tns:WebServiceHttpGet">
+      <http:address location="http://kwronski.hostingasp.pl/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceHttpPost" binding="tns:WebServiceHttpPost">
+      <http:address location="http://kwronski.hostingasp.pl/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

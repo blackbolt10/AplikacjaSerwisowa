@@ -99,8 +99,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06004e
 			public const int adresSerwerSynchronizacja_EditText = 2131099726;
 			
-			// aapt resource value: 0x7f060057
-			public const int adresSerwer_EditText = 2131099735;
+			// aapt resource value: 0x7f060058
+			public const int adresSerwer_EditText = 2131099736;
 			
 			// aapt resource value: 0x7f06004d
 			public const int adresSerwer_textView = 2131099725;
@@ -174,8 +174,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060053
 			public const int hasloSerwerSynchronizacja_EditText = 2131099731;
 			
-			// aapt resource value: 0x7f06005a
-			public const int hasloSerwer_EditText = 2131099738;
+			// aapt resource value: 0x7f06005b
+			public const int hasloSerwer_EditText = 2131099739;
 			
 			// aapt resource value: 0x7f060047
 			public const int haslo_EditText = 2131099719;
@@ -186,8 +186,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060050
 			public const int instancjaSerwerSynchronizacja_EditText = 2131099728;
 			
-			// aapt resource value: 0x7f060058
-			public const int instancjaSerwer_EditText = 2131099736;
+			// aapt resource value: 0x7f060059
+			public const int instancjaSerwer_EditText = 2131099737;
 			
 			// aapt resource value: 0x7f06004f
 			public const int instancjaSerwer_textView = 2131099727;
@@ -237,8 +237,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060052
 			public const int loginSerwerSynchronizacja_EditText = 2131099730;
 			
-			// aapt resource value: 0x7f060059
-			public const int loginSerwer_EditText = 2131099737;
+			// aapt resource value: 0x7f06005a
+			public const int loginSerwer_EditText = 2131099738;
 			
 			// aapt resource value: 0x7f060051
 			public const int loginSerwer_textView = 2131099729;
@@ -285,14 +285,17 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06001a
 			public const int sliding_tabs = 2131099674;
 			
-			// aapt resource value: 0x7f06005c
-			public const int synchronizacjaButton = 2131099740;
+			// aapt resource value: 0x7f06005d
+			public const int synchronizacjaButton = 2131099741;
+			
+			// aapt resource value: 0x7f060057
+			public const int synchronizacjaGalsoftSynchronizacjaButton = 2131099735;
 			
 			// aapt resource value: 0x7f060055
 			public const int synchronizacjaSynchronizacjaButton = 2131099733;
 			
-			// aapt resource value: 0x7f06005e
-			public const int synchronizacja_glowneOknoMenu = 2131099742;
+			// aapt resource value: 0x7f06005f
+			public const int synchronizacja_glowneOknoMenu = 2131099743;
 			
 			// aapt resource value: 0x7f06000c
 			public const int telefon1Frag1TextView = 2131099660;
@@ -321,8 +324,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060056
 			public const int test2Synchronizacja_button = 2131099734;
 			
-			// aapt resource value: 0x7f06005d
-			public const int test2_button = 2131099741;
+			// aapt resource value: 0x7f06005e
+			public const int test2_button = 2131099742;
 			
 			// aapt resource value: 0x7f060001
 			public const int textView1 = 2131099649;
@@ -351,8 +354,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060015
 			public const int urlNazwaFrag1TextView = 2131099669;
 			
-			// aapt resource value: 0x7f060061
-			public const int ustawienia_mainActivityMenu = 2131099745;
+			// aapt resource value: 0x7f060062
+			public const int ustawienia_mainActivityMenu = 2131099746;
 			
 			// aapt resource value: 0x7f06004b
 			public const int uzupelnijTestButton = 2131099723;
@@ -366,8 +369,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06004a
 			public const int wszyscyButton = 2131099722;
 			
-			// aapt resource value: 0x7f06005f
-			public const int wyloguj_glowneOknoMenu = 2131099743;
+			// aapt resource value: 0x7f060060
+			public const int wyloguj_glowneOknoMenu = 2131099744;
 			
 			// aapt resource value: 0x7f060048
 			public const int zaloguj_Button = 2131099720;
@@ -375,17 +378,17 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060044
 			public const int zaloguj_textView = 2131099716;
 			
-			// aapt resource value: 0x7f060060
-			public const int zamknij_glowneOknoMenu = 2131099744;
+			// aapt resource value: 0x7f060061
+			public const int zamknij_glowneOknoMenu = 2131099745;
 			
-			// aapt resource value: 0x7f060062
-			public const int zamknij_mainActivityMenu = 2131099746;
+			// aapt resource value: 0x7f060063
+			public const int zamknij_mainActivityMenu = 2131099747;
 			
 			// aapt resource value: 0x7f060054
 			public const int zapiszSerwerSynchronizacja_Button = 2131099732;
 			
-			// aapt resource value: 0x7f06005b
-			public const int zapiszSerwer_Button = 2131099739;
+			// aapt resource value: 0x7f06005c
+			public const int zapiszSerwer_Button = 2131099740;
 			
 			static Id()
 			{

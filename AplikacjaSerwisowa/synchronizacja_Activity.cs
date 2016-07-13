@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Xml;
 
 using Android.App;
@@ -15,13 +18,15 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using Newtonsoft.Json;
+
 namespace AplikacjaSerwisowa
 {
     [Activity(Label = "Synchronizacja", Icon = "@drawable/synchronizacja")]
     public class synchronizacja_Activity : Activity
     {
         EditText adresSerwera, instancjaSerwer, loginSerwer, hasloSerwer;
-        Button zapiszButton, synchronizacja_Button, test2Button;
+        Button zapiszButton, synchronizacja_Button, test2Button, synchronizacjaGalsoftButton;
 
         String documentsPath = "/sdcard/Download";
 
@@ -29,7 +34,7 @@ namespace AplikacjaSerwisowa
         String nazwaKntKarty = "knt_karty.xml";
         String nazwaKntAdresy= "kna_adresy.xml";
 
-        ProgressDialog progrssDialog;
+        ProgressDialog progrssDialog, progrssDialogGalsoft;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -40,7 +45,7 @@ namespace AplikacjaSerwisowa
             instancjaSerwer = FindViewById<EditText>(Resource.Id.instancjaSerwerSynchronizacja_EditText);
             loginSerwer = FindViewById<EditText>(Resource.Id.loginSerwerSynchronizacja_EditText);
             hasloSerwer = FindViewById<EditText>(Resource.Id.hasloSerwerSynchronizacja_EditText);
-
+            
             zapiszButton = FindViewById<Button>(Resource.Id.zapiszSerwerSynchronizacja_Button);
             zapiszButton.Click += delegate { zapisDanychDoPamieciUrzadzenia(); };
 
@@ -50,6 +55,8 @@ namespace AplikacjaSerwisowa
             test2Button = FindViewById<Button>(Resource.Id.test2Synchronizacja_button);
             test2Button.Click += delegate { test2(); };
 
+            synchronizacjaGalsoftButton = FindViewById<Button>(Resource.Id.synchronizacjaGalsoftSynchronizacjaButton);
+            synchronizacjaGalsoftButton.Click += delegate { synchronizacjaGalsoft(); };
             // Create your application here
 
             Odczyt();
@@ -488,11 +495,151 @@ namespace AplikacjaSerwisowa
             }
         }
 
-    private void test2()
+        private void test2()
         {
             DBRepository dbr = new DBRepository();
             String result = dbr.kartyTowarow_GetAllRecords();
             Toast.MakeText(this, result, ToastLength.Long).Show();
         }
+
+        private void synchronizacjaGalsoft()
+        {
+            progrssDialogGalsoft = new ProgressDialog(this);
+            progrssDialogGalsoft.SetTitle("Pobieranie");
+            progrssDialogGalsoft.SetMessage("Proszê czekaæ...");
+            progrssDialogGalsoft.SetProgressStyle(ProgressDialogStyle.Horizontal);
+            progrssDialogGalsoft.SetCancelable(false);
+            progrssDialogGalsoft.Max = 1;
+            progrssDialogGalsoft.Show();
+
+            Thread th = new Thread(() => pobieranieDanychWebService());
+            th.Start();
+        }
+        
+        private void pobieranieDanychWebService()
+        {
+            RunOnUiThread(() => progrssDialogGalsoft.SetMessage("Pobierannie danych z serwera..."));
+
+            AplikacjaSerwisowa.kwronski.WebService kwronskiService = new AplikacjaSerwisowa.kwronski.WebService();
+            String teasfgsgsagsa = kwronskiService.ZwrocListeZlecenSerwisowychNaglowki();
+
+            var records = JsonConvert.DeserializeObject<List<SerwisoweZleceniaNaglownki>>(teasfgsgsagsa);
+
+            /*
+            String test = "";
+            for(int i = 0; i < records.Count; i++)
+            {
+                test += records[i].SZN_Id;
+            }
+            */
+
+            RunOnUiThread(() => progrssDialogGalsoft.SetMessage("Tworzenie bazy danch..."));
+
+            DBRepository dbr = new DBRepository();
+            String result = dbr.createDB();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();            
+            result = dbr.stworzSerwisoweZleceniaNaglowkiTable();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();
+
+            if(records.Count > 0)
+            {
+                wprowadzWpisyDoTabeliSerwisoweZleceniaNaglowki(records, dbr);
+            }
+            progrssDialogGalsoft.Dismiss();
+        }
+
+        private void wprowadzWpisyDoTabeliSerwisoweZleceniaNaglowki(List<SerwisoweZleceniaNaglownki> records, DBRepository dbr)
+        {
+            RunOnUiThread(() => progrssDialogGalsoft.SetMessage("Dodawanie wpisów..."));
+            RunOnUiThread(() => progrssDialogGalsoft.Progress = 0);
+            RunOnUiThread(() => progrssDialogGalsoft.Max = records.Count);
+
+            for(int i = 0; i < records.Count; i++)
+            {
+                RunOnUiThread(() => progrssDialogGalsoft.Progress++);
+
+                SerwisoweZleceniaNaglownki szn = records[i];
+                dbr.SerwisoweZleceniaNaglowki_InsertRecord(szn);
+            }
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Mo¿e siê przydaæ ?
+/*
+ * private void synchronizacjaGalsoft()
+        {
+            AplikacjaSerwisowa.kwronski.WebService kwronskiService = new AplikacjaSerwisowa.kwronski.WebService();
+            String teasfgsgsagsa = kwronskiService.HelloWorld("lama");
+
+
+            //string url = @"http://91.196.8.98/AplikacjaSerwisowa/WebService.asmx/test";
+            //string url = @"http://kwronski.hostingasp.pl/WebService.asmx?op=test";
+
+            /* HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+             req.Host = "91.196.8.98"; 
+             HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+
+             StreamReader reader = new StreamReader(resp.GetResponseStream());
+             String test = reader.ReadToEnd();
+             */
+
+// HttpClient client = new HttpClient();
+// client.MaxResponseContentBufferSize = 2500000;
+//String test = client.GetStringAsync(url);
+
+/* HttpWebRequest request;
+ request = (HttpWebRequest)WebRequest.Create(url);
+ request.ContentType = "text/xml; charset=utf-8";
+ GetResponse(request);*/
+
+//string url = @"http://kwronski.hostingasp.pl/WebService.asmx/test";
+//string url = @"http://91.196.8.98/AplikacjaSerwisowa/WebService.asmx/test";
+
+/*HttpWebRequest req = WebRequest.Create(url) as HttpWebRequest;
+XmlDocument xmlDoc = new XmlDocument();
+string testsdgsdgsdg = "";
+
+            using(HttpWebResponse resp = req.GetResponse() as HttpWebResponse)
+            {
+                xmlDoc.Load(resp.GetResponseStream());
+                testsdgsdgsdg = xmlDoc.InnerText;
+            }
+
+            //testeasdgsadgha(url);
+        }
+*/

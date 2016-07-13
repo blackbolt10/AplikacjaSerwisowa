@@ -420,5 +420,81 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela SerwisoweZleceniaNaglowki**************|
+            *---------------------------------------------------------------------------------
+        */
+
+        public string stworzSerwisoweZleceniaNaglowkiTable()
+        {
+            String output = "";
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+
+                try
+                {
+                    db.DropTable<SerwisoweZleceniaNaglownki>();
+                }
+                catch(Exception) { }
+
+                db.CreateTable<SerwisoweZleceniaNaglownki>();
+
+                output = "Tabela SerwisoweZleceniaNaglownki zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzSerwisoweZleceniaNaglowkiTable() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+        public String SerwisoweZleceniaNaglowki_InsertRecord(SerwisoweZleceniaNaglownki item)
+        {
+            String output = "";
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+
+                db.Insert(item);
+                output = "Wpis dodany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SerwisoweZleceniaNaglowki_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
+        }
     }
 }
+
+
+
+
+
+
+

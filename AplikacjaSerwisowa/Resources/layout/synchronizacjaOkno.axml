@@ -101,5 +101,11 @@
             android:layout_below="@id/synchronizacjaSynchronizacjaButton"
             android:id="@+id/test2Synchronizacja_button"
             android:layout_marginRight="0.0dp" />
+        <Button
+            android:text="Synchronizacja Galsoft"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test2Synchronizacja_button"
+            android:id="@+id/synchronizacjaGalsoftSynchronizacjaButton" />
     </RelativeLayout>
 </ScrollView>

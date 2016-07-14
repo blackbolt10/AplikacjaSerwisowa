@@ -25,42 +25,289 @@ namespace AplikacjaSerwisowa
     [Activity(Label = "Synchronizacja", Icon = "@drawable/synchronizacja")]
     public class synchronizacja_Activity : Activity
     {
-        EditText adresSerwera, instancjaSerwer, loginSerwer, hasloSerwer;
-        Button zapiszButton, synchronizacja_Button, test2Button, synchronizacjaGalsoftButton;
+        private Button synchronizacja_Button, test2Button;
 
-        String documentsPath = "/sdcard/Download";
+        private AplikacjaSerwisowa.kwronski.WebService kwronskiService;
 
-        String nazwaPlikuKartyTowarow = "karty_towarowe.xml";
-        String nazwaKntKarty = "knt_karty.xml";
-        String nazwaKntAdresy= "kna_adresy.xml";
-
-        ProgressDialog progrssDialog, progrssDialogGalsoft;
+        private ProgressDialog progrssDialog;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.synchronizacjaOkno);
 
-            adresSerwera = FindViewById<EditText>(Resource.Id.adresSerwerSynchronizacja_EditText);
-            instancjaSerwer = FindViewById<EditText>(Resource.Id.instancjaSerwerSynchronizacja_EditText);
-            loginSerwer = FindViewById<EditText>(Resource.Id.loginSerwerSynchronizacja_EditText);
-            hasloSerwer = FindViewById<EditText>(Resource.Id.hasloSerwerSynchronizacja_EditText);
-            
-            zapiszButton = FindViewById<Button>(Resource.Id.zapiszSerwerSynchronizacja_Button);
-            zapiszButton.Click += delegate { zapisDanychDoPamieciUrzadzenia(); };
-
             synchronizacja_Button = FindViewById<Button>(Resource.Id.synchronizacjaSynchronizacjaButton);
             synchronizacja_Button.Click += delegate { synchronizacja(); };
 
             test2Button = FindViewById<Button>(Resource.Id.test2Synchronizacja_button);
             test2Button.Click += delegate { test2(); };
-
-            synchronizacjaGalsoftButton = FindViewById<Button>(Resource.Id.synchronizacjaGalsoftSynchronizacjaButton);
-            synchronizacjaGalsoftButton.Click += delegate { synchronizacjaGalsoft(); };
+            
             // Create your application here
 
-            Odczyt();
+            kwronskiService = new AplikacjaSerwisowa.kwronski.WebService();
         }
+
+        private void messagebox(String tekst, String tytul = "", Int32 icon = 1)
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+            if (icon == 0)
+            {
+                alert.SetIconAttribute(Android.Resource.Attribute.AlertDialogIcon);
+            }
+
+            alert.SetTitle(tytul);
+            alert.SetMessage(tekst);
+            alert.SetPositiveButton("OK", (senderAlert, args) => { });
+
+            Dialog dialog = alert.Create();
+            dialog.Show();
+        }
+
+        private void test2()
+        {
+            DBRepository dbr = new DBRepository();
+            String result = dbr.kntKarty_GetAllRecords();
+            Toast.MakeText(this, result, ToastLength.Long).Show();
+        }
+
+        private void synchronizacja()
+        {
+            ConnectivityManager connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
+            NetworkInfo activeConnection = connectivityManager.ActiveNetworkInfo;
+            bool isOnline = (activeConnection != null) && activeConnection.IsConnected;
+
+            if(isOnline)
+            {
+                rozpocznijPobieranie();
+            }
+            else
+            {
+                Toast.MakeText(this, "Brak dostêpu do internetu", ToastLength.Short).Show();
+            }
+        }
+
+        private void rozpocznijPobieranie()
+        {
+            progrssDialog = new ProgressDialog(this);
+            progrssDialog.SetTitle("Pobieranie");
+            progrssDialog.SetMessage("Proszê czekaæ...");
+            progrssDialog.SetProgressStyle(ProgressDialogStyle.Horizontal);
+            progrssDialog.SetCancelable(false);
+            progrssDialog.Max = 1;
+            progrssDialog.Show();
+
+            Thread th = new Thread(() => pobieranieDanychWebService());
+            th.Start();
+        }
+
+        private void pobieranieDanychWebService()
+        {
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 1/3..."));
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie nag³ówków kontrahentów..."));
+            String kntKartyString = kwronskiService.ZwrocListeKntKarty();
+
+            RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy nag³ówków kontrahentów..."));
+            tworzenieBazyKntKarty(kntKartyString);
+
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 2/3..."));
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie adresów kontrahentów..."));
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = 1);
+            String kntAdresyString = kwronskiService.ZwrocListeKntAdresy();
+
+            RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy adresów kontrahentów..."));
+            tworzenieBazyKntAdresy(kntAdresyString);
+
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 3/3..."));
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie nag³ówków zlecen serwisowych..."));
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = 1);
+            String serwisoweZlecenniaNaglowkiString = kwronskiService.ZwrocListeZlecenSerwisowychNaglowki();
+
+            RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy nag³ówków zlecen serwisowych..."));
+            tworzenieBazySerwisoweZleceniaNaglowki(serwisoweZlecenniaNaglowkiString);
+            
+                        
+            RunOnUiThread(() => messagebox("Pobieranie zakoñczone", "Ukoñczono"));
+            progrssDialog.Dismiss();
+        }
+
+        private void tworzenieBazyKntKarty(String kntKartyString)
+        {
+            var records = JsonConvert.DeserializeObject<List<KntKartyTable>>(kntKartyString);
+
+            DBRepository dbr = new DBRepository();
+            String result = dbr.createDB();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();            
+            result = dbr.stworzKntKartyTabele();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();
+
+            if(records.Count > 0)
+            {
+                wprowadzWpisyDoTabeliyKntKarty(records, dbr);
+            }
+        }
+
+        private void wprowadzWpisyDoTabeliyKntKarty(List<KntKartyTable> records, DBRepository dbr)
+        {
+            RunOnUiThread(() => progrssDialog.SetMessage("Zapisywanie nag³ówków kontrahentów..."));
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = records.Count);
+
+            for(int i = 0; i < records.Count; i++)
+            {
+                RunOnUiThread(() => progrssDialog.Progress++);
+
+                KntKartyTable kntKarta = records[i];
+                dbr.kntKarty_InsertRecord(kntKarta);
+            }
+        }
+
+        private void tworzenieBazyKntAdresy(String kntAdresyString)
+        {
+            var records = JsonConvert.DeserializeObject<List<KntAdresyTable>>(kntAdresyString);
+
+            DBRepository dbr = new DBRepository();
+            String result = dbr.createDB();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();            
+            result = dbr.stworzKntAdresyTabele();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();
+
+            if(records.Count > 0)
+            {
+                wprowadzWpisyDoTabeliyKnAdresy(records, dbr);
+            }
+        }
+
+        private void wprowadzWpisyDoTabeliyKnAdresy(List<KntAdresyTable> records, DBRepository dbr)
+        {
+            RunOnUiThread(() => progrssDialog.SetMessage("Zapisywanie adresów kontrahentów..."));
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = records.Count);
+
+            for(int i = 0; i < records.Count; i++)
+            {
+                RunOnUiThread(() => progrssDialog.Progress++);
+
+                KntAdresyTable kntAdres = records[i];
+                dbr.kntAdresy_InsertRecord(kntAdres);
+            }
+        }
+
+        private void tworzenieBazySerwisoweZleceniaNaglowki(String serwisoweZlecenniaNaglowkiString)
+        {
+            var records = JsonConvert.DeserializeObject<List<SerwisoweZleceniaNaglowkiTable>>(serwisoweZlecenniaNaglowkiString);
+
+            DBRepository dbr = new DBRepository();
+            String result = dbr.createDB();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();            
+            result = dbr.stworzSerwisoweZleceniaNaglowkiTable();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();
+
+            if(records.Count > 0)
+            {
+                wprowadzWpisyDoTabeliSerwisoweZleceniaNaglowki(records, dbr);
+            }
+        }
+
+        private void wprowadzWpisyDoTabeliSerwisoweZleceniaNaglowki(List<SerwisoweZleceniaNaglowkiTable> records, DBRepository dbr)
+        {
+            RunOnUiThread(() => progrssDialog.SetMessage("Zapisywanie nag³ówków zleceñ serwisowych..."));
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = records.Count);
+
+            for(int i = 0; i < records.Count; i++)
+            {
+                RunOnUiThread(() => progrssDialog.Progress++);
+
+                SerwisoweZleceniaNaglowkiTable szn = records[i];
+                dbr.SerwisoweZleceniaNaglowki_InsertRecord(szn);
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Mo¿e siê przydaæ ?
+/*
+ * private void synchronizacjaGalsoft()
+        {
+            AplikacjaSerwisowa.kwronski.WebService kwronskiService = new AplikacjaSerwisowa.kwronski.WebService();
+            String teasfgsgsagsa = kwronskiService.HelloWorld("lama");
+
+
+            //string url = @"http://91.196.8.98/AplikacjaSerwisowa/WebService.asmx/test";
+            //string url = @"http://kwronski.hostingasp.pl/WebService.asmx?op=test";
+
+            /* HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+             req.Host = "91.196.8.98"; 
+             HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+
+             StreamReader reader = new StreamReader(resp.GetResponseStream());
+             String test = reader.ReadToEnd();
+             */
+
+// HttpClient client = new HttpClient();
+// client.MaxResponseContentBufferSize = 2500000;
+//String test = client.GetStringAsync(url);
+
+/* HttpWebRequest request;
+ request = (HttpWebRequest)WebRequest.Create(url);
+ request.ContentType = "text/xml; charset=utf-8";
+ GetResponse(request);*/
+
+//string url = @"http://kwronski.hostingasp.pl/WebService.asmx/test";
+//string url = @"http://91.196.8.98/AplikacjaSerwisowa/WebService.asmx/test";
+
+/*HttpWebRequest req = WebRequest.Create(url) as HttpWebRequest;
+XmlDocument xmlDoc = new XmlDocument();
+string testsdgsdgsdg = "";
+
+            using(HttpWebResponse resp = req.GetResponse() as HttpWebResponse)
+            {
+                xmlDoc.Load(resp.GetResponseStream());
+                testsdgsdgsdg = xmlDoc.InnerText;
+            }
+
+            //testeasdgsadgha(url);
+        }
+*/
+/*
+
         private void zapisDanychDoPamieciUrzadzenia()
         {
             var prefs = Application.Context.GetSharedPreferences(ApplicationInfo.LoadLabel(PackageManager), FileCreationMode.Private);
@@ -82,50 +329,17 @@ namespace AplikacjaSerwisowa
             loginSerwer.Text = prefs.GetString("loginSerwera", "");
             hasloSerwer.Text = prefs.GetString("hasloSerwera", "");
         }
+*/
 
-        private void PobieranieIParsowanie()
-        {
-            ConnectivityManager connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
-            NetworkInfo activeConnection = connectivityManager.ActiveNetworkInfo;
-            bool isOnline = (activeConnection != null) && activeConnection.IsConnected;
 
-            if(isOnline)
-            {
-                if(pobierzXML(nazwaPlikuKartyTowarow))
-                {
-                    odczytajXML(nazwaPlikuKartyTowarow);
-                }
+/*
+    String documentsPath = "/sdcard/Download";
 
-                if(pobierzXML(nazwaKntKarty))
-                {
-                    odczytajXML(nazwaKntKarty);
-                }
+    String nazwaPlikuKartyTowarow = "karty_towarowe.xml";
+    String nazwaKntKarty = "knt_karty.xml";
+    String nazwaKntAdresy= "kna_adresy.xml";
 
-                if(pobierzXML(nazwaKntAdresy))
-                {
-                    odczytajXML(nazwaKntAdresy);
-                }
-            }
-            else
-            {
-                Toast.MakeText(this, "Brak dostêpu do internetu", ToastLength.Short).Show();
-            }
-            progrssDialog.Dismiss();
-        }
-
-        private void synchronizacja()
-        {
-            progrssDialog = new ProgressDialog(this);
-            progrssDialog.SetTitle("Pobieranie");
-            progrssDialog.SetMessage("Proszê czekaæ...");
-            progrssDialog.SetProgressStyle(ProgressDialogStyle.Horizontal);
-            progrssDialog.SetCancelable(false);
-            progrssDialog.Show();
-
-            Thread th = new Thread(() => PobieranieIParsowanie());
-            th.Start();   
-        }
-        private Boolean pobierzXML(String nazwaPlikuXML)
+    private Boolean pobierzXML(String nazwaPlikuXML)
         {
             //Toast.MakeText(this, "Pobieranie pliku "+ nazwaPlikuXML, ToastLength.Short).Show();
 
@@ -183,23 +397,8 @@ namespace AplikacjaSerwisowa
             }
 
         }
-        private void messagebox(String tekst, String tytul = "", Int32 icon = 1)
-        {
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-            if (icon == 0)
-            {
-                alert.SetIconAttribute(Android.Resource.Attribute.AlertDialogIcon);
-            }
-
-            alert.SetTitle(tytul);
-            alert.SetMessage(tekst);
-            alert.SetPositiveButton("OK", (senderAlert, args) => { });
-
-            Dialog dialog = alert.Create();
-            dialog.Show();
-        }
-        private void odczytajXML(String nazwaPlikuXML)
+ private void odczytajXML(String nazwaPlikuXML)
         {
             RunOnUiThread(() => progrssDialog.SetMessage("Odczytywanie pliku " + nazwaPlikuXML));
 
@@ -321,7 +520,6 @@ namespace AplikacjaSerwisowa
             List<string> knt_nip_List = new List<string>();
             List<string> knt_telefon1_List = new List<string>();
             List<string> knt_telefon2_List = new List<string>();
-            List<string> knt_telefon3_List = new List<string>();
             List<string> knt_telex_List = new List<string>();
             List<string> knt_fax_List = new List<string>();
             List<string> knt_email_List = new List<string>();
@@ -346,7 +544,6 @@ namespace AplikacjaSerwisowa
                     knt_nip_List.Add(xn["knt_nip"].InnerText);
                     knt_telefon1_List.Add(xn["knt_telefon1"].InnerText);
                     knt_telefon2_List.Add(xn["knt_telefon2"].InnerText);
-                    knt_telefon3_List.Add(xn["knt_telefon3"].InnerText);
                     knt_telex_List.Add(xn["knt_telex"].InnerText);
                     knt_fax_List.Add(xn["knt_fax"].InnerText);
                     knt_email_List.Add(xn["knt_email"].InnerText);
@@ -361,10 +558,10 @@ namespace AplikacjaSerwisowa
 
             if(knt_gidnumer_List.Count > 0)
             {
-                zapiszKntKartyWBazie(knt_gidnumer_List, knt_akronim_List, knt_nazwa1_List, knt_nazwa2_List, knt_nazwa3_List, knt_kodp_List, knt_miasto_List, knt_ulica_List, knt_adresy_List, knt_nip_List, knt_telefon1_List, knt_telefon2_List, knt_telefon3_List, knt_telex_List, knt_fax_List, knt_email_List, knt_url_List);
+                zapiszKntKartyWBazie(knt_gidnumer_List, knt_akronim_List, knt_nazwa1_List, knt_nazwa2_List, knt_nazwa3_List, knt_kodp_List, knt_miasto_List, knt_ulica_List, knt_adresy_List, knt_nip_List, knt_telefon1_List, knt_telefon2_List, knt_telex_List, knt_fax_List, knt_email_List, knt_url_List);
             }
         }
-        private void zapiszKntKartyWBazie(List<string> knt_gidnumer_List, List<string> knt_akronim_List, List<string> knt_nazwa1_List, List<string> knt_nazwa2_List, List<string> knt_nazwa3_List, List<string> knt_kodp_List, List<string> knt_miasto_List, List<string> knt_ulica_List, List<string> knt_adresy_List, List<string> knt_nip_List, List<string> knt_telefon1_List, List<string> knt_telefon2_List, List<string> knt_telefon3_List, List<string> knt_telex_List, List<string> knt_fax_List, List<string> knt_email_List, List<string> knt_url_List)
+        private void zapiszKntKartyWBazie(List<string> knt_gidnumer_List, List<string> knt_akronim_List, List<string> knt_nazwa1_List, List<string> knt_nazwa2_List, List<string> knt_nazwa3_List, List<string> knt_kodp_List, List<string> knt_miasto_List, List<string> knt_ulica_List, List<string> knt_adresy_List, List<string> knt_nip_List, List<string> knt_telefon1_List, List<string> knt_telefon2_List, List<string> knt_telex_List, List<string> knt_fax_List, List<string> knt_email_List, List<string> knt_url_List)
         {
             DBRepository dbr = new DBRepository();
             String result = dbr.createDB();
@@ -381,7 +578,7 @@ namespace AplikacjaSerwisowa
 
                 KntKartyTable kntKarta = new KntKartyTable();
                 kntKarta.Knt_GIDNumer = Convert.ToInt32(knt_gidnumer_List[i]);
-                kntKarta.Knt_Akrnonim = knt_akronim_List[i];
+                kntKarta.Knt_Akronim = knt_akronim_List[i];
                 kntKarta.Knt_nazwa1 = knt_nazwa1_List[i];
                 kntKarta.Knt_nazwa2 = knt_nazwa2_List[i];
                 kntKarta.Knt_nazwa3 = knt_nazwa3_List[i];
@@ -392,7 +589,6 @@ namespace AplikacjaSerwisowa
                 kntKarta.Knt_nip = knt_nip_List[i];
                 kntKarta.Knt_telefon1 = knt_telefon1_List[i];
                 kntKarta.Knt_telefon2 = knt_telefon2_List[i];
-                kntKarta.Knt_telefon3 = knt_telefon3_List[i];
                 kntKarta.Knt_telex = knt_telex_List[i];
                 kntKarta.Knt_fax = knt_fax_List[i];
                 kntKarta.Knt_email = knt_email_List[i];
@@ -494,152 +690,6 @@ namespace AplikacjaSerwisowa
                 // Toast.MakeText(this, i + ": " + result, ToastLength.Short).Show();
             }
         }
-
-        private void test2()
-        {
-            DBRepository dbr = new DBRepository();
-            String result = dbr.kartyTowarow_GetAllRecords();
-            Toast.MakeText(this, result, ToastLength.Long).Show();
-        }
-
-        private void synchronizacjaGalsoft()
-        {
-            progrssDialogGalsoft = new ProgressDialog(this);
-            progrssDialogGalsoft.SetTitle("Pobieranie");
-            progrssDialogGalsoft.SetMessage("Proszê czekaæ...");
-            progrssDialogGalsoft.SetProgressStyle(ProgressDialogStyle.Horizontal);
-            progrssDialogGalsoft.SetCancelable(false);
-            progrssDialogGalsoft.Max = 1;
-            progrssDialogGalsoft.Show();
-
-            Thread th = new Thread(() => pobieranieDanychWebService());
-            th.Start();
-        }
-        
-        private void pobieranieDanychWebService()
-        {
-            RunOnUiThread(() => progrssDialogGalsoft.SetMessage("Pobierannie danych z serwera..."));
-
-            AplikacjaSerwisowa.kwronski.WebService kwronskiService = new AplikacjaSerwisowa.kwronski.WebService();
-            String teasfgsgsagsa = kwronskiService.ZwrocListeZlecenSerwisowychNaglowki();
-
-            var records = JsonConvert.DeserializeObject<List<SerwisoweZleceniaNaglownki>>(teasfgsgsagsa);
-
-            /*
-            String test = "";
-            for(int i = 0; i < records.Count; i++)
-            {
-                test += records[i].SZN_Id;
-            }
-            */
-
-            RunOnUiThread(() => progrssDialogGalsoft.SetMessage("Tworzenie bazy danch..."));
-
-            DBRepository dbr = new DBRepository();
-            String result = dbr.createDB();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();            
-            result = dbr.stworzSerwisoweZleceniaNaglowkiTable();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();
-
-            if(records.Count > 0)
-            {
-                wprowadzWpisyDoTabeliSerwisoweZleceniaNaglowki(records, dbr);
-            }
-            progrssDialogGalsoft.Dismiss();
-        }
-
-        private void wprowadzWpisyDoTabeliSerwisoweZleceniaNaglowki(List<SerwisoweZleceniaNaglownki> records, DBRepository dbr)
-        {
-            RunOnUiThread(() => progrssDialogGalsoft.SetMessage("Dodawanie wpisów..."));
-            RunOnUiThread(() => progrssDialogGalsoft.Progress = 0);
-            RunOnUiThread(() => progrssDialogGalsoft.Max = records.Count);
-
-            for(int i = 0; i < records.Count; i++)
-            {
-                RunOnUiThread(() => progrssDialogGalsoft.Progress++);
-
-                SerwisoweZleceniaNaglownki szn = records[i];
-                dbr.SerwisoweZleceniaNaglowki_InsertRecord(szn);
-            }
-        }
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Mo¿e siê przydaæ ?
-/*
- * private void synchronizacjaGalsoft()
-        {
-            AplikacjaSerwisowa.kwronski.WebService kwronskiService = new AplikacjaSerwisowa.kwronski.WebService();
-            String teasfgsgsagsa = kwronskiService.HelloWorld("lama");
-
-
-            //string url = @"http://91.196.8.98/AplikacjaSerwisowa/WebService.asmx/test";
-            //string url = @"http://kwronski.hostingasp.pl/WebService.asmx?op=test";
-
-            /* HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-             req.Host = "91.196.8.98"; 
-             HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-
-             StreamReader reader = new StreamReader(resp.GetResponseStream());
-             String test = reader.ReadToEnd();
-             */
-
-// HttpClient client = new HttpClient();
-// client.MaxResponseContentBufferSize = 2500000;
-//String test = client.GetStringAsync(url);
-
-/* HttpWebRequest request;
- request = (HttpWebRequest)WebRequest.Create(url);
- request.ContentType = "text/xml; charset=utf-8";
- GetResponse(request);*/
-
-//string url = @"http://kwronski.hostingasp.pl/WebService.asmx/test";
-//string url = @"http://91.196.8.98/AplikacjaSerwisowa/WebService.asmx/test";
-
-/*HttpWebRequest req = WebRequest.Create(url) as HttpWebRequest;
-XmlDocument xmlDoc = new XmlDocument();
-string testsdgsdgsdg = "";
-
-            using(HttpWebResponse resp = req.GetResponse() as HttpWebResponse)
-            {
-                xmlDoc.Load(resp.GetResponseStream());
-                testsdgsdgsdg = xmlDoc.InnerText;
-            }
-
-            //testeasdgsadgha(url);
-        }
-*/
+     
+     
+     */

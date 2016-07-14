@@ -110,13 +110,6 @@
                 android:layout_height="match_parent"
                 android:id="@+id/telexFrag1TextView"
                 android:layout_weight="1" />
-            <TextView
-                android:text="Telefon3"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/telefon3Frag1TextView"
-                android:layout_weight="1" />
         </LinearLayout>
         <TextView
             android:text="Fax:"

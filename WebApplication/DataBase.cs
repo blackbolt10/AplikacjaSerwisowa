@@ -23,7 +23,7 @@ namespace WebApplication
         private Boolean podlaczDoBazyDanych()
         {
             Boolean wynikLogowaniaDoBD = false;
-            hasla haslo = new hasla(2);
+            hasla haslo = new hasla(4);
 
             try
             {
@@ -41,10 +41,10 @@ namespace WebApplication
             return wynikLogowaniaDoBD;
         }
 
-        private SqlDataAdapter zapytanie(string zapytanie1)
+        private SqlDataAdapter zapytanie(string zapytanieString)
         {
             SqlDataAdapter wynik = new SqlDataAdapter();
-            polecenieSQL = new SqlCommand(zapytanie1);
+            polecenieSQL = new SqlCommand(zapytanieString);
             polecenieSQL.CommandTimeout = 240;
             polecenieSQL.Connection = uchwytBD;
             wynik = new SqlDataAdapter(polecenieSQL);
@@ -190,9 +190,109 @@ namespace WebApplication
 
 
 
-        
 
+        public List<KntKarty> wygenerujListeKntKarty()
+        {
 
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = @"select knt.knt_GIDNumer, knt.knt_Akronim, knt.knt_nazwa1, knt.knt_nazwa2, knt.knt_nazwa3, knt.knt_KodP, knt.knt_miasto,
+                    knt.knt_ulica, knt.knt_Adres, knt.knt_nip, knt.knt_telefon1, knt.knt_telefon2, knt.knt_telex,
+                    knt.knt_fax, knt.knt_email, knt.knt_url from cdn.kntkarty knt";
+
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return wygenerujListeKntKarty(pomDataTable);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        private List<KntKarty> wygenerujListeKntKarty(DataTable pomDataTable)
+        {
+            List<KntKarty> result = new List<KntKarty>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                Int32 Knt_GIDNumer = Convert.ToInt32(pomDataTable.Rows[i]["Knt_GIDNumer"].ToString());
+                String Knt_Akronim = pomDataTable.Rows[i]["Knt_Akronim"].ToString();
+                String Knt_nazwa1 = pomDataTable.Rows[i]["Knt_nazwa1"].ToString();
+                String Knt_nazwa2 = pomDataTable.Rows[i]["Knt_nazwa2"].ToString();
+                String Knt_nazwa3 = pomDataTable.Rows[i]["Knt_nazwa3"].ToString();
+                String Knt_KodP = pomDataTable.Rows[i]["Knt_KodP"].ToString();
+                String Knt_miasto = pomDataTable.Rows[i]["Knt_miasto"].ToString();
+                String Knt_ulica = pomDataTable.Rows[i]["Knt_ulica"].ToString();
+                String Knt_Adres = pomDataTable.Rows[i]["Knt_Adres"].ToString();
+                String Knt_nip = pomDataTable.Rows[i]["Knt_nip"].ToString();
+                String Knt_telefon1 = pomDataTable.Rows[i]["Knt_telefon1"].ToString();
+                String Knt_telefon2 = pomDataTable.Rows[i]["Knt_telefon2"].ToString();
+                String Knt_telex = pomDataTable.Rows[i]["Knt_telex"].ToString();
+                String Knt_fax = pomDataTable.Rows[i]["Knt_fax"].ToString();
+                String Knt_email = pomDataTable.Rows[i]["Knt_email"].ToString();
+                String Knt_url = pomDataTable.Rows[i]["Knt_url"].ToString();
+
+                result.Add(new KntKarty(Knt_GIDNumer, Knt_Akronim, Knt_nazwa1, Knt_nazwa2, Knt_nazwa3, Knt_KodP, Knt_miasto, Knt_ulica, Knt_Adres, Knt_nip, Knt_telefon1, Knt_telefon2, Knt_telex, Knt_fax, Knt_email, Knt_url));
+            }
+            return result;
+        }
+
+        public List<KntAdresy> wygenerujListeKntAdresy()
+        {
+
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = @"select kna_GIDNumer, kna_kntnumer, kna_Akronim, kna_nazwa1, kna_nazwa2, kna_nazwa3, kna_KodP, kna_miasto,
+                    kna_ulica, kna_Adres, kna_nip, kna_telefon1, kna_telefon2, kna_telex, kna_fax, kna_email from cdn.kntadresy";
+
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return wygenerujListeKntAdresy(pomDataTable);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        private List<KntAdresy> wygenerujListeKntAdresy(DataTable pomDataTable)
+        {
+            List<KntAdresy> result = new List<KntAdresy>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                Int32 Kna_GIDNumer = Convert.ToInt32(pomDataTable.Rows[i]["Kna_GIDNumer"].ToString());
+                Int32 Kna_KntNumer = Convert.ToInt32(pomDataTable.Rows[i]["kna_kntnumer"].ToString());
+                String Kna_Akronim = pomDataTable.Rows[i]["Kna_Akronim"].ToString();
+                String Kna_nazwa1 = pomDataTable.Rows[i]["Kna_nazwa1"].ToString();
+                String Kna_nazwa2 = pomDataTable.Rows[i]["Kna_nazwa2"].ToString();
+                String Kna_nazwa3 = pomDataTable.Rows[i]["Kna_nazwa3"].ToString();
+                String Kna_KodP = pomDataTable.Rows[i]["Kna_KodP"].ToString();
+                String Kna_miasto = pomDataTable.Rows[i]["Kna_miasto"].ToString();
+                String Kna_ulica = pomDataTable.Rows[i]["Kna_ulica"].ToString();
+                String Kna_Adres = pomDataTable.Rows[i]["Kna_Adres"].ToString();
+                String Kna_nip = pomDataTable.Rows[i]["Kna_nip"].ToString();
+                String Kna_telefon1 = pomDataTable.Rows[i]["Kna_telefon1"].ToString();
+                String Kna_telefon2 = pomDataTable.Rows[i]["Kna_telefon2"].ToString();
+                String Kna_telex = pomDataTable.Rows[i]["Kna_telex"].ToString();
+                String Kna_fax = pomDataTable.Rows[i]["Kna_fax"].ToString();
+                String Kna_email = pomDataTable.Rows[i]["Kna_email"].ToString();
+
+                result.Add(new KntAdresy(Kna_GIDNumer,Kna_KntNumer,Kna_Akronim,Kna_nazwa1,Kna_nazwa2,Kna_nazwa3,Kna_KodP,Kna_miasto,Kna_ulica,Kna_Adres,Kna_nip,Kna_telefon1,Kna_telefon2,Kna_telex,Kna_fax,Kna_email));
+            }
+            return result;
+        }
     }
 }
 
@@ -210,10 +310,8 @@ namespace WebApplication
 
 
 
-[Table("SerwisoweZleceniaNaglownki")]
 public class SerwisoweZleceniaNaglownki
 {
-    public int ID { get; set; }
     public String Dokument { get; set; }
     public int SZN_Id { get; set; }
     public int SZN_KntTyp { get; set; }
@@ -253,3 +351,88 @@ public class SerwisoweZleceniaNaglownki
     }
     public SerwisoweZleceniaNaglownki() { }
 }
+
+public class KntKarty
+{
+    public Int32 Knt_GIDNumer { get; set; }
+    public String Knt_Akronim { get; set; }
+    public String Knt_nazwa1 { get; set; }
+    public String Knt_nazwa2 { get; set; }
+    public String Knt_nazwa3 { get; set; }
+    public String Knt_KodP { get; set; }
+    public String Knt_miasto { get; set; }
+    public String Knt_ulica { get; set; }
+    public String Knt_Adres { get; set; }
+    public String Knt_nip { get; set; }
+    public String Knt_telefon1 { get; set; }
+    public String Knt_telefon2 { get; set; }
+    public String Knt_telex { get; set; }
+    public String Knt_fax { get; set; }
+    public String Knt_email { get; set; }
+    public String Knt_url { get; set; }
+
+    public KntKarty(Int32 _Knt_GIDNumer, String _Knt_Akronim, String _Knt_nazwa1, String _Knt_nazwa2, String _Knt_nazwa3, String _Knt_KodP, String _Knt_miasto, String _Knt_ulica, String _Knt_Adres, String _Knt_nip, String _Knt_telefon1, String _Knt_telefon2, String _Knt_telex, String _Knt_fax, String _Knt_email, String _Knt_url)
+    {
+        Knt_GIDNumer = _Knt_GIDNumer;
+        Knt_Akronim = _Knt_Akronim;
+        Knt_nazwa1 = _Knt_nazwa1;
+        Knt_nazwa2 = _Knt_nazwa2;
+        Knt_nazwa3 = _Knt_nazwa3;
+        Knt_KodP = _Knt_KodP;
+        Knt_miasto = _Knt_miasto;
+        Knt_ulica = _Knt_ulica;
+        Knt_Adres = _Knt_Adres;
+        Knt_nip = _Knt_nip;
+        Knt_telefon1 = _Knt_telefon1;
+        Knt_telefon2 = _Knt_telefon2;
+        Knt_telex = _Knt_telex;
+        Knt_fax = _Knt_fax;
+        Knt_email = _Knt_email;
+        Knt_url = _Knt_url;
+    }
+
+    public KntKarty() { }
+}
+
+public class KntAdresy
+{
+    public Int32 Kna_GIDNumer { get; set; }
+    public Int32 Kna_KntNumer { get; set; }
+    public String Kna_Akrnonim { get; set; }
+    public String Kna_nazwa1 { get; set; }
+    public String Kna_nazwa2 { get; set; }
+    public String Kna_nazwa3 { get; set; }
+    public String Kna_KodP { get; set; }
+    public String Kna_miasto { get; set; }
+    public String Kna_ulica { get; set; }
+    public String Kna_Adres { get; set; }
+    public String Kna_nip { get; set; }
+    public String Kna_telefon1 { get; set; }
+    public String Kna_telefon2 { get; set; }
+    public String Kna_telex { get; set; }
+    public String Kna_fax { get; set; }
+    public String Kna_email { get; set; }
+
+    public KntAdresy(Int32 _Kna_GIDNumer, Int32 _Kna_KntNumer, String _Kna_Akrnonim, String _Kna_nazwa1, String _Kna_nazwa2, String _Kna_nazwa3, String _Kna_KodP, String _Kna_miasto, String _Kna_ulica, String _Kna_Adres, String _Kna_nip, String _Kna_telefon1, String _Kna_telefon2, String _Kna_telex, String _Kna_fax, String _Kna_email)
+    {
+        Kna_GIDNumer = _Kna_GIDNumer;
+        Kna_KntNumer = _Kna_KntNumer;
+        Kna_Akrnonim = _Kna_Akrnonim;
+        Kna_nazwa1 = _Kna_nazwa1;
+        Kna_nazwa2 = _Kna_nazwa2;
+        Kna_nazwa3 = _Kna_nazwa3;
+        Kna_KodP = _Kna_KodP;
+        Kna_miasto = _Kna_miasto;
+        Kna_ulica = _Kna_ulica;
+        Kna_Adres = _Kna_Adres;
+        Kna_nip = _Kna_nip;
+        Kna_telefon1 = _Kna_telefon1;
+        Kna_telefon2 = _Kna_telefon2;
+        Kna_telex = _Kna_telex;
+        Kna_fax = _Kna_fax;
+        Kna_email = _Kna_email;
+    }
+    public KntAdresy() { }
+}
+ 
+

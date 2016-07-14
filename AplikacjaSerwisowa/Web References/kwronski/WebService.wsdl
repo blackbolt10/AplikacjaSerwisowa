@@ -1,50 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://kwronski.hostingasp.pl/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://kwronski.hostingasp.pl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://kwronski.hostingasp.pl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://kwronski.hostingasp.pl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://kwronski.hostingasp.pl/">
-      <s:element name="GettestClassXML">
-        <s:complexType />
-      </s:element>
-      <s:element name="GettestClassXMLResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GettestClassXMLResult" type="tns:ArrayOfTestClass" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:complexType name="ArrayOfTestClass">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="testClass" nillable="true" type="tns:testClass" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="testClass">
-        <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="Salary" type="s:int" />
-        </s:sequence>
-      </s:complexType>
-      <s:element name="GettestClassJSON">
-        <s:complexType />
-      </s:element>
-      <s:element name="GettestClassJSONResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GettestClassJSONResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="HelloWorld">
+      <s:element name="SayHelloToLame">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="test" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="HelloWorldResponse">
+      <s:element name="SayHelloToLameResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SayHelloToLameResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -58,13 +26,13 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="test">
+      <s:element name="XMLZwrocListeKntKarty">
         <s:complexType />
       </s:element>
-      <s:element name="testResponse">
+      <s:element name="XMLZwrocListeKntKartyResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="testResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="XMLZwrocListeKntKartyResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -82,6 +50,26 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ZwrocListeKntAdresy">
+        <s:complexType />
+      </s:element>
+      <s:element name="ZwrocListeKntAdresyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZwrocListeKntAdresyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZwrocListeKntKarty">
+        <s:complexType />
+      </s:element>
+      <s:element name="ZwrocListeKntKartyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZwrocListeKntKartyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ZwrocListeZlecenSerwisowychNaglowki">
         <s:complexType />
       </s:element>
@@ -92,27 +80,14 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="ArrayOfTestClass" nillable="true" type="tns:ArrayOfTestClass" />
       <s:element name="string" nillable="true" type="s:string" />
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="GettestClassXMLSoapIn">
-    <wsdl:part name="parameters" element="tns:GettestClassXML" />
+  <wsdl:message name="SayHelloToLameSoapIn">
+    <wsdl:part name="parameters" element="tns:SayHelloToLame" />
   </wsdl:message>
-  <wsdl:message name="GettestClassXMLSoapOut">
-    <wsdl:part name="parameters" element="tns:GettestClassXMLResponse" />
-  </wsdl:message>
-  <wsdl:message name="GettestClassJSONSoapIn">
-    <wsdl:part name="parameters" element="tns:GettestClassJSON" />
-  </wsdl:message>
-  <wsdl:message name="GettestClassJSONSoapOut">
-    <wsdl:part name="parameters" element="tns:GettestClassJSONResponse" />
-  </wsdl:message>
-  <wsdl:message name="HelloWorldSoapIn">
-    <wsdl:part name="parameters" element="tns:HelloWorld" />
-  </wsdl:message>
-  <wsdl:message name="HelloWorldSoapOut">
-    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  <wsdl:message name="SayHelloToLameSoapOut">
+    <wsdl:part name="parameters" element="tns:SayHelloToLameResponse" />
   </wsdl:message>
   <wsdl:message name="lamaSoapIn">
     <wsdl:part name="parameters" element="tns:lama" />
@@ -120,11 +95,11 @@
   <wsdl:message name="lamaSoapOut">
     <wsdl:part name="parameters" element="tns:lamaResponse" />
   </wsdl:message>
-  <wsdl:message name="testSoapIn">
-    <wsdl:part name="parameters" element="tns:test" />
+  <wsdl:message name="XMLZwrocListeKntKartySoapIn">
+    <wsdl:part name="parameters" element="tns:XMLZwrocListeKntKarty" />
   </wsdl:message>
-  <wsdl:message name="testSoapOut">
-    <wsdl:part name="parameters" element="tns:testResponse" />
+  <wsdl:message name="XMLZwrocListeKntKartySoapOut">
+    <wsdl:part name="parameters" element="tns:XMLZwrocListeKntKartyResponse" />
   </wsdl:message>
   <wsdl:message name="SetDataSoapIn">
     <wsdl:part name="parameters" element="tns:SetData" />
@@ -132,32 +107,36 @@
   <wsdl:message name="SetDataSoapOut">
     <wsdl:part name="parameters" element="tns:SetDataResponse" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeKntAdresySoapIn">
+    <wsdl:part name="parameters" element="tns:ZwrocListeKntAdresy" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeKntAdresySoapOut">
+    <wsdl:part name="parameters" element="tns:ZwrocListeKntAdresyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeKntKartySoapIn">
+    <wsdl:part name="parameters" element="tns:ZwrocListeKntKarty" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeKntKartySoapOut">
+    <wsdl:part name="parameters" element="tns:ZwrocListeKntKartyResponse" />
+  </wsdl:message>
   <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiSoapIn">
     <wsdl:part name="parameters" element="tns:ZwrocListeZlecenSerwisowychNaglowki" />
   </wsdl:message>
   <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiSoapOut">
     <wsdl:part name="parameters" element="tns:ZwrocListeZlecenSerwisowychNaglowkiResponse" />
   </wsdl:message>
-  <wsdl:message name="GettestClassXMLHttpGetIn" />
-  <wsdl:message name="GettestClassXMLHttpGetOut">
-    <wsdl:part name="Body" element="tns:ArrayOfTestClass" />
-  </wsdl:message>
-  <wsdl:message name="GettestClassJSONHttpGetIn" />
-  <wsdl:message name="GettestClassJSONHttpGetOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
-  <wsdl:message name="HelloWorldHttpGetIn">
+  <wsdl:message name="SayHelloToLameHttpGetIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="HelloWorldHttpGetOut">
+  <wsdl:message name="SayHelloToLameHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="lamaHttpGetIn" />
   <wsdl:message name="lamaHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
-  <wsdl:message name="testHttpGetIn" />
-  <wsdl:message name="testHttpGetOut">
+  <wsdl:message name="XMLZwrocListeKntKartyHttpGetIn" />
+  <wsdl:message name="XMLZwrocListeKntKartyHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="SetDataHttpGetIn">
@@ -166,30 +145,30 @@
   <wsdl:message name="SetDataHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeKntAdresyHttpGetIn" />
+  <wsdl:message name="ZwrocListeKntAdresyHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeKntKartyHttpGetIn" />
+  <wsdl:message name="ZwrocListeKntKartyHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiHttpGetIn" />
   <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
-  <wsdl:message name="GettestClassXMLHttpPostIn" />
-  <wsdl:message name="GettestClassXMLHttpPostOut">
-    <wsdl:part name="Body" element="tns:ArrayOfTestClass" />
-  </wsdl:message>
-  <wsdl:message name="GettestClassJSONHttpPostIn" />
-  <wsdl:message name="GettestClassJSONHttpPostOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
-  <wsdl:message name="HelloWorldHttpPostIn">
+  <wsdl:message name="SayHelloToLameHttpPostIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="HelloWorldHttpPostOut">
+  <wsdl:message name="SayHelloToLameHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="lamaHttpPostIn" />
   <wsdl:message name="lamaHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
-  <wsdl:message name="testHttpPostIn" />
-  <wsdl:message name="testHttpPostOut">
+  <wsdl:message name="XMLZwrocListeKntKartyHttpPostIn" />
+  <wsdl:message name="XMLZwrocListeKntKartyHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="SetDataHttpPostIn">
@@ -198,35 +177,43 @@
   <wsdl:message name="SetDataHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeKntAdresyHttpPostIn" />
+  <wsdl:message name="ZwrocListeKntAdresyHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeKntKartyHttpPostIn" />
+  <wsdl:message name="ZwrocListeKntKartyHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiHttpPostIn" />
   <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
-    <wsdl:operation name="GettestClassXML">
-      <wsdl:input message="tns:GettestClassXMLSoapIn" />
-      <wsdl:output message="tns:GettestClassXMLSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GettestClassJSON">
-      <wsdl:input message="tns:GettestClassJSONSoapIn" />
-      <wsdl:output message="tns:GettestClassJSONSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="HelloWorld">
+    <wsdl:operation name="SayHelloToLame">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">HelloWorld</wsdl:documentation>
-      <wsdl:input message="tns:HelloWorldSoapIn" />
-      <wsdl:output message="tns:HelloWorldSoapOut" />
+      <wsdl:input message="tns:SayHelloToLameSoapIn" />
+      <wsdl:output message="tns:SayHelloToLameSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="lama">
       <wsdl:input message="tns:lamaSoapIn" />
       <wsdl:output message="tns:lamaSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="test">
-      <wsdl:input message="tns:testSoapIn" />
-      <wsdl:output message="tns:testSoapOut" />
+    <wsdl:operation name="XMLZwrocListeKntKarty">
+      <wsdl:input message="tns:XMLZwrocListeKntKartySoapIn" />
+      <wsdl:output message="tns:XMLZwrocListeKntKartySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SetData">
       <wsdl:input message="tns:SetDataSoapIn" />
       <wsdl:output message="tns:SetDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntAdresy">
+      <wsdl:input message="tns:ZwrocListeKntAdresySoapIn" />
+      <wsdl:output message="tns:ZwrocListeKntAdresySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntKarty">
+      <wsdl:input message="tns:ZwrocListeKntKartySoapIn" />
+      <wsdl:output message="tns:ZwrocListeKntKartySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychNaglowkiSoapIn" />
@@ -234,30 +221,30 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpGet">
-    <wsdl:operation name="GettestClassXML">
-      <wsdl:input message="tns:GettestClassXMLHttpGetIn" />
-      <wsdl:output message="tns:GettestClassXMLHttpGetOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GettestClassJSON">
-      <wsdl:input message="tns:GettestClassJSONHttpGetIn" />
-      <wsdl:output message="tns:GettestClassJSONHttpGetOut" />
-    </wsdl:operation>
-    <wsdl:operation name="HelloWorld">
+    <wsdl:operation name="SayHelloToLame">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">HelloWorld</wsdl:documentation>
-      <wsdl:input message="tns:HelloWorldHttpGetIn" />
-      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+      <wsdl:input message="tns:SayHelloToLameHttpGetIn" />
+      <wsdl:output message="tns:SayHelloToLameHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="lama">
       <wsdl:input message="tns:lamaHttpGetIn" />
       <wsdl:output message="tns:lamaHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="test">
-      <wsdl:input message="tns:testHttpGetIn" />
-      <wsdl:output message="tns:testHttpGetOut" />
+    <wsdl:operation name="XMLZwrocListeKntKarty">
+      <wsdl:input message="tns:XMLZwrocListeKntKartyHttpGetIn" />
+      <wsdl:output message="tns:XMLZwrocListeKntKartyHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="SetData">
       <wsdl:input message="tns:SetDataHttpGetIn" />
       <wsdl:output message="tns:SetDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntAdresy">
+      <wsdl:input message="tns:ZwrocListeKntAdresyHttpGetIn" />
+      <wsdl:output message="tns:ZwrocListeKntAdresyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntKarty">
+      <wsdl:input message="tns:ZwrocListeKntKartyHttpGetIn" />
+      <wsdl:output message="tns:ZwrocListeKntKartyHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpGetIn" />
@@ -265,30 +252,30 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpPost">
-    <wsdl:operation name="GettestClassXML">
-      <wsdl:input message="tns:GettestClassXMLHttpPostIn" />
-      <wsdl:output message="tns:GettestClassXMLHttpPostOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GettestClassJSON">
-      <wsdl:input message="tns:GettestClassJSONHttpPostIn" />
-      <wsdl:output message="tns:GettestClassJSONHttpPostOut" />
-    </wsdl:operation>
-    <wsdl:operation name="HelloWorld">
+    <wsdl:operation name="SayHelloToLame">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">HelloWorld</wsdl:documentation>
-      <wsdl:input message="tns:HelloWorldHttpPostIn" />
-      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+      <wsdl:input message="tns:SayHelloToLameHttpPostIn" />
+      <wsdl:output message="tns:SayHelloToLameHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="lama">
       <wsdl:input message="tns:lamaHttpPostIn" />
       <wsdl:output message="tns:lamaHttpPostOut" />
     </wsdl:operation>
-    <wsdl:operation name="test">
-      <wsdl:input message="tns:testHttpPostIn" />
-      <wsdl:output message="tns:testHttpPostOut" />
+    <wsdl:operation name="XMLZwrocListeKntKarty">
+      <wsdl:input message="tns:XMLZwrocListeKntKartyHttpPostIn" />
+      <wsdl:output message="tns:XMLZwrocListeKntKartyHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="SetData">
       <wsdl:input message="tns:SetDataHttpPostIn" />
       <wsdl:output message="tns:SetDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntAdresy">
+      <wsdl:input message="tns:ZwrocListeKntAdresyHttpPostIn" />
+      <wsdl:output message="tns:ZwrocListeKntAdresyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntKarty">
+      <wsdl:input message="tns:ZwrocListeKntKartyHttpPostIn" />
+      <wsdl:output message="tns:ZwrocListeKntKartyHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpPostIn" />
@@ -297,26 +284,8 @@
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GettestClassXML">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/GettestClassXML" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GettestClassJSON">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/GettestClassJSON" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HelloWorld">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/HelloWorld" style="document" />
+    <wsdl:operation name="SayHelloToLame">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/SayHelloToLame" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -333,8 +302,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="test">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/test" style="document" />
+    <wsdl:operation name="XMLZwrocListeKntKarty">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/XMLZwrocListeKntKarty" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -344,6 +313,24 @@
     </wsdl:operation>
     <wsdl:operation name="SetData">
       <soap:operation soapAction="http://kwronski.hostingasp.pl/SetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntAdresy">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeKntAdresy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntKarty">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeKntKarty" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -363,26 +350,8 @@
   </wsdl:binding>
   <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GettestClassXML">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/GettestClassXML" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GettestClassJSON">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/GettestClassJSON" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HelloWorld">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/HelloWorld" style="document" />
+    <wsdl:operation name="SayHelloToLame">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/SayHelloToLame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -399,8 +368,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="test">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/test" style="document" />
+    <wsdl:operation name="XMLZwrocListeKntKarty">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/XMLZwrocListeKntKarty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -410,6 +379,24 @@
     </wsdl:operation>
     <wsdl:operation name="SetData">
       <soap12:operation soapAction="http://kwronski.hostingasp.pl/SetData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntAdresy">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeKntAdresy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntKarty">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeKntKarty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -429,26 +416,8 @@
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpGet" type="tns:WebServiceHttpGet">
     <http:binding verb="GET" />
-    <wsdl:operation name="GettestClassXML">
-      <http:operation location="/GettestClassXML" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GettestClassJSON">
-      <http:operation location="/GettestClassJSON" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HelloWorld">
-      <http:operation location="/HelloWorld" />
+    <wsdl:operation name="SayHelloToLame">
+      <http:operation location="/SayHelloToLame" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -465,8 +434,8 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="test">
-      <http:operation location="/test" />
+    <wsdl:operation name="XMLZwrocListeKntKarty">
+      <http:operation location="/XMLZwrocListeKntKarty" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -476,6 +445,24 @@
     </wsdl:operation>
     <wsdl:operation name="SetData">
       <http:operation location="/SetData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntAdresy">
+      <http:operation location="/ZwrocListeKntAdresy" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntKarty">
+      <http:operation location="/ZwrocListeKntKarty" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -495,26 +482,8 @@
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpPost" type="tns:WebServiceHttpPost">
     <http:binding verb="POST" />
-    <wsdl:operation name="GettestClassXML">
-      <http:operation location="/GettestClassXML" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GettestClassJSON">
-      <http:operation location="/GettestClassJSON" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HelloWorld">
-      <http:operation location="/HelloWorld" />
+    <wsdl:operation name="SayHelloToLame">
+      <http:operation location="/SayHelloToLame" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
@@ -531,8 +500,8 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="test">
-      <http:operation location="/test" />
+    <wsdl:operation name="XMLZwrocListeKntKarty">
+      <http:operation location="/XMLZwrocListeKntKarty" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
@@ -542,6 +511,24 @@
     </wsdl:operation>
     <wsdl:operation name="SetData">
       <http:operation location="/SetData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntAdresy">
+      <http:operation location="/ZwrocListeKntAdresy" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeKntKarty">
+      <http:operation location="/ZwrocListeKntKarty" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
@@ -561,16 +548,16 @@
   </wsdl:binding>
   <wsdl:service name="WebService">
     <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
-      <soap:address location="http://kwronski.hostingasp.pl/WebService.asmx" />
+      <soap:address location="http://91.196.9.105:8080/WebService.asmx" />
     </wsdl:port>
     <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
-      <soap12:address location="http://kwronski.hostingasp.pl/WebService.asmx" />
+      <soap12:address location="http://91.196.9.105:8080/WebService.asmx" />
     </wsdl:port>
     <wsdl:port name="WebServiceHttpGet" binding="tns:WebServiceHttpGet">
-      <http:address location="http://kwronski.hostingasp.pl/WebService.asmx" />
+      <http:address location="http://91.196.9.105:8080/WebService.asmx" />
     </wsdl:port>
     <wsdl:port name="WebServiceHttpPost" binding="tns:WebServiceHttpPost">
-      <http:address location="http://kwronski.hostingasp.pl/WebService.asmx" />
+      <http:address location="http://91.196.9.105:8080/WebService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

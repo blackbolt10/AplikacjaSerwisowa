@@ -5,8 +5,8 @@ using SQLite;
 
 namespace AplikacjaSerwisowa
 {
-    [Table("SerwisoweZleceniaNaglownki")]
-    public class SerwisoweZleceniaNaglownki
+    [Table("SerwisoweZleceniaNaglowkiTable")]
+    public class SerwisoweZleceniaNaglowkiTable
     {
         [PrimaryKey, AutoIncrement, Column("_Id")]
         public int Id { get; set; }
@@ -28,7 +28,7 @@ namespace AplikacjaSerwisowa
         public String SZN_Opis { get; set; }
 
 
-        public SerwisoweZleceniaNaglownki(String _Dokument, int _SZN_Id, int _SZN_KntTyp, int _SZN_KntNumer, int _SZN_KnATyp, int _SZN_KnANumer, int _SZN_KnDTyp, int _SZN_KnDNumer, int _SZN_AdWTyp, int _SZN_AdWNumer, String _SZN_DataWystawienia, String _SZN_DataRozpoczecia, String _SZN_Stan, String _SZN_Status, String _SZN_CechaOpis, String _SZN_Opis)
+        public SerwisoweZleceniaNaglowkiTable(String _Dokument, int _SZN_Id, int _SZN_KntTyp, int _SZN_KntNumer, int _SZN_KnATyp, int _SZN_KnANumer, int _SZN_KnDTyp, int _SZN_KnDNumer, int _SZN_AdWTyp, int _SZN_AdWNumer, String _SZN_DataWystawienia, String _SZN_DataRozpoczecia, String _SZN_Stan, String _SZN_Status, String _SZN_CechaOpis, String _SZN_Opis)
         {
             Dokument = _Dokument;
             SZN_Id = _SZN_Id;
@@ -47,6 +47,6 @@ namespace AplikacjaSerwisowa
             SZN_CechaOpis = _SZN_CechaOpis;
             SZN_Opis = _SZN_Opis;
         }
-        public SerwisoweZleceniaNaglownki() { }
+        public SerwisoweZleceniaNaglowkiTable() { }
     }
 }

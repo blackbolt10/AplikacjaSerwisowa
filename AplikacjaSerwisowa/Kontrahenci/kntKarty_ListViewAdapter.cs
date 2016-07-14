@@ -26,7 +26,6 @@ namespace AplikacjaSerwisowa
         private List<string> mkna_nip_List = new List<string>();
         private List<string> mkna_telefon1_List = new List<string>();
         private List<string> mkna_telefon2_List = new List<string>();
-        private List<string> mkna_telefon3_List = new List<string>();
         private List<string> mkna_telex_List = new List<string>();
         private List<string> mkna_fax_List = new List<string>();
         private List<string> mkna_email_List = new List<string>();
@@ -34,7 +33,7 @@ namespace AplikacjaSerwisowa
 
         private Context mContext;
 
-        public kntKarty_ListViewAdapter(Context context, List<string> kna_gidnumer_List, List<string> kna_akronim_List, List<string> kna_nazwa1_List, List<string> kna_nazwa2_List, List<string> kna_nazwa3_List, List<string> kna_kodp_List, List<string> kna_miasto_List, List<string> kna_ulica_List, List<string> kna_adresy_List, List<string> kna_nip_List, List<string> kna_telefon1_List, List<string> kna_telefon2_List, List<string> kna_telefon3_List, List<string> kna_telex_List, List<string> kna_fax_List, List<string> kna_email_List, Int32 ukrywanie)
+        public kntKarty_ListViewAdapter(Context context, List<string> kna_gidnumer_List, List<string> kna_akronim_List, List<string> kna_nazwa1_List, List<string> kna_nazwa2_List, List<string> kna_nazwa3_List, List<string> kna_kodp_List, List<string> kna_miasto_List, List<string> kna_ulica_List, List<string> kna_adresy_List, List<string> kna_nip_List, List<string> kna_telefon1_List, List<string> kna_telefon2_List, List<string> kna_telex_List, List<string> kna_fax_List, List<string> kna_email_List, Int32 ukrywanie)
         {
             mkna_gidnumer_List = kna_gidnumer_List;
             mkna_akronim_List = kna_akronim_List;
@@ -48,7 +47,6 @@ namespace AplikacjaSerwisowa
             mkna_nip_List = kna_nip_List;
             mkna_telefon1_List = kna_telefon1_List;
             mkna_telefon2_List = kna_telefon2_List;
-            mkna_telefon3_List = kna_telefon3_List;
             mkna_telex_List = kna_telex_List;
             mkna_fax_List = kna_fax_List;
             mkna_email_List = kna_email_List;

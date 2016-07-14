@@ -102,7 +102,6 @@ namespace AplikacjaSerwisowa
             mNipTextView = view.FindViewById<TextView>(Resource.Id.nipFrag1TextView);
             mTelefon1TextView = view.FindViewById<TextView>(Resource.Id.telefon1Frag1TextView);
             mTelefon2TextView = view.FindViewById<TextView>(Resource.Id.telefon2Frag1TextView);
-            mTelefon3TextView = view.FindViewById<TextView>(Resource.Id.telefon3Frag1TextView);
             mTelexTextView = view.FindViewById<TextView>(Resource.Id.telexFrag1TextView);
             mFaxTextView = view.FindViewById<TextView>(Resource.Id.faxFrag1TextView);
             mUlicaTextView = view.FindViewById<TextView>(Resource.Id.ulicaFrag1TextView);

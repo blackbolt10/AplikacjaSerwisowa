@@ -32,7 +32,6 @@ namespace AplikacjaSerwisowa
         private List<string> kna_nip_List = new List<string>();
         private List<string> kna_telefon1_List = new List<string>();
         private List<string> kna_telefon2_List = new List<string>();
-        private List<string> kna_telefon3_List = new List<string>();
         private List<string> kna_telex_List = new List<string>();
         private List<string> kna_fax_List = new List<string>();
         private List<string> kna_email_List = new List<string>();
@@ -56,7 +55,7 @@ namespace AplikacjaSerwisowa
                 foreach (var item in table)
                 {
                     kna_gidnumer_List.Add(item.Knt_GIDNumer.ToString());
-                    kna_akronim_List.Add(item.Knt_Akrnonim);
+                    kna_akronim_List.Add(item.Knt_Akronim);
                     kna_nazwa1_List.Add(item.Knt_nazwa1);
                     kna_nazwa2_List.Add(item.Knt_nazwa2);
                     kna_nazwa3_List.Add(item.Knt_nazwa3);
@@ -67,7 +66,6 @@ namespace AplikacjaSerwisowa
                     kna_nip_List.Add(item.Knt_nip);
                     kna_telefon1_List.Add(item.Knt_telefon1);
                     kna_telefon2_List.Add(item.Knt_telefon2);
-                    kna_telefon3_List.Add(item.Knt_telefon3);
                     kna_telex_List.Add(item.Knt_telex);
                     kna_fax_List.Add(item.Knt_fax);
                     kna_email_List.Add(item.Knt_email);
@@ -82,11 +80,11 @@ namespace AplikacjaSerwisowa
 
             if (kna_gidnumer_List.Count > 0 && kna_akronim_List.Count > 0 )
             {
-                adapter = new kntKarty_ListViewAdapter(this, kna_gidnumer_List, kna_akronim_List, kna_nazwa1_List, kna_nazwa2_List, kna_nazwa3_List, kna_kodp_List, kna_miasto_List, kna_ulica_List, kna_adresy_List, kna_nip_List, kna_telefon1_List, kna_telefon2_List, kna_telefon3_List, kna_telex_List, kna_fax_List, kna_email_List, mUkrywanieGidNmer);
+                adapter = new kntKarty_ListViewAdapter(this, kna_gidnumer_List, kna_akronim_List, kna_nazwa1_List, kna_nazwa2_List, kna_nazwa3_List, kna_kodp_List, kna_miasto_List, kna_ulica_List, kna_adresy_List, kna_nip_List, kna_telefon1_List, kna_telefon2_List, kna_telex_List, kna_fax_List, kna_email_List, mUkrywanieGidNmer);
             }
             else
             {
-                adapter = new kntKarty_ListViewAdapter(this, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, mUkrywanieGidNmer);
+                adapter = new kntKarty_ListViewAdapter(this, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, mUkrywanieGidNmer);
             }
             listaKontrahentow.Adapter = adapter;
         }

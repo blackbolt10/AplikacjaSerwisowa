@@ -71,10 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase\DBRepository.cs" />
-    <Compile Include="DataBase\SerwisoweZleceniaNaglowki.cs" />
+    <Compile Include="DataBase\Tabele\SerwisoweZleceniaNaglowkiTable.cs" />
     <Compile Include="glowneOkno_Activity.cs" />
-    <Compile Include="Kontrahenci\KntAdresyTable.cs" />
-    <Compile Include="Kontrahenci\KntKartyTable.cs" />
+    <Compile Include="DataBase\Tabele\KntAdresyTable.cs" />
+    <Compile Include="DataBase\Tabele\KntKartyTable.cs" />
     <Compile Include="Kontrahenci\kntKarty_ListViewAdapter.cs" />
     <Compile Include="Kontrahenci\kontrahenciAdresy_ListViewAdapter.cs" />
     <Compile Include="Kontrahenci\kontrahenciInformacje.cs" />
@@ -85,7 +85,7 @@
     <Compile Include="Magazyn\kartyTowarow_ListViewAdapter.cs" />
     <Compile Include="Magazyn\magazyn_Activity.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="DataBase\OperatorzyTable.cs" />
+    <Compile Include="DataBase\Tabele\OperatorzyTable.cs" />
     <Compile Include="noweZlecenie_Activity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,9 +126,6 @@
     <None Include="Web References\kwronski\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\kwronski\testClass.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\kwronski\WebService.wsdl" />
   </ItemGroup>
@@ -187,10 +184,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://kwronski.hostingasp.pl/WebService.asmx">
+    <WebReferenceUrl Include="http://91.196.9.105:8080/WebService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\kwronski\</RelPath>
-      <UpdateFromURL>http://kwronski.hostingasp.pl/WebService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://91.196.9.105:8080/WebService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

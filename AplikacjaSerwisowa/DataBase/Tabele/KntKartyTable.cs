@@ -15,7 +15,7 @@ namespace AplikacjaSerwisowa
         public Int32 Knt_GIDNumer { get; set; }
 
         [MaxLength(20), Unique]
-        public String Knt_Akrnonim { get; set; }
+        public String Knt_Akronim { get; set; }
 
         [MaxLength(50)]
         public String Knt_nazwa1 { get; set; }
@@ -46,9 +46,7 @@ namespace AplikacjaSerwisowa
 
         [MaxLength(30)]
         public String Knt_telefon2 { get; set; }
-
-        [MaxLength(30)]
-        public String Knt_telefon3 { get; set; }
+        
         [MaxLength(30)]
         public String Knt_telex { get; set; }
 

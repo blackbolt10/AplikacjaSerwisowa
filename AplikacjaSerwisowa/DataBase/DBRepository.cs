@@ -283,7 +283,7 @@ namespace AplikacjaSerwisowa
 
                 foreach(var item in table)
                 {
-                    output += item.Id + ": GIDNum:" + item.Knt_GIDNumer + ", A:" + item.Knt_Akrnonim + "\n";
+                    output += item.Id + ": GIDNum:" + item.Knt_GIDNumer + ", A:" + item.Knt_Akronim + "\n";
                 }
             }
             catch(Exception exc)
@@ -314,7 +314,7 @@ namespace AplikacjaSerwisowa
                     if(result.Count > 0)
                     {
                         output.Add(result[0].Knt_GIDNumer.ToString());
-                        output.Add(result[0].Knt_Akrnonim.ToString());
+                        output.Add(result[0].Knt_Akronim.ToString());
                         output.Add(result[0].Knt_nazwa1.ToString());
                         output.Add(result[0].Knt_nazwa2.ToString());
                         output.Add(result[0].Knt_nazwa3.ToString());
@@ -325,15 +325,15 @@ namespace AplikacjaSerwisowa
                         output.Add(result[0].Knt_nip.ToString());
                         output.Add(result[0].Knt_telefon1.ToString());
                         output.Add(result[0].Knt_telefon2.ToString());
-                        output.Add(result[0].Knt_telefon3.ToString());
                         output.Add(result[0].Knt_telex.ToString());
                         output.Add(result[0].Knt_fax.ToString());
                         output.Add(result[0].Knt_email.ToString());
                         output.Add(result[0].Knt_url.ToString());
                     }
                 }
-                catch(Exception)
-                {}
+                catch(Exception exc)
+                {
+                }
             }
 
             return output;
@@ -456,13 +456,13 @@ namespace AplikacjaSerwisowa
 
                 try
                 {
-                    db.DropTable<SerwisoweZleceniaNaglownki>();
+                    db.DropTable<SerwisoweZleceniaNaglowkiTable>();
                 }
                 catch(Exception) { }
 
-                db.CreateTable<SerwisoweZleceniaNaglownki>();
+                db.CreateTable<SerwisoweZleceniaNaglowkiTable>();
 
-                output = "Tabela SerwisoweZleceniaNaglownki zosta³a stworzona...";
+                output = "Tabela SerwisoweZleceniaNaglowkiTable zosta³a stworzona...";
             }
             catch(Exception exc)
             {
@@ -471,7 +471,7 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
-        public String SerwisoweZleceniaNaglowki_InsertRecord(SerwisoweZleceniaNaglownki item)
+        public String SerwisoweZleceniaNaglowki_InsertRecord(SerwisoweZleceniaNaglowkiTable item)
         {
             String output = "";
             try

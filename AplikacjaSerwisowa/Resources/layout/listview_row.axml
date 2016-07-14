@@ -15,22 +15,22 @@
         android:layout_height="32.0dp"
         android:id="@+id/realizacjaImageView" />
     <TextView
-        android:text="Duży kontrahent"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Nagłówek"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/kontrahentTextView"
+        android:id="@+id/naglowekTextViewListaZlecenNaglowek"
         android:layout_toRightOf="@id/realizacjaImageView"
         android:maxHeight="100.0dp"
         android:paddingLeft="10.0dp"
-        android:paddingBottom="10.0dp" />
+        android:paddingBottom="10.0dp"
+        android:layout_marginTop="5.0dp" />
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/kontrahentTextView"
+        android:layout_below="@id/naglowekTextViewListaZlecenNaglowek"
         android:id="@+id/linearLayout2">
         <LinearLayout
             android:orientation="horizontal"
@@ -41,17 +41,12 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true">
             <TextView
-                android:text="Data"
+                android:text="Kontrahent"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/dataTextView"
-                android:layout_weight="1" />
-            <TextView
-                android:text="Telefon"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/telefonTextView"
-                android:layout_weight="1" />
+                android:id="@+id/kontrahentTextViewListaZlecenNaglowek"
+                android:layout_weight="1"
+                android:layout_marginTop="10.0dp" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -60,18 +55,14 @@
             android:id="@+id/linearLayout3"
             android:weightSum="2"
             android:layout_alignParentRight="true"
-            android:layout_alignParentLeft="true">
+            android:layout_alignParentLeft="true"
+            android:minWidth="25px"
+            android:minHeight="25px">
             <TextView
-                android:text="Adres"
-                android:layout_width="wrap_content"
+                android:text="Stan"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/adresTextView"
-                android:layout_weight="1" />
-            <TextView
-                android:text="Godzina"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/godzinaTextView"
+                android:id="@+id/stanTextViewListaZlecenNaglowek"
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>

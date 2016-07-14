@@ -15,22 +15,20 @@ namespace AplikacjaSerwisowa
     class listaZlecen_ListViewAdapter : BaseAdapter<string>
     {
         private List<string> mKontrahenci;
-        private List<string> mData;
-        private List<string> mTelefon;
-        private List<string> mAdres;
-        private List<string> mGodzina;
+        private List<string> mStan;
+        private List<string> mNaglowki;
         private List<string> mWykonanie;
+        private List<string> mData;
 
         private Context mContext;
 
-        public listaZlecen_ListViewAdapter(Context context, List<string> kontrahenci_List, List<string> data_List, List<string> adres_List, List<string> telefon_List, List<string> godzina_List, List<string> wykonanie_List)
+        public listaZlecen_ListViewAdapter(Context context, List<string> kontrahenci_List, List<string> stan_List, List<string> naglowki_List, List<string> data_List, List<string> wykonanie_List)
         {
             mKontrahenci = kontrahenci_List;
-            mData = data_List;
-            mTelefon = telefon_List;
-            mAdres = adres_List;
-            mGodzina = godzina_List;
+            mStan = stan_List;
+            mNaglowki = naglowki_List;
             mWykonanie = wykonanie_List;
+            mData = data_List;
 
             mContext = context;
         }
@@ -54,18 +52,14 @@ namespace AplikacjaSerwisowa
                 row = LayoutInflater.From(mContext).Inflate(Resource.Layout.listview_row, null, false);
             }
 
-            TextView kontrahent_TextView = row.FindViewById<TextView>(Resource.Id.kontrahentTextView);
-            TextView data_TextView = row.FindViewById<TextView>(Resource.Id.dataTextView);
-            TextView adres_TextView = row.FindViewById<TextView>(Resource.Id.adresTextView);
-            TextView telefon_TextView = row.FindViewById<TextView>(Resource.Id.telefonTextView);
-            TextView godzina_TextView = row.FindViewById<TextView>(Resource.Id.godzinaTextView);
+            TextView naglowek_TextView = row.FindViewById<TextView>(Resource.Id.naglowekTextViewListaZlecenNaglowek);
+            TextView kontrahent_TextView = row.FindViewById<TextView>(Resource.Id.kontrahentTextViewListaZlecenNaglowek);
+            TextView stan_TextView = row.FindViewById<TextView>(Resource.Id.stanTextViewListaZlecenNaglowek);
             ImageView wykonanie_ImageView = row.FindViewById<ImageView>(Resource.Id.realizacjaImageView);
 
             kontrahent_TextView.Text = mKontrahenci[position];
-            data_TextView.Text = mData[position];
-            adres_TextView.Text = mAdres[position];
-            telefon_TextView.Text = mTelefon[position];
-            godzina_TextView.Text = mGodzina[position];
+            stan_TextView.Text = mStan[position];
+            naglowek_TextView.Text = mData[position]+" - "+ mNaglowki[position];
 
             if(mWykonanie[position] == "1")
             {

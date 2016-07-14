@@ -96,14 +96,11 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06002a
 			public const int adresKodPKontrahenciRowTextView = 2131099690;
 			
-			// aapt resource value: 0x7f06004f
-			public const int adresSerwer_EditText = 2131099727;
+			// aapt resource value: 0x7f06004d
+			public const int adresSerwer_EditText = 2131099725;
 			
-			// aapt resource value: 0x7f06004e
-			public const int adresSerwer_textView = 2131099726;
-			
-			// aapt resource value: 0x7f060040
-			public const int adresTextView = 2131099712;
+			// aapt resource value: 0x7f06004c
+			public const int adresSerwer_textView = 2131099724;
 			
 			// aapt resource value: 0x7f060002
 			public const int akronimFrag1TextView = 2131099650;
@@ -131,9 +128,6 @@ namespace AplikacjaSerwisowa
 			
 			// aapt resource value: 0x7f060032
 			public const int daneKontrahentaAdresy2LinearLayout = 2131099698;
-			
-			// aapt resource value: 0x7f06003d
-			public const int dataTextView = 2131099709;
 			
 			// aapt resource value: 0x7f060013
 			public const int emailFrag1TextView = 2131099667;
@@ -165,29 +159,26 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06002d
 			public const int gidNumerKontrahenciRowTextView = 2131099693;
 			
-			// aapt resource value: 0x7f060041
-			public const int godzinaTextView = 2131099713;
+			// aapt resource value: 0x7f060052
+			public const int hasloSerwer_EditText = 2131099730;
 			
-			// aapt resource value: 0x7f060054
-			public const int hasloSerwer_EditText = 2131099732;
+			// aapt resource value: 0x7f060044
+			public const int haslo_EditText = 2131099716;
 			
-			// aapt resource value: 0x7f060046
-			public const int haslo_EditText = 2131099718;
+			// aapt resource value: 0x7f060043
+			public const int haslo_textView = 2131099715;
 			
-			// aapt resource value: 0x7f060045
-			public const int haslo_textView = 2131099717;
+			// aapt resource value: 0x7f06004f
+			public const int instancjaSerwer_EditText = 2131099727;
 			
-			// aapt resource value: 0x7f060051
-			public const int instancjaSerwer_EditText = 2131099729;
+			// aapt resource value: 0x7f06004e
+			public const int instancjaSerwer_textView = 2131099726;
 			
-			// aapt resource value: 0x7f060050
-			public const int instancjaSerwer_textView = 2131099728;
+			// aapt resource value: 0x7f060049
+			public const int item_title = 2131099721;
 			
-			// aapt resource value: 0x7f06004b
-			public const int item_title = 2131099723;
-			
-			// aapt resource value: 0x7f060042
-			public const int kartyTowarowListView = 2131099714;
+			// aapt resource value: 0x7f060040
+			public const int kartyTowarowListView = 2131099712;
 			
 			// aapt resource value: 0x7f060037
 			public const int kntNumerKontrahenciAdresyRowTextView = 2131099703;
@@ -204,8 +195,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06001d
 			public const int kontrahenci_Button = 2131099677;
 			
-			// aapt resource value: 0x7f06003c
-			public const int kontrahentTextView = 2131099708;
+			// aapt resource value: 0x7f06003d
+			public const int kontrahentTextViewListaZlecenNaglowek = 2131099709;
 			
 			// aapt resource value: 0x7f06000b
 			public const int linearLayout1 = 2131099659;
@@ -213,8 +204,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06000e
 			public const int linearLayout2 = 2131099662;
 			
-			// aapt resource value: 0x7f06003f
-			public const int linearLayout3 = 2131099711;
+			// aapt resource value: 0x7f06003e
+			public const int linearLayout3 = 2131099710;
 			
 			// aapt resource value: 0x7f06003a
 			public const int listView1 = 2131099706;
@@ -222,20 +213,23 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06001c
 			public const int listaZlecen_Button = 2131099676;
 			
-			// aapt resource value: 0x7f060048
-			public const int loadingPanel = 2131099720;
+			// aapt resource value: 0x7f060046
+			public const int loadingPanel = 2131099718;
 			
-			// aapt resource value: 0x7f060053
-			public const int loginSerwer_EditText = 2131099731;
+			// aapt resource value: 0x7f060051
+			public const int loginSerwer_EditText = 2131099729;
 			
-			// aapt resource value: 0x7f060052
-			public const int loginSerwer_textView = 2131099730;
+			// aapt resource value: 0x7f060050
+			public const int loginSerwer_textView = 2131099728;
 			
-			// aapt resource value: 0x7f060044
-			public const int login_EditText = 2131099716;
+			// aapt resource value: 0x7f060042
+			public const int login_EditText = 2131099714;
 			
 			// aapt resource value: 0x7f06001e
 			public const int magazyn_Button = 2131099678;
+			
+			// aapt resource value: 0x7f06003c
+			public const int naglowekTextViewListaZlecenNaglowek = 2131099708;
 			
 			// aapt resource value: 0x7f060004
 			public const int nazwaFrag1TextView = 2131099652;
@@ -273,14 +267,17 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060019
 			public const int sliding_tabs = 2131099673;
 			
+			// aapt resource value: 0x7f06003f
+			public const int stanTextViewListaZlecenNaglowek = 2131099711;
+			
+			// aapt resource value: 0x7f060054
+			public const int synchronizacjaButton = 2131099732;
+			
+			// aapt resource value: 0x7f06004a
+			public const int synchronizacjaSynchronizacjaButton = 2131099722;
+			
 			// aapt resource value: 0x7f060056
-			public const int synchronizacjaButton = 2131099734;
-			
-			// aapt resource value: 0x7f06004c
-			public const int synchronizacjaSynchronizacjaButton = 2131099724;
-			
-			// aapt resource value: 0x7f060058
-			public const int synchronizacja_glowneOknoMenu = 2131099736;
+			public const int synchronizacja_glowneOknoMenu = 2131099734;
 			
 			// aapt resource value: 0x7f06000c
 			public const int telefon1Frag1TextView = 2131099660;
@@ -297,17 +294,14 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06000a
 			public const int telefonNazwaFrag1TextView = 2131099658;
 			
-			// aapt resource value: 0x7f06003e
-			public const int telefonTextView = 2131099710;
-			
 			// aapt resource value: 0x7f06000f
 			public const int telexFrag1TextView = 2131099663;
 			
-			// aapt resource value: 0x7f06004d
-			public const int test2Synchronizacja_button = 2131099725;
+			// aapt resource value: 0x7f06004b
+			public const int test2Synchronizacja_button = 2131099723;
 			
-			// aapt resource value: 0x7f060057
-			public const int test2_button = 2131099735;
+			// aapt resource value: 0x7f060055
+			public const int test2_button = 2131099733;
 			
 			// aapt resource value: 0x7f060001
 			public const int textView1 = 2131099649;
@@ -336,11 +330,11 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060014
 			public const int urlNazwaFrag1TextView = 2131099668;
 			
-			// aapt resource value: 0x7f06005b
-			public const int ustawienia_mainActivityMenu = 2131099739;
+			// aapt resource value: 0x7f060059
+			public const int ustawienia_mainActivityMenu = 2131099737;
 			
-			// aapt resource value: 0x7f06004a
-			public const int uzupelnijTestButton = 2131099722;
+			// aapt resource value: 0x7f060048
+			public const int uzupelnijTestButton = 2131099720;
 			
 			// aapt resource value: 0x7f060039
 			public const int viewPager = 2131099705;
@@ -348,26 +342,26 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06001a
 			public const int viewpager = 2131099674;
 			
-			// aapt resource value: 0x7f060049
-			public const int wszyscyButton = 2131099721;
-			
-			// aapt resource value: 0x7f060059
-			public const int wyloguj_glowneOknoMenu = 2131099737;
-			
 			// aapt resource value: 0x7f060047
-			public const int zaloguj_Button = 2131099719;
+			public const int wszyscyButton = 2131099719;
 			
-			// aapt resource value: 0x7f060043
-			public const int zaloguj_textView = 2131099715;
+			// aapt resource value: 0x7f060057
+			public const int wyloguj_glowneOknoMenu = 2131099735;
+			
+			// aapt resource value: 0x7f060045
+			public const int zaloguj_Button = 2131099717;
+			
+			// aapt resource value: 0x7f060041
+			public const int zaloguj_textView = 2131099713;
+			
+			// aapt resource value: 0x7f060058
+			public const int zamknij_glowneOknoMenu = 2131099736;
 			
 			// aapt resource value: 0x7f06005a
-			public const int zamknij_glowneOknoMenu = 2131099738;
+			public const int zamknij_mainActivityMenu = 2131099738;
 			
-			// aapt resource value: 0x7f06005c
-			public const int zamknij_mainActivityMenu = 2131099740;
-			
-			// aapt resource value: 0x7f060055
-			public const int zapiszSerwer_Button = 2131099733;
+			// aapt resource value: 0x7f060053
+			public const int zapiszSerwer_Button = 2131099731;
 			
 			static Id()
 			{

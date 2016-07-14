@@ -125,80 +125,74 @@ namespace AplikacjaSerwisowa
             try
             {
                 DBRepository dbr = new DBRepository();
-                List<String> result = dbr.kntKarty_GetRecord(mGidNumerKontrahenta);
+                KntKartyTable result = dbr.kntKarty_GetRecord(mGidNumerKontrahenta);
 
-                mGidNumerTextView.Text = result[0];
+                mGidNumerTextView.Text = result.Knt_GIDNumer.ToString();
                 if(mUkrywanie)
                 {
                     mGidNumerTextView.Visibility = ViewStates.Gone;
                 }
 
-                mAkronimTextView.Text = result[1];
-                mNazwaTextView.Text = result[2];
+                mAkronimTextView.Text = result.Knt_Akronim;
+                mNazwaTextView.Text = result.Knt_nazwa1;
 
-                if(result[3]!= "")
+                if(result.Knt_nazwa2!= "")
                 {
-                    mNazwaTextView.Text += "\n" + result[3];
+                    mNazwaTextView.Text += "\n" + result.Knt_nazwa2;
                 }
 
-                if(result[4] != "")
+                if(result.Knt_nazwa3 != "")
                 {
-                    mNazwaTextView.Text += "\n" + result[4];
+                    mNazwaTextView.Text += "\n" + result.Knt_nazwa2;
                 }
                 
-                mKodPMiastoTextView.Text = result[5] + result[6];
-                mUlicaTextView.Text = result[7];
-                mNipTextView.Text = result[9];
+                mKodPMiastoTextView.Text = result.Knt_KodP + result.Knt_miasto;
+                mUlicaTextView.Text = result.Knt_ulica;
+                mNipTextView.Text = result.Knt_nip;
 
                 if(mNipTextView.Text == "")
                 {
                     mNipTextView.Visibility = ViewStates.Gone;
                 }
 
-                mTelefon1TextView.Text = result[10];
+                mTelefon1TextView.Text = result.Knt_telefon1;
                 if(mTelefon1TextView.Text == "")
                 {
                     mTelefon1TextView.Visibility = ViewStates.Gone;
                 }
 
-                mTelefon2TextView.Text = result[11];
+                mTelefon2TextView.Text = result.Knt_telefon2;
                 if(mTelefon2TextView.Text == "")
                 {
                     mTelefon2TextView.Visibility = ViewStates.Gone;
                 }
 
-                mTelefon3TextView.Text = result[12];
-                if(mTelefon3TextView.Text == "")
-                {
-                    mTelefon3TextView.Visibility = ViewStates.Gone;
-                }
-
-                mTelexTextView.Text = result[13];
+                mTelexTextView.Text = result.Knt_telex;
                 if(mTelexTextView.Text == "")
                 {
                     mTelexTextView.Visibility = ViewStates.Gone;
                 }
 
-                if(mTelefon1TextView.Text == ""&& mTelefon2TextView.Text == ""&& mTelefon3TextView.Text == ""&& mTelexTextView.Text == "")
+                if(mTelefon1TextView.Text == ""&& mTelefon2TextView.Text == ""&& mTelexTextView.Text == "")
                 {
                     mTelefonNazwaTextView.Visibility = ViewStates.Gone;
                 }
 
-                mFaxTextView.Text = result[14];
+                mFaxTextView.Text = result.Knt_fax;
                 if(mFaxTextView.Text == "")
                 {
                     mFaxTextView.Visibility = ViewStates.Gone;
                     mFaxNazwaTextView.Visibility = ViewStates.Gone;
                 }
 
-                mEmailTextView.Text = result[15];
+                mEmailTextView.Text = result.Knt_email;
                 if(mEmailTextView.Text == "")
                 {
                     mEmailTextView.Visibility = ViewStates.Gone;
                     mEmailNazwaTextView.Visibility = ViewStates.Gone; ;
                 }
 
-                mUrlTextView.Text = result[16];
+                mUrlTextView.Text = result.Knt_url;
                 if(mUrlTextView.Text == "")
                 {
                     mUrlTextView.Visibility = ViewStates.Gone;
@@ -275,7 +269,7 @@ namespace AplikacjaSerwisowa
                 {
                     kna_gidnumer_List.Add(item.Kna_GIDNumer.ToString());
                     kna_kntnumer.Add(item.Kna_KntNumer.ToString());
-                    kna_akronim_List.Add(item.Kna_Akrnonim);
+                    kna_akronim_List.Add(item.Kna_Akronim);
                     kna_nazwa1_List.Add(item.Kna_nazwa1);
                     kna_nazwa2_List.Add(item.Kna_nazwa2);
                     kna_nazwa3_List.Add(item.Kna_nazwa3);

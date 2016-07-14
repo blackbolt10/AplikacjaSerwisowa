@@ -17,7 +17,7 @@ namespace AplikacjaSerwisowa
         public Int32 Kna_KntNumer { get; set; }
 
         [MaxLength(20), Unique]
-        public String Kna_Akrnonim { get; set; }
+        public String Kna_Akronim { get; set; }
 
         [MaxLength(50)]
         public String Kna_nazwa1 { get; set; }

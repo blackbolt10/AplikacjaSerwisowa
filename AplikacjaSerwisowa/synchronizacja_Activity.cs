@@ -671,7 +671,7 @@ string testsdgsdgsdg = "";
 
                 KntAdresyTable kntAdres = new KntAdresyTable();
                 kntAdres.Kna_GIDNumer = Convert.ToInt32(kna_gidnumer_List[i]);
-                kntAdres.Kna_KntNumer = Convert.ToInt32(kna_kntNumer_List[i]);                kntAdres.Kna_Akrnonim = kna_akronim_List[i];
+                kntAdres.Kna_KntNumer = Convert.ToInt32(kna_kntNumer_List[i]);                kntAdres.Kna_Akronim = kna_akronim_List[i];
                 kntAdres.Kna_nazwa1 = kna_nazwa1_List[i];
                 kntAdres.Kna_nazwa2 = kna_nazwa2_List[i];
                 kntAdres.Kna_nazwa3 = kna_nazwa3_List[i];

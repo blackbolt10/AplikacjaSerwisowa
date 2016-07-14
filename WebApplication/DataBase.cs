@@ -101,7 +101,7 @@ namespace WebApplication
 
         public List<SerwisoweZleceniaNaglownki> wygenerujListeSerwisowychZlecenNaglowki()
         {
-            DateTime data = DateTime.Now.AddMonths(-6);
+            DateTime data = DateTime.Now.AddMonths(-9);
             String zapytanieSerwisowaLista = @"SELECT 
             CDN.NumerDokumentu(4700,4700,4700,SZN_Numer,SZN_Rok,SZN_Seria,SZN_Miesiac) as Dokument
 
@@ -136,7 +136,7 @@ namespace WebApplication
             LEFT OUTER JOIN CDN.KntKarty E ON  A.SZN_KnDTyp= E.Knt_GIDTyp AND  A.SZN_KnDNumer= E.Knt_GIDNumer --Docelowy
             --LEFT OUTER JOIN CDN.KntAdresy F ON  A.SZN_KnATyp= F.KnA_GIDTyp AND  A.SZN_KnANumer= F.KnA_GIDNumer 
             LEFT OUTER JOIN CDN.KntKarty G ON  A.SZN_KntTyp= G.Knt_GIDTyp AND  A.SZN_KntNumer= G.Knt_GIDNumer   --Kontrahent
-            --WHERE ( (SZN_ROK=" + data.Year.ToString() +@" AND Month(DATEADD(dd,SZN_DataWystawienia,CONVERT(DATETIME,'18001228',11)))="+ data.Month.ToString() + @") ) 
+            WHERE (DATEADD(DAY,A.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'"+data.Year.ToString()+"-"+data.Month.ToString()+@"-01') 
             ORDER BY  A.SZN_Rok,  A.SZN_Miesiac,  A.SZN_Seria,  A.SZN_Numer";
 
         DataTable pomDataTable = new DataTable();
@@ -398,7 +398,7 @@ public class KntAdresy
 {
     public Int32 Kna_GIDNumer { get; set; }
     public Int32 Kna_KntNumer { get; set; }
-    public String Kna_Akrnonim { get; set; }
+    public String Kna_Akronim { get; set; }
     public String Kna_nazwa1 { get; set; }
     public String Kna_nazwa2 { get; set; }
     public String Kna_nazwa3 { get; set; }
@@ -413,11 +413,11 @@ public class KntAdresy
     public String Kna_fax { get; set; }
     public String Kna_email { get; set; }
 
-    public KntAdresy(Int32 _Kna_GIDNumer, Int32 _Kna_KntNumer, String _Kna_Akrnonim, String _Kna_nazwa1, String _Kna_nazwa2, String _Kna_nazwa3, String _Kna_KodP, String _Kna_miasto, String _Kna_ulica, String _Kna_Adres, String _Kna_nip, String _Kna_telefon1, String _Kna_telefon2, String _Kna_telex, String _Kna_fax, String _Kna_email)
+    public KntAdresy(Int32 _Kna_GIDNumer, Int32 _Kna_KntNumer, String _Kna_Akronim, String _Kna_nazwa1, String _Kna_nazwa2, String _Kna_nazwa3, String _Kna_KodP, String _Kna_miasto, String _Kna_ulica, String _Kna_Adres, String _Kna_nip, String _Kna_telefon1, String _Kna_telefon2, String _Kna_telex, String _Kna_fax, String _Kna_email)
     {
         Kna_GIDNumer = _Kna_GIDNumer;
         Kna_KntNumer = _Kna_KntNumer;
-        Kna_Akrnonim = _Kna_Akrnonim;
+        Kna_Akronim = _Kna_Akronim;
         Kna_nazwa1 = _Kna_nazwa1;
         Kna_nazwa2 = _Kna_nazwa2;
         Kna_nazwa3 = _Kna_nazwa3;

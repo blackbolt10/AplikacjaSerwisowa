@@ -76,6 +76,16 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ZwrocListeZlecenSerwisowychSkladniki">
+        <s:complexType />
+      </s:element>
+      <s:element name="ZwrocListeZlecenSerwisowychSkladnikiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZwrocListeZlecenSerwisowychSkladnikiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="string" nillable="true" type="s:string" />
     </s:schema>
   </wsdl:types>
@@ -121,6 +131,12 @@
   <wsdl:message name="ZwrocListeZlecenSerwisowychCzynnosciSoapOut">
     <wsdl:part name="parameters" element="tns:ZwrocListeZlecenSerwisowychCzynnosciResponse" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeZlecenSerwisowychSkladnikiSoapIn">
+    <wsdl:part name="parameters" element="tns:ZwrocListeZlecenSerwisowychSkladniki" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeZlecenSerwisowychSkladnikiSoapOut">
+    <wsdl:part name="parameters" element="tns:ZwrocListeZlecenSerwisowychSkladnikiResponse" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpGetIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -151,6 +167,10 @@
   <wsdl:message name="ZwrocListeZlecenSerwisowychCzynnosciHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeZlecenSerwisowychSkladnikiHttpGetIn" />
+  <wsdl:message name="ZwrocListeZlecenSerwisowychSkladnikiHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpPostIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -179,6 +199,10 @@
   </wsdl:message>
   <wsdl:message name="ZwrocListeZlecenSerwisowychCzynnosciHttpPostIn" />
   <wsdl:message name="ZwrocListeZlecenSerwisowychCzynnosciHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeZlecenSerwisowychSkladnikiHttpPostIn" />
+  <wsdl:message name="ZwrocListeZlecenSerwisowychSkladnikiHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
@@ -217,6 +241,11 @@
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychCzynnosciSoapIn" />
       <wsdl:output message="tns:ZwrocListeZlecenSerwisowychCzynnosciSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcSkladniki</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeZlecenSerwisowychSkladnikiSoapIn" />
+      <wsdl:output message="tns:ZwrocListeZlecenSerwisowychSkladnikiSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpGet">
     <wsdl:operation name="SayHelloToLame">
@@ -254,6 +283,11 @@
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychCzynnosciHttpGetIn" />
       <wsdl:output message="tns:ZwrocListeZlecenSerwisowychCzynnosciHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcSkladniki</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeZlecenSerwisowychSkladnikiHttpGetIn" />
+      <wsdl:output message="tns:ZwrocListeZlecenSerwisowychSkladnikiHttpGetOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpPost">
     <wsdl:operation name="SayHelloToLame">
@@ -290,6 +324,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcCzynnosci</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychCzynnosciHttpPostIn" />
       <wsdl:output message="tns:ZwrocListeZlecenSerwisowychCzynnosciHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcSkladniki</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeZlecenSerwisowychSkladnikiHttpPostIn" />
+      <wsdl:output message="tns:ZwrocListeZlecenSerwisowychSkladnikiHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -350,6 +389,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
       <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychCzynnosci" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychSkladniki" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -423,6 +471,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychSkladniki" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpGet" type="tns:WebServiceHttpGet">
     <http:binding verb="GET" />
@@ -489,6 +546,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
+      <http:operation location="/ZwrocListeZlecenSerwisowychSkladniki" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpPost" type="tns:WebServiceHttpPost">
     <http:binding verb="POST" />
@@ -548,6 +614,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
       <http:operation location="/ZwrocListeZlecenSerwisowychCzynnosci" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
+      <http:operation location="/ZwrocListeZlecenSerwisowychSkladniki" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

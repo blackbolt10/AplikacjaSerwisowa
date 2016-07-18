@@ -21,7 +21,9 @@ namespace AplikacjaSerwisowa
         public Int32 szc_TwrNumer { get; set; }
         
         public double szc_Ilosc { get; set; }
-        
+
+        public String Twr_Jm { get; set; }
+
         public String szc_TwrNazwa { get; set; }
         
         public String Twr_Kod { get; set; }

@@ -93,5 +93,15 @@ namespace WebApplication
 
             return new JavaScriptSerializer().Serialize(listaSerwisoweZlecenCzynnosci);
         }
+
+        [WebMethod(Description = "Pozwala na wygenerowanie SrwZlcSkladniki")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ZwrocListeZlecenSerwisowychSkladniki()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<SrwZlcSkladniki> listaSerwisoweZlecenCzynnosci = dataBaseObject.wygenerujListeSrwZlcSkladniki();
+
+            return new JavaScriptSerializer().Serialize(listaSerwisoweZlecenCzynnosci);
+        }
     }
 }

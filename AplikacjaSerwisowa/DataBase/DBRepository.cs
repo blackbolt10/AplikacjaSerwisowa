@@ -608,10 +608,111 @@ namespace AplikacjaSerwisowa
                             szc.szc_Ilosc = result[i].szc_Ilosc;
                             szc.szc_Pozycja = result[i].szc_Pozycja;
                             szc.szc_sznId = result[i].szc_sznId;
+                            szc.Twr_Jm = result[i].Twr_Jm;
                             szc.szc_TwrNazwa = result[i].szc_TwrNazwa;
-                            szc.szc_TwrNumer = result[i].szc_TwrNumer;
+                            szc.Twr_Kod = result[i].Twr_Kod;
 
                             output.Add(szc);
+                        }
+                    }
+                }
+                catch(Exception exc)
+                {
+                }
+            }
+
+            return output;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela SrwZlcCzynnosci************************|
+            *---------------------------------------------------------------------------------
+        */
+
+        public string stworzSrwZlcSkladnikiTable()
+        {
+            String output = "";
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+
+                try
+                {
+                    db.DropTable<SrwZlcSkladnikiTable>();
+                }
+                catch(Exception) { }
+
+                db.CreateTable<SrwZlcSkladnikiTable>();
+
+                output = "Tabela SrwZlcSkladnikiTable zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzSrwZlcSkladnikiTable() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+        public String SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiTable item)
+        {
+            String output = "";
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+
+                db.Insert(item);
+                output = "Wpis dodany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwZlcSkladniki_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+
+        public List<SrwZlcSkladnikiTable> SrwZlcSkladniki_GetRecords(String szn_ID)
+        {
+            List<SrwZlcSkladnikiTable> output = new List<SrwZlcSkladnikiTable>();
+
+            if(szn_ID.Length > 0)
+            {
+                try
+                {
+                    String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                    SQLiteConnection db = new SQLiteConnection(dbPath);
+                    var table = db.Table<SrwZlcSkladnikiTable>();
+
+                    var result = db.Query<SrwZlcSkladnikiTable>("select * from SrwZlcSkladnikiTable where szs_sznId = " + szn_ID);
+
+                    if(result.Count > 0)
+                    {
+                        for(int i = 0; i < result.Count; i++)
+                        {
+                            SrwZlcSkladnikiTable szs = new SrwZlcSkladnikiTable();
+                            szs.szs_Id = result[i].szs_Id;
+                            szs.szs_Ilosc = result[i].szs_Ilosc;
+                            szs.szs_Pozycja = result[i].szs_Pozycja;
+                            szs.szs_sznId = result[i].szs_sznId;
+                            szs.Twr_Jm = result[i].Twr_Jm;
+                            szs.szs_TwrNazwa = result[i].szs_TwrNazwa;
+                            szs.Twr_Kod = result[i].Twr_Kod;
+
+                            output.Add(szs);
                         }
                     }
                 }

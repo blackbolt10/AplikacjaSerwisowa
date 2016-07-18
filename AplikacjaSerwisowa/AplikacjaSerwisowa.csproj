@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="DataBase\DBRepository.cs" />
     <Compile Include="DataBase\Tabele\SerwisoweZleceniaNaglowkiTable.cs" />
+    <Compile Include="DataBase\Tabele\SrwZlcSkladnikiTable.cs" />
     <Compile Include="DataBase\Tabele\SrwZlcCzynnosciTable.cs" />
     <Compile Include="glowneOkno_Activity.cs" />
     <Compile Include="DataBase\Tabele\KntAdresyTable.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Kontrahenci\kontrahenciAdresy_ListViewAdapter.cs" />
     <Compile Include="Kontrahenci\kontrahenciInformacje.cs" />
     <Compile Include="Kontrahenci\kontrahenci_Activity.cs" />
+    <Compile Include="Lista Zlecen\listaZlecenSzczegolySkladniki_ListViewAdapter.cs" />
     <Compile Include="Lista Zlecen\listaZlecenSzczegolyCzynnosci_ListViewAdapter.cs" />
     <Compile Include="Lista Zlecen\listaZlecenSzczegoly_Activity.cs" />
     <Compile Include="Lista Zlecen\listaZlecen_Activity.cs" />
@@ -138,7 +140,13 @@
     <AndroidResource Include="Resources\layout\czynnosciListaZlecenSzczegoly.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\czynnosciListaZlecenSczegoly_row.axml">
+    <AndroidResource Include="Resources\layout\czynnosciListaZlecenSzczegoly_row.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\skladnikiListaZlecenSzczegoly_row.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\skladnikiListaZlecenSzczegoly.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="Web References\kwronski\Reference.map">

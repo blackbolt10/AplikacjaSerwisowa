@@ -103,14 +103,14 @@ namespace AplikacjaSerwisowa
 
         private void pobieranieDanychWebService()
         {
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 1/4..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 1/5..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie nag³ówków kontrahentów..."));
             String kntKartyString = kwronskiService.ZwrocListeKntKarty();
 
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy nag³ówków kontrahentów..."));
             tworzenieBazyKntKarty(kntKartyString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 2/4..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 2/5..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie adresów kontrahentów..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
@@ -119,7 +119,7 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy adresów kontrahentów..."));
             tworzenieBazyKntAdresy(kntAdresyString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 3/4..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 3/5..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie nag³ówków zleceñ serwisowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
@@ -128,7 +128,7 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy nag³ówków zleceñ serwisowych..."));
             tworzenieBazySerwisoweZleceniaNaglowki(serwisoweZlecenniaNaglowkiString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 4/4..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 4/5..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie czynnosci zleceñ serwisowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
@@ -136,6 +136,15 @@ namespace AplikacjaSerwisowa
 
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy czynnosci zleceñ serwisowych..."));
             tworzenieBazySrwZlcCzynnosci(srwZlcCzynnosciString);
+
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 5/5..."));
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie skladniki zleceñ serwisowych..."));
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = 1);
+            String srwZlcSkladnikiString = kwronskiService.ZwrocListeZlecenSerwisowychSkladniki();
+
+            RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy skladniki zleceñ serwisowych..."));
+            tworzenieBazySrwZlcSkladniki(srwZlcSkladnikiString);
 
             RunOnUiThread(() => messagebox("Pobieranie zakoñczone", "Ukoñczono"));
             progrssDialog.Dismiss();
@@ -233,6 +242,46 @@ namespace AplikacjaSerwisowa
                 dbr.SrwZlcCynnosci_InsertRecord(szc);
             }
         }
+
+
+
+        private void tworzenieBazySrwZlcSkladniki(String srwZlcCzynnosciString)
+        {
+            var records = JsonConvert.DeserializeObject<List<SrwZlcSkladnikiTable>>(srwZlcCzynnosciString);
+
+            DBRepository dbr = new DBRepository();
+            String result = dbr.createDB();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();            
+            result = dbr.stworzSrwZlcSkladnikiTable();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();
+
+            if(records.Count > 0)
+            {
+                wprowadzWpisyDoTabeliSrwZlcSkladniki(records, dbr);
+            }
+        }
+
+        private void wprowadzWpisyDoTabeliSrwZlcSkladniki(List<SrwZlcSkladnikiTable> records, DBRepository dbr)
+        {
+            RunOnUiThread(() => progrssDialog.SetMessage("Zapisywanie sk³adniki zleceñ serwisowych..."));
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = records.Count);
+
+            for(int i = 0; i < records.Count; i++)
+            {
+                RunOnUiThread(() => progrssDialog.Progress++);
+
+                SrwZlcSkladnikiTable szs = records[i];
+                dbr.SrwZlcSkladniki_InsertRecord(szs);
+            }
+        }
+
+
+
+
+
+
+
 
         private void tworzenieBazySerwisoweZleceniaNaglowki(String serwisoweZlecenniaNaglowkiString)
         {

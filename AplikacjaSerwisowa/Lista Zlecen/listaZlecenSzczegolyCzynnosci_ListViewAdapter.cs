@@ -40,18 +40,21 @@ namespace AplikacjaSerwisowa
             View row = convertView;
             if(row == null)
             {
-                row = LayoutInflater.From(mContext).Inflate(Resource.Layout.czynnosciListaZlecenSczegoly_row, null, false);
+                row = LayoutInflater.From(mContext).Inflate(Resource.Layout.czynnosciListaZlecenSzczegoly_row, null, false);
             }
 
             TextView akronim_TextView = row.FindViewById<TextView>(Resource.Id.akronimCzynnosciListaZlecenSzczegolyTextView);
             TextView pozycja_TextView = row.FindViewById<TextView>(Resource.Id.pozycjaCzynnosciListaZlecenSzczegolyTextView);
             TextView ilosc_TextView = row.FindViewById<TextView>(Resource.Id.iloscCzynnosciListaZlecenSzczegolyTextView);
             TextView nazwa_TextView = row.FindViewById<TextView>(Resource.Id.nazwaCzynnosciListaZlecenSzczegolyTextView);
+            TextView jm_TextView = row.FindViewById<TextView>(Resource.Id.jmCzynnosciListaZlecenSzczegolyTextView);
+
 
             akronim_TextView.Text = szcList[position].Twr_Kod;
             pozycja_TextView.Text = szcList[position].szc_Pozycja.ToString();
             ilosc_TextView.Text = szcList[position].szc_Ilosc.ToString();
             nazwa_TextView.Text = szcList[position].szc_TwrNazwa;
+            jm_TextView.Text = szcList[position].Twr_Jm;
 
             return row;
         }

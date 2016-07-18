@@ -43,6 +43,8 @@ namespace AplikacjaSerwisowa.kwronski {
         
         private System.Threading.SendOrPostCallback ZwrocListeZlecenSerwisowychCzynnosciOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ZwrocListeZlecenSerwisowychSkladnikiOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -101,6 +103,9 @@ namespace AplikacjaSerwisowa.kwronski {
         
         /// <remarks/>
         public event ZwrocListeZlecenSerwisowychCzynnosciCompletedEventHandler ZwrocListeZlecenSerwisowychCzynnosciCompleted;
+        
+        /// <remarks/>
+        public event ZwrocListeZlecenSerwisowychSkladnikiCompletedEventHandler ZwrocListeZlecenSerwisowychSkladnikiCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/SayHelloToLame", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -294,6 +299,33 @@ namespace AplikacjaSerwisowa.kwronski {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychSkladniki", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string ZwrocListeZlecenSerwisowychSkladniki() {
+            object[] results = this.Invoke("ZwrocListeZlecenSerwisowychSkladniki", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeZlecenSerwisowychSkladnikiAsync() {
+            this.ZwrocListeZlecenSerwisowychSkladnikiAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeZlecenSerwisowychSkladnikiAsync(object userState) {
+            if ((this.ZwrocListeZlecenSerwisowychSkladnikiOperationCompleted == null)) {
+                this.ZwrocListeZlecenSerwisowychSkladnikiOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZwrocListeZlecenSerwisowychSkladnikiOperationCompleted);
+            }
+            this.InvokeAsync("ZwrocListeZlecenSerwisowychSkladniki", new object[0], this.ZwrocListeZlecenSerwisowychSkladnikiOperationCompleted, userState);
+        }
+        
+        private void OnZwrocListeZlecenSerwisowychSkladnikiOperationCompleted(object arg) {
+            if ((this.ZwrocListeZlecenSerwisowychSkladnikiCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZwrocListeZlecenSerwisowychSkladnikiCompleted(this, new ZwrocListeZlecenSerwisowychSkladnikiCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -481,6 +513,32 @@ namespace AplikacjaSerwisowa.kwronski {
         private object[] results;
         
         internal ZwrocListeZlecenSerwisowychCzynnosciCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void ZwrocListeZlecenSerwisowychSkladnikiCompletedEventHandler(object sender, ZwrocListeZlecenSerwisowychSkladnikiCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZwrocListeZlecenSerwisowychSkladnikiCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZwrocListeZlecenSerwisowychSkladnikiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

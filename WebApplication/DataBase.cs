@@ -307,10 +307,10 @@ namespace WebApplication
             DataTable pomDataTable = new DataTable();
             try
             {
-                String zapytanieString = @"select szc_Id, szc_sznId, szc_Pozycja, szc_TwrNumer, szc_Ilosc, szc_TwrNazwa, twrk.Twr_Kod from cdn.SrwZlcCzynnosci
+                String zapytanieString = @"select szc_Id, szc_sznId, szc_Pozycja, szc_TwrNumer, szc_Ilosc, twrk.twr_jm, szc_TwrNazwa, twrk.Twr_Kod from cdn.SrwZlcCzynnosci
                         LEFT OUTER JOIN cdn.srwzlcnag szn on szn.szn_id = szc_sznid
                         left outer join cdn.twrkarty twrk on twrk.twr_gidnumer = szc_twrnumer
-                        where (DATEADD(DAY,szn.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'"+ data.Year.ToString()+"-"+data.Month.ToString()+"-01')";
+                        where (DATEADD(DAY,szn.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'" + data.Year.ToString()+"-"+data.Month.ToString()+"-01')";
 
                 SqlDataAdapter da = zapytanie(zapytanieString);
                 da.Fill(pomDataTable);
@@ -338,9 +338,73 @@ namespace WebApplication
                 Int32 szc_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["szc_TwrNumer"].ToString());
                 Double szc_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["szc_Ilosc"].ToString());
                 String szc_TwrNazwa = pomDataTable.Rows[i]["szc_TwrNazwa"].ToString();
+                String Twr_Jm = pomDataTable.Rows[i]["Twr_Jm"].ToString();
                 String Twr_Kod = pomDataTable.Rows[i]["Twr_Kod"].ToString();
 
-                result.Add(new SrwZlcCzynnoci(szc_Id,szc_sznId,szc_Pozycja,szc_TwrNumer,szc_Ilosc,szc_TwrNazwa,Twr_Kod));
+                result.Add(new SrwZlcCzynnoci(szc_Id, szc_sznId, szc_Pozycja, szc_TwrNumer, szc_Ilosc, Twr_Jm, szc_TwrNazwa, Twr_Kod));
+            }
+            return result;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        public List<SrwZlcSkladniki> wygenerujListeSrwZlcSkladniki()
+        {
+            DateTime data = DateTime.Now.AddMonths(liczbaMiesiecyWstecz);
+            Exception exc = new Exception();
+
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = @"select szs_Id, szs_sznId, szs_Pozycja, szs_TwrNumer, szs_Ilosc, twrk.twr_jm, szs_TwrNazwa, twrk.Twr_Kod from cdn.SrwZlcSkladniki
+                        LEFT OUTER JOIN cdn.srwzlcnag szn on szn.szn_id = szs_sznid
+                        left outer join cdn.twrkarty twrk on twrk.twr_gidnumer = szs_twrnumer
+                        where (DATEADD(DAY,szn.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'" + data.Year.ToString() + "-" + data.Month.ToString() + "-01')";
+
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception _exc)
+            {
+                exc = _exc;
+            }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return wygenerujListeSrwZlcSkladniki(pomDataTable);
+            }
+            else
+            {
+                List<SrwZlcSkladniki> result = new List<SrwZlcSkladniki>();
+                result.Add(new SrwZlcSkladniki(0, 0, 0, 0, 0, null, exc.Message, null));
+                return result;
+            }
+        }
+        private List<SrwZlcSkladniki> wygenerujListeSrwZlcSkladniki(DataTable pomDataTable)
+        {
+            List<SrwZlcSkladniki> result = new List<SrwZlcSkladniki>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                Int32 szs_Id = Convert.ToInt32(pomDataTable.Rows[i]["szs_Id"].ToString());
+                Int32 szs_sznId = Convert.ToInt32(pomDataTable.Rows[i]["szs_sznId"].ToString());
+                Int32 szs_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["szs_Pozycja"].ToString());
+                Int32 szs_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["szs_TwrNumer"].ToString());
+                Double szs_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["szs_Ilosc"].ToString());
+                String szs_TwrNazwa = pomDataTable.Rows[i]["szs_TwrNazwa"].ToString();
+                String Twr_Jm = pomDataTable.Rows[i]["Twr_Jm"].ToString();
+                String Twr_Kod = pomDataTable.Rows[i]["Twr_Kod"].ToString();
+
+                result.Add(new SrwZlcSkladniki(szs_Id, szs_sznId, szs_Pozycja, szs_TwrNumer, szs_Ilosc, Twr_Jm, szs_TwrNazwa, Twr_Kod));
             }
             return result;
         }
@@ -493,18 +557,47 @@ public class SrwZlcCzynnoci
     public Int32 szc_Pozycja { get; set; }
     public Int32 szc_TwrNumer { get; set; }
     public Double szc_Ilosc { get; set; }
+    public String Twr_Jm { get; set; }
     public String szc_TwrNazwa { get; set; }
     public String Twr_Kod { get; set; }
 
-    public SrwZlcCzynnoci(Int32 _szc_Id, Int32 _szc_sznId, Int32 _szc_Pozycja, Int32 _szc_TwrNumer, Double _szc_Ilosc, String _szc_TwrNazwa, String _Twr_Kod)
+    public SrwZlcCzynnoci(Int32 _szc_Id, Int32 _szc_sznId, Int32 _szc_Pozycja, Int32 _szc_TwrNumer, Double _szc_Ilosc, String _Twr_Jm, String _szc_TwrNazwa, String _Twr_Kod)
     {
         szc_Id = _szc_Id;
         szc_sznId = _szc_sznId;
         szc_Pozycja = _szc_Pozycja;
         szc_TwrNumer = _szc_TwrNumer;
         szc_Ilosc = _szc_Ilosc;
+        Twr_Jm = _Twr_Jm;
         szc_TwrNazwa = _szc_TwrNazwa;
         Twr_Kod = _Twr_Kod;
     }
     public SrwZlcCzynnoci() { }
+}
+
+
+
+public class SrwZlcSkladniki
+{
+    public Int32 szs_Id { get; set; }
+    public Int32 szs_sznId { get; set; }
+    public Int32 szs_Pozycja { get; set; }
+    public Int32 szs_TwrNumer { get; set; }
+    public Double szs_Ilosc { get; set; }
+    public String Twr_Jm { get; set; }
+    public String szs_TwrNazwa { get; set; }
+    public String Twr_Kod { get; set; }
+
+    public SrwZlcSkladniki(Int32 _szs_Id, Int32 _szs_sznId, Int32 _szs_Pozycja, Int32 _szs_TwrNumer, Double _szs_Ilosc, String _Twr_Jm, String _szs_TwrNazwa, String _Twr_Kod)
+    {
+        szs_Id = _szs_Id;
+        szs_sznId = _szs_sznId;
+        szs_Pozycja = _szs_Pozycja;
+        szs_TwrNumer = _szs_TwrNumer;
+        szs_Ilosc = _szs_Ilosc;
+        Twr_Jm = _Twr_Jm;
+        szs_TwrNazwa = _szs_TwrNazwa;
+        Twr_Kod = _Twr_Kod;
+    }
+    public SrwZlcSkladniki() { }
 }

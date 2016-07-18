@@ -81,17 +81,19 @@
     <Compile Include="Kontrahenci\kontrahenciAdresy_ListViewAdapter.cs" />
     <Compile Include="Kontrahenci\kontrahenciInformacje.cs" />
     <Compile Include="Kontrahenci\kontrahenci_Activity.cs" />
-    <Compile Include="Lista Zlecen\listaZlecenSzczegolySkladniki_ListViewAdapter.cs" />
-    <Compile Include="Lista Zlecen\listaZlecenSzczegolyCzynnosci_ListViewAdapter.cs" />
-    <Compile Include="Lista Zlecen\listaZlecenSzczegoly_Activity.cs" />
-    <Compile Include="Lista Zlecen\listaZlecen_Activity.cs" />
-    <Compile Include="Lista Zlecen\listaZlecen_ListViewAdapter.cs" />
+    <Compile Include="Lista zlecen\listaZlecenSzczegolySkladniki_ListViewAdapter.cs" />
+    <Compile Include="Lista zlecen\listaZlecenSzczegolyCzynnosci_ListViewAdapter.cs" />
+    <Compile Include="Lista zlecen\listaZlecenSzczegoly_Activity.cs" />
+    <Compile Include="Lista zlecen\listaZlecen_Activity.cs" />
+    <Compile Include="Lista zlecen\listaZlecen_ListViewAdapter.cs" />
     <Compile Include="Magazyn\kartyTowarowTable.cs" />
     <Compile Include="Magazyn\kartyTowarow_ListViewAdapter.cs" />
     <Compile Include="Magazyn\magazyn_Activity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="DataBase\Tabele\OperatorzyTable.cs" />
-    <Compile Include="noweZlecenie_Activity.cs" />
+    <Compile Include="Nowe zlecenie\listaKontrahentow_ListViewAdapter.cs" />
+    <Compile Include="Nowe zlecenie\noweZlecenie_Activity.cs" />
+    <Compile Include="Nowe zlecenie\noweZlecenieDodajKontrahenta_Activity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataBase\SQLite.cs" />
@@ -147,6 +149,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\skladnikiListaZlecenSzczegoly.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\noweZlecenieZakladkaKontrahentLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\noweZlecenieDodawanieKontrahetnaLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="Web References\kwronski\Reference.map">

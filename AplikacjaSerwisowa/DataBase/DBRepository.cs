@@ -324,7 +324,34 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
+        public List<KntKartyTable> kntKarty_GetFilteredRecords(String filtr)
+        {
+            List<KntKartyTable> output = new List<KntKartyTable>();
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+                var table = db.Table<KntKartyTable>();
+                string zapytanie = "select * from KntKartyTable ";
 
+                if(filtr !="")
+                {
+                    zapytanie+= "where Knt_Akronim like '%" + filtr + "%' or Knt_nazwa1 like '%" + filtr + "%' or Knt_nazwa2 like '%" + filtr + "%' or Knt_nazwa3 like '%" + filtr + "%'";
+                }
+
+                var result = db.Query<KntKartyTable>(zapytanie);
+
+                for(int i =0;i<result.Count;i++)
+                { 
+                    output.Add(result[i]);
+                }
+            }
+            catch(Exception exc)
+            {
+            }
+
+            return output;
+        }
 
 
 

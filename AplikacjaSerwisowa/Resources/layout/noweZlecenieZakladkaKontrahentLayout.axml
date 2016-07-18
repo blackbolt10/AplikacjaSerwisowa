@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayout1"
+        android:padding="15px">
+        <TextView
+            android:text="Kontrahent główny"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView1"
+            android:id="@+id/GlownyNoweZlecenieLinearLayout"
+            android:layout_marginTop="10px">
+            <TextView
+                android:text="Akronim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/akronimGlownyNoweZlecenieTextView" />
+            <TextView
+                android:text="Nazwa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nazwaGlownyNoweZlecenieTextView" />
+        </LinearLayout>
+        <Button
+            android:text="Dodaj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/GlownyNoweZlecenieLinearLayout"
+            android:id="@+id/dodajGlownyNoweZlecenieButton"
+            android:layout_alignParentRight="true" />
+        <TextView
+            android:text="Kontrahent docelowy"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dodajGlownyNoweZlecenieButton"
+            android:id="@+id/textView2" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView2"
+            android:id="@+id/DocelowyNoweZlecenieLinearLayout"
+            android:layout_marginTop="10px">
+            <TextView
+                android:text="Akronim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/akronimDocelowyNoweZlecenieTextView" />
+            <TextView
+                android:text="Nazwa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nazwaDocelowyNoweZlecenieTextView" />
+        </LinearLayout>
+        <Button
+            android:text="Dodaj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/DocelowyNoweZlecenieLinearLayout"
+            android:id="@+id/dodajDocelowyNoweZlecenieButton"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+</ScrollView>

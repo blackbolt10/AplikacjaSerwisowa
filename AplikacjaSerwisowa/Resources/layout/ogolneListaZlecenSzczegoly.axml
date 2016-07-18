@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000">
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/relativeLayout1"
+        android:padding="5px">
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="32.0dp"
+            android:layout_height="32.0dp"
+            android:id="@+id/ListaZlecenSzczegolyLimageView" />
+        <TextView
+            android:text="Data + numer dokumentu"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/ListaZlecenSzczegolyLimageView"
+            android:id="@+id/dataNumerDokListaZlecenSzczegolyTextView"
+            android:layout_marginTop="7.0dp" />
+        <TextView
+            android:text="Stan: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ListaZlecenSzczegolyLimageView"
+            android:id="@+id/textView2" />
+        <TextView
+            android:text="Kontrahent główny:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView2"
+            android:id="@+id/textView3" />
+        <TextView
+            android:text="Stan dokumentu"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/textView2"
+            android:id="@+id/stanListaZlecenSzczegolyTextView"
+            android:layout_below="@id/dataNumerDokListaZlecenSzczegolyTextView"
+            android:layout_alignParentRight="true" />
+        <TextView
+            android:text="Nazwa kontrahenta głownego"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView3"
+            android:id="@+id/nazwaGlownegoKontrahentaListaZlecenSzczegolyTextView" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nazwaGlownegoKontrahentaListaZlecenSzczegolyTextView"
+            android:id="@+id/ListaZlecenSzczegolyLinearLayout">
+            <TextView
+                android:text="Kontrahent docelowy:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4" />
+            <TextView
+                android:text="Nazwa kontrahenta docelowego"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nazwaDocelowegoKontrahentaListaZlecenSzczegolyTextView" />
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

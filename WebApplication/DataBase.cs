@@ -14,6 +14,7 @@ namespace WebApplication
     {
         private SqlConnection uchwytBD;
         private SqlCommand polecenieSQL;
+        private int liczbaMiesiecyWstecz = -9;
 
         public DataBase()
         {
@@ -98,10 +99,10 @@ namespace WebApplication
 
             return output;
         }
-
+         
         public List<SerwisoweZleceniaNaglownki> wygenerujListeSerwisowychZlecenNaglowki()
         {
-            DateTime data = DateTime.Now.AddMonths(-9);
+            DateTime data = DateTime.Now.AddMonths(liczbaMiesiecyWstecz);
             String zapytanieSerwisowaLista = @"SELECT 
             CDN.NumerDokumentu(4700,4700,4700,SZN_Numer,SZN_Rok,SZN_Seria,SZN_Miesiac) as Dokument
 
@@ -293,6 +294,56 @@ namespace WebApplication
             }
             return result;
         }
+
+
+
+
+
+
+        public List<SrwZlcCzynnoci> wygenerujListeSrwZlcCzynnoci()
+        {
+            DateTime data = DateTime.Now.AddMonths(liczbaMiesiecyWstecz);
+
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = @"select szc_Id, szc_sznId, szc_Pozycja, szc_TwrNumer, szc_Ilosc, szc_TwrNazwa, twrk.Twr_Kod from cdn.SrwZlcCzynnosci
+                        LEFT OUTER JOIN cdn.srwzlcnag szn on szn.szn_id = szc_sznid
+                        left outer join cdn.twrkarty twrk on twrk.twr_gidnumer = szc_twrnumer
+                        where (DATEADD(DAY,szn.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'"+ data.Year.ToString()+"-"+data.Month.ToString()+"-01')";
+
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return wygenerujListeSrwZlcCzynnoci(pomDataTable);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        private List<SrwZlcCzynnoci> wygenerujListeSrwZlcCzynnoci(DataTable pomDataTable)
+        {
+            List<SrwZlcCzynnoci> result = new List<SrwZlcCzynnoci>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                Int32 szc_Id = Convert.ToInt32(pomDataTable.Rows[i]["szc_Id"].ToString());
+                Int32 szc_sznId = Convert.ToInt32(pomDataTable.Rows[i]["szc_sznId"].ToString());
+                Int32 szc_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["szc_Pozycja"].ToString());
+                Int32 szc_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["szc_TwrNumer"].ToString());
+                Double szc_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["szc_Ilosc"].ToString());
+                String szc_TwrNazwa = pomDataTable.Rows[i]["szc_TwrNazwa"].ToString();
+                String Twr_Kod = pomDataTable.Rows[i]["Twr_Kod"].ToString();
+
+                result.Add(new SrwZlcCzynnoci(szc_Id,szc_sznId,szc_Pozycja,szc_TwrNumer,szc_Ilosc,szc_TwrNazwa,Twr_Kod));
+            }
+            return result;
+        }
     }
 }
 
@@ -434,5 +485,26 @@ public class KntAdresy
     }
     public KntAdresy() { }
 }
- 
 
+public class SrwZlcCzynnoci
+{
+    public Int32 szc_Id { get; set; }
+    public Int32 szc_sznId { get; set; }
+    public Int32 szc_Pozycja { get; set; }
+    public Int32 szc_TwrNumer { get; set; }
+    public Double szc_Ilosc { get; set; }
+    public String szc_TwrNazwa { get; set; }
+    public String Twr_Kod { get; set; }
+
+    public SrwZlcCzynnoci(Int32 _szc_Id, Int32 _szc_sznId, Int32 _szc_Pozycja, Int32 _szc_TwrNumer, Double _szc_Ilosc, String _szc_TwrNazwa, String _Twr_Kod)
+    {
+        szc_Id = _szc_Id;
+        szc_sznId = _szc_sznId;
+        szc_Pozycja = _szc_Pozycja;
+        szc_TwrNumer = _szc_TwrNumer;
+        szc_Ilosc = _szc_Ilosc;
+        szc_TwrNazwa = _szc_TwrNazwa;
+        Twr_Kod = _Twr_Kod;
+    }
+    public SrwZlcCzynnoci() { }
+}

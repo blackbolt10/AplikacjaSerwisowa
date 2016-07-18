@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000">
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/relativeLayout1"
+        android:padding="5px">
+        <TextView
+            android:text="Kontrahent główny"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1" />
+        <TextView
+            android:text="Akronim"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView1"
+            android:id="@+id/akronimGlownyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Nazwa1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/akronimGlownyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/nazwa1GlownyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Nazwa2"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nazwa1GlownyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/nazwa2GlownyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Nazwa3"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nazwa2GlownyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/nazwa3GlownyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Adres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nazwa3GlownyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/adresNaglowekGlownyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Ulica"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/adresNaglowekGlownyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/ulicaGlownyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="KodP Miasto"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ulicaGlownyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/kodpMiastoGlownyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Nip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/kodpMiastoGlownyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/nipNaglowekGlownyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Nip"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nipNaglowekGlownyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/nipGlownyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Telefon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nipGlownyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/telefonNaglowekGlownyKontrahentListaZlecenSczegolyTextView" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/telefonNaglowekGlownyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/telefonGlownyKontrahentListaZlecenSczegolyLinearLayout"
+            android:weightSum="2">
+            <TextView
+                android:text="Telefon1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/telefon1GlownyKontrahentListaZlecenSczegolyTextView"
+                android:layout_weight="1" />
+            <TextView
+                android:text="Telefon2"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/telefon2GlownyKontrahentListaZlecenSczegolyTextView"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <TextView
+            android:text="Email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/telefonGlownyKontrahentListaZlecenSczegolyLinearLayout"
+            android:id="@+id/emailNaglowekGlownyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Email"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailNaglowekGlownyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/emailGlownyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Kontrhanet docelowy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailGlownyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/textView2"
+            android:layout_marginTop="20px" />
+        <TextView
+            android:text="Akronim"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView2"
+            android:id="@+id/akronimDocelowyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Nazwa1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/akronimDocelowyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/nazwa1DocelowyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Nazwa2"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nazwa1DocelowyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/nazwa2DocelowyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Nazwa3"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nazwa2DocelowyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/nazwa3DocelowyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Adres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nazwa3DocelowyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/adresNaglowekDocelowyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Ulica"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/adresNaglowekDocelowyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/ulicaDocelowyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="KodP Miasto"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ulicaDocelowyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/kodpMiastoDocelowyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Nip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/kodpMiastoDocelowyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/nipNaglowekDocelowyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Nip"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nipNaglowekDocelowyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/nipDocelowyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Telefon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nipDocelowyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/telefonNaglowekDocelowyKontrahentListaZlecenSczegolyTextView" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/telefonNaglowekDocelowyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/telefonDocelowyKontrahentListaZlecenSczegolyLinearLayout"
+            android:weightSum="2">
+            <TextView
+                android:text="Telefon1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/telefon1DocelowyKontrahentListaZlecenSczegolyTextView"
+                android:layout_weight="1" />
+            <TextView
+                android:text="Telefon2"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/telefon2DocelowyKontrahentListaZlecenSczegolyTextView"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <TextView
+            android:text="Email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/telefonDocelowyKontrahentListaZlecenSczegolyLinearLayout"
+            android:id="@+id/emailNaglowekDocelowyKontrahentListaZlecenSczegolyTextView" />
+        <TextView
+            android:text="Email"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailNaglowekDocelowyKontrahentListaZlecenSczegolyTextView"
+            android:id="@+id/emailDocelowyKontrahentListaZlecenSczegolyTextView" />
+    </RelativeLayout>
+</ScrollView>

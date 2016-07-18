@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="DataBase\DBRepository.cs" />
     <Compile Include="DataBase\Tabele\SerwisoweZleceniaNaglowkiTable.cs" />
+    <Compile Include="DataBase\Tabele\SrwZlcCzynnosciTable.cs" />
     <Compile Include="glowneOkno_Activity.cs" />
     <Compile Include="DataBase\Tabele\KntAdresyTable.cs" />
     <Compile Include="DataBase\Tabele\KntKartyTable.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="Kontrahenci\kontrahenciAdresy_ListViewAdapter.cs" />
     <Compile Include="Kontrahenci\kontrahenciInformacje.cs" />
     <Compile Include="Kontrahenci\kontrahenci_Activity.cs" />
+    <Compile Include="Lista Zlecen\listaZlecenSzczegolyCzynnosci_ListViewAdapter.cs" />
+    <Compile Include="Lista Zlecen\listaZlecenSzczegoly_Activity.cs" />
     <Compile Include="Lista Zlecen\listaZlecen_Activity.cs" />
     <Compile Include="Lista Zlecen\listaZlecen_ListViewAdapter.cs" />
     <Compile Include="Magazyn\kartyTowarowTable.cs" />
@@ -123,6 +126,21 @@
     <AndroidResource Include="Resources\layout\pager_item.axml" />
     <AndroidResource Include="Resources\layout\synchronizacjaOkno.axml" />
     <AndroidResource Include="Resources\layout\ustawienia.axml" />
+    <AndroidResource Include="Resources\layout\listaZlecenSzczegolyLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ogolneListaZlecenSzczegoly.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\kontrahentListaZlecenSzczegolyLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\czynnosciListaZlecenSzczegoly.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\czynnosciListaZlecenSczegoly_row.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <None Include="Web References\kwronski\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

@@ -23,6 +23,7 @@ namespace AplikacjaSerwisowa
         private List<String> data_list;
         private List<String> naglowki_list;
         private List<String> wykonanie_list;
+        private List<String> szn_ID_list;
 
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -38,7 +39,8 @@ namespace AplikacjaSerwisowa
             data_list = new List<string>();
             naglowki_list = new List<string>();
             wykonanie_list = new List<string>();
-            int testVarIn = 0;
+            szn_ID_list = new List<string>();
+            
             try
             {
                 String dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
@@ -47,16 +49,20 @@ namespace AplikacjaSerwisowa
 
                 foreach(var item in table)
                 {
-                    testVarIn++;
-                    if(testVarIn == 880)
-                    { }
                     string wynik = "";
                     string kntKartaNazwa = pobierzInformacjeOKntKarta(item.SZN_KntNumer);
                     string kntAdresNazwa = pobierzInformacjeOKntKarta(item.SZN_KnDNumer);
 
                     if(kntKartaNazwa!="" && kntAdresNazwa!="")
                     {
-                        wynik = kntKartaNazwa + "\n" + kntAdresNazwa;
+                        if(kntKartaNazwa == kntAdresNazwa)
+                        {
+                            wynik = kntKartaNazwa;
+                        }
+                        else
+                        {
+                            wynik = kntKartaNazwa + "\n" + kntAdresNazwa;
+                        }
                     }
                     else if(kntKartaNazwa != "" && kntAdresNazwa == "")
                     {
@@ -75,6 +81,7 @@ namespace AplikacjaSerwisowa
                     data_list.Add(item.SZN_DataWystawienia.Split(' ')[0]);
                     stan_List.Add(item.SZN_Stan);
                     naglowki_list.Add(item.Dokument);
+                    szn_ID_list.Add(item.SZN_Id.ToString());
 
                     Random test = new Random();
                     test.Next(0, 1);
@@ -83,7 +90,7 @@ namespace AplikacjaSerwisowa
             }
             catch(Exception exc)
             {
-                messagebox("B³¹d "+ testVarIn + " listaZlecen_Activity.OnCreate():\n" + exc.Message, "B³¹d", 0);
+                messagebox("B³¹d listaZlecen_Activity.OnCreate():\n" + exc.Message, "B³¹d", 0);
             }
 
             listaZlecen_ListViewAdapter adapter;
@@ -152,9 +159,15 @@ namespace AplikacjaSerwisowa
 
         private void itemClick_Function(object sender, AdapterView.ItemClickEventArgs e)
         {
-            ListView test = (ListView) sender;
+            /*ListView test = (ListView) sender;
             String test1 = test.GetItemAtPosition(Convert.ToInt32(e.Id)).ToString();
-            Toast.MakeText(this, e.Id.ToString()+"\n"+ test1, ToastLength.Short).Show();
+            String gidnumer = szn_ID_list[Convert.ToInt32(e.Id)];
+            Toast.MakeText(this, e.Id.ToString()+"\n"+ test1+"\n"+ gidnumer, ToastLength.Short).Show();
+            */
+
+            Intent listaZlecenSzczegolyIntent = new Intent(this, typeof(listaZlecenSzczegoly_Activity));
+            listaZlecenSzczegolyIntent.PutExtra("szn_ID", szn_ID_list[e.Position]);
+            StartActivity(listaZlecenSzczegolyIntent);
         }
     }
 }

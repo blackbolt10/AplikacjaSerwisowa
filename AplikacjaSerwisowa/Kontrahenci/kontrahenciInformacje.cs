@@ -58,8 +58,6 @@ namespace AplikacjaSerwisowa
     
         public SamplePagerAdapter(Android.Support.V4.App.FragmentManager fragManager) : base(fragManager)
         {
-           string test = kontrahenciInformacje.GetKnt_GidNumer();
-
             mFragmentHolder = new List<Android.Support.V4.App.Fragment>();
             mFragmentHolder.Add(new Fragment1());
             mFragmentHolder.Add(new Fragment2());
@@ -80,7 +78,7 @@ namespace AplikacjaSerwisowa
     public class Fragment1 : Android.Support.V4.App.Fragment
     {
         private TextView mAkronimTextView, mNazwaTextView, mNipTextView;
-        private TextView mTelefon1TextView, mTelefon2TextView, mTelefon3TextView;
+        private TextView mTelefon1TextView, mTelefon2TextView;
         private TextView mTelexTextView, mEmailTextView, mUrlTextView, mFaxTextView;
         private TextView mGidNumerTextView, mKodPMiastoTextView, mUlicaTextView;
 

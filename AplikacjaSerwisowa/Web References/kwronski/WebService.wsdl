@@ -36,20 +36,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SetData">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="jsonString" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="SetDataResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SetDataResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="ZwrocListeKntAdresy">
         <s:complexType />
       </s:element>
@@ -80,6 +66,16 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ZwrocListeZlecenSerwisowychCzynnosci">
+        <s:complexType />
+      </s:element>
+      <s:element name="ZwrocListeZlecenSerwisowychCzynnosciResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZwrocListeZlecenSerwisowychCzynnosciResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="string" nillable="true" type="s:string" />
     </s:schema>
   </wsdl:types>
@@ -101,12 +97,6 @@
   <wsdl:message name="XMLZwrocListeKntKartySoapOut">
     <wsdl:part name="parameters" element="tns:XMLZwrocListeKntKartyResponse" />
   </wsdl:message>
-  <wsdl:message name="SetDataSoapIn">
-    <wsdl:part name="parameters" element="tns:SetData" />
-  </wsdl:message>
-  <wsdl:message name="SetDataSoapOut">
-    <wsdl:part name="parameters" element="tns:SetDataResponse" />
-  </wsdl:message>
   <wsdl:message name="ZwrocListeKntAdresySoapIn">
     <wsdl:part name="parameters" element="tns:ZwrocListeKntAdresy" />
   </wsdl:message>
@@ -125,6 +115,12 @@
   <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiSoapOut">
     <wsdl:part name="parameters" element="tns:ZwrocListeZlecenSerwisowychNaglowkiResponse" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeZlecenSerwisowychCzynnosciSoapIn">
+    <wsdl:part name="parameters" element="tns:ZwrocListeZlecenSerwisowychCzynnosci" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeZlecenSerwisowychCzynnosciSoapOut">
+    <wsdl:part name="parameters" element="tns:ZwrocListeZlecenSerwisowychCzynnosciResponse" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpGetIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -139,12 +135,6 @@
   <wsdl:message name="XMLZwrocListeKntKartyHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
-  <wsdl:message name="SetDataHttpGetIn">
-    <wsdl:part name="jsonString" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="SetDataHttpGetOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
   <wsdl:message name="ZwrocListeKntAdresyHttpGetIn" />
   <wsdl:message name="ZwrocListeKntAdresyHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
@@ -155,6 +145,10 @@
   </wsdl:message>
   <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiHttpGetIn" />
   <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeZlecenSerwisowychCzynnosciHttpGetIn" />
+  <wsdl:message name="ZwrocListeZlecenSerwisowychCzynnosciHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpPostIn">
@@ -171,12 +165,6 @@
   <wsdl:message name="XMLZwrocListeKntKartyHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
-  <wsdl:message name="SetDataHttpPostIn">
-    <wsdl:part name="jsonString" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="SetDataHttpPostOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
   <wsdl:message name="ZwrocListeKntAdresyHttpPostIn" />
   <wsdl:message name="ZwrocListeKntAdresyHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
@@ -189,97 +177,119 @@
   <wsdl:message name="ZwrocListeZlecenSerwisowychNaglowkiHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeZlecenSerwisowychCzynnosciHttpPostIn" />
+  <wsdl:message name="ZwrocListeZlecenSerwisowychCzynnosciHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
     <wsdl:operation name="SayHelloToLame">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">HelloWorld</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Hello lame .......!</wsdl:documentation>
       <wsdl:input message="tns:SayHelloToLameSoapIn" />
       <wsdl:output message="tns:SayHelloToLameSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="lama">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca tajny kod!</wsdl:documentation>
       <wsdl:input message="tns:lamaSoapIn" />
       <wsdl:output message="tns:lamaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="XMLZwrocListeKntKarty">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Wstępnie do usunięcia</wsdl:documentation>
       <wsdl:input message="tns:XMLZwrocListeKntKartySoapIn" />
       <wsdl:output message="tns:XMLZwrocListeKntKartySoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SetData">
-      <wsdl:input message="tns:SetDataSoapIn" />
-      <wsdl:output message="tns:SetDataSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie KntAdresy</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeKntAdresySoapIn" />
       <wsdl:output message="tns:ZwrocListeKntAdresySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntKarty">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie KntKarty</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeKntKartySoapIn" />
       <wsdl:output message="tns:ZwrocListeKntKartySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SerwisoweZleceniaNaglownki</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychNaglowkiSoapIn" />
       <wsdl:output message="tns:ZwrocListeZlecenSerwisowychNaglowkiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcCzynnosci</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeZlecenSerwisowychCzynnosciSoapIn" />
+      <wsdl:output message="tns:ZwrocListeZlecenSerwisowychCzynnosciSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpGet">
     <wsdl:operation name="SayHelloToLame">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">HelloWorld</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Hello lame .......!</wsdl:documentation>
       <wsdl:input message="tns:SayHelloToLameHttpGetIn" />
       <wsdl:output message="tns:SayHelloToLameHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="lama">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca tajny kod!</wsdl:documentation>
       <wsdl:input message="tns:lamaHttpGetIn" />
       <wsdl:output message="tns:lamaHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="XMLZwrocListeKntKarty">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Wstępnie do usunięcia</wsdl:documentation>
       <wsdl:input message="tns:XMLZwrocListeKntKartyHttpGetIn" />
       <wsdl:output message="tns:XMLZwrocListeKntKartyHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="SetData">
-      <wsdl:input message="tns:SetDataHttpGetIn" />
-      <wsdl:output message="tns:SetDataHttpGetOut" />
-    </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie KntAdresy</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeKntAdresyHttpGetIn" />
       <wsdl:output message="tns:ZwrocListeKntAdresyHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntKarty">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie KntKarty</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeKntKartyHttpGetIn" />
       <wsdl:output message="tns:ZwrocListeKntKartyHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SerwisoweZleceniaNaglownki</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpGetIn" />
       <wsdl:output message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcCzynnosci</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeZlecenSerwisowychCzynnosciHttpGetIn" />
+      <wsdl:output message="tns:ZwrocListeZlecenSerwisowychCzynnosciHttpGetOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpPost">
     <wsdl:operation name="SayHelloToLame">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">HelloWorld</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Hello lame .......!</wsdl:documentation>
       <wsdl:input message="tns:SayHelloToLameHttpPostIn" />
       <wsdl:output message="tns:SayHelloToLameHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="lama">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca tajny kod!</wsdl:documentation>
       <wsdl:input message="tns:lamaHttpPostIn" />
       <wsdl:output message="tns:lamaHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="XMLZwrocListeKntKarty">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Wstępnie do usunięcia</wsdl:documentation>
       <wsdl:input message="tns:XMLZwrocListeKntKartyHttpPostIn" />
       <wsdl:output message="tns:XMLZwrocListeKntKartyHttpPostOut" />
     </wsdl:operation>
-    <wsdl:operation name="SetData">
-      <wsdl:input message="tns:SetDataHttpPostIn" />
-      <wsdl:output message="tns:SetDataHttpPostOut" />
-    </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie KntAdresy</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeKntAdresyHttpPostIn" />
       <wsdl:output message="tns:ZwrocListeKntAdresyHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntKarty">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie KntKarty</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeKntKartyHttpPostIn" />
       <wsdl:output message="tns:ZwrocListeKntKartyHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SerwisoweZleceniaNaglownki</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpPostIn" />
       <wsdl:output message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcCzynnosci</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeZlecenSerwisowychCzynnosciHttpPostIn" />
+      <wsdl:output message="tns:ZwrocListeZlecenSerwisowychCzynnosciHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -311,15 +321,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SetData">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/SetData" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
       <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeKntAdresy" style="document" />
       <wsdl:input>
@@ -340,6 +341,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
       <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychNaglowki" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychCzynnosci" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -377,15 +387,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SetData">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/SetData" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
       <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeKntAdresy" style="document" />
       <wsdl:input>
@@ -406,6 +407,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
       <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychNaglowki" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychCzynnosci" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -443,15 +453,6 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SetData">
-      <http:operation location="/SetData" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
       <http:operation location="/ZwrocListeKntAdresy" />
       <wsdl:input>
@@ -472,6 +473,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
       <http:operation location="/ZwrocListeZlecenSerwisowychNaglowki" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
+      <http:operation location="/ZwrocListeZlecenSerwisowychCzynnosci" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -509,15 +519,6 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SetData">
-      <http:operation location="/SetData" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
       <http:operation location="/ZwrocListeKntAdresy" />
       <wsdl:input>
@@ -538,6 +539,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
       <http:operation location="/ZwrocListeZlecenSerwisowychNaglowki" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
+      <http:operation location="/ZwrocListeZlecenSerwisowychCzynnosci" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

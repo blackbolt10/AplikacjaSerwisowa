@@ -499,6 +499,129 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+
+        public SerwisoweZleceniaNaglowkiTable SerwisoweZleceniaNaglowki_GetRecord(String szn_ID)
+        {
+            SerwisoweZleceniaNaglowkiTable output = null;
+
+            if(szn_ID.Length > 0)
+            {
+                try
+                {
+                    String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                    SQLiteConnection db = new SQLiteConnection(dbPath);
+                    var table = db.Table<SerwisoweZleceniaNaglowkiTable>();
+
+                    var result = db.Query<SerwisoweZleceniaNaglowkiTable>("select * from SerwisoweZleceniaNaglowkiTable where SZN_Id = " + szn_ID);
+
+                    if(result.Count > 0)
+                    {
+                        output = result[0];
+                    }
+                }
+                catch(Exception exc)
+                {
+                }
+            }
+
+            return output;
+        }
+
+
+
+
+
+
+
+
+
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela SrwZlcCzynnosci************************|
+            *---------------------------------------------------------------------------------
+        */
+
+        public string stworzSrwZlcCynnosciTable()
+        {
+            String output = "";
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+
+                try
+                {
+                    db.DropTable<SrwZlcCzynnosciTable>();
+                }
+                catch(Exception) { }
+
+                db.CreateTable<SrwZlcCzynnosciTable>();
+
+                output = "Tabela SrwZlcCzynnosciTable zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzSrwZlcCynnosciTable() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+        public String SrwZlcCynnosci_InsertRecord(SrwZlcCzynnosciTable item)
+        {
+            String output = "";
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+
+                db.Insert(item);
+                output = "Wpis dodany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwZlcCynnosci_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+
+        public List<SrwZlcCzynnosciTable> SrwZlcCynnosci_GetRecords(String szn_ID)
+        {
+            List<SrwZlcCzynnosciTable> output = new List<SrwZlcCzynnosciTable>();
+
+            if(szn_ID.Length > 0)
+            {
+                try
+                {
+                    String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                    SQLiteConnection db = new SQLiteConnection(dbPath);
+                    var table = db.Table<SrwZlcCzynnosciTable>();
+
+                    var result = db.Query<SrwZlcCzynnosciTable>("select * from SrwZlcCzynnosciTable where szc_sznId = " + szn_ID);
+
+                    if(result.Count > 0)
+                    {
+                        for(int i=0;i<result.Count;i++)
+                        {
+                            SrwZlcCzynnosciTable szc = new SrwZlcCzynnosciTable();
+                            szc.szc_Id = result[i].szc_Id;
+                            szc.szc_Ilosc = result[i].szc_Ilosc;
+                            szc.szc_Pozycja = result[i].szc_Pozycja;
+                            szc.szc_sznId = result[i].szc_sznId;
+                            szc.szc_TwrNazwa = result[i].szc_TwrNazwa;
+                            szc.szc_TwrNumer = result[i].szc_TwrNumer;
+
+                            output.Add(szc);
+                        }
+                    }
+                }
+                catch(Exception exc)
+                {
+                }
+            }
+
+            return output;
+        }
     }
 }
 

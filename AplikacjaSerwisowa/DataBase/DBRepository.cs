@@ -460,7 +460,34 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
+        public List<KntAdresyTable> kntAdresy_GetFilteredRecords(String filtr, String knt_GidNumer)
+        {
+            List<KntAdresyTable> output = new List<KntAdresyTable>();
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+                var table = db.Table<KntAdresyTable>();
+                string zapytanie = "select * from KntAdresyTable where Kna_KntNumer = "+ knt_GidNumer + " ";
 
+                if(filtr != "")
+                {
+                    zapytanie += "and (Kna_Akronim like '%" + filtr + "%' or Kna_nazwa1 like '%" + filtr + "%' or Kna_nazwa2 like '%" + filtr + "%' or Kna_nazwa3 like '%" + filtr + "%')";
+                }
+
+                var result = db.Query<KntAdresyTable>(zapytanie);
+
+                for(int i = 0; i < result.Count; i++)
+                {
+                    output.Add(result[i]);
+                }
+            }
+            catch(Exception exc)
+            {
+            }
+
+            return output;
+        }
 
 
 

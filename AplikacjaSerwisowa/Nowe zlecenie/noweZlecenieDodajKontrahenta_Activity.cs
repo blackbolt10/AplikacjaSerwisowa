@@ -48,19 +48,20 @@ namespace AplikacjaSerwisowa
             else
             {
                 pobierzKntAdresy();
-
-                if(kntAdresyList.Count > 0)
-                {
-                    listaKontrahentow_ListViewAdapter adapter = new listaKontrahentow_ListViewAdapter(this, null, kntAdresyList);
-                    listaKontrahentowListView.Adapter = adapter;
-                }
             }
         }
 
         private void ListaKontrahentowListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            
-            zakladkaKontrahentNoweZlecenie.aktualizujKontrahentaGlownego("["+kntKartyList[e.Position].Knt_Akronim+"]", kntKartyList[e.Position].Knt_nazwa1, kntKartyList[e.Position].Knt_GIDNumer);
+            if(glowny == "1")
+            {
+                zakladkaKontrahentNoweZlecenie.aktualizujKontrahentaGlownego("[" + kntKartyList[e.Position].Knt_Akronim + "]", kntKartyList[e.Position].Knt_nazwa1, kntKartyList[e.Position].Knt_GIDNumer);
+            }
+            else
+            {
+                zakladkaKontrahentNoweZlecenie.aktualizujKontrahentaDocelowego("[" + kntAdresyList[e.Position].Kna_Akronim + "]", kntAdresyList[e.Position].Kna_nazwa1, kntAdresyList[e.Position].Kna_GIDNumer);
+            }
+
             this.Finish();
         }
 
@@ -88,13 +89,28 @@ namespace AplikacjaSerwisowa
                 listaKontrahentow_ListViewAdapter adapter = new listaKontrahentow_ListViewAdapter(this, kntKartyList, null);
                 listaKontrahentowListView.Adapter = adapter;
             }
+            else
+            {
+                listaKontrahentowListView.Adapter = null;
+            }
         }
 
         private void pobierzKntAdresy()
         {
             DBRepository dbr = new DBRepository();
-           // List<KntKartyTable> result = dbr.kntAdresy_GetFilteredRecords(Knt_GIDNumer, filtrEditText.Text);
 
+            kntAdresyList = new List<KntAdresyTable>();
+            kntAdresyList = dbr.kntAdresy_GetFilteredRecords(filtrEditText.Text, Knt_GIDNumer);
+
+            if(kntAdresyList.Count > 0)
+            {
+                listaKontrahentow_ListViewAdapter adapter = new listaKontrahentow_ListViewAdapter(this, null, kntAdresyList);
+                listaKontrahentowListView.Adapter = adapter;
+            }
+            else
+            {
+                listaKontrahentowListView.Adapter = null;
+            }
         }
     }
 

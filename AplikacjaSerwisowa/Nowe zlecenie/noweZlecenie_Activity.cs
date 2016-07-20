@@ -100,7 +100,7 @@ namespace AplikacjaSerwisowa
 
     public class zakladkaKontrahentNoweZlecenie : Android.Support.V4.App.Fragment
     {
-        private Button mGlownyButton, mDocelowyButton;
+        private static Button mGlownyButton, mDocelowyButton;
         private static LinearLayout mGlownyLinearLayout, mDocelowyLinearLayout;
         private static TextView mAkronimGlownyTextView, mNazwaGlownyTextView;
         private static TextView mAkronimDocelowyTextView, mNazwaDocelowyTextView;
@@ -114,19 +114,29 @@ namespace AplikacjaSerwisowa
         {
             var view = inflater.Inflate(Resource.Layout.noweZlecenieZakladkaKontrahentLayout, container, false);
 
+            Kna_GIDNumer = -1;
+            Knt_GIDNumer = -1;
             kontekst = noweZlecenie_Activity.GetContext();
 
             mGlownyButton = view.FindViewById<Button>(Resource.Id.dodajGlownyNoweZlecenieButton);
             mGlownyButton.Click += MGlownyButton_Click;
+
             mGlownyLinearLayout = view.FindViewById<LinearLayout>(Resource.Id.GlownyNoweZlecenieLinearLayout);
+
             mAkronimGlownyTextView = view.FindViewById<TextView>(Resource.Id.akronimGlownyNoweZlecenieTextView);
+            mAkronimGlownyTextView.Text = "";
             mNazwaGlownyTextView = view.FindViewById<TextView>(Resource.Id.nazwaGlownyNoweZlecenieTextView);
+            mNazwaGlownyTextView.Text = "";
 
             mDocelowyButton = view.FindViewById<Button>(Resource.Id.dodajDocelowyNoweZlecenieButton);
             mDocelowyButton.Click += MDocelowyButton_Click;
+
             mDocelowyLinearLayout = view.FindViewById<LinearLayout>(Resource.Id.DocelowyNoweZlecenieLinearLayout);
-            mAkronimDocelowyTextView = view.FindViewById<TextView>(Resource.Id.nazwaDocelowyNoweZlecenieTextView);
+
+            mAkronimDocelowyTextView = view.FindViewById<TextView>(Resource.Id.akronimDocelowyNoweZlecenieTextView);
+            mAkronimDocelowyTextView.Text = "";
             mNazwaDocelowyTextView = view.FindViewById<TextView>(Resource.Id.nazwaDocelowyNoweZlecenieTextView);
+            mNazwaDocelowyTextView.Text = "";
 
             ustawWidocznosc();
 
@@ -138,12 +148,16 @@ namespace AplikacjaSerwisowa
             Intent noweZlecenieDodajKontrahentGlowny = new Intent(kontekst, typeof(noweZlecenieDodajKontrahenta_Activity));
             noweZlecenieDodajKontrahentGlowny.PutExtra("glowny", "1");
             StartActivity(noweZlecenieDodajKontrahentGlowny);
+
+            Kna_GIDNumer = -1;
+            mAkronimDocelowyTextView.Text = "";
+            mNazwaDocelowyTextView.Text = "";
         }
         private void MDocelowyButton_Click(object sender, EventArgs e)
         {
             Intent listaZlecenSzczegolyIntent = new Intent(kontekst, typeof(noweZlecenieDodajKontrahenta_Activity));
             listaZlecenSzczegolyIntent.PutExtra("glowny", "0");
-            listaZlecenSzczegolyIntent.PutExtra("Kna_GIDNumer", Knt_GIDNumer.ToString());
+            listaZlecenSzczegolyIntent.PutExtra("Knt_GIDNumer", Knt_GIDNumer.ToString());
             StartActivity(listaZlecenSzczegolyIntent);
         }
 
@@ -157,10 +171,12 @@ namespace AplikacjaSerwisowa
             if(Knt_GIDNumer == -1)
             {
                 mGlownyLinearLayout.Visibility = ViewStates.Gone;
+                mDocelowyButton.Enabled = false;
             }
             else
             {
                 mGlownyLinearLayout.Visibility = ViewStates.Visible;
+                mDocelowyButton.Enabled = true;
             }
 
             if(Kna_GIDNumer == -1)
@@ -178,6 +194,14 @@ namespace AplikacjaSerwisowa
             mAkronimGlownyTextView.Text = akronim;
             mNazwaGlownyTextView.Text = nazwa;
             Knt_GIDNumer = kntGidNumer;
+            ustawWidocznosc();
+        }
+
+        public static void aktualizujKontrahentaDocelowego(String akronim, String nazwa, Int32 _Kna_GIDNumer)
+        {
+            mAkronimDocelowyTextView.Text = akronim;
+            mNazwaDocelowyTextView.Text = nazwa;
+            Kna_GIDNumer = _Kna_GIDNumer;
             ustawWidocznosc();
         }
     }

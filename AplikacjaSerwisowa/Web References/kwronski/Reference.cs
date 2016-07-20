@@ -45,6 +45,8 @@ namespace AplikacjaSerwisowa.kwronski {
         
         private System.Threading.SendOrPostCallback ZwrocListeZlecenSerwisowychSkladnikiOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ZwrocListeTwrKartyOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -106,6 +108,9 @@ namespace AplikacjaSerwisowa.kwronski {
         
         /// <remarks/>
         public event ZwrocListeZlecenSerwisowychSkladnikiCompletedEventHandler ZwrocListeZlecenSerwisowychSkladnikiCompleted;
+        
+        /// <remarks/>
+        public event ZwrocListeTwrKartyCompletedEventHandler ZwrocListeTwrKartyCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/SayHelloToLame", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -326,6 +331,33 @@ namespace AplikacjaSerwisowa.kwronski {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/ZwrocListeTwrKarty", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string ZwrocListeTwrKarty() {
+            object[] results = this.Invoke("ZwrocListeTwrKarty", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeTwrKartyAsync() {
+            this.ZwrocListeTwrKartyAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeTwrKartyAsync(object userState) {
+            if ((this.ZwrocListeTwrKartyOperationCompleted == null)) {
+                this.ZwrocListeTwrKartyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZwrocListeTwrKartyOperationCompleted);
+            }
+            this.InvokeAsync("ZwrocListeTwrKarty", new object[0], this.ZwrocListeTwrKartyOperationCompleted, userState);
+        }
+        
+        private void OnZwrocListeTwrKartyOperationCompleted(object arg) {
+            if ((this.ZwrocListeTwrKartyCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZwrocListeTwrKartyCompleted(this, new ZwrocListeTwrKartyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -539,6 +571,32 @@ namespace AplikacjaSerwisowa.kwronski {
         private object[] results;
         
         internal ZwrocListeZlecenSerwisowychSkladnikiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void ZwrocListeTwrKartyCompletedEventHandler(object sender, ZwrocListeTwrKartyCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZwrocListeTwrKartyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZwrocListeTwrKartyCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

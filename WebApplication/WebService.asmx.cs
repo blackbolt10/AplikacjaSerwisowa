@@ -103,5 +103,15 @@ namespace WebApplication
 
             return new JavaScriptSerializer().Serialize(listaSerwisoweZlecenCzynnosci);
         }
+
+        [WebMethod(Description = "Pozwala na wygenerowanie TwrKartyTable")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ZwrocListeTwrKarty()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<TwrKartyTable> twrKartyList = dataBaseObject.wygenerujListeTwrKarty();
+
+            return new JavaScriptSerializer().Serialize(twrKartyList);
+        }
     }
 }

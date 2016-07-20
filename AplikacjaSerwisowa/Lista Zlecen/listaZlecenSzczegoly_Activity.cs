@@ -413,7 +413,7 @@ namespace AplikacjaSerwisowa
                 DBRepository dbr = new DBRepository();
                 szcList = dbr.SrwZlcCynnosci_GetRecords(szn_ID);
             }
-            catch(Exception exc)
+            catch(Exception)
             {
 
             }
@@ -475,7 +475,7 @@ namespace AplikacjaSerwisowa
                 DBRepository dbr = new DBRepository();
                 szcList = dbr.SrwZlcSkladniki_GetRecords(szn_ID);
             }
-            catch(Exception exc)
+            catch(Exception)
             {
 
             }

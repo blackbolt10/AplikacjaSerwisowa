@@ -86,6 +86,16 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ZwrocListeTwrKarty">
+        <s:complexType />
+      </s:element>
+      <s:element name="ZwrocListeTwrKartyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZwrocListeTwrKartyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="string" nillable="true" type="s:string" />
     </s:schema>
   </wsdl:types>
@@ -137,6 +147,12 @@
   <wsdl:message name="ZwrocListeZlecenSerwisowychSkladnikiSoapOut">
     <wsdl:part name="parameters" element="tns:ZwrocListeZlecenSerwisowychSkladnikiResponse" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeTwrKartySoapIn">
+    <wsdl:part name="parameters" element="tns:ZwrocListeTwrKarty" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeTwrKartySoapOut">
+    <wsdl:part name="parameters" element="tns:ZwrocListeTwrKartyResponse" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpGetIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -171,6 +187,10 @@
   <wsdl:message name="ZwrocListeZlecenSerwisowychSkladnikiHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeTwrKartyHttpGetIn" />
+  <wsdl:message name="ZwrocListeTwrKartyHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpPostIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -203,6 +223,10 @@
   </wsdl:message>
   <wsdl:message name="ZwrocListeZlecenSerwisowychSkladnikiHttpPostIn" />
   <wsdl:message name="ZwrocListeZlecenSerwisowychSkladnikiHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeTwrKartyHttpPostIn" />
+  <wsdl:message name="ZwrocListeTwrKartyHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
@@ -246,6 +270,11 @@
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychSkladnikiSoapIn" />
       <wsdl:output message="tns:ZwrocListeZlecenSerwisowychSkladnikiSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeTwrKarty">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie TwrKartyTable</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeTwrKartySoapIn" />
+      <wsdl:output message="tns:ZwrocListeTwrKartySoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpGet">
     <wsdl:operation name="SayHelloToLame">
@@ -288,6 +317,11 @@
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychSkladnikiHttpGetIn" />
       <wsdl:output message="tns:ZwrocListeZlecenSerwisowychSkladnikiHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeTwrKarty">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie TwrKartyTable</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeTwrKartyHttpGetIn" />
+      <wsdl:output message="tns:ZwrocListeTwrKartyHttpGetOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpPost">
     <wsdl:operation name="SayHelloToLame">
@@ -329,6 +363,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcSkladniki</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychSkladnikiHttpPostIn" />
       <wsdl:output message="tns:ZwrocListeZlecenSerwisowychSkladnikiHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeTwrKarty">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie TwrKartyTable</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeTwrKartyHttpPostIn" />
+      <wsdl:output message="tns:ZwrocListeTwrKartyHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -398,6 +437,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
       <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychSkladniki" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeTwrKarty">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeTwrKarty" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -480,6 +528,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeTwrKarty">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeTwrKarty" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpGet" type="tns:WebServiceHttpGet">
     <http:binding verb="GET" />
@@ -555,6 +612,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeTwrKarty">
+      <http:operation location="/ZwrocListeTwrKarty" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpPost" type="tns:WebServiceHttpPost">
     <http:binding verb="POST" />
@@ -623,6 +689,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
       <http:operation location="/ZwrocListeZlecenSerwisowychSkladniki" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeTwrKarty">
+      <http:operation location="/ZwrocListeTwrKarty" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

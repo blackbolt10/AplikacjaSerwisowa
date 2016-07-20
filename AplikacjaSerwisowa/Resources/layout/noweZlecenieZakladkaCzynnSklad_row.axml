@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:paddingBottom="5.0dp"
+    android:paddingTop="5.0dp"
+    android:paddingLeft="5.0dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/noweZlecenieZakCzynnSkladNaglowekLinearLayout"
+            android:weightSum="6">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/noweZlecenieZakCzynnSkladCheckBox" />
+            <TextView
+                android:text="Akronim"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/noweZlecenieZakCzynnSkladAkronimTextView"
+                android:paddingTop="7px" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/noweZlecenieZakCzynnSkladNaglowekLinearLayout"
+            android:id="@+id/noweZlecenieZakCzynnSkladIloscJmNazwaLinearLayout"
+            android:weightSum="6">
+            <TextView
+                android:text="0.00"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/noweZlecenieZakCzynnSkladIloscTextView"
+                android:layout_weight="1"
+                android:textAlignment="gravity"
+                android:gravity="right"
+                android:paddingRight="20px" />
+            <TextView
+                android:text="JM"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/noweZlecenieZakCzynnSkladJmTextView"
+                android:layout_weight="1" />
+            <TextView
+                android:text="Nazwa"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/noweZlecenieZakCzynnSkladNazwaTextView"
+                android:layout_weight="4"
+                android:paddingLeft="20px" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/noweZlecenieZakCzynnSkladIloscJmNazwaLinearLayout"
+            android:id="@+id/noweZlecenieZakCzynnSkladNazwaFullLinearLayout"
+            android:weightSum="6">
+            <TextView
+                android:text="NazwaFull"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/noweZlecenieZakCzynnSkladNazwaFullTextView"
+                android:paddingLeft="30px" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

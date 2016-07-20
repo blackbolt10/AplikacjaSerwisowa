@@ -408,6 +408,63 @@ namespace WebApplication
             }
             return result;
         }
+
+
+
+
+
+
+
+
+
+
+        public List<TwrKartyTable> wygenerujListeTwrKarty()
+        {
+            Exception exc = new Exception();
+
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = @"select Twr_GIDNumer, Twr_Kod, Twr_Typ, Twr_Nazwa, Twr_Nazwa1, Twr_Jm  from cdn.twrkarty 
+                        order by Twr_Nazwa";
+
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception _exc)
+            {
+                exc = _exc;
+            }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return wygenerujListeTwrKarty(pomDataTable);
+            }
+            else
+            {
+                List<TwrKartyTable> result = new List<TwrKartyTable>();
+                result.Add(new TwrKartyTable(0, exc.Message, 0, "", "", ""));
+                return result;
+            }
+        }
+        private List<TwrKartyTable> wygenerujListeTwrKarty(DataTable pomDataTable)
+        {
+            List<TwrKartyTable> result = new List<TwrKartyTable>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                Int32 Twr_GIDNumer = Convert.ToInt32(pomDataTable.Rows[i]["Twr_GIDNumer"].ToString());
+                String Twr_Kod = pomDataTable.Rows[i]["Twr_Kod"].ToString();
+                Int32 Twr_Typ = Convert.ToInt32(pomDataTable.Rows[i]["Twr_Typ"].ToString());
+                String Twr_Nazwa = pomDataTable.Rows[i]["Twr_Nazwa"].ToString();
+                String Twr_Nazwa1 = pomDataTable.Rows[i]["Twr_Nazwa1"].ToString();
+                String Twr_Jm = pomDataTable.Rows[i]["Twr_Jm"].ToString();
+
+
+                result.Add(new TwrKartyTable(Twr_GIDNumer, Twr_Kod, Twr_Typ, Twr_Nazwa, Twr_Nazwa1, Twr_Jm));
+            }
+            return result;
+        }
     }
 }
 
@@ -600,4 +657,31 @@ public class SrwZlcSkladniki
         Twr_Kod = _Twr_Kod;
     }
     public SrwZlcSkladniki() { }
+}
+
+public class TwrKartyTable
+{
+    public Int32 Twr_GIDNumer { get; set; }
+    
+    public String Twr_Kod { get; set; }
+
+    public Int32 Twr_Typ { get; set; }
+    
+    public String Twr_Nazwa { get; set; }
+
+    public String Twr_Nazwa1 { get; set; }
+
+    public String Twr_Jm { get; set; }
+
+    public TwrKartyTable(Int32 _Twr_GIDNumer, String _Twr_Kod, Int32 _Twr_Typ, String _Twr_Nazwa, String _Twr_Nazwa1, String _Twr_Jm)
+    {
+        Twr_GIDNumer = _Twr_GIDNumer;
+        Twr_Kod = _Twr_Kod;
+        Twr_Typ = _Twr_Typ;
+        Twr_Nazwa = _Twr_Nazwa;
+        Twr_Nazwa1 = _Twr_Nazwa1;
+        Twr_Jm = _Twr_Jm;
+    }
+
+    public TwrKartyTable() { }
 }

@@ -103,14 +103,14 @@ namespace AplikacjaSerwisowa
 
         private void pobieranieDanychWebService()
         {
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 1/5..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 1/6..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie nag³ówków kontrahentów..."));
             String kntKartyString = kwronskiService.ZwrocListeKntKarty();
 
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy nag³ówków kontrahentów..."));
             tworzenieBazyKntKarty(kntKartyString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 2/5..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 2/6..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie adresów kontrahentów..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
@@ -119,7 +119,7 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy adresów kontrahentów..."));
             tworzenieBazyKntAdresy(kntAdresyString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 3/5..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 3/6..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie nag³ówków zleceñ serwisowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
@@ -128,7 +128,7 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy nag³ówków zleceñ serwisowych..."));
             tworzenieBazySerwisoweZleceniaNaglowki(serwisoweZlecenniaNaglowkiString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 4/5..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 4/6..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie czynnosci zleceñ serwisowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
@@ -137,7 +137,7 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy czynnosci zleceñ serwisowych..."));
             tworzenieBazySrwZlcCzynnosci(srwZlcCzynnosciString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 5/5..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 5/6..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie skladniki zleceñ serwisowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
@@ -145,6 +145,15 @@ namespace AplikacjaSerwisowa
 
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy skladniki zleceñ serwisowych..."));
             tworzenieBazySrwZlcSkladniki(srwZlcSkladnikiString);
+
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 5/6..."));
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie kart towarowych..."));
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = 1);
+            String twrKartyString = kwronskiService.ZwrocListeTwrKarty();
+
+            RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy kart towarowych..."));
+            tworzenieBazyTwrKarty(twrKartyString);
 
             RunOnUiThread(() => messagebox("Pobieranie zakoñczone", "Ukoñczono"));
             progrssDialog.Dismiss();
@@ -243,8 +252,6 @@ namespace AplikacjaSerwisowa
             }
         }
 
-
-
         private void tworzenieBazySrwZlcSkladniki(String srwZlcCzynnosciString)
         {
             var records = JsonConvert.DeserializeObject<List<SrwZlcSkladnikiTable>>(srwZlcCzynnosciString);
@@ -276,13 +283,6 @@ namespace AplikacjaSerwisowa
             }
         }
 
-
-
-
-
-
-
-
         private void tworzenieBazySerwisoweZleceniaNaglowki(String serwisoweZlecenniaNaglowkiString)
         {
             var records = JsonConvert.DeserializeObject<List<SerwisoweZleceniaNaglowkiTable>>(serwisoweZlecenniaNaglowkiString);
@@ -311,6 +311,36 @@ namespace AplikacjaSerwisowa
 
                 SerwisoweZleceniaNaglowkiTable szn = records[i];
                 dbr.SerwisoweZleceniaNaglowki_InsertRecord(szn);
+            }
+        }
+        private void tworzenieBazyTwrKarty(String twrKartyString)
+        {
+            var records = JsonConvert.DeserializeObject<List<TwrKartyTable>>(twrKartyString);
+
+            DBRepository dbr = new DBRepository();
+            String result = dbr.createDB();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();            
+            result = dbr.stworzTwrKartyTable();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();
+
+            if(records.Count > 0)
+            {
+                wprowadzWpisyDoTabeliTwrKarty(records, dbr);
+            }
+        }
+
+        private void wprowadzWpisyDoTabeliTwrKarty(List<TwrKartyTable> records, DBRepository dbr)
+        {
+            RunOnUiThread(() => progrssDialog.SetMessage("Zapisywanie kart towarowych..."));
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = records.Count);
+
+            for(int i = 0; i < records.Count; i++)
+            {
+                RunOnUiThread(() => progrssDialog.Progress++);
+
+                TwrKartyTable twrKarta = records[i];
+                dbr.TwrKartyTable_InsertRecord(twrKarta);
             }
         }
     }

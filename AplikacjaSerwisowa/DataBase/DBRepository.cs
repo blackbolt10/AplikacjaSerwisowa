@@ -316,7 +316,7 @@ namespace AplikacjaSerwisowa
                         output = result[0];
                     }
                 }
-                catch(Exception exc)
+                catch(Exception)
                 {
                 }
             }
@@ -346,7 +346,7 @@ namespace AplikacjaSerwisowa
                     output.Add(result[i]);
                 }
             }
-            catch(Exception exc)
+            catch(Exception)
             {
             }
 
@@ -452,7 +452,7 @@ namespace AplikacjaSerwisowa
                         output = result[0];
                     }
                 }
-                catch(Exception exc)
+                catch(Exception)
                 {
                 }
             }
@@ -482,7 +482,7 @@ namespace AplikacjaSerwisowa
                     output.Add(result[i]);
                 }
             }
-            catch(Exception exc)
+            catch(Exception)
             {
             }
 
@@ -573,7 +573,7 @@ namespace AplikacjaSerwisowa
                         output = result[0];
                     }
                 }
-                catch(Exception exc)
+                catch(Exception)
                 {
                 }
             }
@@ -670,7 +670,7 @@ namespace AplikacjaSerwisowa
                         }
                     }
                 }
-                catch(Exception exc)
+                catch(Exception)
                 {
                 }
             }
@@ -678,7 +678,34 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
+        public List<SrwZlcCzynnosciTable> SrwZlcCzynnosciTable_GetFilteredRecords(String filtr)
+        {
+            List<SrwZlcCzynnosciTable> output = new List<SrwZlcCzynnosciTable>();
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+                var table = db.Table<SrwZlcCzynnosciTable>();
+                string zapytanie = "select * from SrwZlcCzynnosciTable ";
 
+                if(filtr != "")
+                {
+                    zapytanie += "where szc_TwrNazwa like '%" + filtr + "%' or Twr_Kod like '%" + filtr + "%'";
+                }
+
+                var result = db.Query<SrwZlcCzynnosciTable>(zapytanie);
+
+                for(int i = 0; i < result.Count; i++)
+                {
+                    output.Add(result[i]);
+                }
+            }
+            catch(Exception)
+            {
+            }
+
+            return output;
+        }
 
 
 
@@ -770,9 +797,139 @@ namespace AplikacjaSerwisowa
                         }
                     }
                 }
-                catch(Exception exc)
+                catch(Exception)
                 {
                 }
+            }
+
+            return output;
+        }
+
+        public List<SrwZlcSkladnikiTable> SrwZlcSkladnikiTable_GetFilteredRecords(String filtr)
+        {
+            List<SrwZlcSkladnikiTable> output = new List<SrwZlcSkladnikiTable>();
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+                var table = db.Table<SrwZlcSkladnikiTable>();
+                string zapytanie = "select * from SrwZlcSkladnikiTable ";
+
+                if(filtr != "")
+                {
+                    zapytanie += "where szs_TwrNazwa like '%" + filtr + "%' or Twr_Kod like '%" + filtr + "%'";
+                }
+
+                var result = db.Query<SrwZlcSkladnikiTable>(zapytanie);
+
+                for(int i = 0; i < result.Count; i++)
+                {
+                    output.Add(result[i]);
+                }
+            }
+            catch(Exception)
+            {
+            }
+
+            return output;
+        }
+
+
+
+
+
+
+
+
+
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela TwrKarty*******************************|
+            *---------------------------------------------------------------------------------
+        */
+        
+        public string stworzTwrKartyTable()
+        {
+            String output = "";
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+
+                try
+                {
+                    db.DropTable<TwrKartyTable>();
+                }
+                catch(Exception) { }
+
+                db.CreateTable<TwrKartyTable>();
+
+                output = "Tabela TwrKartyTable zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzTwrKartyTable() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+
+        public String TwrKartyTable_InsertRecord(TwrKartyTable item)
+        {
+            String output = "";
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+
+                db.Insert(item);
+                output = "Wpis dodany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.TwrKartyTable_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+        public List<TwrKartyTable> TwrKartyTable_GetFilteredRecords(String filtrEditText, String filtr, Boolean czynnosci)
+        {
+            List<TwrKartyTable> output = new List<TwrKartyTable>();
+            try
+            {
+                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                SQLiteConnection db = new SQLiteConnection(dbPath);
+                var table = db.Table<TwrKartyTable>();
+                string zapytanie = "select * from TwrKartyTable where ";
+
+                if(czynnosci)
+                {
+                    zapytanie += "twr_typ = 4";
+                }
+                else
+                {
+                    zapytanie += "twr_typ in (1,2)";
+                }
+
+                if(filtrEditText != "")
+                {
+                    zapytanie += " and (Twr_Kod like '%" + filtrEditText + "%' or Twr_Nazwa like '%" + filtrEditText + "%')";
+                }
+
+                if(filtr != "")
+                {
+                    zapytanie += " and Twr_GIDNumer not in ("+filtr+")";
+                }
+
+                var result = db.Query<TwrKartyTable>(zapytanie);
+
+                for(int i = 0; i < result.Count; i++)
+                {
+                    output.Add(result[i]);
+                }
+            }
+            catch(Exception)
+            {
             }
 
             return output;

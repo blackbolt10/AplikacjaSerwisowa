@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 
+using cdn_api;
+
 namespace AplikacjaSerwisowaKomp
 {
     public partial class MainWindow : Form
@@ -34,6 +36,7 @@ namespace AplikacjaSerwisowaKomp
             {
                 this.Close();
             }
+            APIConnect();
         }
 
         private Boolean podlaczDoBazyDanych()
@@ -377,6 +380,10 @@ namespace AplikacjaSerwisowaKomp
 
         }
 
+        private void noweZlecenie(object sender, EventArgs e)
+        {
+            APIConnect();
+        }
 
 
 
@@ -387,5 +394,106 @@ namespace AplikacjaSerwisowaKomp
 
 
 
+
+
+        public Int32 Sesja;
+
+        private void APIConnect()
+        {
+            Sesja = 0;
+            XLLoginInfo_20162 LogINFO_20162 = new XLLoginInfo_20162();
+
+            LogINFO_20162.Wersja = 20162;
+            LogINFO_20162.ProgramID = "VisualCSharpHandlowcy";
+            LogINFO_20162.OpeIdent = "";
+            LogINFO_20162.Baza = "";
+            LogINFO_20162.OpeHaslo = "";
+            LogINFO_20162.PlikLog = "";
+            LogINFO_20162.SerwerKlucza = "";
+            LogINFO_20162.UtworzWlasnaSesje = 0;
+
+            int WynikLogowania = cdn_api.cdn_api.XLLogin(LogINFO_20162, ref Sesja);
+
+            if(WynikLogowania != 0)
+            {
+                MessageBox.Show("Błąd logowania " + Convert.ToString(WynikLogowania));
+                stworzNaglowekButton.Enabled = false;
+                zamknijNaglowekButton.Enabled = false;
+                dodajPozycjeButton.Enabled = false;
+            }
+            else
+            {
+                //MessageBox.Show("Połączono z bazą " + LogINFO_20162.Baza);
+                stworzNaglowekButton.Enabled = true;
+                zamknijNaglowekButton.Enabled = true;
+                dodajPozycjeButton.Enabled = true;
+            }
+
+        }
+
+
+        private void Logout()
+        {
+            int WynikWylogowania = cdn_api.cdn_api.XLLogout(Sesja);
+            /* if (WynikWylogowania == 0)
+             {
+                 MessageBox.Show("Wylogowano poprawnie");
+             }
+             else
+             {
+                 MessageBox.Show("Błąd wylogowania" + Convert.ToString(WynikWylogowania));
+             }*/
+        }
+
+
+
+        private int IDDok = 0;
+
+        private void stworzNaglowekButton_Click(object sender, EventArgs e)
+        {
+            String gidnumerOld = "";
+            
+            cdn_api.XLSerwisNagInfo_20162 DokumentZlcRemNagInfo = new XLSerwisNagInfo_20162();
+            DokumentZlcRemNagInfo.Wersja = 20162;
+
+            DokumentZlcRemNagInfo.KntNumer = 805;
+            DokumentZlcRemNagInfo.KntTyp = 32;
+
+            DokumentZlcRemNagInfo.KnANumer = 1041;
+            DokumentZlcRemNagInfo.KnATyp = 864;
+
+            DokumentZlcRemNagInfo.AdWNumer = 1069;
+            DokumentZlcRemNagInfo.AdWTyp = 896;
+
+            DokumentZlcRemNagInfo.Tryb = 2;
+
+
+
+
+
+            DokumentZlcRemNagInfo.Opis = "lama lama lama";
+
+
+
+            int wynik = cdn_api.cdn_api.XLNoweZlecenieSerwis(Sesja,ref IDDok, DokumentZlcRemNagInfo);
+            MessageBox.Show("Wynik = " + wynik.ToString()+"\nIDD0k = "+IDDok.ToString());
+        }
+
+        private void zamknijNaglowekButton_Click(object sender, EventArgs e)
+        {
+            cdn_api.XLZamkniecieSerwisNagInfo_20162 test = new XLZamkniecieSerwisNagInfo_20162();
+            test.Wersja = 20162;
+            test.TrybZamkniecia = 6;
+            test.Akcja = 3;
+
+            int wynik = cdn_api.cdn_api.XLZamknijZlecenieSerwis(ref IDDok, test);
+
+            MessageBox.Show("Wynik = " + wynik.ToString() + "\niddok = " + IDDok.ToString());
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Logout();
+        }
     }
 }

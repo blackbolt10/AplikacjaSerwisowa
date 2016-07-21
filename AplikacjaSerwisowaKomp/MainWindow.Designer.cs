@@ -44,6 +44,10 @@
             this.kntAdresyLabel = new System.Windows.Forms.Label();
             this.twrKartyCzynnosciLabel = new System.Windows.Forms.Label();
             this.kntKartyLabel = new System.Windows.Forms.Label();
+            this.noweZlecenieButton = new System.Windows.Forms.Button();
+            this.stworzNaglowekButton = new System.Windows.Forms.Button();
+            this.dodajPozycjeButton = new System.Windows.Forms.Button();
+            this.zamknijNaglowekButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.operatorzyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.twrKartySkladnikiPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.twrKartyCzynnosciPictureBox)).BeginInit();
@@ -201,11 +205,57 @@
             this.kntKartyLabel.TabIndex = 14;
             this.kntKartyLabel.Text = "Gotowy do działania";
             // 
+            // noweZlecenieButton
+            // 
+            this.noweZlecenieButton.Location = new System.Drawing.Point(12, 202);
+            this.noweZlecenieButton.Name = "noweZlecenieButton";
+            this.noweZlecenieButton.Size = new System.Drawing.Size(115, 32);
+            this.noweZlecenieButton.TabIndex = 15;
+            this.noweZlecenieButton.Text = "Nowe zlecenie";
+            this.noweZlecenieButton.UseVisualStyleBackColor = true;
+            this.noweZlecenieButton.Click += new System.EventHandler(this.noweZlecenie);
+            // 
+            // stworzNaglowekButton
+            // 
+            this.stworzNaglowekButton.Enabled = false;
+            this.stworzNaglowekButton.Location = new System.Drawing.Point(142, 203);
+            this.stworzNaglowekButton.Name = "stworzNaglowekButton";
+            this.stworzNaglowekButton.Size = new System.Drawing.Size(115, 31);
+            this.stworzNaglowekButton.TabIndex = 16;
+            this.stworzNaglowekButton.Text = "Naglowek Zlecenia";
+            this.stworzNaglowekButton.UseVisualStyleBackColor = true;
+            this.stworzNaglowekButton.Click += new System.EventHandler(this.stworzNaglowekButton_Click);
+            // 
+            // dodajPozycjeButton
+            // 
+            this.dodajPozycjeButton.Enabled = false;
+            this.dodajPozycjeButton.Location = new System.Drawing.Point(263, 202);
+            this.dodajPozycjeButton.Name = "dodajPozycjeButton";
+            this.dodajPozycjeButton.Size = new System.Drawing.Size(115, 32);
+            this.dodajPozycjeButton.TabIndex = 17;
+            this.dodajPozycjeButton.Text = "Dodaj pozycje";
+            this.dodajPozycjeButton.UseVisualStyleBackColor = true;
+            // 
+            // zamknijNaglowekButton
+            // 
+            this.zamknijNaglowekButton.Enabled = false;
+            this.zamknijNaglowekButton.Location = new System.Drawing.Point(384, 202);
+            this.zamknijNaglowekButton.Name = "zamknijNaglowekButton";
+            this.zamknijNaglowekButton.Size = new System.Drawing.Size(115, 32);
+            this.zamknijNaglowekButton.TabIndex = 18;
+            this.zamknijNaglowekButton.Text = "Zamknij naglowek";
+            this.zamknijNaglowekButton.UseVisualStyleBackColor = true;
+            this.zamknijNaglowekButton.Click += new System.EventHandler(this.zamknijNaglowekButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 361);
+            this.Controls.Add(this.zamknijNaglowekButton);
+            this.Controls.Add(this.dodajPozycjeButton);
+            this.Controls.Add(this.stworzNaglowekButton);
+            this.Controls.Add(this.noweZlecenieButton);
             this.Controls.Add(this.kntKartyLabel);
             this.Controls.Add(this.twrKartyCzynnosciLabel);
             this.Controls.Add(this.kntAdresyLabel);
@@ -224,6 +274,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
             this.Text = "Aplikacja serwisowa";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.operatorzyPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.twrKartySkladnikiPictureBox)).EndInit();
@@ -252,6 +303,10 @@
         private System.Windows.Forms.Label kntAdresyLabel;
         private System.Windows.Forms.Label twrKartyCzynnosciLabel;
         private System.Windows.Forms.Label kntKartyLabel;
+        private System.Windows.Forms.Button noweZlecenieButton;
+        private System.Windows.Forms.Button stworzNaglowekButton;
+        private System.Windows.Forms.Button dodajPozycjeButton;
+        private System.Windows.Forms.Button zamknijNaglowekButton;
     }
 }
 

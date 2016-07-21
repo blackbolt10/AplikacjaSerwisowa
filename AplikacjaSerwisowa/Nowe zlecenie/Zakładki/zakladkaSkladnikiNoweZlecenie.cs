@@ -25,7 +25,7 @@ namespace AplikacjaSerwisowa
         private static List<TwrKartyTable> skladnikiList;
 
         private static Context kontekst;
-
+        
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.noweZlecenieZakladkaCzynnSkladLayout, container, false);
@@ -127,6 +127,11 @@ namespace AplikacjaSerwisowa
             {
                 mUsunButton.Enabled = false;
             }
+        }
+
+        public static void ustawIlosc(double ilosc)
+        {
+            skladnikiList[skladnikiList.Count - 1].Ilosc = ilosc;
         }
 
         public override string ToString() //Called on line 156 in SlidingTabScrollView

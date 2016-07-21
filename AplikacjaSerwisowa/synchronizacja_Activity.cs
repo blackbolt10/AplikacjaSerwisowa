@@ -103,15 +103,15 @@ namespace AplikacjaSerwisowa
 
         private void pobieranieDanychWebService()
         {
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 1/6..."));
-            RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie nag³ówków kontrahentów..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 1/6..."));
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie nag³ówków kontrahentów..."));
             String kntKartyString = kwronskiService.ZwrocListeKntKarty();
 
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy nag³ówków kontrahentów..."));
             tworzenieBazyKntKarty(kntKartyString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 2/6..."));
-            RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie adresów kontrahentów..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 2/6..."));
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie adresów kontrahentów..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
             String kntAdresyString = kwronskiService.ZwrocListeKntAdresy();
@@ -119,8 +119,8 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy adresów kontrahentów..."));
             tworzenieBazyKntAdresy(kntAdresyString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 3/6..."));
-            RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie nag³ówków zleceñ serwisowych..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 3/6..."));
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie nag³ówków zleceñ serwisowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
             String serwisoweZlecenniaNaglowkiString = kwronskiService.ZwrocListeZlecenSerwisowychNaglowki();
@@ -128,8 +128,8 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy nag³ówków zleceñ serwisowych..."));
             tworzenieBazySerwisoweZleceniaNaglowki(serwisoweZlecenniaNaglowkiString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 4/6..."));
-            RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie czynnosci zleceñ serwisowych..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 4/6..."));
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie czynnosci zleceñ serwisowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
             String srwZlcCzynnosciString = kwronskiService.ZwrocListeZlecenSerwisowychCzynnosci();
@@ -137,8 +137,8 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy czynnosci zleceñ serwisowych..."));
             tworzenieBazySrwZlcCzynnosci(srwZlcCzynnosciString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 5/6..."));
-            RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie skladniki zleceñ serwisowych..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 5/6..."));
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie skladniki zleceñ serwisowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
             String srwZlcSkladnikiString = kwronskiService.ZwrocListeZlecenSerwisowychSkladniki();
@@ -146,8 +146,8 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy skladniki zleceñ serwisowych..."));
             tworzenieBazySrwZlcSkladniki(srwZlcSkladnikiString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobierannie 5/6..."));
-            RunOnUiThread(() => progrssDialog.SetMessage("Pobierannie kart towarowych..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 6/6..."));
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie kart towarowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
             String twrKartyString = kwronskiService.ZwrocListeTwrKarty();

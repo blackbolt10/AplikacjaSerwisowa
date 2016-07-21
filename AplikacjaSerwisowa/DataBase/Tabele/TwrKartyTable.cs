@@ -19,7 +19,7 @@ namespace AplikacjaSerwisowa
 
         public Int32 Twr_Typ { get; set; }
 
-        public Int32 Ilosc { get; set; }
+        public Double Ilosc { get; set; }
 
         public String Twr_Nazwa { get; set; }
         

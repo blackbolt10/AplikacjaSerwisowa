@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayout1"
+    android:padding="20px">
+    <TextView
+        android:text="Akronim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/noweZlecenieZakCzynnSkladIloscAkronimTextView" />
+    <TextView
+        android:text="Nazwa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noweZlecenieZakCzynnSkladIloscAkronimTextView"
+        android:id="@+id/noweZlecenieZakCzynnSkladIloscNazwaTextView" />
+    <TextView
+        android:text="Ilość:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noweZlecenieZakCzynnSkladIloscNazwaTextView"
+        android:id="@+id/textView4"
+        android:layout_marginTop="15px" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_below="@id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayout1"
+        android:weightSum="15">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/noweZlecenieZakCzynnSkladIloscIloscEditText"
+            android:layout_weight="14" 
+            android:inputType="numberDecimal"
+            android:digits="0123456789.,"/>
+        <TextView
+            android:text="JM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/noweZlecenieZakCzynnSkladIloscJmTextView"
+            android:paddingTop="8px"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <Button
+        android:text="Akceptuj"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LinearLayout1"
+        android:id="@+id/noweZlecenieZakCzynnSkladIloscAkceptujButton"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15px" />
+</RelativeLayout>

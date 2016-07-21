@@ -36,6 +36,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/noweZlecenieZakCzynnSkladNaglowekLinearLayout"
+            android:id="@+id/noweZlecenieZakCzynnSkladNazwaFullLinearLayout"
+            android:weightSum="6">
+            <TextView
+                android:text="NazwaFull"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/noweZlecenieZakCzynnSkladNazwaFullTextView"
+                android:paddingLeft="30px" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/noweZlecenieZakCzynnSkladNazwaFullLinearLayout"
             android:id="@+id/noweZlecenieZakCzynnSkladIloscJmNazwaLinearLayout"
             android:weightSum="6">
             <TextView
@@ -43,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/noweZlecenieZakCzynnSkladIloscTextView"
-                android:layout_weight="1"
+                android:layout_weight="5"
                 android:textAlignment="gravity"
                 android:gravity="right"
                 android:paddingRight="20px" />
@@ -53,27 +67,6 @@
                 android:layout_height="match_parent"
                 android:id="@+id/noweZlecenieZakCzynnSkladJmTextView"
                 android:layout_weight="1" />
-            <TextView
-                android:text="Nazwa"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/noweZlecenieZakCzynnSkladNazwaTextView"
-                android:layout_weight="4"
-                android:paddingLeft="20px" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/noweZlecenieZakCzynnSkladIloscJmNazwaLinearLayout"
-            android:id="@+id/noweZlecenieZakCzynnSkladNazwaFullLinearLayout"
-            android:weightSum="6">
-            <TextView
-                android:text="NazwaFull"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/noweZlecenieZakCzynnSkladNazwaFullTextView"
-                android:paddingLeft="30px" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

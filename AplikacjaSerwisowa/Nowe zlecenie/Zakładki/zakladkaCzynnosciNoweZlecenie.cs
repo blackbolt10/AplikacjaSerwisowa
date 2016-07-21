@@ -130,6 +130,11 @@ namespace AplikacjaSerwisowa
             }
         }
 
+        public static void ustawIlosc(double ilosc)
+        {
+            czynnosciList[czynnosciList.Count - 1].Ilosc = ilosc;
+        }
+
         public override string ToString() //Called on line 156 in SlidingTabScrollView
         {
             return "Czynności";

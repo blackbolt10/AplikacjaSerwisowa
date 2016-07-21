@@ -54,10 +54,24 @@ namespace AplikacjaSerwisowa
 
             if(czynnosc == "0")
             {
+                Intent noweZlecenieCzynnosciIntent = new Intent(this, typeof(noweZlecenieDodajCzynnSkladIlosc_Activit));
+                noweZlecenieCzynnosciIntent.PutExtra("nazwa", twrKartyObject.Twr_Nazwa);
+                noweZlecenieCzynnosciIntent.PutExtra("akronim", "["+twrKartyObject.Twr_Kod+"]");
+                noweZlecenieCzynnosciIntent.PutExtra("jm", twrKartyObject.Twr_Jm);
+                noweZlecenieCzynnosciIntent.PutExtra("czynnosc", "1");
+                StartActivity(noweZlecenieCzynnosciIntent);
+
                 zakladkaCzynnosciNoweZlecenie.dodajCzynnosc(twrKartyObject);
             }
             else
             {
+                Intent noweZlecenieCzynnosciIntent = new Intent(this, typeof(noweZlecenieDodajCzynnSkladIlosc_Activit));
+                noweZlecenieCzynnosciIntent.PutExtra("nazwa", twrKartyObject.Twr_Nazwa);
+                noweZlecenieCzynnosciIntent.PutExtra("akronim", "[" + twrKartyObject.Twr_Kod + "]");
+                noweZlecenieCzynnosciIntent.PutExtra("jm", twrKartyObject.Twr_Jm);
+                noweZlecenieCzynnosciIntent.PutExtra("czynnosc", "0");
+                StartActivity(noweZlecenieCzynnosciIntent);
+
                 zakladkaSkladnikiNoweZlecenie.dodajSkladnik(twrKartyObject);
             }
 

@@ -97,6 +97,7 @@
     <Compile Include="Nowe zlecenie\noweZlecenieDodajCzynnSklad_Activit.cs" />
     <Compile Include="Nowe zlecenie\noweZlecenie_Activity.cs" />
     <Compile Include="Nowe zlecenie\noweZlecenieDodajKontrahenta_Activity.cs" />
+    <Compile Include="Nowe zlecenie\Zakładki\noweZlecenieDodajCzynnSkladIlosc_Activit.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\zakladkaCzynnosciNoweZlecenie.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\zakladkaKontrahentNoweZlecenie.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\zakladkaSkladnikiNoweZlecenie.cs" />
@@ -167,6 +168,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\noweZlecenieZakladkaCzynnSklad_row.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\noweZlecenieZakladkaCzynnSkladIlosc.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="Web References\kwronski\Reference.map">

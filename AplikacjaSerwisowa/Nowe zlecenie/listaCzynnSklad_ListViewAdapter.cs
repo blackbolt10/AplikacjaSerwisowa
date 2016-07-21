@@ -48,7 +48,6 @@ namespace AplikacjaSerwisowa
             }
 
             TextView akronim_TextView = row.FindViewById<TextView>(Resource.Id.noweZlecenieZakCzynnSkladAkronimTextView);
-            TextView nazwa_TextView = row.FindViewById<TextView>(Resource.Id.noweZlecenieZakCzynnSkladNazwaTextView);
             TextView nazwaFull_TextView = row.FindViewById<TextView>(Resource.Id.noweZlecenieZakCzynnSkladNazwaFullTextView);
             TextView jm_TextView = row.FindViewById<TextView>(Resource.Id.noweZlecenieZakCzynnSkladJmTextView);
             TextView ilosc_TextView = row.FindViewById<TextView>(Resource.Id.noweZlecenieZakCzynnSkladIloscTextView);
@@ -60,23 +59,19 @@ namespace AplikacjaSerwisowa
 
             if(full)
             {
-                nazwaFullLinearLayout.Visibility = ViewStates.Visible;
                 iloscJmNazwaLinearLayout.Visibility = ViewStates.Gone;
                 checkBox.Visibility = ViewStates.Gone;
-
-                nazwaFull_TextView.Text = twrKartyList[position].Twr_Nazwa;
             }
             else
             {
-                nazwaFullLinearLayout.Visibility = ViewStates.Gone;
                 iloscJmNazwaLinearLayout.Visibility = ViewStates.Visible;
                 checkBox.Visibility = ViewStates.Visible;
 
                 ilosc_TextView.Text = twrKartyList[position].Ilosc.ToString();
                 jm_TextView.Text = twrKartyList[position].Twr_Jm;
-                nazwa_TextView.Text = twrKartyList[position].Twr_Nazwa;
             }
 
+            nazwaFull_TextView.Text = twrKartyList[position].Twr_Nazwa;
             akronim_TextView.Text = "["+twrKartyList[position].Twr_Kod+"]";
 
             checkBox.Checked = twrKartyList[position].zaznaczone;

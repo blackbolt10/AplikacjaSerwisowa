@@ -23,7 +23,6 @@ namespace AplikacjaSerwisowaKomp
         private static SqlCommand polecenieSQL;
         private static Boolean pobieranieDanych = false;
 
-
         public MainWindow()
         {
             InitializeComponent();
@@ -400,14 +399,16 @@ namespace AplikacjaSerwisowaKomp
 
         private void APIConnect()
         {
+            hasla haslo = new hasla();
+
             Sesja = 0;
             XLLoginInfo_20162 LogINFO_20162 = new XLLoginInfo_20162();
 
             LogINFO_20162.Wersja = 20162;
             LogINFO_20162.ProgramID = "VisualCSharpHandlowcy";
-            LogINFO_20162.OpeIdent = "";
-            LogINFO_20162.Baza = "";
-            LogINFO_20162.OpeHaslo = "";
+            LogINFO_20162.OpeIdent = haslo.GetoperatorXL();
+            LogINFO_20162.Baza = haslo.GetBazaXl();
+            LogINFO_20162.OpeHaslo = haslo.GetHasloXL();
             LogINFO_20162.PlikLog = "";
             LogINFO_20162.SerwerKlucza = "";
             LogINFO_20162.UtworzWlasnaSesje = 0;

@@ -452,28 +452,23 @@ namespace AplikacjaSerwisowaKomp
 
         private void stworzNaglowekButton_Click(object sender, EventArgs e)
         {
-            String gidnumerOld = "";
-            
             cdn_api.XLSerwisNagInfo_20162 DokumentZlcRemNagInfo = new XLSerwisNagInfo_20162();
             DokumentZlcRemNagInfo.Wersja = 20162;
-
-            DokumentZlcRemNagInfo.KntNumer = 805;
-            DokumentZlcRemNagInfo.KntTyp = 32;
-
-            DokumentZlcRemNagInfo.KnANumer = 1041;
-            DokumentZlcRemNagInfo.KnATyp = 864;
-
-            DokumentZlcRemNagInfo.AdWNumer = 1069;
-            DokumentZlcRemNagInfo.AdWTyp = 896;
-
             DokumentZlcRemNagInfo.Tryb = 2;
 
+            DokumentZlcRemNagInfo.Opis = "lama";
 
+            DokumentZlcRemNagInfo.KntTyp = 32;
+            DokumentZlcRemNagInfo.KntNumer = 805;
 
+            DokumentZlcRemNagInfo.KnATyp = 864;
+            DokumentZlcRemNagInfo.KnANumer = 1041;
 
+            DokumentZlcRemNagInfo.KnDTyp = 32;
+            DokumentZlcRemNagInfo.KnDNumer = 805;
 
-            DokumentZlcRemNagInfo.Opis = "lama lama lama";
-
+            DokumentZlcRemNagInfo.KnPTyp = 32;
+            DokumentZlcRemNagInfo.KnPNumer = 805;
 
 
             int wynik = cdn_api.cdn_api.XLNoweZlecenieSerwis(Sesja,ref IDDok, DokumentZlcRemNagInfo);

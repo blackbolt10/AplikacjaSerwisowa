@@ -5,51 +5,44 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using System.Text;
 using System.Timers;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AplikacjaSerwisowaUsluga
 {
     public partial class Service1 : ServiceBase
     {
-        private ApiXL api_cdn_xl = null;
-        private DataBase db = null;
-        private Timer timer;
-
+        private DataBase dbXL = null;
+        private DataBase dbSERWIS = null;
+        private System.Timers.Timer timer;
+        
         public Service1()
         {
             InitializeComponent();
-
-            InitializeTimer();
-            podlaczDoBazyDanych();
             InitializeEventLog();
         }
 
         protected override void OnStart(string[] args)
         {
-            ApiConnect();
+            InitializeTimer();
+            podlaczDoBazyDanych(0);
+            podlaczDoBazyDanych(1);
+
             timer.Start();
         }
 
         protected override void OnStop()
         {
-            if(api_cdn_xl != null)
-            {
-                LogOut();
-            }
             eventLog1.WriteEntry("OnStop() - Usługa zatrzymana");
         }
 
         protected override void OnContinue()
         {
-            eventLog1.WriteEntry("OnContinue() - Usługa wznowiona");
-
-            if(api_cdn_xl == null)
-            {
-                ApiConnect();
-            }
+            eventLog1.WriteEntry("OnContinue() - Usługa jest wznowiana");
         }
 
         private void InitializeEventLog()
@@ -63,71 +56,48 @@ namespace AplikacjaSerwisowaUsluga
             eventLog1.Log = "AplikacjaSerwisowaUsluga";
         }
 
-        private void podlaczDoBazyDanych()
+        private void podlaczDoBazyDanych(int baza)
         {
-            db = new DataBase(eventLog1);
-            Boolean wynikPolaczenia = db.PolaczZBaza();
+            Boolean wynikPolaczenia = false;
+            if(baza == 0)
+            {
+                dbXL = new DataBase(eventLog1);
+                wynikPolaczenia = dbXL.PolaczZBaza(baza);
+            }
+            else
+            {
+                dbSERWIS = new DataBase(eventLog1);
+                wynikPolaczenia = dbSERWIS.PolaczZBaza(baza);
+            }
 
             if(wynikPolaczenia)
             {
-                eventLog1.WriteEntry("podlaczDoBazyDanych() result = " + wynikPolaczenia);
+               // eventLog1.WriteEntry("podlaczDoBazyDanych("+ baza + ") result = " + wynikPolaczenia);
             }
             else
             {
-                eventLog1.WriteEntry("Service1.podlaczDoBazyDanych() result = " + wynikPolaczenia, EventLogEntryType.Warning);
+                eventLog1.WriteEntry("Service1.podlaczDoBazyDanych(" + baza + ") result = " + wynikPolaczenia, EventLogEntryType.Warning);
                 eventLog1.WriteEntry("AplikacjaSerwisowaUsluga - rozpoczynam zatrzymanie", EventLogEntryType.Error);
                 this.Stop();
-            }
-        }
-
-        private void ApiConnect()
-        {
-            eventLog1.WriteEntry("Usługa uruchomiona - rozpoczęcie ApiConnect()");
-
-            api_cdn_xl = new ApiXL(eventLog1);
-            Int32 wynikLogowania = api_cdn_xl.APIConnect();
-            
-
-            if(wynikLogowania != 0)
-            {
-                eventLog1.WriteEntry("ApiConnect() result = " + wynikLogowania, EventLogEntryType.Warning);
-                eventLog1.WriteEntry("AplikacjaSerwisowaUsluga - rozpoczynam zatrzymanie", EventLogEntryType.Error);
-                this.Stop();
-            }
-            else
-            {
-                eventLog1.WriteEntry("ApiConnect() result = " + wynikLogowania);
-            }
-        }
-
-        private void LogOut()
-        {
-            Int32 wynikWylogowania = api_cdn_xl.ApiLogout();
-
-            if(wynikWylogowania != 0 && wynikWylogowania != -1)
-            {
-                eventLog1.WriteEntry("ApiLogout() result = " + wynikWylogowania, EventLogEntryType.Warning);
-            }
-            else
-            {
-                eventLog1.WriteEntry("ApiLogout() result = " + wynikWylogowania);
             }
         }
 
         private void InitializeTimer()
         {
-            timer = new Timer();
-            timer.Interval = 10000;
+            timer = new System.Timers.Timer();
+            timer.Interval = 1000;
             timer.Elapsed += Timer_Elapsed;
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             timer.Stop();
+            eventLog1.WriteEntry("Synchronizacja start!");
 
-            Synchroniacja synch = new Synchroniacja(db, api_cdn_xl, eventLog1);
+            Synchroniacja synch = new Synchroniacja(dbXL, dbSERWIS, eventLog1);
             synch.Start();
 
+            eventLog1.WriteEntry("Synchronizacja end!");
             timer.Start();
         }
     }

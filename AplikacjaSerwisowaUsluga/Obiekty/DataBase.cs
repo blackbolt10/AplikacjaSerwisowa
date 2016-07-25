@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace AplikacjaSerwisowaUsluga
 {
-
     class DataBase
     {
         private static SqlConnection uchwytBD;
@@ -21,7 +20,7 @@ namespace AplikacjaSerwisowaUsluga
             eventLog = _eventLog;
         }
 
-        public Boolean PolaczZBaza()
+        public Boolean PolaczZBaza(int baza)
         {
             Hasla haslo = new Hasla(2);
 
@@ -30,9 +29,16 @@ namespace AplikacjaSerwisowaUsluga
                 String loginBD = haslo.GetInstanceUserName();
                 String hasloBD = haslo.GetInstancePassword();
                 String instancja = haslo.GetInstanceName();
-                String bazaDanych = haslo.GetDataBaseName();
-
-                //MessageBox.Show(loginBD + "|" + hasloBD + "|" + instancja + "|" + bazaDanych);
+                String bazaDanych = "";
+                if(baza == 0)
+                {
+                    bazaDanych = haslo.GetDataBaseNameXL();
+                }
+                else
+                {
+                    bazaDanych = haslo.GetDataBaseNameSerwis();
+                }
+                
                 uchwytBD = new SqlConnection(@"user id=" + loginBD + "; password=" + hasloBD + "; Data Source=" + instancja + "; Initial Catalog=" + bazaDanych + ";");
                 uchwytBD.Open();
                 return true;
@@ -44,17 +50,20 @@ namespace AplikacjaSerwisowaUsluga
             }
         }
 
-        public DataTable pobierzNoweSrwZlc()
+        public DataTable pobierzNoweSrwZlcNag()
         {
             DataTable noweSrwZlecDT = new DataTable();
 
             try
             {
-                String zapytanieString = "";
+                String zapytanieString = "SELECT * FROM [GAL].[SrwZlcNag] where GZN_Sync = 0";
                 SqlDataAdapter da = zapytanie(zapytanieString);
                 da.Fill(noweSrwZlecDT);
             }
-            catch(Exception) {}
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Błąd funkcji DataBase.pobierzNoweSrwZlcNag():\n" + exc.Message, EventLogEntryType.Error);
+            }
 
             return noweSrwZlecDT;
         }
@@ -75,6 +84,19 @@ namespace AplikacjaSerwisowaUsluga
             polecenieSQL = new SqlCommand(zapytanie1);
             polecenieSQL.Connection = uchwytBD;
             polecenieSQL.ExecuteNonQuery();
+        }
+
+        public void oznaczZlcSrwNagZapisany(int id)
+        {
+            try
+            {
+                String zapytanieString = "UPDATE [GAL].[SrwZlcNag] SET [GZN_Sync] = 1 WHERE [GZN_Id] = "+id.ToString();
+                zapiszDB(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Błąd funkcji DataBase.oznaczZlcSrwNagZapisany("+id.ToString()+"):\n" + exc.Message, EventLogEntryType.Error);
+            }
         }
     }
 }

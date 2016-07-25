@@ -8,6 +8,8 @@ namespace AplikacjaSerwisowaUsluga
 {
     class SrwZlcNagStruct
     {
+        public Int32 Id;
+
         public Int32 KntTyp;
         public Int32 KntNumer;
 
@@ -25,8 +27,9 @@ namespace AplikacjaSerwisowaUsluga
 
         public String Opis;
 
-        public SrwZlcNagStruct(Int32 _KntTyp, Int32 _KntNumer, Int32 _KnATyp, Int32 _KnANumer, Int32 _KndTyp, Int32 _KndNumer, Int32 _KnPTyp, Int32 _KnPNumer, DateTime _DataWystawienia, DateTime _DataRozpoczecia, String _Opis)
+        public SrwZlcNagStruct(Int32 _Id, Int32 _KntTyp, Int32 _KntNumer, Int32 _KnATyp, Int32 _KnANumer, Int32 _KndTyp, Int32 _KndNumer, Int32 _KnPTyp, Int32 _KnPNumer, DateTime _DataWystawienia, DateTime _DataRozpoczecia, String _Opis)
         {
+            Id = _Id;
             KntTyp = _KntTyp;
             KntNumer = _KntNumer;
             KnATyp = _KnATyp;
@@ -39,6 +42,8 @@ namespace AplikacjaSerwisowaUsluga
             DataRozpoczecia = _DataRozpoczecia;
             Opis = _Opis;
         }
+
+        public SrwZlcNagStruct() { }
     }
 }
 

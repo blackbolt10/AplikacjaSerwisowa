@@ -235,6 +235,7 @@
             this.dodajPozycjeButton.TabIndex = 17;
             this.dodajPozycjeButton.Text = "Dodaj pozycje";
             this.dodajPozycjeButton.UseVisualStyleBackColor = true;
+            this.dodajPozycjeButton.Click += new System.EventHandler(this.dodajPozycjeButton_Click);
             // 
             // zamknijNaglowekButton
             // 

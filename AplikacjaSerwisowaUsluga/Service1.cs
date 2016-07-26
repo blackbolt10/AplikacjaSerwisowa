@@ -12,6 +12,8 @@ using System.Timers;
 using System.Threading;
 using System.Threading.Tasks;
 
+using cdn_api;
+
 namespace AplikacjaSerwisowaUsluga
 {
     public partial class Service1 : ServiceBase
@@ -24,10 +26,15 @@ namespace AplikacjaSerwisowaUsluga
         {
             InitializeComponent();
             InitializeEventLog();
+            Synchroniacja synch = new Synchroniacja(null,null,null);
+            int wynik = synch.APIConnect();
+            //eventLog1.WriteEntry("Service1.ApiConnect() = " + wynik.ToString());
         }
 
         protected override void OnStart(string[] args)
         {
+            eventLog1.WriteEntry("OnStart() - Usługa uruchomiona");
+
             InitializeTimer();
             podlaczDoBazyDanych(0);
             podlaczDoBazyDanych(1);
@@ -72,6 +79,7 @@ namespace AplikacjaSerwisowaUsluga
 
             if(wynikPolaczenia)
             {
+                //zalogowano do bazy
                // eventLog1.WriteEntry("podlaczDoBazyDanych("+ baza + ") result = " + wynikPolaczenia);
             }
             else
@@ -85,7 +93,7 @@ namespace AplikacjaSerwisowaUsluga
         private void InitializeTimer()
         {
             timer = new System.Timers.Timer();
-            timer.Interval = 1000;
+            timer.Interval = 10000;
             timer.Elapsed += Timer_Elapsed;
         }
 

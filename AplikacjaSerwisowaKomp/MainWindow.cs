@@ -491,5 +491,42 @@ namespace AplikacjaSerwisowaKomp
         {
             Logout();
         }
+
+        private void dodajPozycjeButton_Click(object sender, EventArgs e)
+        {
+            dodajCzynnosc();
+            dodajSkladnik();
+        }
+
+        private void dodajSkladnik()
+        {
+            XLSerwisSkladnikInfo_20162 XlSerwisSkladnikInfo = new XLSerwisSkladnikInfo_20162();
+            XlSerwisSkladnikInfo.Wersja = 20162;
+            XlSerwisSkladnikInfo.TwrTyp = 16;
+            XlSerwisSkladnikInfo.TwrNumer = 537;
+            XlSerwisSkladnikInfo.Ilosc = "7";
+
+
+            Int32 wynik = cdn_api.cdn_api.XLDodajSkladnikSerwis(ref IDDok, XlSerwisSkladnikInfo);
+            if(wynik != 0)
+            {
+                MessageBox.Show("Dodawanie skladnika błąd " + wynik.ToString());
+            }
+        }
+
+        private void dodajCzynnosc()
+        {
+            XLSerwisCzynnoscInfo_20162 XlSerwisCzynnoscInfo = new XLSerwisCzynnoscInfo_20162();
+            XlSerwisCzynnoscInfo.Wersja = 20162;
+            XlSerwisCzynnoscInfo.TwrTyp = 16;
+            XlSerwisCzynnoscInfo.TwrNumer = 1271;
+            XlSerwisCzynnoscInfo.Ilosc = "7";
+
+            Int32 wynik = cdn_api.cdn_api.XLDodajCzynnoscSerwis(ref IDDok, XlSerwisCzynnoscInfo);
+            if(wynik != 0)
+            {
+                MessageBox.Show("Dodawanie czynnosci błąd " + wynik.ToString());
+            }
+        }
     }
 }

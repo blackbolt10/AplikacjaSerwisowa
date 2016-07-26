@@ -86,17 +86,59 @@ namespace AplikacjaSerwisowaUsluga
             polecenieSQL.ExecuteNonQuery();
         }
 
-        public void oznaczZlcSrwNagZapisany(int id)
+        public void oznaczZlcSrwNagZapisany(int id, int oznaczenie)
         {
+            /* switch(oznaczenie)
+             * 1 - dodano poprawnie do XL
+             * 2 - błąd dodawania cznnosci
+             * 3 - błąd dodawania składników
+            */
+
             try
             {
-                String zapytanieString = "UPDATE [GAL].[SrwZlcNag] SET [GZN_Sync] = 1 WHERE [GZN_Id] = "+id.ToString();
+                String zapytanieString = "UPDATE [GAL].[SrwZlcNag] SET [GZN_Sync] = "+ oznaczenie + " WHERE [GZN_Id] = " +id.ToString();
                 zapiszDB(zapytanieString);
             }
             catch(Exception exc)
             {
                 eventLog.WriteEntry("Błąd funkcji DataBase.oznaczZlcSrwNagZapisany("+id.ToString()+"):\n" + exc.Message, EventLogEntryType.Error);
             }
+        }
+
+        public DataTable pobierzSrwZlcCzynnosci(int GZN_Id)
+        {
+            DataTable SrwZlcCzynnosciDT = new DataTable();
+
+            try
+            {
+                String zapytanieString = "SELECT * FROM [GAL].[SrwZlcCzynnosci] where GZC_GZNId = " + GZN_Id.ToString();
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(SrwZlcCzynnosciDT);
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Błąd funkcji DataBase.pobierzSrwZlcCzynnosci(" + GZN_Id + "):\n" + exc.Message, EventLogEntryType.Error);
+            }
+
+            return SrwZlcCzynnosciDT;
+        }
+
+        public DataTable pobierzSrwZlcSkladniki(int GZN_Id)
+        {
+            DataTable SrwZlcSkladnikiDT = new DataTable();
+
+            try
+            {
+                String zapytanieString = "SELECT * FROM [GAL].[SrwZlcSkladniki] where GZS_GZNId = " + GZN_Id.ToString();
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(SrwZlcSkladnikiDT);
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Błąd funkcji DataBase.pobierzSrwZlcSkladniki(" + GZN_Id + "):\n" + exc.Message, EventLogEntryType.Error);
+            }
+
+            return SrwZlcSkladnikiDT;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace AplikacjaSerwisowaUsluga
             int wynik = APIConnect();
             if(wynik == 0)
             {
-                SrwZlcSynchronizacja();
+                dodajSrwZlcNag();
 
 
 
@@ -83,26 +83,20 @@ namespace AplikacjaSerwisowaUsluga
             return WynikWylogowania;
         }
 
-
-        private void SrwZlcSynchronizacja()
-        {
-            odczytajSrwZkcNagZBazy();
-        }
-
-        private void odczytajSrwZkcNagZBazy()
+        private void dodajSrwZlcNag()
         {
             DataTable noweZleceniaDT = dbSERWIS.pobierzNoweSrwZlcNag();
 
-            if(noweZleceniaDT.Rows.Count>0)
+            if(noweZleceniaDT.Rows.Count > 0)
             {
-                for(int i=0;i<noweZleceniaDT.Rows.Count;i++)
+                for(int i = 0; i < noweZleceniaDT.Rows.Count; i++)
                 {
-                    wprowadzWierszSrwZkcNagDoXL(noweZleceniaDT.Rows[i]);
+                    wprowadzWierszSrwZlcNagDoXL(noweZleceniaDT.Rows[i]);
                 }
             }
         }
 
-        private void wprowadzWierszSrwZkcNagDoXL(DataRow dataRow)
+        private void wprowadzWierszSrwZlcNagDoXL(DataRow dataRow)
         {
             SrwZlcNagStruct srwZlcNag = new SrwZlcNagStruct();
             try
@@ -119,7 +113,7 @@ namespace AplikacjaSerwisowaUsluga
                 
                 DateTime DataWystawienia = wygenerujDate(dataRow["GZN_DataWystawienia"].ToString());
                 DateTime DataRozpoczecia = wygenerujDate(dataRow["GZN_DataRozpoczecia"].ToString());
-                
+
                 String Opis = dataRow["GZN_Opis"].ToString();
 
                 srwZlcNag = new SrwZlcNagStruct(Id, KntTyp, KntNumer, KnATyp, KnANumer, KndTyp, KndNumer, KnPTyp, KnPNumer, DataWystawienia, DataRozpoczecia, Opis);
@@ -129,39 +123,144 @@ namespace AplikacjaSerwisowaUsluga
                 eventLog.WriteEntry("Wystąpił błąd podczas tworzenia struktury w funkcji Synchroniacja.wprowadzWierszSrwZkcNagDoXL():\n" + exc.Message, EventLogEntryType.Error);
             }
 
-            Int32 result = wygenerujZlcSrwNag(srwZlcNag);
+            Int32 wynikWgenerujZlcSrwNag = wygenerujZlcSrwNag(srwZlcNag);
 
-            if(result == 0)
+            if(wynikWgenerujZlcSrwNag == 0)
             {
-                dodajCzynnosci();
-                dodajSkladniki();
+                Boolean wynikDodawaniaCzynnosci = dodajSrwZlcCzynnosci(srwZlcNag.Id);
+                Boolean wynikDodawaniaSkladnikow = dodajSrwZlcSkladniki(srwZlcNag.Id);
 
-                result = zmknijZlcSrwNag(srwZlcNag.Id);
-                
-                if(result == 0)
+                if(wynikDodawaniaCzynnosci && wynikDodawaniaSkladnikow)
                 {
-                    dbSERWIS.oznaczZlcSrwNagZapisany(srwZlcNag.Id);
+                    Int32 wynikZmknijZlcSrwNag = zmknijZlcSrwNag(srwZlcNag.Id);
+
+                    if(wynikZmknijZlcSrwNag == 0)
+                    {
+                        dbSERWIS.oznaczZlcSrwNagZapisany(srwZlcNag.Id, 1);
+                    }
+                }
+                else
+                {
+                    if(!wynikDodawaniaCzynnosci)
+                    {
+                        dbSERWIS.oznaczZlcSrwNagZapisany(srwZlcNag.Id, 2);
+                    }
+
+                    if(!wynikDodawaniaSkladnikow)
+                    {
+                        dbSERWIS.oznaczZlcSrwNagZapisany(srwZlcNag.Id, 3);
+                    }
                 }
             }
         }
 
-        private DateTime wygenerujDate(String data)
+        private Boolean dodajSrwZlcCzynnosci(int GZN_Id)
         {
-            String[] dataArray = data.Split('-', ':', ' ');
-            DateTime date = new DateTime(Convert.ToInt32(dataArray[0]), Convert.ToInt32(dataArray[1]), Convert.ToInt32(dataArray[2]));
-            return date;
+            DataTable noweCzynnosciZleceniaDT = dbSERWIS.pobierzSrwZlcCzynnosci(GZN_Id);
+            Boolean wynikDodawaniaCzynnosci = true;
+
+            if(noweCzynnosciZleceniaDT.Rows.Count > 0)
+            {
+                for(int i = 0; i < noweCzynnosciZleceniaDT.Rows.Count; i++)
+                {
+                    if(!wprowadzWierszSrwZlcCzynnosci(noweCzynnosciZleceniaDT.Rows[i]))
+                    {
+                        wynikDodawaniaCzynnosci = false;
+                        break;
+                    }
+                }
+            }
+            return wynikDodawaniaCzynnosci;
         }
 
-        private void dodajCzynnosci()
+        private Boolean wprowadzWierszSrwZlcCzynnosci(DataRow dataRow)
         {
+            SrwZlcCzynnosciStruct srwZlcCzynnosc = new SrwZlcCzynnosciStruct();
+            try
+            {
+                Int32 Id = Convert.ToInt32(dataRow["GZC_Id"].ToString());
+                Int32 Sync = Convert.ToInt32(dataRow["GZC_Sync"].ToString());
+                Int32 GZNId = Convert.ToInt32(dataRow["GZC_GZNId"].ToString());
+                Int32 Pozycja = Convert.ToInt32(dataRow["GZC_Pozycja"].ToString());
+                Int32 TwrTyp = Convert.ToInt32(dataRow["GZC_TwrTyp"].ToString());
+                Int32 TwrNumer = Convert.ToInt32(dataRow["GZC_TwrNumer"].ToString());
+
+                String Ilosc = dataRow["GZC_Ilosc"].ToString();
+                String Opis = dataRow["GZC_Opis"].ToString();
+
+                srwZlcCzynnosc = new SrwZlcCzynnosciStruct(Id, Sync, GZNId, Pozycja, TwrTyp, TwrNumer, Ilosc, Opis);
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Wystąpił błąd podczas tworzenia struktury w funkcji Synchroniacja.wprowadzWierszSrwZlcCzynnosci():\n" + exc.Message, EventLogEntryType.Error);
+                return false;
+            }
+
+            Int32 wynikWgenerujZlcSrwCznnosc = wygenerujZlcSrwCzynnosc(srwZlcCzynnosc);
+
+            if(wynikWgenerujZlcSrwCznnosc == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        private void dodajSkladniki()
+        private Boolean dodajSrwZlcSkladniki(int GZN_Id)
         {
+            DataTable noweSkladnikiZleceniaDT = dbSERWIS.pobierzSrwZlcSkladniki(GZN_Id);
+            Boolean wynikDodawaniaSkladnikow = true;
+
+            if(noweSkladnikiZleceniaDT.Rows.Count > 0)
+            {
+                for(int i = 0; i < noweSkladnikiZleceniaDT.Rows.Count; i++)
+                {
+                    if(!wprowadzWierszSrwZlcSkladniki(noweSkladnikiZleceniaDT.Rows[i]))
+                    {
+                        wynikDodawaniaSkladnikow = false;
+                        break;
+                    }
+                }
+            }
+            return wynikDodawaniaSkladnikow;
         }
 
+        private bool wprowadzWierszSrwZlcSkladniki(DataRow dataRow)
+        {
+            SrwZlcSkladnikiStruct srwZlcSkladnik = new SrwZlcSkladnikiStruct();
+            try
+            {
+                Int32 Id = Convert.ToInt32(dataRow["GZS_Id"].ToString());
+                Int32 Sync = Convert.ToInt32(dataRow["GZS_Sync"].ToString());
+                Int32 GZNId = Convert.ToInt32(dataRow["GZS_GZNId"].ToString());
+                Int32 Pozycja = Convert.ToInt32(dataRow["GZS_Pozycja"].ToString());
+                Int32 TwrTyp = Convert.ToInt32(dataRow["GZS_TwrTyp"].ToString());
+                Int32 TwrNumer = Convert.ToInt32(dataRow["GZS_TwrNumer"].ToString());
 
+                String Ilosc = dataRow["GZS_Ilosc"].ToString();
+                String Opis = dataRow["GZS_Opis"].ToString();
 
+                srwZlcSkladnik = new SrwZlcSkladnikiStruct(Id, Sync, GZNId, Pozycja, TwrTyp, TwrNumer, Ilosc, Opis);
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Wystąpił błąd podczas tworzenia struktury w funkcji Synchroniacja.wprowadzWierszSrwZlcSkladniki():\n" + exc.Message, EventLogEntryType.Error);
+                return false;
+            }
+
+            Int32 wynikWgenerujZlcSrwSkladnik = wygenerujZlcSrwSkladnik(srwZlcSkladnik);
+
+            if(wynikWgenerujZlcSrwSkladnik == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public Int32 wygenerujZlcSrwNag(SrwZlcNagStruct srwZlcNag)
         {
@@ -171,6 +270,13 @@ namespace AplikacjaSerwisowaUsluga
                 cdn_api.XLSerwisNagInfo_20162 DokumentXLSerwisNagInfo = new XLSerwisNagInfo_20162();
                 DokumentXLSerwisNagInfo.Wersja = 20162;
                 DokumentXLSerwisNagInfo.Tryb = 2;
+
+                /*
+                DokumentXLSerwisNagInfo.DataRozpoczecia = zwrocDateClarion(srwZlcNag.DataRozpoczecia);
+                DokumentXLSerwisNagInfo.DataWystawienia = zwrocDateClarion(srwZlcNag.DataWystawienia);
+                DokumentXLSerwisNagInfo.Rok = srwZlcNag.DataWystawienia.Year;
+                DokumentXLSerwisNagInfo.Miesiac = srwZlcNag.DataWystawienia.Month;
+                */
 
                 DokumentXLSerwisNagInfo.Opis = srwZlcNag.Opis;
 
@@ -197,7 +303,89 @@ namespace AplikacjaSerwisowaUsluga
             {
                 eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwNag(" + srwZlcNag.Id + ") result = " + wynik, EventLogEntryType.Error);
             }
+            else
+            {
+                eventLog.WriteEntry("wygenerujZlcSrwNag(" + srwZlcNag.Id + ") iddokumentu = " + IDDokSrwZlcNag);
+            }
+
             return wynik;
+        }
+        
+        private DateTime wygenerujDate(String data)
+        {
+            String[] dataArray = data.Split('-', ':', ' ');
+            DateTime date = new DateTime(Convert.ToInt32(dataArray[0]), Convert.ToInt32(dataArray[1]), Convert.ToInt32(dataArray[2]));
+            return date;
+        }
+
+        private int wygenerujZlcSrwCzynnosc(SrwZlcCzynnosciStruct srwZlcCzynnosc)
+        {
+            int wynik = -100;
+            try
+            {
+                XLSerwisCzynnoscInfo_20162 DokumentXLSerwisCzynnoscInfo = new XLSerwisCzynnoscInfo_20162();
+                DokumentXLSerwisCzynnoscInfo.Wersja = 20162;
+                DokumentXLSerwisCzynnoscInfo.TwrTyp = srwZlcCzynnosc.GZC_TwrTyp;
+                DokumentXLSerwisCzynnoscInfo.TwrNumer = srwZlcCzynnosc.GZC_TwrNumer;
+                DokumentXLSerwisCzynnoscInfo.Ilosc = srwZlcCzynnosc.GZC_Ilosc;
+                DokumentXLSerwisCzynnoscInfo.Opis = srwZlcCzynnosc.GZC_Opis;
+
+
+                wynik = cdn_api.cdn_api.XLDodajCzynnoscSerwis(ref IDDokSrwZlcNag, DokumentXLSerwisCzynnoscInfo);
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwCzynnosc(" + srwZlcCzynnosc.GZC_Id + "):\n" + exc.Message, EventLogEntryType.Error);
+            }
+
+            if(wynik != 0)
+            {
+                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwCzynnosc(" + srwZlcCzynnosc.GZC_Id + ") result = " + wynik, EventLogEntryType.Error);
+            }
+            else
+            {
+                eventLog.WriteEntry("wygenerujZlcSrwCzynnosc(" + srwZlcCzynnosc.GZC_Id + ") iddokumentu = " + IDDokSrwZlcNag);
+            }
+            return wynik;
+        }
+
+        private int wygenerujZlcSrwSkladnik(SrwZlcSkladnikiStruct srwZlcSkladnik)
+        {
+            int wynik = -100;
+            try
+            {
+                XLSerwisSkladnikInfo_20162 XlSerwisSkladnikInfo = new XLSerwisSkladnikInfo_20162();
+                XlSerwisSkladnikInfo.Wersja = 20162;
+                XlSerwisSkladnikInfo.TwrTyp = srwZlcSkladnik.GZS_TwrTyp;
+                XlSerwisSkladnikInfo.TwrNumer = srwZlcSkladnik.GZS_TwrNumer;
+                XlSerwisSkladnikInfo.Ilosc = srwZlcSkladnik.GZS_Ilosc;
+                XlSerwisSkladnikInfo.Opis = srwZlcSkladnik.GZS_Opis;
+
+
+                wynik = cdn_api.cdn_api.XLDodajSkladnikSerwis(ref IDDokSrwZlcNag, XlSerwisSkladnikInfo);
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwSkladnik(" + srwZlcSkladnik.GZS_Id + "):\n" + exc.Message, EventLogEntryType.Error);
+            }
+
+            if(wynik != 0)
+            {
+                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwSkladnik(" + srwZlcSkladnik.GZS_Id + ") result = " + wynik, EventLogEntryType.Error);
+            }
+            else
+            {
+                eventLog.WriteEntry("wygenerujZlcSrwSkladnik(" + srwZlcSkladnik.GZS_Id + ") iddokumentu = " + IDDokSrwZlcNag);
+            }
+            return wynik;
+        }
+
+
+        private int zwrocDateClarion(DateTime dataRozpoczecia)
+        {
+            DateTime date = new DateTime(1800, 12, 28, 0, 0, 0);
+            int daysSince = (DateTime.Now - date).Days;
+            return daysSince;
         }
 
         public Int32 zmknijZlcSrwNag(Int32 srwZlcNagId)
@@ -211,7 +399,7 @@ namespace AplikacjaSerwisowaUsluga
 
             if(wynik != 0)
             {
-                eventLog.WriteEntry("Wystąpił błąd funkcji zmknijZlcSrwNag(" + srwZlcNagId + ") result = " + wynik, EventLogEntryType.Error);
+                eventLog.WriteEntry("Wystąpił błąd funkcji zmknijZlcSrwNag(" + srwZlcNagId + ") = " + wynik+", ID zamkanego dokument ="+IDDokSrwZlcNag, EventLogEntryType.Error);
             }
 
             return wynik;

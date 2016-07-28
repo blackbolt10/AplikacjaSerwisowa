@@ -16,11 +16,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/synchronizacjaSynchronizacjaButton" />
         <Button
-            android:text="Test2()"
+            android:text="Wyślij dane"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/synchronizacjaSynchronizacjaButton"
-            android:id="@+id/test2Synchronizacja_button"
+            android:id="@+id/SynchronizacjaWyslijDaneButton"
             android:layout_marginRight="0.0dp" />
     </RelativeLayout>
 </ScrollView>

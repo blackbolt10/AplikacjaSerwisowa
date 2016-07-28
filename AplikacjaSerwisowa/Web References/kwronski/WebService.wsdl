@@ -96,6 +96,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="synchronizujSrwZlcNag">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inputJSON" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="synchronizujSrwZlcNagResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="synchronizujSrwZlcNagResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="string" nillable="true" type="s:string" />
     </s:schema>
   </wsdl:types>
@@ -153,6 +167,12 @@
   <wsdl:message name="ZwrocListeTwrKartySoapOut">
     <wsdl:part name="parameters" element="tns:ZwrocListeTwrKartyResponse" />
   </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcNagSoapIn">
+    <wsdl:part name="parameters" element="tns:synchronizujSrwZlcNag" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcNagSoapOut">
+    <wsdl:part name="parameters" element="tns:synchronizujSrwZlcNagResponse" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpGetIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -189,6 +209,12 @@
   </wsdl:message>
   <wsdl:message name="ZwrocListeTwrKartyHttpGetIn" />
   <wsdl:message name="ZwrocListeTwrKartyHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcNagHttpGetIn">
+    <wsdl:part name="inputJSON" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcNagHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpPostIn">
@@ -229,6 +255,12 @@
   <wsdl:message name="ZwrocListeTwrKartyHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcNagHttpPostIn">
+    <wsdl:part name="inputJSON" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcNagHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
     <wsdl:operation name="SayHelloToLame">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Hello lame .......!</wsdl:documentation>
@@ -256,7 +288,7 @@
       <wsdl:output message="tns:ZwrocListeKntKartySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SerwisoweZleceniaNaglownki</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcNag</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychNaglowkiSoapIn" />
       <wsdl:output message="tns:ZwrocListeZlecenSerwisowychNaglowkiSoapOut" />
     </wsdl:operation>
@@ -274,6 +306,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie TwrKartyTable</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeTwrKartySoapIn" />
       <wsdl:output message="tns:ZwrocListeTwrKartySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcNag">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na synchronizację SrwZlcNag z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:synchronizujSrwZlcNagSoapIn" />
+      <wsdl:output message="tns:synchronizujSrwZlcNagSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpGet">
@@ -303,7 +340,7 @@
       <wsdl:output message="tns:ZwrocListeKntKartyHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SerwisoweZleceniaNaglownki</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcNag</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpGetIn" />
       <wsdl:output message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpGetOut" />
     </wsdl:operation>
@@ -321,6 +358,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie TwrKartyTable</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeTwrKartyHttpGetIn" />
       <wsdl:output message="tns:ZwrocListeTwrKartyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcNag">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na synchronizację SrwZlcNag z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:synchronizujSrwZlcNagHttpGetIn" />
+      <wsdl:output message="tns:synchronizujSrwZlcNagHttpGetOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpPost">
@@ -350,7 +392,7 @@
       <wsdl:output message="tns:ZwrocListeKntKartyHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SerwisoweZleceniaNaglownki</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcNag</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpPostIn" />
       <wsdl:output message="tns:ZwrocListeZlecenSerwisowychNaglowkiHttpPostOut" />
     </wsdl:operation>
@@ -368,6 +410,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie TwrKartyTable</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeTwrKartyHttpPostIn" />
       <wsdl:output message="tns:ZwrocListeTwrKartyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcNag">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na synchronizację SrwZlcNag z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:synchronizujSrwZlcNagHttpPostIn" />
+      <wsdl:output message="tns:synchronizujSrwZlcNagHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -446,6 +493,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeTwrKarty">
       <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeTwrKarty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcNag">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcNag" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -537,6 +593,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcNag">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcNag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpGet" type="tns:WebServiceHttpGet">
     <http:binding verb="GET" />
@@ -621,6 +686,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcNag">
+      <http:operation location="/synchronizujSrwZlcNag" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpPost" type="tns:WebServiceHttpPost">
     <http:binding verb="POST" />
@@ -698,6 +772,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeTwrKarty">
       <http:operation location="/ZwrocListeTwrKarty" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcNag">
+      <http:operation location="/synchronizujSrwZlcNag" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

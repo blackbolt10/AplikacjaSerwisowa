@@ -105,6 +105,9 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060098
 			public const int ListaZlecenSzczegolyLinearLayout = 2131099800;
 			
+			// aapt resource value: 0x7f0600a2
+			public const int SynchronizacjaWyslijDaneButton = 2131099810;
+			
 			// aapt resource value: 0x7f06003a
 			public const int adresKodPKontrahenciAdresyRowTextView = 2131099706;
 			
@@ -536,9 +539,6 @@ namespace AplikacjaSerwisowa
 			
 			// aapt resource value: 0x7f060016
 			public const int telexFrag1TextView = 2131099670;
-			
-			// aapt resource value: 0x7f0600a2
-			public const int test2Synchronizacja_button = 2131099810;
 			
 			// aapt resource value: 0x7f0600ac
 			public const int test2_button = 2131099820;

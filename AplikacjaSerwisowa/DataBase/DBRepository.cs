@@ -8,6 +8,18 @@ namespace AplikacjaSerwisowa
 {
     public class DBRepository
     {
+        private String dbPath;
+        private SQLiteConnection db;
+
+        public DBRepository()
+        {
+            dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+            db = new SQLiteConnection(dbPath);
+        }
+
+
+
+
         public string createDB()
         {
             String output = "";
@@ -26,14 +38,12 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+
         public string CreateTable()
         {
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 try
                 {
                     db.DropTable<OperatorzyTable>();
@@ -56,10 +66,7 @@ namespace AplikacjaSerwisowa
         {
             String output = "";
             try
-            {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);  
-                              
+            {        
                 db.Insert(item);
                 output = "Record added..";
             }
@@ -77,8 +84,6 @@ namespace AplikacjaSerwisowa
 
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
                 var table = db.Table<OperatorzyTable>();
 
                 foreach(var item in table)
@@ -101,8 +106,6 @@ namespace AplikacjaSerwisowa
             {
                 try
                 {
-                    String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                    SQLiteConnection db = new SQLiteConnection(dbPath);
                     var table = db.Table<OperatorzyTable>();
 
                     var test = db.Query<OperatorzyTable>("select Haslo from OperatorzyTable where Akronim = '" + akronim + "'");
@@ -151,9 +154,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 try
                 {
                     db.DropTable<kartyTowarowTable>();
@@ -176,9 +176,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 db.Insert(item);
                 output = "Wpis dodany..";
             }
@@ -195,8 +192,6 @@ namespace AplikacjaSerwisowa
 
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
                 var table = db.Table<kartyTowarowTable>();
 
                 foreach (var item in table)
@@ -233,9 +228,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 try
                 {
                     db.DropTable<KntKartyTable>();
@@ -258,9 +250,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 db.Insert(item);
                 output = "Wpis dodany..";
             }
@@ -277,8 +266,6 @@ namespace AplikacjaSerwisowa
 
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
                 var table = db.Table<KntKartyTable>();
 
                 foreach(var item in table)
@@ -294,9 +281,6 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-
-        
-
         public KntKartyTable kntKarty_GetRecord(String knt_GidNumer)
         {
             KntKartyTable output = null;
@@ -305,8 +289,6 @@ namespace AplikacjaSerwisowa
             {
                 try
                 {
-                    String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                    SQLiteConnection db = new SQLiteConnection(dbPath);
                     var table = db.Table<KntKartyTable>();
 
                     var result = db.Query<KntKartyTable>("select * from KntKartyTable where Knt_GIDNumer = " + knt_GidNumer);
@@ -329,8 +311,6 @@ namespace AplikacjaSerwisowa
             List<KntKartyTable> output = new List<KntKartyTable>();
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
                 var table = db.Table<KntKartyTable>();
                 string zapytanie = "select * from KntKartyTable ";
 
@@ -372,9 +352,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 try
                 {
                     db.DropTable<KntAdresyTable>();
@@ -397,9 +374,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 db.Insert(item);
                 output = "Wpis dodany..";
             }
@@ -416,8 +390,6 @@ namespace AplikacjaSerwisowa
 
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
                 var table = db.Table<KntAdresyTable>();
 
                 foreach(var item in table)
@@ -441,8 +413,6 @@ namespace AplikacjaSerwisowa
             {
                 try
                 {
-                    String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                    SQLiteConnection db = new SQLiteConnection(dbPath);
                     var table = db.Table<KntAdresyTable>();
 
                     var result = db.Query<KntAdresyTable>("select * from KntAdresyTable where kna_GIDNumer = " + kna_GIDNumer);
@@ -465,8 +435,6 @@ namespace AplikacjaSerwisowa
             List<KntAdresyTable> output = new List<KntAdresyTable>();
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
                 var table = db.Table<KntAdresyTable>();
                 string zapytanie = "select * from KntAdresyTable where Kna_KntNumer = "+ knt_GidNumer + " ";
 
@@ -510,63 +478,70 @@ namespace AplikacjaSerwisowa
             *---------------------------------------------------------------------------------
         */
 
-        public string stworzSerwisoweZleceniaNaglowkiTable()
+        public string stworzSrwZlcNagTable()
         {
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 try
                 {
-                    db.DropTable<SerwisoweZleceniaNaglowkiTable>();
+                    db.DropTable<SrwZlcNagTable>();
                 }
                 catch(Exception) { }
 
-                db.CreateTable<SerwisoweZleceniaNaglowkiTable>();
+                db.CreateTable<SrwZlcNagTable>();
 
-                output = "Tabela SerwisoweZleceniaNaglowkiTable zosta³a stworzona...";
+                output = "Tabela SrwZlcNagTable zosta³a stworzona...";
             }
             catch(Exception exc)
             {
-                output = "DBRepository.stworzSerwisoweZleceniaNaglowkiTable() Error: " + exc.Message;
+                output = "DBRepository.stworzSrwZlcNagTable() Error: " + exc.Message;
             }
 
             return output;
         }
-        public String SerwisoweZleceniaNaglowki_InsertRecord(SerwisoweZleceniaNaglowkiTable item)
+        public String SrwZlcNag_InsertRecord(SrwZlcNagTable item)
         {
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 db.Insert(item);
                 output = "Wpis dodany..";
             }
             catch(Exception exc)
             {
-                output = "DBRepository.SerwisoweZleceniaNaglowki_InsertRecord() Error: " + exc.Message;
+                output = "DBRepository.SrwZlcNag_InsertRecord() Error: " + exc.Message;
             }
 
             return output;
         }
-
-        public SerwisoweZleceniaNaglowkiTable SerwisoweZleceniaNaglowki_GetRecord(String szn_ID)
+        
+        public void SrwZlcNag_OznaczWyslane(List<int> wyslaneNagList, int wslaneParam)
         {
-            SerwisoweZleceniaNaglowkiTable output = null;
+            for(int i = 0; i < wyslaneNagList.Count; i++)
+            {
+                var result = db.Query<SrwZlcNagTable>("UPDATE SrwZlcNagTable SET SZN_Synchronizacja = " + wslaneParam.ToString() + " where SZN_Id = " + wyslaneNagList[i].ToString());
+            }
+        }
+        public void SrwZlcNag_OznaczWyslane(List<SrwZlcNagTable> wyslaneNagList, int wslaneParam)
+        {
+            for(int i = 0; i < wyslaneNagList.Count; i++)
+            {
+                var result = db.Query<SrwZlcNagTable>("UPDATE SrwZlcNagTable SET SZN_Synchronizacja = " + wslaneParam.ToString() + " where SZN_Id = " + wyslaneNagList[i].SZN_Id.ToString());
+            }
+        }
+
+        public SrwZlcNagTable SrwZlcNag_GetRecordGetRecord(String szn_ID)
+        {
+            SrwZlcNagTable output = null;
 
             if(szn_ID.Length > 0)
             {
                 try
                 {
-                    String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                    SQLiteConnection db = new SQLiteConnection(dbPath);
-                    var table = db.Table<SerwisoweZleceniaNaglowkiTable>();
+                    var table = db.Table<SrwZlcNagTable>();
 
-                    var result = db.Query<SerwisoweZleceniaNaglowkiTable>("select * from SerwisoweZleceniaNaglowkiTable where SZN_Id = " + szn_ID);
+                    var result = db.Query<SrwZlcNagTable>("select * from SrwZlcNagTable where SZN_Id = " + szn_ID);
 
                     if(result.Count > 0)
                     {
@@ -581,7 +556,32 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
+        public List<SrwZlcNagTable> SrwZlcNagSynchronizacja(int synchParam)
+        {
+            List<SrwZlcNagTable> srwZlcNagList = new List<SrwZlcNagTable>();
 
+            try
+            {
+                srwZlcNagList = db.Query<SrwZlcNagTable>("select * from SrwZlcNagTable where  SZN_Synchronizacja = " + synchParam.ToString());
+            }
+            catch(Exception)
+            {
+            }
+            return srwZlcNagList;
+            //return lamadodajDosynch();
+        }
+
+        private List<SrwZlcNagTable> lamadodajDosynch()
+        {
+            List<SrwZlcNagTable> wynik = new List<SrwZlcNagTable>();
+
+            for(int i = 0; i < 3; i++)
+            {
+                SrwZlcNagTable lama = new SrwZlcNagTable("test", -1 - i, 0, 0,0, 0, 0, 0, 0, 0, "2015-01-10", "2015-01-10", "", "", "", "lama!" + i, 1);
+                wynik.Add(lama);
+            }
+            return wynik;
+        }
 
 
 
@@ -600,9 +600,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 try
                 {
                     db.DropTable<SrwZlcCzynnosciTable>();
@@ -625,9 +622,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 db.Insert(item);
                 output = "Wpis dodany..";
             }
@@ -647,8 +641,6 @@ namespace AplikacjaSerwisowa
             {
                 try
                 {
-                    String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                    SQLiteConnection db = new SQLiteConnection(dbPath);
                     var table = db.Table<SrwZlcCzynnosciTable>();
 
                     var result = db.Query<SrwZlcCzynnosciTable>("select * from SrwZlcCzynnosciTable where szc_sznId = " + szn_ID);
@@ -683,8 +675,6 @@ namespace AplikacjaSerwisowa
             List<SrwZlcCzynnosciTable> output = new List<SrwZlcCzynnosciTable>();
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
                 var table = db.Table<SrwZlcCzynnosciTable>();
                 string zapytanie = "select * from SrwZlcCzynnosciTable ";
 
@@ -727,9 +717,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 try
                 {
                     db.DropTable<SrwZlcSkladnikiTable>();
@@ -752,9 +739,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 db.Insert(item);
                 output = "Wpis dodany..";
             }
@@ -774,8 +758,6 @@ namespace AplikacjaSerwisowa
             {
                 try
                 {
-                    String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                    SQLiteConnection db = new SQLiteConnection(dbPath);
                     var table = db.Table<SrwZlcSkladnikiTable>();
 
                     var result = db.Query<SrwZlcSkladnikiTable>("select * from SrwZlcSkladnikiTable where szs_sznId = " + szn_ID);
@@ -810,8 +792,6 @@ namespace AplikacjaSerwisowa
             List<SrwZlcSkladnikiTable> output = new List<SrwZlcSkladnikiTable>();
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
                 var table = db.Table<SrwZlcSkladnikiTable>();
                 string zapytanie = "select * from SrwZlcSkladnikiTable ";
 
@@ -853,9 +833,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 try
                 {
                     db.DropTable<TwrKartyTable>();
@@ -879,9 +856,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-
                 db.Insert(item);
                 output = "Wpis dodany..";
             }
@@ -897,8 +871,6 @@ namespace AplikacjaSerwisowa
             List<TwrKartyTable> output = new List<TwrKartyTable>();
             try
             {
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
                 var table = db.Table<TwrKartyTable>();
                 string zapytanie = "select * from TwrKartyTable where ";
 

@@ -25,7 +25,7 @@ namespace AplikacjaSerwisowa
     [Activity(Label = "Synchronizacja", Icon = "@drawable/synchronizacja")]
     public class synchronizacja_Activity : Activity
     {
-        private Button synchronizacja_Button, test2Button;
+        private Button synchronizacja_Button, wyslij_Button;
 
         private AplikacjaSerwisowa.kwronski.WebService kwronskiService;
 
@@ -39,8 +39,8 @@ namespace AplikacjaSerwisowa
             synchronizacja_Button = FindViewById<Button>(Resource.Id.synchronizacjaSynchronizacjaButton);
             synchronizacja_Button.Click += delegate { synchronizacja(); };
 
-            test2Button = FindViewById<Button>(Resource.Id.test2Synchronizacja_button);
-            test2Button.Click += delegate { test2(); };
+            wyslij_Button = FindViewById<Button>(Resource.Id.SynchronizacjaWyslijDaneButton);
+            wyslij_Button.Click += delegate { wyslijDane(); };
             
             // Create your application here
 
@@ -62,13 +62,6 @@ namespace AplikacjaSerwisowa
 
             Dialog dialog = alert.Create();
             dialog.Show();
-        }
-
-        private void test2()
-        {
-            DBRepository dbr = new DBRepository();
-            String result = dbr.kntKarty_GetAllRecords();
-            Toast.MakeText(this, result, ToastLength.Long).Show();
         }
 
         private void synchronizacja()
@@ -285,12 +278,12 @@ namespace AplikacjaSerwisowa
 
         private void tworzenieBazySerwisoweZleceniaNaglowki(String serwisoweZlecenniaNaglowkiString)
         {
-            var records = JsonConvert.DeserializeObject<List<SerwisoweZleceniaNaglowkiTable>>(serwisoweZlecenniaNaglowkiString);
+            var records = JsonConvert.DeserializeObject<List<SrwZlcNagTable>>(serwisoweZlecenniaNaglowkiString);
 
             DBRepository dbr = new DBRepository();
             String result = dbr.createDB();
             //Toast.MakeText(this, result, ToastLength.Short).Show();            
-            result = dbr.stworzSerwisoweZleceniaNaglowkiTable();
+            result = dbr.stworzSrwZlcNagTable();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
             if(records.Count > 0)
@@ -299,7 +292,7 @@ namespace AplikacjaSerwisowa
             }
         }
 
-        private void wprowadzWpisyDoTabeliSerwisoweZleceniaNaglowki(List<SerwisoweZleceniaNaglowkiTable> records, DBRepository dbr)
+        private void wprowadzWpisyDoTabeliSerwisoweZleceniaNaglowki(List<SrwZlcNagTable> records, DBRepository dbr)
         {
             RunOnUiThread(() => progrssDialog.SetMessage("Zapisywanie nag³ówków zleceñ serwisowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
@@ -309,8 +302,8 @@ namespace AplikacjaSerwisowa
             {
                 RunOnUiThread(() => progrssDialog.Progress++);
 
-                SerwisoweZleceniaNaglowkiTable szn = records[i];
-                dbr.SerwisoweZleceniaNaglowki_InsertRecord(szn);
+                SrwZlcNagTable szn = records[i];
+                dbr.SrwZlcNag_InsertRecord(szn);
             }
         }
         private void tworzenieBazyTwrKarty(String twrKartyString)
@@ -342,6 +335,69 @@ namespace AplikacjaSerwisowa
                 TwrKartyTable twrKarta = records[i];
                 dbr.TwrKartyTable_InsertRecord(twrKarta);
             }
+        }
+
+
+
+
+
+
+
+        private void wyslijDane()
+        {
+            List<int> wyslaneNagList = wyslijSrwZlcNag();
+            oznaczWyslaneSrwZlcNag(wyslaneNagList);
+
+            wyslijSrwZlcCzynniki(wyslaneNagList);
+            wyslijSrwZlcSkladniki(wyslaneNagList);
+        }
+
+        private List<int> wyslijSrwZlcNag()
+        {
+            List<int> wyslaneNagList = new List<int>();
+            DBRepository db = new DBRepository();
+
+            List<SrwZlcNagTable> srwZlcNagList = db.SrwZlcNagSynchronizacja(0);
+
+            String jsonOut = JsonConvert.SerializeObject(srwZlcNagList);
+
+            String result = kwronskiService.synchronizujSrwZlcNag(jsonOut);
+
+            if(result != "[]")
+            {
+                db.SrwZlcNag_OznaczWyslane(srwZlcNagList, 2);
+
+                result = result.Replace('[', ' ');
+                result = result.Replace(']', ' ');
+
+                String[] resultArray = result.Split(',');
+                for(int i = 0; i < resultArray.Length; i++)
+                {
+                    wyslaneNagList.Add(Convert.ToInt32(resultArray[i]));
+                }
+            }
+            return wyslaneNagList;
+        }
+
+        private void oznaczWyslaneSrwZlcNag(List<int> wyslaneNagList)
+        {
+            DBRepository db = new DBRepository();
+            db.SrwZlcNag_OznaczWyslane(wyslaneNagList,3);
+        }
+
+
+
+
+
+
+        private void wyslijSrwZlcCzynniki(List<int> wyslaneNagList)
+        {
+            
+        }
+
+        private void wyslijSrwZlcSkladniki(List<int> wyslaneNagList)
+        {
+            
         }
     }
 }

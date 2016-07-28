@@ -108,12 +108,12 @@ namespace AplikacjaSerwisowa
 
         private void ustawDaneZlecenia()
         {
-            SerwisoweZleceniaNaglowkiTable szn = null;
+            SrwZlcNagTable szn = null;
             DBRepository dbr = new DBRepository();
 
             try
             {
-                szn = dbr.SerwisoweZleceniaNaglowki_GetRecord(szn_ID);
+                szn = dbr.SrwZlcNag_GetRecordGetRecord(szn_ID);
             }
             catch(Exception exc)
             {

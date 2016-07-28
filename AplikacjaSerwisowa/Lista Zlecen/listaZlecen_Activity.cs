@@ -45,7 +45,7 @@ namespace AplikacjaSerwisowa
             {
                 String dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
                 SQLiteConnection db = new SQLiteConnection(dbPath);
-                var table = db.Table<SerwisoweZleceniaNaglowkiTable>();
+                var table = db.Table<SrwZlcNagTable>();
 
                 foreach(var item in table)
                 {

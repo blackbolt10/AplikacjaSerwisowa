@@ -74,12 +74,12 @@ namespace WebApplication
             return new JavaScriptSerializer().Serialize(listaKntKarty);
         }
 
-        [WebMethod(Description = "Pozwala na wygenerowanie SerwisoweZleceniaNaglownki")]
+        [WebMethod(Description = "Pozwala na wygenerowanie SrwZlcNag")]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string ZwrocListeZlecenSerwisowychNaglowki()
         {
             DataBase dataBaseObject = new DataBase();
-            List<SerwisoweZleceniaNaglownki> listaSerwisoweZlecenNaglowki = dataBaseObject.wygenerujListeSerwisowychZlecenNaglowki();
+            List<SrwZlcNag> listaSerwisoweZlecenNaglowki = dataBaseObject.wygenerujListeSerwisowychZlecenNaglowki();
 
             return new JavaScriptSerializer().Serialize(listaSerwisoweZlecenNaglowki);
         }
@@ -113,5 +113,18 @@ namespace WebApplication
 
             return new JavaScriptSerializer().Serialize(twrKartyList);
         }
+
+        [WebMethod(Description = "Pozwala na synchronizację SrwZlcNag z urządzenia")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string synchronizujSrwZlcNag(String inputJSON)
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<int> output = dataBaseObject.synchronizujSrwZlcNag(inputJSON);
+
+            return new JavaScriptSerializer().Serialize(output);
+        }
+
+
+        
     }
 }

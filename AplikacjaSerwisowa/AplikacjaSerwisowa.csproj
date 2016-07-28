@@ -72,7 +72,7 @@
   <ItemGroup>
     <Compile Include="DataBase\DBRepository.cs" />
     <Compile Include="DataBase\Tabele\TwrKartyTable.cs" />
-    <Compile Include="DataBase\Tabele\SerwisoweZleceniaNaglowkiTable.cs" />
+    <Compile Include="DataBase\Tabele\SrwZlcNagTable.cs" />
     <Compile Include="DataBase\Tabele\SrwZlcSkladnikiTable.cs" />
     <Compile Include="DataBase\Tabele\SrwZlcCzynnosciTable.cs" />
     <Compile Include="glowneOkno_Activity.cs" />

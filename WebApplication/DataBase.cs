@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Xml;
 
 namespace WebApplication
@@ -13,12 +14,13 @@ namespace WebApplication
     class DataBase
     {
         private SqlConnection uchwytBD;
-        private SqlCommand polecenieSQL;
+        private SqlConnection uchwytBDSerwis;
         private int liczbaMiesiecyWstecz = -9;
 
         public DataBase()
         {
             podlaczDoBazyDanych();
+            podlaczDoBazyDanychSerwis();
         }
 
         private Boolean podlaczDoBazyDanych()
@@ -42,10 +44,31 @@ namespace WebApplication
             return wynikLogowaniaDoBD;
         }
 
+        private Boolean podlaczDoBazyDanychSerwis()
+        {
+            Boolean wynikLogowaniaDoBD = false;
+            hasla haslo = new hasla(4);
+
+            try
+            {
+                String loginBD = haslo.GetInstanceUserName();
+                String hasloBD = haslo.GetInstancePassword();
+                String instancja = haslo.GetInstanceName();
+                String bazaDanych = haslo.GetDataBaseSerwisName();
+
+                uchwytBDSerwis = new SqlConnection(@"user id=" + loginBD + "; password=" + hasloBD + "; Data Source=" + instancja + "; Initial Catalog=" + bazaDanych + ";");
+                uchwytBDSerwis.Open();
+                wynikLogowaniaDoBD = true;
+            }
+            catch(Exception) { }
+
+            return wynikLogowaniaDoBD;
+        }
+
         private SqlDataAdapter zapytanie(string zapytanieString)
         {
             SqlDataAdapter wynik = new SqlDataAdapter();
-            polecenieSQL = new SqlCommand(zapytanieString);
+            SqlCommand polecenieSQL = new SqlCommand(zapytanieString);
             polecenieSQL.CommandTimeout = 240;
             polecenieSQL.Connection = uchwytBD;
             wynik = new SqlDataAdapter(polecenieSQL);
@@ -53,13 +76,23 @@ namespace WebApplication
             return wynik;
         }
 
+        private SqlDataAdapter zapytanieSerwis(string zapytanieString)
+        {
+            SqlDataAdapter wynik = new SqlDataAdapter();
+            SqlCommand polecenieSQL = new SqlCommand(zapytanieString);
+            polecenieSQL.CommandTimeout = 240;
+            polecenieSQL.Connection = uchwytBDSerwis;
+            wynik = new SqlDataAdapter(polecenieSQL);
+
+            return wynik;
+        }
+
         private void zapiszDB(string zapytanie1)
         {
-            polecenieSQL = new SqlCommand(zapytanie1);
+            SqlCommand polecenieSQL = new SqlCommand(zapytanie1);
             polecenieSQL.Connection = uchwytBD;
             polecenieSQL.ExecuteNonQuery();
         }
-
 
         public String pobierzKntKarty()
         {
@@ -100,7 +133,7 @@ namespace WebApplication
             return output;
         }
          
-        public List<SerwisoweZleceniaNaglownki> wygenerujListeSerwisowychZlecenNaglowki()
+        public List<SrwZlcNag> wygenerujListeSerwisowychZlecenNaglowki()
         {
             DateTime data = DateTime.Now.AddMonths(liczbaMiesiecyWstecz);
             String zapytanieSerwisowaLista = @"SELECT 
@@ -159,9 +192,46 @@ namespace WebApplication
             }
         }
 
-        private List<SerwisoweZleceniaNaglownki> wygenerujListeSerwisowychZlecen(DataTable pomDataTable)
+        public List<int> synchronizujSrwZlcNag(string inputJSON)
         {
-            List<SerwisoweZleceniaNaglownki> result = new List<SerwisoweZleceniaNaglownki>();
+            List<int> result = new List<int>();
+
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<SrwZlcNag> records = ser.Deserialize<List<SrwZlcNag>>(inputJSON);
+
+            for(int i =0;i<records.Count;i++)
+            {
+                Boolean wynik = zapiszSrwZlcNagSerwis(records[i]);
+                if(wynik)
+                {
+                    result.Add(records[i].SZN_Id);
+                }
+            }
+
+            return result;
+        }
+
+        private Boolean zapiszSrwZlcNagSerwis(SrwZlcNag srwZlcNag)
+        {
+            DataTable pomdatatable = new DataTable();
+
+            try
+            {
+                String zapytanieString = "INSERT INTO [GAL].[SrwZlcNag] VALUES(0, "+srwZlcNag.SZN_KntTyp+ ", " + srwZlcNag.SZN_KntNumer + ", " + srwZlcNag.SZN_KnATyp + ", " + srwZlcNag.SZN_KnANumer + ", " + srwZlcNag.SZN_KntTyp + ", " + srwZlcNag.SZN_KntNumer + ", " + srwZlcNag.SZN_KntTyp + ", " + srwZlcNag.SZN_KntNumer + ", '"+srwZlcNag.SZN_DataWystawienia+ "', '" + srwZlcNag.SZN_DataRozpoczecia + "', '" + srwZlcNag.SZN_Opis+ "')";
+                SqlDataAdapter da =  zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
+
+        private List<SrwZlcNag> wygenerujListeSerwisowychZlecen(DataTable pomDataTable)
+        {
+            List<SrwZlcNag> result = new List<SrwZlcNag>();
 
             for(int i=0;i<pomDataTable.Rows.Count;i++)
             {
@@ -182,7 +252,7 @@ namespace WebApplication
                 String SZN_CechaOpis = pomDataTable.Rows[i]["SZN_CechaOpis"].ToString();
                 String SZN_Opis = pomDataTable.Rows[i]["SZN_Opis"].ToString();
 
-                result.Add(new SerwisoweZleceniaNaglownki(Dokument, SZN_Id, SZN_KntTyp, SZN_KntNumer, SZN_KnATyp, SZN_KnANumer, SZN_KnDTyp, SZN_KnDNumer, SZN_AdWTyp, SZN_AdWNumer, SZN_DataWystawienia, SZN_DataRozpoczecia, SZN_Stan, SZN_Status, SZN_CechaOpis, SZN_Opis));
+                result.Add(new SrwZlcNag(Dokument, SZN_Id, SZN_KntTyp, SZN_KntNumer, SZN_KnATyp, SZN_KnANumer, SZN_KnDTyp, SZN_KnDNumer, SZN_AdWTyp, SZN_AdWNumer, SZN_DataWystawienia, SZN_DataRozpoczecia, SZN_Stan, SZN_Status, SZN_CechaOpis, SZN_Opis, 0));
             }
             return result;
         }
@@ -466,6 +536,8 @@ namespace WebApplication
             }
             return result;
         }
+
+
     }
 }
 
@@ -483,7 +555,7 @@ namespace WebApplication
 
 
 
-public class SerwisoweZleceniaNaglownki
+public class SrwZlcNag
 {
     public String Dokument { get; set; }
     public int SZN_Id { get; set; }
@@ -501,9 +573,10 @@ public class SerwisoweZleceniaNaglownki
     public String SZN_Status { get; set; }
     public String SZN_CechaOpis { get; set; }
     public String SZN_Opis { get; set; }
+    public int SZN_Synchronizacja { get; set; }
 
 
-    public SerwisoweZleceniaNaglownki(String _Dokument, int _SZN_Id, int _SZN_KntTyp, int _SZN_KntNumer, int _SZN_KnATyp, int _SZN_KnANumer, int _SZN_KnDTyp, int _SZN_KnDNumer, int _SZN_AdWTyp, int _SZN_AdWNumer, String _SZN_DataWystawienia, String _SZN_DataRozpoczecia, String _SZN_Stan, String _SZN_Status, String _SZN_CechaOpis, String _SZN_Opis)
+    public SrwZlcNag(String _Dokument, int _SZN_Id, int _SZN_KntTyp, int _SZN_KntNumer, int _SZN_KnATyp, int _SZN_KnANumer, int _SZN_KnDTyp, int _SZN_KnDNumer, int _SZN_AdWTyp, int _SZN_AdWNumer, String _SZN_DataWystawienia, String _SZN_DataRozpoczecia, String _SZN_Stan, String _SZN_Status, String _SZN_CechaOpis, String _SZN_Opis, int _SZN_Synchronizacja)
     {
         Dokument = _Dokument;
         SZN_Id = _SZN_Id;
@@ -521,8 +594,9 @@ public class SerwisoweZleceniaNaglownki
         SZN_Status = _SZN_Status;
         SZN_CechaOpis = _SZN_CechaOpis;
         SZN_Opis = _SZN_Opis;
+        SZN_Synchronizacja = _SZN_Synchronizacja;
     }
-    public SerwisoweZleceniaNaglownki() { }
+    public SrwZlcNag() { }
 }
 
 public class KntKarty

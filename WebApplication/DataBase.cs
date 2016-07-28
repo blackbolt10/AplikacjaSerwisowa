@@ -320,7 +320,7 @@ namespace WebApplication
             DataTable pomDataTable = new DataTable();
             try
             {
-                String zapytanieString = @"select kna_GIDNumer, kna_kntnumer, kna_Akronim, kna_nazwa1, kna_nazwa2, kna_nazwa3, kna_KodP, kna_miasto,
+                String zapytanieString = @"select kna_GIDNumer, kna_GIDTyp, kna_kntnumer, kna_Akronim, kna_nazwa1, kna_nazwa2, kna_nazwa3, kna_KodP, kna_miasto,
                     kna_ulica, kna_Adres, kna_nip, kna_telefon1, kna_telefon2, kna_telex, kna_fax, kna_email from cdn.kntadresy";
 
                 SqlDataAdapter da = zapytanie(zapytanieString);
@@ -344,6 +344,7 @@ namespace WebApplication
             for(int i = 0; i < pomDataTable.Rows.Count; i++)
             {
                 Int32 Kna_GIDNumer = Convert.ToInt32(pomDataTable.Rows[i]["Kna_GIDNumer"].ToString());
+                Int32 Kna_GIDTyp = Convert.ToInt32(pomDataTable.Rows[i]["Kna_GIDTyp"].ToString());
                 Int32 Kna_KntNumer = Convert.ToInt32(pomDataTable.Rows[i]["kna_kntnumer"].ToString());
                 String Kna_Akronim = pomDataTable.Rows[i]["Kna_Akronim"].ToString();
                 String Kna_nazwa1 = pomDataTable.Rows[i]["Kna_nazwa1"].ToString();
@@ -360,7 +361,7 @@ namespace WebApplication
                 String Kna_fax = pomDataTable.Rows[i]["Kna_fax"].ToString();
                 String Kna_email = pomDataTable.Rows[i]["Kna_email"].ToString();
 
-                result.Add(new KntAdresy(Kna_GIDNumer,Kna_KntNumer,Kna_Akronim,Kna_nazwa1,Kna_nazwa2,Kna_nazwa3,Kna_KodP,Kna_miasto,Kna_ulica,Kna_Adres,Kna_nip,Kna_telefon1,Kna_telefon2,Kna_telex,Kna_fax,Kna_email));
+                result.Add(new KntAdresy(Kna_GIDNumer, Kna_GIDTyp, Kna_KntNumer,Kna_Akronim,Kna_nazwa1,Kna_nazwa2,Kna_nazwa3,Kna_KodP,Kna_miasto,Kna_ulica,Kna_Adres,Kna_nip,Kna_telefon1,Kna_telefon2,Kna_telex,Kna_fax,Kna_email));
             }
             return result;
         }
@@ -436,7 +437,7 @@ namespace WebApplication
             DataTable pomDataTable = new DataTable();
             try
             {
-                String zapytanieString = @"select szs_Id, szs_sznId, szs_Pozycja, szs_TwrNumer, szs_Ilosc, twrk.twr_jm, szs_TwrNazwa, twrk.Twr_Kod from cdn.SrwZlcSkladniki
+                String zapytanieString = @"select szs_Id, szs_sznId, szs_Pozycja, szs_TwrNumer, szs_TwrTyp, szs_Ilosc, twrk.twr_jm, szs_TwrNazwa, twrk.Twr_Kod from cdn.SrwZlcSkladniki
                         LEFT OUTER JOIN cdn.srwzlcnag szn on szn.szn_id = szs_sznid
                         left outer join cdn.twrkarty twrk on twrk.twr_gidnumer = szs_twrnumer
                         where (DATEADD(DAY,szn.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'" + data.Year.ToString() + "-" + data.Month.ToString() + "-01')";
@@ -456,7 +457,7 @@ namespace WebApplication
             else
             {
                 List<SrwZlcSkladniki> result = new List<SrwZlcSkladniki>();
-                result.Add(new SrwZlcSkladniki(0, 0, 0, 0, 0, null, exc.Message, null));
+                result.Add(new SrwZlcSkladniki(0, 0, 0, 0, 0, 0, null, exc.Message, null));
                 return result;
             }
         }
@@ -470,12 +471,13 @@ namespace WebApplication
                 Int32 szs_sznId = Convert.ToInt32(pomDataTable.Rows[i]["szs_sznId"].ToString());
                 Int32 szs_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["szs_Pozycja"].ToString());
                 Int32 szs_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["szs_TwrNumer"].ToString());
+                Int32 szs_TwrTyp = Convert.ToInt32(pomDataTable.Rows[i]["szs_TwrTyp"].ToString());
                 Double szs_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["szs_Ilosc"].ToString());
                 String szs_TwrNazwa = pomDataTable.Rows[i]["szs_TwrNazwa"].ToString();
                 String Twr_Jm = pomDataTable.Rows[i]["Twr_Jm"].ToString();
                 String Twr_Kod = pomDataTable.Rows[i]["Twr_Kod"].ToString();
 
-                result.Add(new SrwZlcSkladniki(szs_Id, szs_sznId, szs_Pozycja, szs_TwrNumer, szs_Ilosc, Twr_Jm, szs_TwrNazwa, Twr_Kod));
+                result.Add(new SrwZlcSkladniki(szs_Id, szs_sznId, szs_Pozycja, szs_TwrNumer, szs_TwrTyp, szs_Ilosc, Twr_Jm, szs_TwrNazwa, Twr_Kod));
             }
             return result;
         }
@@ -645,6 +647,7 @@ public class KntKarty
 public class KntAdresy
 {
     public Int32 Kna_GIDNumer { get; set; }
+    public Int32 Kna_GIDTyp { get; set; }
     public Int32 Kna_KntNumer { get; set; }
     public String Kna_Akronim { get; set; }
     public String Kna_nazwa1 { get; set; }
@@ -661,9 +664,10 @@ public class KntAdresy
     public String Kna_fax { get; set; }
     public String Kna_email { get; set; }
 
-    public KntAdresy(Int32 _Kna_GIDNumer, Int32 _Kna_KntNumer, String _Kna_Akronim, String _Kna_nazwa1, String _Kna_nazwa2, String _Kna_nazwa3, String _Kna_KodP, String _Kna_miasto, String _Kna_ulica, String _Kna_Adres, String _Kna_nip, String _Kna_telefon1, String _Kna_telefon2, String _Kna_telex, String _Kna_fax, String _Kna_email)
+    public KntAdresy(Int32 _Kna_GIDNumer, Int32 _Kna_GIDTyp, Int32 _Kna_KntNumer, String _Kna_Akronim, String _Kna_nazwa1, String _Kna_nazwa2, String _Kna_nazwa3, String _Kna_KodP, String _Kna_miasto, String _Kna_ulica, String _Kna_Adres, String _Kna_nip, String _Kna_telefon1, String _Kna_telefon2, String _Kna_telex, String _Kna_fax, String _Kna_email)
     {
         Kna_GIDNumer = _Kna_GIDNumer;
+        Kna_GIDTyp = _Kna_GIDTyp;
         Kna_KntNumer = _Kna_KntNumer;
         Kna_Akronim = _Kna_Akronim;
         Kna_nazwa1 = _Kna_nazwa1;
@@ -718,17 +722,19 @@ public class SrwZlcSkladniki
     public Int32 szs_sznId { get; set; }
     public Int32 szs_Pozycja { get; set; }
     public Int32 szs_TwrNumer { get; set; }
+    public Int32 szs_TwrTyp { get; set; }
     public Double szs_Ilosc { get; set; }
     public String Twr_Jm { get; set; }
     public String szs_TwrNazwa { get; set; }
     public String Twr_Kod { get; set; }
 
-    public SrwZlcSkladniki(Int32 _szs_Id, Int32 _szs_sznId, Int32 _szs_Pozycja, Int32 _szs_TwrNumer, Double _szs_Ilosc, String _Twr_Jm, String _szs_TwrNazwa, String _Twr_Kod)
+    public SrwZlcSkladniki(Int32 _szs_Id, Int32 _szs_sznId, Int32 _szs_Pozycja, Int32 _szs_TwrNumer, Int32 _szs_TwrTyp, Double _szs_Ilosc, String _Twr_Jm, String _szs_TwrNazwa, String _Twr_Kod)
     {
         szs_Id = _szs_Id;
         szs_sznId = _szs_sznId;
         szs_Pozycja = _szs_Pozycja;
         szs_TwrNumer = _szs_TwrNumer;
+        szs_TwrTyp = _szs_TwrTyp;
         szs_Ilosc = _szs_Ilosc;
         Twr_Jm = _Twr_Jm;
         szs_TwrNazwa = _szs_TwrNazwa;

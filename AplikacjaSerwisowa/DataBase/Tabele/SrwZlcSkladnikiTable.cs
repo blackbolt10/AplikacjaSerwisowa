@@ -19,7 +19,9 @@ namespace AplikacjaSerwisowa
         public Int32 szs_Pozycja { get; set; }
         
         public Int32 szs_TwrNumer { get; set; }
-        
+
+        public Int32 szs_TwrTyp { get; set; }
+
         public double szs_Ilosc { get; set; }
 
         public String Twr_Jm { get; set; }

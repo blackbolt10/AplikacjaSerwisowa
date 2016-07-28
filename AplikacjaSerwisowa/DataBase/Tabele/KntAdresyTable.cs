@@ -14,6 +14,8 @@ namespace AplikacjaSerwisowa
         [Unique]
         public Int32 Kna_GIDNumer { get; set; }
 
+        public Int32 Kna_GIDTyp { get; set; }
+
         public Int32 Kna_KntNumer { get; set; }
 
         [MaxLength(20), Unique]

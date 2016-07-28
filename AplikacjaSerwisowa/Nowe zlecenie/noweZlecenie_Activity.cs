@@ -25,8 +25,6 @@ namespace AplikacjaSerwisowa
 
         public static String szn_ID;
         private static Context kontekst;
-        public static String knt_GidNumer { get; set; }
-        public static String szn_AdWNumer { get; set; }
 
         public static List<TwrKartyTable> skladnikiList;
         public static List<TwrKartyTable> czynnosciList;
@@ -137,7 +135,9 @@ namespace AplikacjaSerwisowa
         public static SrwZlcNagTable pobierzNaglowek()
         {
             SrwZlcNagTable srwZlcNag = new SrwZlcNagTable();
-
+            srwZlcNag.SZN_DataRozpoczecia ="2015-07-25";
+            srwZlcNag.SZN_DataWystawienia = "2015-07-25";
+            srwZlcNag.SZN_Opis = "to jest opis!";
 
             return srwZlcNag;
         }

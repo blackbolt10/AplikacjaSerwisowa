@@ -20,8 +20,8 @@ namespace AplikacjaSerwisowa
     class zakladkaPodpisNoweZlecenie : Android.Support.V4.App.Fragment
     {
         private Button zapiszButton;
-        private Int32 KNT_GIDNumer, KNA_GIDNumer;
         List<SrwZlcCzynnosciTable> SrwZlcCzynnosciTableList;
+        List<SrwZlcSkladnikiTable> SrwZlcSkladnikiTableList;
         List<TwrKartyTable> skladnikiList;
         SrwZlcNagTable srwZlcNag;
         private Context kontekst;
@@ -34,11 +34,9 @@ namespace AplikacjaSerwisowa
 
             zapiszButton = view.FindViewById<Button>(Resource.Id.noweZlecenieZakladkaPodpisZapiszButton);
             zapiszButton.Click += ZapiszButton_Click;
-
-            KNT_GIDNumer = -1;
-            KNA_GIDNumer = -1;
+            
             skladnikiList = new List<TwrKartyTable>();
-            srwZlcNag = new SrwZlcNagTable();
+            srwZlcNag = null;
 
             return view;
         }
@@ -79,37 +77,23 @@ namespace AplikacjaSerwisowa
 
         private Boolean pobierzKontrahentow()
         {
-            List<Int32> listaKontrahentow =  zakladkaKontrahentNoweZlecenie.pobierzKontrahentow();
-
-            if(listaKontrahentow.Count>1)
+            if(noweZlecenie_Activity.Knt_GIDNumer != -1 && noweZlecenie_Activity.Kna_GIDNumer != -1)
             {
-                KNT_GIDNumer = listaKontrahentow[0];
-                KNA_GIDNumer = listaKontrahentow[1];
-
                 return true;
             }
-            else if(listaKontrahentow.Count == 1)
+            else if(noweZlecenie_Activity.Knt_GIDNumer == -1 && noweZlecenie_Activity.Kna_GIDNumer == -1)
             {
-                switch(listaKontrahentow[0])
-                {
-                    case 0:
-                        Toast.MakeText(kontekst, "Kontrahent główny i docelowy nie zostali ustawieni! \nOperacja zapisu jest niemożliwa.", ToastLength.Short).Show();
-                    break;
-
-                    case 1:
-                        Toast.MakeText(kontekst, "Kontrahent główny nie został ustawieny! \nOperacja zapisu jest niemożliwa.", ToastLength.Short).Show();
-                    break;
-
-                    case 2:
-                        Toast.MakeText(kontekst, "Kontrahent docelowy nie został ustawieny! \nOperacja zapisu jest niemożliwa.", ToastLength.Short).Show();
-                    break;
-                }
-                return false;
+                Toast.MakeText(kontekst, "Kontrahent główny i docelowy nie zostali ustawieni! \nOperacja zapisu jest niemożliwa.", ToastLength.Short).Show();
             }
-            else
+            else if(noweZlecenie_Activity.Knt_GIDNumer == -1 && noweZlecenie_Activity.Kna_GIDNumer != -1)
             {
-                return false;
+                Toast.MakeText(kontekst, "Kontrahent główny nie został ustawieny! \nOperacja zapisu jest niemożliwa.", ToastLength.Short).Show();
             }
+            else if(noweZlecenie_Activity.Knt_GIDNumer != -1 && noweZlecenie_Activity.Kna_GIDNumer == -1)
+            {
+                Toast.MakeText(kontekst, "Kontrahent docelowy nie został ustawieny! \nOperacja zapisu jest niemożliwa.", ToastLength.Short).Show();
+            }
+            return false;
         }
 
         private Boolean pobierzCzynnosci()
@@ -140,16 +124,24 @@ namespace AplikacjaSerwisowa
         private Boolean pobierzSkladniki()
         {
             skladnikiList = zakladkaSkladnikiNoweZlecenie.pobierzListSkladnikow();
-            /*
-            if(skladnikiList.Count > 0)
+            SrwZlcSkladnikiTableList = new List<SrwZlcSkladnikiTable>();
+
+            if(skladnikiList != null)
             {
-                return true;
+                for(int i = 0; i < skladnikiList.Count; i++)
+                {
+                    SrwZlcSkladnikiTable srwZlcSkladnik = new SrwZlcSkladnikiTable();
+                    srwZlcSkladnik.szs_sznId = srwZlcNag.SZN_Id;
+                    srwZlcSkladnik.szs_Pozycja = i;
+                    srwZlcSkladnik.szs_TwrNumer = skladnikiList[i].Twr_GIDNumer;
+                    srwZlcSkladnik.szs_TwrTyp = skladnikiList[i].Twr_GIDTyp;
+                    srwZlcSkladnik.szs_TwrNazwa = skladnikiList[i].Twr_Nazwa;
+                    srwZlcSkladnik.szs_Ilosc = skladnikiList[i].Ilosc;
+                    srwZlcSkladnik.Twr_Kod = skladnikiList[i].Twr_Kod;
+
+                    SrwZlcSkladnikiTableList.Add(srwZlcSkladnik);
+                }
             }
-            else
-            {
-                return false;
-            }
-            */
 
             return true;
         }
@@ -172,11 +164,37 @@ namespace AplikacjaSerwisowa
                     db.SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciTableList[i]);
                 }
             }
+
+            if(SrwZlcSkladnikiTableList != null)
+            {
+                for(int i = 0; i < SrwZlcSkladnikiTableList.Count; i++)
+                {
+                    db.SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiTableList[i]);
+                }
+            }
         }
 
         private void uzupelnijDaneKontrahenta()
         {
+            DBRepository db = new DBRepository();
+
+            KntKartyTable kntKarty = new KntKartyTable();
+            KntAdresyTable knaKarty= new KntAdresyTable();
+
+            kntKarty = db.kntKarty_GetRecord(noweZlecenie_Activity.Knt_GIDNumer.ToString());
+            knaKarty = db.kntAdresy_GetRecord(noweZlecenie_Activity.Kna_GIDNumer.ToString());
+
+            srwZlcNag.SZN_KnANumer = knaKarty.Kna_GIDNumer;
+            srwZlcNag.SZN_KnATyp = knaKarty.Kna_GIDTyp;
             
+            srwZlcNag.SZN_KntNumer = knaKarty.Kna_KntNumer;
+            srwZlcNag.SZN_KntTyp = knaKarty.Kna_GIDTyp;
+
+            srwZlcNag.SZN_KnDNumer = knaKarty.Kna_KntNumer;
+            srwZlcNag.SZN_KnDTyp = knaKarty.Kna_GIDTyp;
+
+            srwZlcNag.SZN_AdWNumer = knaKarty.Kna_GIDNumer;
+            srwZlcNag.SZN_AdWTyp = knaKarty.Kna_GIDTyp;
         }
 
         public override string ToString() //Called on line 156 in SlidingTabScrollView

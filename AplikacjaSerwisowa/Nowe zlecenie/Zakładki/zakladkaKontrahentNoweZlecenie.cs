@@ -117,30 +117,5 @@ namespace AplikacjaSerwisowa
         {
             ustawWidocznosc();
         }
-
-        public static List<Int32> pobierzKontrahentow()
-        {
-            List<Int32> lista = new List<int>();
-
-            if(noweZlecenie_Activity.Knt_GIDNumer != -1 && noweZlecenie_Activity.Kna_GIDNumer != -1)
-            {
-                lista.Add(noweZlecenie_Activity.Knt_GIDNumer);
-                lista.Add(noweZlecenie_Activity.Kna_GIDNumer);
-            }
-            else if(noweZlecenie_Activity.Knt_GIDNumer == -1 && noweZlecenie_Activity.Kna_GIDNumer == -1)
-            {
-                lista.Add(0); // 1 - brak obu knt
-            }
-            else if(noweZlecenie_Activity.Knt_GIDNumer != -1 && noweZlecenie_Activity.Kna_GIDNumer == -1)
-            {
-                lista.Add(2); // 2- brak noweZlecenie_Activity.Kna_GIDNumer
-            }
-            else if(noweZlecenie_Activity.Knt_GIDNumer == -1 && noweZlecenie_Activity.Kna_GIDNumer != -1)
-            {
-                lista.Add(1);// 1- brak noweZlecenie_Activity.Knt_GIDNumer
-            }
-
-            return lista;
-        }
     }
 }

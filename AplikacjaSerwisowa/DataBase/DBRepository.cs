@@ -584,6 +584,29 @@ namespace AplikacjaSerwisowa
         }
 
 
+        public int SrwZlcNagGenerujNoweID()
+        {
+            int result = 0;
+            List<int> wynik = new List<int>();
+
+            try
+            {
+                wynik = db.Query<int>("select min(SZN_Id) as min from SrwZlcNagTable");
+            }
+            catch(Exception)
+            {}
+
+            if(wynik.Count==1)
+            {
+                if(wynik[0]< result)
+                {
+                    result = wynik[0]-1;
+                }
+            }
+            return result;
+        }
+
+
 
 
 
@@ -595,7 +618,7 @@ namespace AplikacjaSerwisowa
             *---------------------------------------------------------------------------------
         */
 
-        public string stworzSrwZlcCynnosciTable()
+        public string stworzSrwZlcCzynnosciTable()
         {
             String output = "";
             try
@@ -617,7 +640,7 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
-        public String SrwZlcCynnosci_InsertRecord(SrwZlcCzynnosciTable item)
+        public String SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciTable item)
         {
             String output = "";
             try
@@ -633,7 +656,7 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public List<SrwZlcCzynnosciTable> SrwZlcCynnosci_GetRecords(String szn_ID)
+        public List<SrwZlcCzynnosciTable> SrwZlcCzynnosci_GetRecords(String szn_ID)
         {
             List<SrwZlcCzynnosciTable> output = new List<SrwZlcCzynnosciTable>();
 

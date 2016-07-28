@@ -22,8 +22,6 @@ namespace AplikacjaSerwisowa
         private static Button mDodajButton, mUsunButton;
         private static ListView mListaListView;
 
-        private static List<TwrKartyTable> skladnikiList;
-
         private static Context kontekst;
         
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -40,17 +38,16 @@ namespace AplikacjaSerwisowa
 
             mListaListView = view.FindViewById<ListView>(Resource.Id.noweZlecenieZakladkaCzynnSkladListView);
 
-            skladnikiList = new List<TwrKartyTable>();
             aktualizujListeSkladnikow();
 
             return view;
         }
 
-        private static void aktualizujListeSkladnikow()
+        public static void aktualizujListeSkladnikow()
         {
-            if(skladnikiList.Count > 0)
+            if(noweZlecenie_Activity.skladnikiList.Count > 0)
             {
-                listaCzynnSklad_ListViewAdapter adapter = new listaCzynnSklad_ListViewAdapter(kontekst, skladnikiList, false, false);
+                listaCzynnSklad_ListViewAdapter adapter = new listaCzynnSklad_ListViewAdapter(kontekst, noweZlecenie_Activity.skladnikiList, false, false);
                 mListaListView.Adapter = adapter;
                 mUsunButton.Enabled = true;
             }
@@ -63,11 +60,11 @@ namespace AplikacjaSerwisowa
 
         private void MUsunButton_Click(object sender, EventArgs e)
         {
-            for(int i = skladnikiList.Count - 1; i >= 0; i--)
+            for(int i = noweZlecenie_Activity.skladnikiList.Count - 1; i >= 0; i--)
             {
-                if(skladnikiList[i].zaznaczone == true)
+                if(noweZlecenie_Activity.skladnikiList[i].zaznaczone == true)
                 {
-                    skladnikiList.RemoveAt(i);
+                    noweZlecenie_Activity.skladnikiList.RemoveAt(i);
                 }
             }
             aktualizujListeSkladnikow();
@@ -86,9 +83,9 @@ namespace AplikacjaSerwisowa
         {
             string filtr = "-1";
 
-            for(int i = 0; i < skladnikiList.Count; i++)
+            for(int i = 0; i < noweZlecenie_Activity.skladnikiList.Count; i++)
             {
-                filtr += ", " + skladnikiList[i].Twr_GIDNumer;
+                filtr += ", " + noweZlecenie_Activity.skladnikiList[i].Twr_GIDNumer;
             }
 
             return filtr;
@@ -96,13 +93,13 @@ namespace AplikacjaSerwisowa
 
         public static void dodajSkladnik(TwrKartyTable skladnik)
         {
-            skladnikiList.Add(skladnik);
+            noweZlecenie_Activity.skladnikiList.Add(skladnik);
             aktualizujListeSkladnikow();
         }
 
         public static void aktualizujChecBox(Int32 position)
         {
-            skladnikiList[position].zaznaczone = !skladnikiList[position].zaznaczone;
+            noweZlecenie_Activity.skladnikiList[position].zaznaczone = !noweZlecenie_Activity.skladnikiList[position].zaznaczone;
 
             sprawdzCzyGotoweDoUsuniecia();
         }
@@ -110,9 +107,9 @@ namespace AplikacjaSerwisowa
         private static void sprawdzCzyGotoweDoUsuniecia()
         {
             Boolean zaznaczony = false;
-            for(int i = 0; i < skladnikiList.Count; i++)
+            for(int i = 0; i < noweZlecenie_Activity.skladnikiList.Count; i++)
             {
-                if(skladnikiList[i].zaznaczone == true)
+                if(noweZlecenie_Activity.skladnikiList[i].zaznaczone == true)
                 {
                     zaznaczony = true;
                     break;
@@ -129,14 +126,9 @@ namespace AplikacjaSerwisowa
             }
         }
 
-        public static void ustawIlosc(double ilosc)
-        {
-            skladnikiList[skladnikiList.Count - 1].Ilosc = ilosc;
-        }
-
         public static List<TwrKartyTable> pobierzListSkladnikow()
         {
-            return skladnikiList;
+            return noweZlecenie_Activity.skladnikiList;
         }
 
         public override string ToString() //Called on line 156 in SlidingTabScrollView

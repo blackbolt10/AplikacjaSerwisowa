@@ -221,7 +221,7 @@ namespace AplikacjaSerwisowa
             DBRepository dbr = new DBRepository();
             String result = dbr.createDB();
             //Toast.MakeText(this, result, ToastLength.Short).Show();            
-            result = dbr.stworzSrwZlcCynnosciTable();
+            result = dbr.stworzSrwZlcCzynnosciTable();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
             if(records.Count > 0)
@@ -241,7 +241,7 @@ namespace AplikacjaSerwisowa
                 RunOnUiThread(() => progrssDialog.Progress++);
 
                 SrwZlcCzynnosciTable szc = records[i];
-                dbr.SrwZlcCynnosci_InsertRecord(szc);
+                dbr.SrwZlcCzynnosci_InsertRecord(szc);
             }
         }
 
@@ -357,23 +357,26 @@ namespace AplikacjaSerwisowa
             List<int> wyslaneNagList = new List<int>();
             DBRepository db = new DBRepository();
 
-            List<SrwZlcNagTable> srwZlcNagList = db.SrwZlcNagSynchronizacja(0);
+            List<SrwZlcNagTable> srwZlcNagList = db.SrwZlcNagSynchronizacja(1);
 
-            String jsonOut = JsonConvert.SerializeObject(srwZlcNagList);
-
-            String result = kwronskiService.synchronizujSrwZlcNag(jsonOut);
-
-            if(result != "[]")
+            if(srwZlcNagList.Count > 0)
             {
-                db.SrwZlcNag_OznaczWyslane(srwZlcNagList, 2);
+                String jsonOut = JsonConvert.SerializeObject(srwZlcNagList);
 
-                result = result.Replace('[', ' ');
-                result = result.Replace(']', ' ');
+                String result = kwronskiService.synchronizujSrwZlcNag(jsonOut);
 
-                String[] resultArray = result.Split(',');
-                for(int i = 0; i < resultArray.Length; i++)
+                if(result != "[]")
                 {
-                    wyslaneNagList.Add(Convert.ToInt32(resultArray[i]));
+                    db.SrwZlcNag_OznaczWyslane(srwZlcNagList, 2);
+
+                    result = result.Replace('[', ' ');
+                    result = result.Replace(']', ' ');
+
+                    String[] resultArray = result.Split(',');
+                    for(int i = 0; i < resultArray.Length; i++)
+                    {
+                        wyslaneNagList.Add(Convert.ToInt32(resultArray[i]));
+                    }
                 }
             }
             return wyslaneNagList;

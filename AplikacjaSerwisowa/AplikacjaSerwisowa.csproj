@@ -100,7 +100,7 @@
     <Compile Include="Nowe zlecenie\Zakładki\noweZlecenieDodajCzynnSkladIlosc_Activit.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\zakladkaCzynnosciNoweZlecenie.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\zakladkaKontrahentNoweZlecenie.cs" />
-    <Compile Include="Nowe zlecenie\Zakładki\zakladkaPodpiszNoweZlecenie.cs" />
+    <Compile Include="Nowe zlecenie\Zakładki\zakladkaPodpisNoweZlecenie.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\zakladkaSkladnikiNoweZlecenie.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

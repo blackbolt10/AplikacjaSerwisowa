@@ -22,8 +22,6 @@ namespace AplikacjaSerwisowa
         private static Button mDodajButton, mUsunButton;
         private static ListView mListaListView;
 
-        private static List<TwrKartyTable> czynnosciList;
-
         private static Context kontekst;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -40,17 +38,16 @@ namespace AplikacjaSerwisowa
 
             mListaListView = view.FindViewById<ListView>(Resource.Id.noweZlecenieZakladkaCzynnSkladListView);
 
-            czynnosciList = new List<TwrKartyTable>();
             aktualizujListeCzynnosci();
 
             return view;
         }
 
-        private static void aktualizujListeCzynnosci()
+        public static void aktualizujListeCzynnosci()
         {
-            if(czynnosciList.Count > 0)
+            if(noweZlecenie_Activity.czynnosciList.Count > 0)
             {
-                listaCzynnSklad_ListViewAdapter adapter = new listaCzynnSklad_ListViewAdapter(kontekst, czynnosciList, false, true);
+                listaCzynnSklad_ListViewAdapter adapter = new listaCzynnSklad_ListViewAdapter(kontekst, noweZlecenie_Activity.czynnosciList, false, true);
                 mListaListView.Adapter = adapter;
                 mUsunButton.Enabled = true;
             }
@@ -63,11 +60,11 @@ namespace AplikacjaSerwisowa
 
         private void MUsunButton_Click(object sender, EventArgs e)
         {
-            for(int i = czynnosciList.Count - 1; i >= 0; i--)
+            for(int i = noweZlecenie_Activity.czynnosciList.Count - 1; i >= 0; i--)
             {
-                if(czynnosciList[i].zaznaczone == true)
+                if(noweZlecenie_Activity.czynnosciList[i].zaznaczone == true)
                 {
-                    czynnosciList.RemoveAt(i);
+                    noweZlecenie_Activity.czynnosciList.RemoveAt(i);
                 }
             }
             aktualizujListeCzynnosci();
@@ -87,9 +84,9 @@ namespace AplikacjaSerwisowa
         {
             string filtr = "-1";
 
-            for(int i = 0;i<czynnosciList.Count;i++)
+            for(int i = 0;i<noweZlecenie_Activity.czynnosciList.Count;i++)
             {
-                filtr += ", "+czynnosciList[i].Twr_GIDNumer;
+                filtr += ", "+noweZlecenie_Activity.czynnosciList[i].Twr_GIDNumer;
             }
 
             return filtr;
@@ -97,13 +94,13 @@ namespace AplikacjaSerwisowa
 
         public static void dodajCzynnosc(TwrKartyTable czynnosc)
         {
-            czynnosciList.Add(czynnosc);
+            noweZlecenie_Activity.czynnosciList.Add(czynnosc);
             aktualizujListeCzynnosci();
         }
 
         public static void aktualizujChecBox(Int32 position)
         {
-            czynnosciList[position].zaznaczone = !czynnosciList[position].zaznaczone;
+            noweZlecenie_Activity.czynnosciList[position].zaznaczone = !noweZlecenie_Activity.czynnosciList[position].zaznaczone;
 
             sprawdzCzyGotoweDoUsuniecia();
         }
@@ -111,9 +108,9 @@ namespace AplikacjaSerwisowa
         private static void sprawdzCzyGotoweDoUsuniecia()
         {
             Boolean zaznaczony = false;
-            for(int i = 0; i < czynnosciList.Count; i++)
+            for(int i = 0; i < noweZlecenie_Activity.czynnosciList.Count; i++)
             {
-                if(czynnosciList[i].zaznaczone == true)
+                if(noweZlecenie_Activity.czynnosciList[i].zaznaczone == true)
                 {
                     zaznaczony = true;
                     break;
@@ -130,14 +127,9 @@ namespace AplikacjaSerwisowa
             }
         }
 
-        public static void ustawIlosc(double ilosc)
-        {
-            czynnosciList[czynnosciList.Count - 1].Ilosc = ilosc;
-        }
-
         public static List<TwrKartyTable> pobierzListeCzynnosci()
         {
-            return czynnosciList;
+            return noweZlecenie_Activity.czynnosciList;
         }
 
         public override string ToString() //Called on line 156 in SlidingTabScrollView

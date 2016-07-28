@@ -17,12 +17,13 @@ using Android.Widget;
 
 namespace AplikacjaSerwisowa
 {
-    class zakladkaPodpiszNoweZlecenie : Android.Support.V4.App.Fragment
+    class zakladkaPodpisNoweZlecenie : Android.Support.V4.App.Fragment
     {
         private Button zapiszButton;
         private Int32 KNT_GIDNumer, KNA_GIDNumer;
-        List<TwrKartyTable> czynnosciList;
+        List<SrwZlcCzynnosciTable> SrwZlcCzynnosciTableList;
         List<TwrKartyTable> skladnikiList;
+        SrwZlcNagTable srwZlcNag;
         private Context kontekst;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -36,8 +37,8 @@ namespace AplikacjaSerwisowa
 
             KNT_GIDNumer = -1;
             KNA_GIDNumer = -1;
-            czynnosciList = new List<TwrKartyTable>();
             skladnikiList = new List<TwrKartyTable>();
+            srwZlcNag = new SrwZlcNagTable();
 
             return view;
         }
@@ -71,6 +72,8 @@ namespace AplikacjaSerwisowa
 
         private Boolean pobierzInformacjeNaglowkowe()
         {
+            srwZlcNag = zakladkaOgolneNoweZlecenie.pobierzNaglowek();
+
             return true;
         }
 
@@ -111,17 +114,25 @@ namespace AplikacjaSerwisowa
 
         private Boolean pobierzCzynnosci()
         {
-            czynnosciList = zakladkaCzynnosciNoweZlecenie.pobierzListeCzynnosci();
-            /*
-            if(czynnosciList.Count>0)
+            List<TwrKartyTable> czynnosciList = zakladkaCzynnosciNoweZlecenie.pobierzListeCzynnosci();
+            SrwZlcCzynnosciTableList = new List<SrwZlcCzynnosciTable>();
+
+            if(czynnosciList != null)
             {
-                return true;
+                for(int i = 0; i < czynnosciList.Count; i++)
+                {
+                    SrwZlcCzynnosciTable srwZlcCzynnosc = new SrwZlcCzynnosciTable();
+                    srwZlcCzynnosc.szc_sznId = srwZlcNag.SZN_Id;
+                    srwZlcCzynnosc.szc_Pozycja = i;
+                    srwZlcCzynnosc.szc_TwrNumer = czynnosciList[i].Twr_GIDNumer;
+                    srwZlcCzynnosc.szc_TwrTyp = czynnosciList[i].Twr_GIDTyp;
+                    srwZlcCzynnosc.szc_TwrNazwa = czynnosciList[i].Twr_Nazwa;
+                    srwZlcCzynnosc.szc_Ilosc = czynnosciList[i].Ilosc;
+                    srwZlcCzynnosc.Twr_Kod = czynnosciList[i].Twr_Kod;
+
+                    SrwZlcCzynnosciTableList.Add(srwZlcCzynnosc);
+                }
             }
-            else
-            {
-                return false;
-            }
-            */
 
             return true;
         }
@@ -145,7 +156,32 @@ namespace AplikacjaSerwisowa
 
         private void wygenerujZlecenie()
         {
-            throw new NotImplementedException();
+            DBRepository db = new DBRepository();
+
+            if(srwZlcNag != null)
+            {
+                uzupelnijDaneKontrahenta();
+
+                db.SrwZlcNag_InsertRecord(srwZlcNag);
+            }
+
+            if(SrwZlcCzynnosciTableList != null)
+            {
+                for(int i = 0; i < SrwZlcCzynnosciTableList.Count; i++)
+                {
+                    db.SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciTableList[i]);
+                }
+            }
+        }
+
+        private void uzupelnijDaneKontrahenta()
+        {
+            
+        }
+
+        public override string ToString() //Called on line 156 in SlidingTabScrollView
+        {
+            return "Podpis";
         }
     }
 }

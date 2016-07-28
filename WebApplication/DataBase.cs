@@ -377,7 +377,7 @@ namespace WebApplication
             DataTable pomDataTable = new DataTable();
             try
             {
-                String zapytanieString = @"select szc_Id, szc_sznId, szc_Pozycja, szc_TwrNumer, szc_Ilosc, twrk.twr_jm, szc_TwrNazwa, twrk.Twr_Kod from cdn.SrwZlcCzynnosci
+                String zapytanieString = @"select szc_Id, szc_sznId, szc_Pozycja, szc_TwrNumer, szc_TwrTyp, szc_Ilosc, twrk.twr_jm, szc_TwrNazwa, twrk.Twr_Kod from cdn.SrwZlcCzynnosci
                         LEFT OUTER JOIN cdn.srwzlcnag szn on szn.szn_id = szc_sznid
                         left outer join cdn.twrkarty twrk on twrk.twr_gidnumer = szc_twrnumer
                         where (DATEADD(DAY,szn.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'" + data.Year.ToString()+"-"+data.Month.ToString()+"-01')";
@@ -406,12 +406,13 @@ namespace WebApplication
                 Int32 szc_sznId = Convert.ToInt32(pomDataTable.Rows[i]["szc_sznId"].ToString());
                 Int32 szc_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["szc_Pozycja"].ToString());
                 Int32 szc_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["szc_TwrNumer"].ToString());
+                Int32 szc_TwrTyp = Convert.ToInt32(pomDataTable.Rows[i]["szc_TwrTyp"].ToString());
                 Double szc_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["szc_Ilosc"].ToString());
                 String szc_TwrNazwa = pomDataTable.Rows[i]["szc_TwrNazwa"].ToString();
                 String Twr_Jm = pomDataTable.Rows[i]["Twr_Jm"].ToString();
                 String Twr_Kod = pomDataTable.Rows[i]["Twr_Kod"].ToString();
 
-                result.Add(new SrwZlcCzynnoci(szc_Id, szc_sznId, szc_Pozycja, szc_TwrNumer, szc_Ilosc, Twr_Jm, szc_TwrNazwa, Twr_Kod));
+                result.Add(new SrwZlcCzynnoci(szc_Id, szc_sznId, szc_Pozycja, szc_TwrNumer, szc_TwrTyp, szc_Ilosc, Twr_Jm, szc_TwrNazwa, Twr_Kod));
             }
             return result;
         }
@@ -688,17 +689,19 @@ public class SrwZlcCzynnoci
     public Int32 szc_sznId { get; set; }
     public Int32 szc_Pozycja { get; set; }
     public Int32 szc_TwrNumer { get; set; }
+    public Int32 szc_TwrTyp { get; set; }
     public Double szc_Ilosc { get; set; }
     public String Twr_Jm { get; set; }
     public String szc_TwrNazwa { get; set; }
     public String Twr_Kod { get; set; }
 
-    public SrwZlcCzynnoci(Int32 _szc_Id, Int32 _szc_sznId, Int32 _szc_Pozycja, Int32 _szc_TwrNumer, Double _szc_Ilosc, String _Twr_Jm, String _szc_TwrNazwa, String _Twr_Kod)
+    public SrwZlcCzynnoci(Int32 _szc_Id, Int32 _szc_sznId, Int32 _szc_Pozycja, Int32 _szc_TwrNumer, Int32 _szc_TwrTyp, Double _szc_Ilosc, String _Twr_Jm, String _szc_TwrNazwa, String _Twr_Kod)
     {
         szc_Id = _szc_Id;
         szc_sznId = _szc_sznId;
         szc_Pozycja = _szc_Pozycja;
         szc_TwrNumer = _szc_TwrNumer;
+        szc_TwrTyp = _szc_TwrTyp;
         szc_Ilosc = _szc_Ilosc;
         Twr_Jm = _Twr_Jm;
         szc_TwrNazwa = _szc_TwrNazwa;

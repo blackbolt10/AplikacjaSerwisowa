@@ -24,8 +24,6 @@ namespace AplikacjaSerwisowa
         private static TextView mAkronimGlownyTextView, mNazwaGlownyTextView;
         private static TextView mAkronimDocelowyTextView, mNazwaDocelowyTextView;
 
-        public static Int32 Knt_GIDNumer = -1;
-        public static Int32 Kna_GIDNumer = -1;
 
         Context kontekst;
 
@@ -33,8 +31,6 @@ namespace AplikacjaSerwisowa
         {
             var view = inflater.Inflate(Resource.Layout.noweZlecenieZakladkaKontrahentLayout, container, false);
 
-            Kna_GIDNumer = -1;
-            Knt_GIDNumer = -1;
             kontekst = noweZlecenie_Activity.GetContext();
 
             mGlownyButton = view.FindViewById<Button>(Resource.Id.dodajGlownyNoweZlecenieButton);
@@ -43,9 +39,9 @@ namespace AplikacjaSerwisowa
             mGlownyLinearLayout = view.FindViewById<LinearLayout>(Resource.Id.GlownyNoweZlecenieLinearLayout);
 
             mAkronimGlownyTextView = view.FindViewById<TextView>(Resource.Id.akronimGlownyNoweZlecenieTextView);
-            mAkronimGlownyTextView.Text = "";
             mNazwaGlownyTextView = view.FindViewById<TextView>(Resource.Id.nazwaGlownyNoweZlecenieTextView);
-            mNazwaGlownyTextView.Text = "";
+            mAkronimGlownyTextView.Text = noweZlecenie_Activity.akronimGlowny;
+            mNazwaGlownyTextView.Text = noweZlecenie_Activity.NazwaGlowny;
 
             mDocelowyButton = view.FindViewById<Button>(Resource.Id.dodajDocelowyNoweZlecenieButton);
             mDocelowyButton.Click += MDocelowyButton_Click;
@@ -53,9 +49,9 @@ namespace AplikacjaSerwisowa
             mDocelowyLinearLayout = view.FindViewById<LinearLayout>(Resource.Id.DocelowyNoweZlecenieLinearLayout);
 
             mAkronimDocelowyTextView = view.FindViewById<TextView>(Resource.Id.akronimDocelowyNoweZlecenieTextView);
-            mAkronimDocelowyTextView.Text = "";
             mNazwaDocelowyTextView = view.FindViewById<TextView>(Resource.Id.nazwaDocelowyNoweZlecenieTextView);
-            mNazwaDocelowyTextView.Text = "";
+            mAkronimDocelowyTextView.Text = noweZlecenie_Activity.akronimDocelowy;
+            mNazwaDocelowyTextView.Text = noweZlecenie_Activity.NazwaDocelowy;
 
             ustawWidocznosc();
 
@@ -68,15 +64,15 @@ namespace AplikacjaSerwisowa
             noweZlecenieDodajKontrahentGlowny.PutExtra("glowny", "1");
             StartActivity(noweZlecenieDodajKontrahentGlowny);
 
-            Kna_GIDNumer = -1;
-            mAkronimDocelowyTextView.Text = "";
-            mNazwaDocelowyTextView.Text = "";
+            noweZlecenie_Activity.Kna_GIDNumer = -1;
+            noweZlecenie_Activity.akronimDocelowy = "";
+            noweZlecenie_Activity.NazwaDocelowy = "";
         }
         private void MDocelowyButton_Click(object sender, EventArgs e)
         {
             Intent listaZlecenSzczegolyIntent = new Intent(kontekst, typeof(noweZlecenieDodajKontrahenta_Activity));
             listaZlecenSzczegolyIntent.PutExtra("glowny", "0");
-            listaZlecenSzczegolyIntent.PutExtra("Knt_GIDNumer", Knt_GIDNumer.ToString());
+            listaZlecenSzczegolyIntent.PutExtra("Knt_GIDNumer", noweZlecenie_Activity.Knt_GIDNumer.ToString());
             StartActivity(listaZlecenSzczegolyIntent);
         }
 
@@ -87,7 +83,7 @@ namespace AplikacjaSerwisowa
 
         private static void ustawWidocznosc()
         {
-            if(Knt_GIDNumer == -1)
+            if(noweZlecenie_Activity.Knt_GIDNumer == -1)
             {
                 mGlownyLinearLayout.Visibility = ViewStates.Gone;
                 mDocelowyButton.Enabled = false;
@@ -96,31 +92,29 @@ namespace AplikacjaSerwisowa
             {
                 mGlownyLinearLayout.Visibility = ViewStates.Visible;
                 mDocelowyButton.Enabled = true;
+                mAkronimGlownyTextView.Text = noweZlecenie_Activity.akronimGlowny;
+                mNazwaGlownyTextView.Text = noweZlecenie_Activity.NazwaGlowny;
             }
 
-            if(Kna_GIDNumer == -1)
+            if(noweZlecenie_Activity.Kna_GIDNumer == -1)
             {
                 mDocelowyLinearLayout.Visibility = ViewStates.Gone;
             }
             else
             {
                 mDocelowyLinearLayout.Visibility = ViewStates.Visible;
+                mAkronimDocelowyTextView.Text = noweZlecenie_Activity.akronimDocelowy;
+                mNazwaDocelowyTextView.Text = noweZlecenie_Activity.NazwaDocelowy;
             }
-        }
+       } 
 
-        public static void aktualizujKontrahentaGlownego(String akronim, String nazwa, Int32 kntGidNumer)
+        public static void aktualizujKontrahentaGlownego()
         {
-            mAkronimGlownyTextView.Text = akronim;
-            mNazwaGlownyTextView.Text = nazwa;
-            Knt_GIDNumer = kntGidNumer;
             ustawWidocznosc();
         }
 
-        public static void aktualizujKontrahentaDocelowego(String akronim, String nazwa, Int32 _Kna_GIDNumer)
+        public static void aktualizujKontrahentaDocelowego()
         {
-            mAkronimDocelowyTextView.Text = akronim;
-            mNazwaDocelowyTextView.Text = nazwa;
-            Kna_GIDNumer = _Kna_GIDNumer;
             ustawWidocznosc();
         }
 
@@ -128,22 +122,22 @@ namespace AplikacjaSerwisowa
         {
             List<Int32> lista = new List<int>();
 
-            if(Knt_GIDNumer != -1 && Kna_GIDNumer != -1)
+            if(noweZlecenie_Activity.Knt_GIDNumer != -1 && noweZlecenie_Activity.Kna_GIDNumer != -1)
             {
-                lista.Add(Knt_GIDNumer);
-                lista.Add(Kna_GIDNumer);
+                lista.Add(noweZlecenie_Activity.Knt_GIDNumer);
+                lista.Add(noweZlecenie_Activity.Kna_GIDNumer);
             }
-            else if(Knt_GIDNumer == -1 && Kna_GIDNumer == -1)
+            else if(noweZlecenie_Activity.Knt_GIDNumer == -1 && noweZlecenie_Activity.Kna_GIDNumer == -1)
             {
                 lista.Add(0); // 1 - brak obu knt
             }
-            else if(Knt_GIDNumer != -1 && Kna_GIDNumer == -1)
+            else if(noweZlecenie_Activity.Knt_GIDNumer != -1 && noweZlecenie_Activity.Kna_GIDNumer == -1)
             {
-                lista.Add(2); // 2- brak kna_gidnumer
+                lista.Add(2); // 2- brak noweZlecenie_Activity.Kna_GIDNumer
             }
-            else if(Knt_GIDNumer == -1 && Kna_GIDNumer != -1)
+            else if(noweZlecenie_Activity.Knt_GIDNumer == -1 && noweZlecenie_Activity.Kna_GIDNumer != -1)
             {
-                lista.Add(1);// 1- brak knt_gidnumer
+                lista.Add(1);// 1- brak noweZlecenie_Activity.Knt_GIDNumer
             }
 
             return lista;

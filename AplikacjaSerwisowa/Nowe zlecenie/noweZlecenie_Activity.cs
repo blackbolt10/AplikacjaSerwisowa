@@ -28,6 +28,17 @@ namespace AplikacjaSerwisowa
         public static String knt_GidNumer { get; set; }
         public static String szn_AdWNumer { get; set; }
 
+        public static List<TwrKartyTable> skladnikiList;
+        public static List<TwrKartyTable> czynnosciList;
+
+        public static Int32 Knt_GIDNumer;
+        public static String akronimGlowny;
+        public static String NazwaGlowny;
+
+        public static Int32 Kna_GIDNumer;
+        public static String akronimDocelowy;
+        public static String NazwaDocelowy;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -41,6 +52,17 @@ namespace AplikacjaSerwisowa
 
             mViewPager.Adapter = new SamplePagerAdapterNoweZlecenie(SupportFragmentManager);
             mScrollView.ViewPager = mViewPager;
+
+            Knt_GIDNumer = -1;
+            akronimGlowny = "";
+             NazwaGlowny = "";
+
+            Kna_GIDNumer = -1;
+            akronimDocelowy = "";
+            NazwaDocelowy = "";
+
+            skladnikiList = new List<TwrKartyTable>();
+            czynnosciList = new List<TwrKartyTable>();
         }
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -50,6 +72,33 @@ namespace AplikacjaSerwisowa
         public static Context GetContext()
         {
             return kontekst;
+        }
+
+        public static void ustawIloscSkladnikow(double ilosc)
+        {
+            skladnikiList[skladnikiList.Count - 1].Ilosc = ilosc;
+        }
+
+        public static void ustawIloscCzynnosci(double ilosc)
+        {
+            czynnosciList[czynnosciList.Count - 1].Ilosc = ilosc;
+        }
+
+        public static void aktualizujKontrahentaGlownego(String akronim, String nazwa, Int32 kntGidNumer)
+        {
+            Knt_GIDNumer = kntGidNumer;
+            akronimGlowny = akronim;
+            NazwaGlowny = nazwa;
+
+            zakladkaKontrahentNoweZlecenie.aktualizujKontrahentaGlownego();
+        }
+
+        public static void aktualizujKontrahentaDocelowego(String akronim, String nazwa, Int32 _Kna_GIDNumer)
+        {
+            Kna_GIDNumer = _Kna_GIDNumer;
+            akronimDocelowy = akronim;
+            NazwaDocelowy = nazwa;
+            zakladkaKontrahentNoweZlecenie.aktualizujKontrahentaDocelowego();
         }
     }
 
@@ -67,7 +116,7 @@ namespace AplikacjaSerwisowa
             mFragmentHolder.Add(new zakladkaKontrahentNoweZlecenie());
             mFragmentHolder.Add(new zakladkaCzynnosciNoweZlecenie());
             mFragmentHolder.Add(new zakladkaSkladnikiNoweZlecenie());
-            mFragmentHolder.Add(new zakladkaPodpiszNoweZlecenie());
+            mFragmentHolder.Add(new zakladkaPodpisNoweZlecenie());
         }
 
         public override int Count
@@ -84,6 +133,14 @@ namespace AplikacjaSerwisowa
     public class zakladkaOgolneNoweZlecenie : Android.Support.V4.App.Fragment
     {
         private Button mButton;
+
+        public static SrwZlcNagTable pobierzNaglowek()
+        {
+            SrwZlcNagTable srwZlcNag = new SrwZlcNagTable();
+
+
+            return srwZlcNag;
+        }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {

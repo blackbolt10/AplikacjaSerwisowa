@@ -50,11 +50,13 @@ namespace AplikacjaSerwisowa
 
                 if(czynnosc == "1")
                 {
-                    zakladkaCzynnosciNoweZlecenie.ustawIlosc(wartosc);
+                    noweZlecenie_Activity.ustawIloscCzynnosci(wartosc);
+                    zakladkaCzynnosciNoweZlecenie.aktualizujListeCzynnosci();
                 }
                 else
                 {
-                    zakladkaSkladnikiNoweZlecenie.ustawIlosc(wartosc);
+                    noweZlecenie_Activity.ustawIloscSkladnikow(wartosc);
+                    zakladkaSkladnikiNoweZlecenie.aktualizujListeSkladnikow();
                 }
                 this.Finish();
             }

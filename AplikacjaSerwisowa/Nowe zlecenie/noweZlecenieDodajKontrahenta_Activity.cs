@@ -55,11 +55,11 @@ namespace AplikacjaSerwisowa
         {
             if(glowny == "1")
             {
-                zakladkaKontrahentNoweZlecenie.aktualizujKontrahentaGlownego("[" + kntKartyList[e.Position].Knt_Akronim + "]", kntKartyList[e.Position].Knt_nazwa1, kntKartyList[e.Position].Knt_GIDNumer);
+                noweZlecenie_Activity.aktualizujKontrahentaGlownego("[" + kntKartyList[e.Position].Knt_Akronim + "]", kntKartyList[e.Position].Knt_nazwa1, kntKartyList[e.Position].Knt_GIDNumer);
             }
             else
             {
-                zakladkaKontrahentNoweZlecenie.aktualizujKontrahentaDocelowego("[" + kntAdresyList[e.Position].Kna_Akronim + "]", kntAdresyList[e.Position].Kna_nazwa1, kntAdresyList[e.Position].Kna_GIDNumer);
+                noweZlecenie_Activity.aktualizujKontrahentaDocelowego("[" + kntAdresyList[e.Position].Kna_Akronim + "]", kntAdresyList[e.Position].Kna_nazwa1, kntAdresyList[e.Position].Kna_GIDNumer);
             }
 
             this.Finish();

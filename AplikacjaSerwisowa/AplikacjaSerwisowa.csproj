@@ -100,6 +100,7 @@
     <Compile Include="Nowe zlecenie\Zakładki\noweZlecenieDodajCzynnSkladIlosc_Activit.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\zakladkaCzynnosciNoweZlecenie.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\zakladkaKontrahentNoweZlecenie.cs" />
+    <Compile Include="Nowe zlecenie\Zakładki\zakladkaPodpiszNoweZlecenie.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\zakladkaSkladnikiNoweZlecenie.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -167,10 +168,13 @@
     <AndroidResource Include="Resources\layout\noweZlecenieZakladkaCzynnSkladLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\noweZlecenieZakladkaCzynnSklad_row.axml">
+    <AndroidResource Include="Resources\layout\noweZlecenieZakladkaPodpisLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\noweZlecenieZakladkaCzynnSkladIlosc.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\noweZlecenieZakladkaCzynnSklad_row.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="Web References\kwronski\Reference.map">

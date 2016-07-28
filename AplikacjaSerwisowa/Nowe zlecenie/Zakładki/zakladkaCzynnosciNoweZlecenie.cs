@@ -135,6 +135,11 @@ namespace AplikacjaSerwisowa
             czynnosciList[czynnosciList.Count - 1].Ilosc = ilosc;
         }
 
+        public static List<TwrKartyTable> pobierzListeCzynnosci()
+        {
+            return czynnosciList;
+        }
+
         public override string ToString() //Called on line 156 in SlidingTabScrollView
         {
             return "Czynności";

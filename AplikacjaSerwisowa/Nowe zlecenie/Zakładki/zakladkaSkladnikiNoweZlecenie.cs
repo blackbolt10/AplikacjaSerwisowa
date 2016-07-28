@@ -134,6 +134,11 @@ namespace AplikacjaSerwisowa
             skladnikiList[skladnikiList.Count - 1].Ilosc = ilosc;
         }
 
+        public static List<TwrKartyTable> pobierzListSkladnikow()
+        {
+            return skladnikiList;
+        }
+
         public override string ToString() //Called on line 156 in SlidingTabScrollView
         {
             return "Składniki";

@@ -67,6 +67,7 @@ namespace AplikacjaSerwisowa
             mFragmentHolder.Add(new zakladkaKontrahentNoweZlecenie());
             mFragmentHolder.Add(new zakladkaCzynnosciNoweZlecenie());
             mFragmentHolder.Add(new zakladkaSkladnikiNoweZlecenie());
+            mFragmentHolder.Add(new zakladkaPodpiszNoweZlecenie());
         }
 
         public override int Count

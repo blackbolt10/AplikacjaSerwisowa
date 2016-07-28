@@ -99,11 +99,11 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060081
 			public const int LinearLayout1 = 2131099777;
 			
-			// aapt resource value: 0x7f060090
-			public const int ListaZlecenSzczegolyLimageView = 2131099792;
+			// aapt resource value: 0x7f060093
+			public const int ListaZlecenSzczegolyLimageView = 2131099795;
 			
-			// aapt resource value: 0x7f060095
-			public const int ListaZlecenSzczegolyLinearLayout = 2131099797;
+			// aapt resource value: 0x7f060098
+			public const int ListaZlecenSzczegolyLinearLayout = 2131099800;
 			
 			// aapt resource value: 0x7f06003a
 			public const int adresKodPKontrahenciAdresyRowTextView = 2131099706;
@@ -117,11 +117,11 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060045
 			public const int adresNaglowekGlownyKontrahentListaZlecenSczegolyTextView = 2131099717;
 			
-			// aapt resource value: 0x7f0600a1
-			public const int adresSerwer_EditText = 2131099809;
+			// aapt resource value: 0x7f0600a4
+			public const int adresSerwer_EditText = 2131099812;
 			
-			// aapt resource value: 0x7f0600a0
-			public const int adresSerwer_textView = 2131099808;
+			// aapt resource value: 0x7f0600a3
+			public const int adresSerwer_textView = 2131099811;
 			
 			// aapt resource value: 0x7f060005
 			public const int akronimCzynnosciListaZlecenSzczegolyTextView = 2131099653;
@@ -150,11 +150,17 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06002c
 			public const int akronimKontrahenciRowTextView = 2131099692;
 			
-			// aapt resource value: 0x7f06009a
-			public const int akronimSkladnikiListaZlecenSzczegolyTextView = 2131099802;
+			// aapt resource value: 0x7f06009d
+			public const int akronimSkladnikiListaZlecenSzczegolyTextView = 2131099805;
 			
 			// aapt resource value: 0x7f06001f
 			public const int button1 = 2131099679;
+			
+			// aapt resource value: 0x7f060091
+			public const int buttonWrapper = 2131099793;
+			
+			// aapt resource value: 0x7f060090
+			public const int content = 2131099792;
 			
 			// aapt resource value: 0x7f060001
 			public const int czynnosciListaZlecenSzczegolyListView = 2131099649;
@@ -171,8 +177,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060039
 			public const int daneKontrahentaAdresy2LinearLayout = 2131099705;
 			
-			// aapt resource value: 0x7f060091
-			public const int dataNumerDokListaZlecenSzczegolyTextView = 2131099793;
+			// aapt resource value: 0x7f060094
+			public const int dataNumerDokListaZlecenSzczegolyTextView = 2131099796;
 			
 			// aapt resource value: 0x7f06008f
 			public const int dodajDocelowyNoweZlecenieButton = 2131099791;
@@ -225,8 +231,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060034
 			public const int gidNumerKontrahenciRowTextView = 2131099700;
 			
-			// aapt resource value: 0x7f0600a6
-			public const int hasloSerwer_EditText = 2131099814;
+			// aapt resource value: 0x7f0600a9
+			public const int hasloSerwer_EditText = 2131099817;
 			
 			// aapt resource value: 0x7f06006c
 			public const int haslo_EditText = 2131099756;
@@ -237,23 +243,23 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060007
 			public const int iloscCzynnosciListaZlecenSzczegolyTextView = 2131099655;
 			
-			// aapt resource value: 0x7f06009b
-			public const int iloscSkladnikiListaZlecenSzczegolyTextView = 2131099803;
+			// aapt resource value: 0x7f06009e
+			public const int iloscSkladnikiListaZlecenSzczegolyTextView = 2131099806;
 			
-			// aapt resource value: 0x7f0600a3
-			public const int instancjaSerwer_EditText = 2131099811;
+			// aapt resource value: 0x7f0600a6
+			public const int instancjaSerwer_EditText = 2131099814;
 			
-			// aapt resource value: 0x7f0600a2
-			public const int instancjaSerwer_textView = 2131099810;
+			// aapt resource value: 0x7f0600a5
+			public const int instancjaSerwer_textView = 2131099813;
 			
-			// aapt resource value: 0x7f060097
-			public const int item_title = 2131099799;
+			// aapt resource value: 0x7f06009a
+			public const int item_title = 2131099802;
 			
 			// aapt resource value: 0x7f060008
 			public const int jmCzynnosciListaZlecenSzczegolyTextView = 2131099656;
 			
-			// aapt resource value: 0x7f06009c
-			public const int jmSkladnikiListaZlecenSzczegolyTextView = 2131099804;
+			// aapt resource value: 0x7f06009f
+			public const int jmSkladnikiListaZlecenSzczegolyTextView = 2131099807;
 			
 			// aapt resource value: 0x7f060068
 			public const int kartyTowarowListView = 2131099752;
@@ -303,11 +309,11 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06006e
 			public const int loadingPanel = 2131099758;
 			
-			// aapt resource value: 0x7f0600a5
-			public const int loginSerwer_EditText = 2131099813;
+			// aapt resource value: 0x7f0600a8
+			public const int loginSerwer_EditText = 2131099816;
 			
-			// aapt resource value: 0x7f0600a4
-			public const int loginSerwer_textView = 2131099812;
+			// aapt resource value: 0x7f0600a7
+			public const int loginSerwer_textView = 2131099815;
 			
 			// aapt resource value: 0x7f06006a
 			public const int login_EditText = 2131099754;
@@ -339,8 +345,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060009
 			public const int nazwaCzynnosciListaZlecenSzczegolyTextView = 2131099657;
 			
-			// aapt resource value: 0x7f060096
-			public const int nazwaDocelowegoKontrahentaListaZlecenSzczegolyTextView = 2131099798;
+			// aapt resource value: 0x7f060099
+			public const int nazwaDocelowegoKontrahentaListaZlecenSzczegolyTextView = 2131099801;
 			
 			// aapt resource value: 0x7f06008e
 			public const int nazwaDocelowyNoweZlecenieTextView = 2131099790;
@@ -348,8 +354,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06000d
 			public const int nazwaFrag1TextView = 2131099661;
 			
-			// aapt resource value: 0x7f060094
-			public const int nazwaGlownegoKontrahentaListaZlecenSzczegolyTextView = 2131099796;
+			// aapt resource value: 0x7f060097
+			public const int nazwaGlownegoKontrahentaListaZlecenSzczegolyTextView = 2131099799;
 			
 			// aapt resource value: 0x7f06008a
 			public const int nazwaGlownyNoweZlecenieTextView = 2131099786;
@@ -357,8 +363,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060027
 			public const int nazwaKartyTowaroweRowTextView = 2131099687;
 			
-			// aapt resource value: 0x7f06009d
-			public const int nazwaSkladnikiListaZlecenSzczegolyTextView = 2131099805;
+			// aapt resource value: 0x7f0600a0
+			public const int nazwaSkladnikiListaZlecenSzczegolyTextView = 2131099808;
 			
 			// aapt resource value: 0x7f06000c
 			public const int nazwaTextView = 2131099660;
@@ -426,6 +432,9 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060086
 			public const int noweZlecenieZakladkaCzynnSkladUsunButton = 2131099782;
 			
+			// aapt resource value: 0x7f060092
+			public const int noweZlecenieZakladkaPodpisZapiszButton = 2131099794;
+			
 			// aapt resource value: 0x7f060022
 			public const int noweZlecenie_Button = 2131099682;
 			
@@ -441,8 +450,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060004
 			public const int pozycjaCzynnosciListaZlecenSzczegolyTextView = 2131099652;
 			
-			// aapt resource value: 0x7f060099
-			public const int pozycjaSkladnikiListaZlecenSzczegolyTextView = 2131099801;
+			// aapt resource value: 0x7f06009c
+			public const int pozycjaSkladnikiListaZlecenSzczegolyTextView = 2131099804;
 			
 			// aapt resource value: 0x7f060064
 			public const int realizacjaImageView = 2131099748;
@@ -459,8 +468,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060071
 			public const int sample_main_layoutNoweZlecenie = 2131099761;
 			
-			// aapt resource value: 0x7f060098
-			public const int skladnikiListaZlecenSzczegolyListView = 2131099800;
+			// aapt resource value: 0x7f06009b
+			public const int skladnikiListaZlecenSzczegolyListView = 2131099803;
 			
 			// aapt resource value: 0x7f060020
 			public const int sliding_tabs = 2131099680;
@@ -471,20 +480,20 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060072
 			public const int sliding_tabsNoweZlecenie = 2131099762;
 			
-			// aapt resource value: 0x7f060093
-			public const int stanListaZlecenSzczegolyTextView = 2131099795;
+			// aapt resource value: 0x7f060096
+			public const int stanListaZlecenSzczegolyTextView = 2131099798;
 			
 			// aapt resource value: 0x7f060067
 			public const int stanTextViewListaZlecenNaglowek = 2131099751;
 			
-			// aapt resource value: 0x7f0600a8
-			public const int synchronizacjaButton = 2131099816;
+			// aapt resource value: 0x7f0600ab
+			public const int synchronizacjaButton = 2131099819;
 			
-			// aapt resource value: 0x7f06009e
-			public const int synchronizacjaSynchronizacjaButton = 2131099806;
+			// aapt resource value: 0x7f0600a1
+			public const int synchronizacjaSynchronizacjaButton = 2131099809;
 			
-			// aapt resource value: 0x7f0600aa
-			public const int synchronizacja_glowneOknoMenu = 2131099818;
+			// aapt resource value: 0x7f0600ad
+			public const int synchronizacja_glowneOknoMenu = 2131099821;
 			
 			// aapt resource value: 0x7f06005c
 			public const int telefon1DocelowyKontrahentListaZlecenSczegolyTextView = 2131099740;
@@ -528,11 +537,11 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060016
 			public const int telexFrag1TextView = 2131099670;
 			
-			// aapt resource value: 0x7f06009f
-			public const int test2Synchronizacja_button = 2131099807;
+			// aapt resource value: 0x7f0600a2
+			public const int test2Synchronizacja_button = 2131099810;
 			
-			// aapt resource value: 0x7f0600a9
-			public const int test2_button = 2131099817;
+			// aapt resource value: 0x7f0600ac
+			public const int test2_button = 2131099820;
 			
 			// aapt resource value: 0x7f06000a
 			public const int textView1 = 2131099658;
@@ -540,8 +549,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060050
 			public const int textView2 = 2131099728;
 			
-			// aapt resource value: 0x7f060092
-			public const int textView3 = 2131099794;
+			// aapt resource value: 0x7f060095
+			public const int textView3 = 2131099797;
 			
 			// aapt resource value: 0x7f060080
 			public const int textView4 = 2131099776;
@@ -576,8 +585,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06001b
 			public const int urlNazwaFrag1TextView = 2131099675;
 			
-			// aapt resource value: 0x7f0600ad
-			public const int ustawienia_mainActivityMenu = 2131099821;
+			// aapt resource value: 0x7f0600b0
+			public const int ustawienia_mainActivityMenu = 2131099824;
 			
 			// aapt resource value: 0x7f060070
 			public const int uzupelnijTestButton = 2131099760;
@@ -597,8 +606,8 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06006f
 			public const int wszyscyButton = 2131099759;
 			
-			// aapt resource value: 0x7f0600ab
-			public const int wyloguj_glowneOknoMenu = 2131099819;
+			// aapt resource value: 0x7f0600ae
+			public const int wyloguj_glowneOknoMenu = 2131099822;
 			
 			// aapt resource value: 0x7f06006d
 			public const int zaloguj_Button = 2131099757;
@@ -606,14 +615,14 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f060069
 			public const int zaloguj_textView = 2131099753;
 			
-			// aapt resource value: 0x7f0600ac
-			public const int zamknij_glowneOknoMenu = 2131099820;
+			// aapt resource value: 0x7f0600af
+			public const int zamknij_glowneOknoMenu = 2131099823;
 			
-			// aapt resource value: 0x7f0600ae
-			public const int zamknij_mainActivityMenu = 2131099822;
+			// aapt resource value: 0x7f0600b1
+			public const int zamknij_mainActivityMenu = 2131099825;
 			
-			// aapt resource value: 0x7f0600a7
-			public const int zapiszSerwer_Button = 2131099815;
+			// aapt resource value: 0x7f0600aa
+			public const int zapiszSerwer_Button = 2131099818;
 			
 			static Id()
 			{
@@ -701,22 +710,25 @@ namespace AplikacjaSerwisowa
 			public const int noweZlecenieZakladkaKontrahentLayout = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int ogolneListaZlecenSzczegoly = 2130903064;
+			public const int noweZlecenieZakladkaPodpisLayout = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int pager_item = 2130903065;
+			public const int ogolneListaZlecenSzczegoly = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int skladnikiListaZlecenSzczegoly = 2130903066;
+			public const int pager_item = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int skladnikiListaZlecenSzczegoly_row = 2130903067;
+			public const int skladnikiListaZlecenSzczegoly = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int synchronizacjaOkno = 2130903068;
+			public const int skladnikiListaZlecenSzczegoly_row = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int ustawienia = 2130903069;
+			public const int synchronizacjaOkno = 2130903069;
+			
+			// aapt resource value: 0x7f03001e
+			public const int ustawienia = 2130903070;
 			
 			static Layout()
 			{

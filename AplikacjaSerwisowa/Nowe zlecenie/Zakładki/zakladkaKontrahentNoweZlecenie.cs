@@ -123,5 +123,30 @@ namespace AplikacjaSerwisowa
             Kna_GIDNumer = _Kna_GIDNumer;
             ustawWidocznosc();
         }
+
+        public static List<Int32> pobierzKontrahentow()
+        {
+            List<Int32> lista = new List<int>();
+
+            if(Knt_GIDNumer != -1 && Kna_GIDNumer != -1)
+            {
+                lista.Add(Knt_GIDNumer);
+                lista.Add(Kna_GIDNumer);
+            }
+            else if(Knt_GIDNumer == -1 && Kna_GIDNumer == -1)
+            {
+                lista.Add(0); // 1 - brak obu knt
+            }
+            else if(Knt_GIDNumer != -1 && Kna_GIDNumer == -1)
+            {
+                lista.Add(2); // 2- brak kna_gidnumer
+            }
+            else if(Knt_GIDNumer == -1 && Kna_GIDNumer != -1)
+            {
+                lista.Add(1);// 1- brak knt_gidnumer
+            }
+
+            return lista;
+        }
     }
 }

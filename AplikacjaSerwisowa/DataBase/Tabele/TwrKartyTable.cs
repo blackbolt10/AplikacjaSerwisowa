@@ -11,6 +11,8 @@ namespace AplikacjaSerwisowa
         [PrimaryKey, AutoIncrement, Column("_Id")]
         public int Id { get; set; }
 
+        public Int32 Twr_GIDTyp { get; set; }
+
         [Unique]
         public Int32 Twr_GIDNumer { get; set; }
 

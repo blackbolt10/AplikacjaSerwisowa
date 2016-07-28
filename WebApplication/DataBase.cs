@@ -425,7 +425,7 @@ namespace WebApplication
             DataTable pomDataTable = new DataTable();
             try
             {
-                String zapytanieString = @"select Twr_GIDNumer, Twr_Kod, Twr_Typ, Twr_Nazwa, Twr_Nazwa1, Twr_Jm  from cdn.twrkarty 
+                String zapytanieString = @"select Twr_GIDTyp, Twr_GIDNumer, Twr_Kod, Twr_Typ, Twr_Nazwa, Twr_Nazwa1, Twr_Jm  from cdn.twrkarty 
                         order by Twr_Nazwa";
 
                 SqlDataAdapter da = zapytanie(zapytanieString);
@@ -443,7 +443,7 @@ namespace WebApplication
             else
             {
                 List<TwrKartyTable> result = new List<TwrKartyTable>();
-                result.Add(new TwrKartyTable(0, exc.Message, 0, "", "", ""));
+                result.Add(new TwrKartyTable(0, 0, exc.Message, 0, "", "", ""));
                 return result;
             }
         }
@@ -453,6 +453,7 @@ namespace WebApplication
 
             for(int i = 0; i < pomDataTable.Rows.Count; i++)
             {
+                Int32 Twr_GIDTyp = Convert.ToInt32(pomDataTable.Rows[i]["Twr_GIDTyp"].ToString());
                 Int32 Twr_GIDNumer = Convert.ToInt32(pomDataTable.Rows[i]["Twr_GIDNumer"].ToString());
                 String Twr_Kod = pomDataTable.Rows[i]["Twr_Kod"].ToString();
                 Int32 Twr_Typ = Convert.ToInt32(pomDataTable.Rows[i]["Twr_Typ"].ToString());
@@ -461,7 +462,7 @@ namespace WebApplication
                 String Twr_Jm = pomDataTable.Rows[i]["Twr_Jm"].ToString();
 
 
-                result.Add(new TwrKartyTable(Twr_GIDNumer, Twr_Kod, Twr_Typ, Twr_Nazwa, Twr_Nazwa1, Twr_Jm));
+                result.Add(new TwrKartyTable(Twr_GIDTyp, Twr_GIDNumer, Twr_Kod, Twr_Typ, Twr_Nazwa, Twr_Nazwa1, Twr_Jm));
             }
             return result;
         }
@@ -661,6 +662,8 @@ public class SrwZlcSkladniki
 
 public class TwrKartyTable
 {
+    public Int32 Twr_GIDTyp { get; set; }
+
     public Int32 Twr_GIDNumer { get; set; }
     
     public String Twr_Kod { get; set; }
@@ -673,8 +676,9 @@ public class TwrKartyTable
 
     public String Twr_Jm { get; set; }
 
-    public TwrKartyTable(Int32 _Twr_GIDNumer, String _Twr_Kod, Int32 _Twr_Typ, String _Twr_Nazwa, String _Twr_Nazwa1, String _Twr_Jm)
+    public TwrKartyTable(Int32 _Twr_GIDTyp, Int32 _Twr_GIDNumer, String _Twr_Kod, Int32 _Twr_Typ, String _Twr_Nazwa, String _Twr_Nazwa1, String _Twr_Jm)
     {
+        Twr_GIDTyp = _Twr_GIDTyp;
         Twr_GIDNumer = _Twr_GIDNumer;
         Twr_Kod = _Twr_Kod;
         Twr_Typ = _Twr_Typ;

@@ -4,16 +4,15 @@
     android:layout_height="fill_parent">
     <LinearLayout
         android:orientation="vertical"
-        android:id="@+id/content"
+        android:id="@+id/noweZlecenieZakladkaPodpisLinearLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#DC143C"
-        android:layout_centerInParent="true" />
+        android:background="#DC143C" />
     <LinearLayout
         android:orientation="horizontal"
-        android:id="@+id/buttonWrapper"
+        android:id="@+id/noweZlecenieZakladkaPodpisLinearLayout2"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_alignParentBottom="true">
         <Button
             android:id="@+id/noweZlecenieZakladkaPodpisZapiszButton"

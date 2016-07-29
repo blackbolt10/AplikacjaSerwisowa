@@ -53,7 +53,7 @@ namespace AplikacjaSerwisowa
 
             Knt_GIDNumer = -1;
             akronimGlowny = "";
-             NazwaGlowny = "";
+            NazwaGlowny = "";
 
             Kna_GIDNumer = -1;
             akronimDocelowy = "";
@@ -152,7 +152,7 @@ namespace AplikacjaSerwisowa
 
         public override string ToString() //Called on line 156 in SlidingTabScrollView
         {
-            return "Fragment 3";
+            return "Fragment noweZlecActiv?";
         }
     }
 }

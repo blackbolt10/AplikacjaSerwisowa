@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using SQLite;
 
 using Android.App;
@@ -14,6 +15,8 @@ using Android.Support.V4.View;
 using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
+
+using SignaturePad;
 
 namespace AplikacjaSerwisowa
 {
@@ -29,6 +32,15 @@ namespace AplikacjaSerwisowa
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.noweZlecenieZakladkaPodpisLayout, container, false);
+
+            LinearLayout linear = view.FindViewById<LinearLayout>(Resource.Id.noweZlecenieZakladkaPodpisLinearLayout);
+
+            SignaturePadView signature = new SignaturePadView(this.Activity)
+            {
+              //  LineWidth = 3f
+            };
+
+            linear.AddView(signature, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FillParent, 450));
 
             kontekst = noweZlecenie_Activity.GetContext();
 
@@ -71,6 +83,7 @@ namespace AplikacjaSerwisowa
         private Boolean pobierzInformacjeNaglowkowe()
         {
             srwZlcNag = zakladkaOgolneNoweZlecenie.pobierzNaglowek();
+            srwZlcNag.SZN_Synchronizacja = 1;
 
             return true;
         }
@@ -107,7 +120,7 @@ namespace AplikacjaSerwisowa
                 {
                     SrwZlcCzynnosciTable srwZlcCzynnosc = new SrwZlcCzynnosciTable();
                     srwZlcCzynnosc.szc_sznId = srwZlcNag.SZN_Id;
-                    srwZlcCzynnosc.szc_Pozycja = i;
+                    srwZlcCzynnosc.szc_Pozycja = i + 1;
                     srwZlcCzynnosc.szc_TwrNumer = czynnosciList[i].Twr_GIDNumer;
                     srwZlcCzynnosc.szc_TwrTyp = czynnosciList[i].Twr_GIDTyp;
                     srwZlcCzynnosc.szc_TwrNazwa = czynnosciList[i].Twr_Nazwa;
@@ -132,7 +145,7 @@ namespace AplikacjaSerwisowa
                 {
                     SrwZlcSkladnikiTable srwZlcSkladnik = new SrwZlcSkladnikiTable();
                     srwZlcSkladnik.szs_sznId = srwZlcNag.SZN_Id;
-                    srwZlcSkladnik.szs_Pozycja = i;
+                    srwZlcSkladnik.szs_Pozycja = i + 1;
                     srwZlcSkladnik.szs_TwrNumer = skladnikiList[i].Twr_GIDNumer;
                     srwZlcSkladnik.szs_TwrTyp = skladnikiList[i].Twr_GIDTyp;
                     srwZlcSkladnik.szs_TwrNazwa = skladnikiList[i].Twr_Nazwa;
@@ -148,30 +161,56 @@ namespace AplikacjaSerwisowa
 
         private void wygenerujZlecenie()
         {
-            DBRepository db = new DBRepository();
-
-            if(srwZlcNag != null)
+            try
             {
-                uzupelnijDaneKontrahenta();
+                DBRepository db = new DBRepository();
 
-                db.SrwZlcNag_InsertRecord(srwZlcNag);
-            }
-
-            if(SrwZlcCzynnosciTableList != null)
-            {
-                for(int i = 0; i < SrwZlcCzynnosciTableList.Count; i++)
+                if(srwZlcNag != null)
                 {
-                    db.SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciTableList[i]);
+                    uzupelnijDaneKontrahenta();
+
+                    db.SrwZlcNag_InsertRecord(srwZlcNag);
                 }
+
+                if(SrwZlcCzynnosciTableList != null)
+                {
+                    for(int i = 0; i < SrwZlcCzynnosciTableList.Count; i++)
+                    {
+                        db.SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciTableList[i]);
+                    }
+                }
+
+                if(SrwZlcSkladnikiTableList != null)
+                {
+                    for(int i = 0; i < SrwZlcSkladnikiTableList.Count; i++)
+                    {
+                        db.SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiTableList[i]);
+                    }
+                }
+                this.Activity.RunOnUiThread(() => Toast.MakeText(kontekst, "Zlecenie zostało stworzone.", ToastLength.Short));
+                Thread.Sleep(2000);
+                this.Activity.Finish();
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wystąpił błąd tworzenia nowego zlecenia:\n" + exc.Message, "Błąd", 0);
+            }
+        }
+        private void messagebox(String tekst, String tytul = "", Int32 icon = 1)
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(kontekst);
+
+            if(icon == 0)
+            {
+                alert.SetIconAttribute(Android.Resource.Attribute.AlertDialogIcon);
             }
 
-            if(SrwZlcSkladnikiTableList != null)
-            {
-                for(int i = 0; i < SrwZlcSkladnikiTableList.Count; i++)
-                {
-                    db.SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiTableList[i]);
-                }
-            }
+            alert.SetTitle(tytul);
+            alert.SetMessage(tekst);
+            alert.SetPositiveButton("OK", (senderAlert, args) => { });
+
+            Dialog dialog = alert.Create();
+            dialog.Show();
         }
 
         private void uzupelnijDaneKontrahenta()

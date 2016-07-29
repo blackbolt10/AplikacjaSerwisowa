@@ -28,7 +28,6 @@ namespace AplikacjaSerwisowa
         public static String knt_GidNumer { get; set; }
         public static String szn_AdWNumer { get; set; }
 
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -124,8 +123,22 @@ namespace AplikacjaSerwisowa
             {
                 dataNumerTextView.Text = szn.SZN_DataWystawienia.Split(' ')[0] + " - " + szn.Dokument;
                 stanTextView.Text = szn.SZN_Stan;
-                kontrahentDocelowyTextView.Text = dbr.kntAdresy_GetRecord(szn.SZN_AdWNumer.ToString()).Kna_nazwa1;
-                kontrahentGlownyTextView.Text = dbr.kntKarty_GetRecord(szn.SZN_KnDNumer.ToString()).Knt_nazwa1;
+                if(szn.SZN_AdWNumer != 0)
+                {
+                    kontrahentDocelowyTextView.Text = dbr.kntAdresy_GetRecord(szn.SZN_AdWNumer.ToString()).Kna_nazwa1;
+                }
+                else
+                {
+                    kontrahentDocelowyTextView.Text = "{brak kontrahenta docelowego}";
+                }
+                if(szn.SZN_KntNumer != 0)
+                {
+                    kontrahentGlownyTextView.Text = dbr.kntKarty_GetRecord(szn.SZN_KnDNumer.ToString()).Knt_nazwa1;
+                }
+                else
+                {
+                    kontrahentGlownyTextView.Text = "{brak kontrahenta g³ównego}";
+                }
                 listaZlecenSzczegoly_Activity.knt_GidNumer = szn.SZN_KntNumer.ToString();
                 listaZlecenSzczegoly_Activity.szn_AdWNumer = szn.SZN_AdWNumer.ToString();
             }
@@ -370,6 +383,28 @@ namespace AplikacjaSerwisowa
                 }
 
             }
+            else
+            {
+                ukryjDocelowego();
+            }
+        }
+
+        private void ukryjDocelowego()
+        {
+            akronimDocelowyTextView.Visibility = ViewStates.Gone;
+            nazwa1DocelowyTextView.Text = "{Brak kontrahenta docelowego}";
+            nazwa2DocelowyTextView.Visibility = ViewStates.Gone;
+            nazwa3DocelowyTextView.Visibility = ViewStates.Gone;
+            ulicaDocelowyTextView.Text = "{Brak adresu kontrahenta docelowego}";
+            kodPMiastoDocelowyTextView.Visibility = ViewStates.Gone;
+            telefon1DocelowyTextView.Visibility = ViewStates.Gone;
+            telefon2DocelowyTextView.Visibility = ViewStates.Gone;
+            nipDocelowyTextView.Visibility = ViewStates.Gone;
+            emailDocelowyTextView.Visibility = ViewStates.Gone;
+            telefonDocelowyLinearLayout.Visibility = ViewStates.Gone;
+            nipNaglowekDocelowyTextView.Visibility = ViewStates.Gone;
+            telefonNaglowekDocelowyTextView.Visibility = ViewStates.Gone;
+            emailNaglowekDocelowyTextView.Visibility = ViewStates.Gone;
         }
 
         public override string ToString() //Called on line 156 in SlidingTabScrollView
@@ -422,10 +457,7 @@ namespace AplikacjaSerwisowa
             {
                 adapter = new listaZlecenSzczegolyCzynnosci_ListViewAdapter(kontekst,szcList);
             }
-            else
-            {
-                adapter = new listaZlecenSzczegolyCzynnosci_ListViewAdapter(kontekst, null);
-            }
+
             return adapter;
         }
 
@@ -469,7 +501,6 @@ namespace AplikacjaSerwisowa
             listaZlecenSzczegolySkladniki_ListViewAdapter adapter = null;
             szcList = new List<SrwZlcSkladnikiTable>();
 
-
             try
             {
                 DBRepository dbr = new DBRepository();
@@ -484,10 +515,7 @@ namespace AplikacjaSerwisowa
             {
                 adapter = new listaZlecenSzczegolySkladniki_ListViewAdapter(kontekst, szcList);
             }
-            else
-            {
-                adapter = new listaZlecenSzczegolySkladniki_ListViewAdapter(kontekst, null);
-            }
+
             return adapter;
         }
 

@@ -159,12 +159,6 @@ namespace AplikacjaSerwisowa
 			// aapt resource value: 0x7f06001f
 			public const int button1 = 2131099679;
 			
-			// aapt resource value: 0x7f060091
-			public const int buttonWrapper = 2131099793;
-			
-			// aapt resource value: 0x7f060090
-			public const int content = 2131099792;
-			
 			// aapt resource value: 0x7f060001
 			public const int czynnosciListaZlecenSzczegolyListView = 2131099649;
 			
@@ -434,6 +428,12 @@ namespace AplikacjaSerwisowa
 			
 			// aapt resource value: 0x7f060086
 			public const int noweZlecenieZakladkaCzynnSkladUsunButton = 2131099782;
+			
+			// aapt resource value: 0x7f060090
+			public const int noweZlecenieZakladkaPodpisLinearLayout = 2131099792;
+			
+			// aapt resource value: 0x7f060091
+			public const int noweZlecenieZakladkaPodpisLinearLayout2 = 2131099793;
 			
 			// aapt resource value: 0x7f060092
 			public const int noweZlecenieZakladkaPodpisZapiszButton = 2131099794;

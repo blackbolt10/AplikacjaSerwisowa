@@ -929,6 +929,77 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+
+
+
+        
+
+
+
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela SrwZlcPodpis***************************|
+            *---------------------------------------------------------------------------------
+        */
+
+        public string stworzSrwZlcPodpisTable()
+        {
+            String output = "";
+            try
+            {
+                try
+                {
+                    db.DropTable<SrwZlcPodpisTable>();
+                }
+                catch(Exception) { }
+
+                db.CreateTable<SrwZlcPodpisTable>();
+
+                output = "Tabela SrwZlcPodpisTable zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzSrwZlcPodpisTable() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+
+        public String SrwZlcPodpis_InsertRecord(SrwZlcPodpisTable item)
+        {
+            String output = "";
+            try
+            {
+                db.Insert(item);
+                output = "Wpis dodany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwZlcPodpis_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+
+        public SrwZlcPodpisTable SrwZlcPodpis_GetRecord(Int32 SZN_Id)
+        {
+            SrwZlcPodpisTable output = null;
+            
+            try
+            {
+                var result = db.Query<SrwZlcPodpisTable>("select * from SrwZlcPodpisTable where SZN_Id = " + SZN_Id.ToString());
+
+                if(result.Count > 0)
+                {
+                    output = result[0];
+                }
+            }
+            catch(Exception)
+            {}
+
+            return output;
+        }
+
     }
 }
 

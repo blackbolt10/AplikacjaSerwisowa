@@ -96,14 +96,14 @@ namespace AplikacjaSerwisowa
 
         private void pobieranieDanychWebService()
         {
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 1/6..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 1/7..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie nag³ówków kontrahentów..."));
             String kntKartyString = kwronskiService.ZwrocListeKntKarty();
 
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy nag³ówków kontrahentów..."));
             tworzenieBazyKntKarty(kntKartyString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 2/6..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 2/7..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie adresów kontrahentów..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
@@ -112,7 +112,7 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy adresów kontrahentów..."));
             tworzenieBazyKntAdresy(kntAdresyString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 3/6..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 3/7..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie nag³ówków zleceñ serwisowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
@@ -121,7 +121,7 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy nag³ówków zleceñ serwisowych..."));
             tworzenieBazySerwisoweZleceniaNaglowki(serwisoweZlecenniaNaglowkiString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 4/6..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 4/7..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie czynnosci zleceñ serwisowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
@@ -130,7 +130,7 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy czynnosci zleceñ serwisowych..."));
             tworzenieBazySrwZlcCzynnosci(srwZlcCzynnosciString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 5/6..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 5/7..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie skladniki zleceñ serwisowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
@@ -139,7 +139,7 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy skladniki zleceñ serwisowych..."));
             tworzenieBazySrwZlcSkladniki(srwZlcSkladnikiString);
 
-            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 6/6..."));
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 6/7..."));
             RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie kart towarowych..."));
             RunOnUiThread(() => progrssDialog.Progress = 0);
             RunOnUiThread(() => progrssDialog.Max = 1);
@@ -147,6 +147,15 @@ namespace AplikacjaSerwisowa
 
             RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy kart towarowych..."));
             tworzenieBazyTwrKarty(twrKartyString);
+
+            RunOnUiThread(() => progrssDialog.SetTitle("Pobieranie 7/7..."));
+            RunOnUiThread(() => progrssDialog.SetMessage("Pobieranie podpisów..."));
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = 1);
+            String podpisyString = kwronskiService.ZwrocListeTwrKarty();
+
+            RunOnUiThread(() => progrssDialog.SetMessage("Tworzenie bazy podpisów..."));
+            tworzenieBazySrwZlcPodpisy(podpisyString);
 
             RunOnUiThread(() => messagebox("Pobieranie zakoñczone", "Ukoñczono"));
             progrssDialog.Dismiss();
@@ -188,9 +197,7 @@ namespace AplikacjaSerwisowa
             var records = JsonConvert.DeserializeObject<List<KntAdresyTable>>(kntAdresyString);
 
             DBRepository dbr = new DBRepository();
-            String result = dbr.createDB();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();            
-            result = dbr.stworzKntAdresyTabele();
+            String result = dbr.stworzKntAdresyTabele();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
             if(records.Count > 0)
@@ -219,14 +226,41 @@ namespace AplikacjaSerwisowa
             var records = JsonConvert.DeserializeObject<List<SrwZlcCzynnosciTable>>(srwZlcCzynnosciString);
 
             DBRepository dbr = new DBRepository();
-            String result = dbr.createDB();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();            
-            result = dbr.stworzSrwZlcCzynnosciTable();
+            String result = dbr.stworzSrwZlcCzynnosciTable();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
             if(records.Count > 0)
             {
                 wprowadzWpisyDoTabeliSrwZlcCzynnosci(records, dbr);
+            }
+        }
+
+        private void tworzenieBazySrwZlcPodpisy(string podpisyString)
+        {
+            var records = JsonConvert.DeserializeObject<List<SrwZlcPodpisTable>>(podpisyString);
+
+            DBRepository dbr = new DBRepository();
+            String result = dbr.stworzSrwZlcPodpisTable();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();
+
+            if(records.Count > 0)
+            {
+                wprowadzWpisyDoTabeliSrwZlcPodpisy(records, dbr);
+            }
+        }
+
+        private void wprowadzWpisyDoTabeliSrwZlcPodpisy(List<SrwZlcPodpisTable> records, DBRepository dbr)
+        {
+            RunOnUiThread(() => progrssDialog.SetMessage("Zapisywanie podpisów..."));
+            RunOnUiThread(() => progrssDialog.Progress = 0);
+            RunOnUiThread(() => progrssDialog.Max = records.Count);
+
+            for(int i = 0; i < records.Count; i++)
+            {
+                RunOnUiThread(() => progrssDialog.Progress++);
+
+                SrwZlcPodpisTable szp = records[i];
+                dbr.SrwZlcPodpis_InsertRecord(szp);
             }
         }
 
@@ -250,9 +284,7 @@ namespace AplikacjaSerwisowa
             var records = JsonConvert.DeserializeObject<List<SrwZlcSkladnikiTable>>(srwZlcCzynnosciString);
 
             DBRepository dbr = new DBRepository();
-            String result = dbr.createDB();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();            
-            result = dbr.stworzSrwZlcSkladnikiTable();
+            String result = dbr.stworzSrwZlcSkladnikiTable();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
             if(records.Count > 0)
@@ -281,9 +313,7 @@ namespace AplikacjaSerwisowa
             var records = JsonConvert.DeserializeObject<List<SrwZlcNagTable>>(serwisoweZlecenniaNaglowkiString);
 
             DBRepository dbr = new DBRepository();
-            String result = dbr.createDB();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();            
-            result = dbr.stworzSrwZlcNagTable();
+            String result = dbr.stworzSrwZlcNagTable();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
             if(records.Count > 0)
@@ -311,9 +341,7 @@ namespace AplikacjaSerwisowa
             var records = JsonConvert.DeserializeObject<List<TwrKartyTable>>(twrKartyString);
 
             DBRepository dbr = new DBRepository();
-            String result = dbr.createDB();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();            
-            result = dbr.stworzTwrKartyTable();
+            String result = dbr.stworzTwrKartyTable();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
             if(records.Count > 0)

@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase\DBRepository.cs" />
+    <Compile Include="DataBase\Tabele\SrwZlcPodpisTable.cs" />
     <Compile Include="DataBase\Tabele\TwrKartyTable.cs" />
     <Compile Include="DataBase\Tabele\SrwZlcNagTable.cs" />
     <Compile Include="DataBase\Tabele\SrwZlcSkladnikiTable.cs" />

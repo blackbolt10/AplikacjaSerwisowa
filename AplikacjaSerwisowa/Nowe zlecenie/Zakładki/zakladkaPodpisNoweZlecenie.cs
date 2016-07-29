@@ -8,13 +8,17 @@ using SQLite;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4;
 using Android.Support.V4.View;
 using Android.Support.V4.App;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
+
+using Java.IO;
 
 using SignaturePad;
 
@@ -23,10 +27,11 @@ namespace AplikacjaSerwisowa
     class zakladkaPodpisNoweZlecenie : Android.Support.V4.App.Fragment
     {
         private Button zapiszButton;
-        List<SrwZlcCzynnosciTable> SrwZlcCzynnosciTableList;
-        List<SrwZlcSkladnikiTable> SrwZlcSkladnikiTableList;
-        List<TwrKartyTable> skladnikiList;
-        SrwZlcNagTable srwZlcNag;
+        private List<SrwZlcCzynnosciTable> SrwZlcCzynnosciTableList;
+        private List<SrwZlcSkladnikiTable> SrwZlcSkladnikiTableList;
+        private List<TwrKartyTable> skladnikiList;
+        private SrwZlcNagTable srwZlcNag;
+        private SignaturePadView signature;
         private Context kontekst;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -35,7 +40,7 @@ namespace AplikacjaSerwisowa
 
             LinearLayout linear = view.FindViewById<LinearLayout>(Resource.Id.noweZlecenieZakladkaPodpisLinearLayout);
 
-            SignaturePadView signature = new SignaturePadView(this.Activity)
+            signature = new SignaturePadView(this.Activity)
             {
               //  LineWidth = 3f
             };
@@ -170,23 +175,28 @@ namespace AplikacjaSerwisowa
                     uzupelnijDaneKontrahenta();
 
                     db.SrwZlcNag_InsertRecord(srwZlcNag);
-                }
 
-                if(SrwZlcCzynnosciTableList != null)
-                {
-                    for(int i = 0; i < SrwZlcCzynnosciTableList.Count; i++)
+                    zapiszPodpis();
+
+                    if(SrwZlcCzynnosciTableList != null)
                     {
-                        db.SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciTableList[i]);
+                        for(int i = 0; i < SrwZlcCzynnosciTableList.Count; i++)
+                        {
+                            db.SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciTableList[i]);
+                        }
+                    }
+
+                    if(SrwZlcSkladnikiTableList != null)
+                    {
+                        for(int i = 0; i < SrwZlcSkladnikiTableList.Count; i++)
+                        {
+                            db.SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiTableList[i]);
+                        }
                     }
                 }
 
-                if(SrwZlcSkladnikiTableList != null)
-                {
-                    for(int i = 0; i < SrwZlcSkladnikiTableList.Count; i++)
-                    {
-                        db.SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiTableList[i]);
-                    }
-                }
+
+
                 this.Activity.RunOnUiThread(() => Toast.MakeText(kontekst, "Zlecenie zostało stworzone.", ToastLength.Short));
                 Thread.Sleep(2000);
                 this.Activity.Finish();
@@ -196,6 +206,34 @@ namespace AplikacjaSerwisowa
                 messagebox("Wystąpił błąd tworzenia nowego zlecenia:\n" + exc.Message, "Błąd", 0);
             }
         }
+
+        private void zapiszPodpis()
+        {
+            Bitmap podpisBitmap = signature.GetImage();
+
+            SrwZlcPodpisTable szp = new SrwZlcPodpisTable();
+            szp.SZN_Id = srwZlcNag.SZN_Id;
+            szp.Podpis = BitMapToString(podpisBitmap);
+
+            DBRepository db = new DBRepository();
+            db.SrwZlcPodpis_InsertRecord(szp);
+        }
+
+        public String BitMapToString(Android.Graphics.Bitmap bitmap)
+        {
+            MemoryStream byteArrayOutputStream = new MemoryStream();
+            bitmap.Compress(Bitmap.CompressFormat.Png, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream.ToArray();
+
+            String str = byteArray[0].ToString();
+            for(int i = 1; i < byteArray.Length; i++)
+            {
+                str += ","+byteArray[i].ToString();
+            }
+
+            return str;
+        }
+
         private void messagebox(String tekst, String tytul = "", Int32 icon = 1)
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(kontekst);

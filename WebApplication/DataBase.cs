@@ -191,7 +191,6 @@ namespace WebApplication
                 return null;
             }
         }
-
         public List<int> synchronizujSrwZlcNag(string inputJSON)
         {
             List<int> result = new List<int>();
@@ -228,6 +227,82 @@ namespace WebApplication
                 return false;
             }
         }
+
+        public List<int> synchronizujSrwZlcCzynnosci(string inputJSON)
+        {
+            List<int> result = new List<int>();
+
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<SrwZlcCzynnoci> records = ser.Deserialize<List<SrwZlcCzynnoci>>(inputJSON);
+
+            for(int i = 0; i < records.Count; i++)
+            {
+                Boolean wynik = zapiszSrwZlcCzynnosciSerwis(records[i]);
+                if(wynik)
+                {
+                    result.Add(records[i].szc_Id);
+                }
+            }
+
+            return result;
+        }
+
+        private Boolean zapiszSrwZlcCzynnosciSerwis(SrwZlcCzynnoci srwZlcCzynnosc)
+        {
+            DataTable pomdatatable = new DataTable();
+
+            try
+            {
+                String zapytanieString = "INSERT INTO [GAL].[SrwZlcCzynnosci] VALUES(" + srwZlcCzynnosc.szc_Id+ ", "+srwZlcCzynnosc.szc_sznId+", "+ srwZlcCzynnosc .szc_Pozycja+ ", "+ srwZlcCzynnosc.szc_TwrTyp + ", "+ srwZlcCzynnosc.szc_TwrNumer+ ", '"+ srwZlcCzynnosc.szc_Ilosc+ "', '')"; //[LAMA] '' - brakuje opisu?
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
+
+        public List<string> synchronizujSrwZlcSkladniki(string inputJSON)
+        {
+            List<string> result = new List<string>();
+
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<SrwZlcSkladniki> records = ser.Deserialize<List<SrwZlcSkladniki>>(inputJSON);
+
+            for(int i = 0; i < records.Count; i++)
+            {
+                string wynik = zapiszSrwZlcSkladnikiSerwis(records[i]);
+                if(wynik.Length !=0)
+                {
+                    result.Add(wynik);
+                    //result.Add(records[i].szs_Id);
+                }
+            }
+
+            return result;
+        }
+
+        private string zapiszSrwZlcSkladnikiSerwis(SrwZlcSkladniki srwZlcCzynnosc)
+        {
+            DataTable pomdatatable = new DataTable();
+
+            try
+            {
+                String zapytanieString = "INSERT INTO [GAL].[SrwZlcSkladniki] VALUES(" + srwZlcCzynnosc.szs_Id + ", " + srwZlcCzynnosc.szs_sznId + ", " + srwZlcCzynnosc.szs_Pozycja + ", " + srwZlcCzynnosc.szs_TwrTyp + ", " + srwZlcCzynnosc.szs_TwrNumer + ", '" + srwZlcCzynnosc.szs_Ilosc + "', '')"; //[LAMA] '' - brakuje opisu?
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+
+                return "";
+            }
+            catch(Exception exc)
+            {
+                return exc.Message;
+            }
+        }
+
 
         private List<SrwZlcNag> wygenerujListeSerwisowychZlecen(DataTable pomDataTable)
         {
@@ -413,7 +488,7 @@ namespace WebApplication
                 String Twr_Jm = pomDataTable.Rows[i]["Twr_Jm"].ToString();
                 String Twr_Kod = pomDataTable.Rows[i]["Twr_Kod"].ToString();
 
-                result.Add(new SrwZlcCzynnoci(szc_Id, szc_sznId, szc_Pozycja, szc_TwrNumer, szc_TwrTyp, szc_Ilosc, Twr_Jm, szc_TwrNazwa, Twr_Kod));
+                result.Add(new SrwZlcCzynnoci(szc_Id, szc_sznId, szc_Pozycja, szc_TwrNumer, szc_TwrTyp, 0, szc_Ilosc, Twr_Jm, szc_TwrNazwa, Twr_Kod));
             }
             return result;
         }
@@ -542,233 +617,4 @@ namespace WebApplication
 
 
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-public class SrwZlcNag
-{
-    public String Dokument { get; set; }
-    public int SZN_Id { get; set; }
-    public int SZN_KntTyp { get; set; }
-    public int SZN_KntNumer { get; set; }
-    public int SZN_KnATyp { get; set; }
-    public int SZN_KnANumer { get; set; }
-    public int SZN_KnDTyp { get; set; }
-    public int SZN_KnDNumer { get; set; }
-    public int SZN_AdWTyp { get; set; }
-    public int SZN_AdWNumer { get; set; }
-    public String SZN_DataWystawienia { get; set; }
-    public String SZN_DataRozpoczecia { get; set; }
-    public String SZN_Stan { get; set; }
-    public String SZN_Status { get; set; }
-    public String SZN_CechaOpis { get; set; }
-    public String SZN_Opis { get; set; }
-    public int SZN_Synchronizacja { get; set; }
-
-
-    public SrwZlcNag(String _Dokument, int _SZN_Id, int _SZN_KntTyp, int _SZN_KntNumer, int _SZN_KnATyp, int _SZN_KnANumer, int _SZN_KnDTyp, int _SZN_KnDNumer, int _SZN_AdWTyp, int _SZN_AdWNumer, String _SZN_DataWystawienia, String _SZN_DataRozpoczecia, String _SZN_Stan, String _SZN_Status, String _SZN_CechaOpis, String _SZN_Opis, int _SZN_Synchronizacja)
-    {
-        Dokument = _Dokument;
-        SZN_Id = _SZN_Id;
-        SZN_KntTyp = _SZN_KntTyp;
-        SZN_KntNumer = _SZN_KntNumer;
-        SZN_KnATyp = _SZN_KnATyp;
-        SZN_KnANumer = _SZN_KnANumer;
-        SZN_KnDTyp = _SZN_KnDTyp;
-        SZN_KnDNumer = _SZN_KnDNumer;
-        SZN_AdWTyp = _SZN_AdWTyp;
-        SZN_AdWNumer = _SZN_AdWNumer;
-        SZN_DataWystawienia = _SZN_DataWystawienia;
-        SZN_DataRozpoczecia = _SZN_DataRozpoczecia;
-        SZN_Stan = _SZN_Stan;
-        SZN_Status = _SZN_Status;
-        SZN_CechaOpis = _SZN_CechaOpis;
-        SZN_Opis = _SZN_Opis;
-        SZN_Synchronizacja = _SZN_Synchronizacja;
-    }
-    public SrwZlcNag() { }
-}
-
-public class KntKarty
-{
-    public Int32 Knt_GIDNumer { get; set; }
-    public String Knt_Akronim { get; set; }
-    public String Knt_nazwa1 { get; set; }
-    public String Knt_nazwa2 { get; set; }
-    public String Knt_nazwa3 { get; set; }
-    public String Knt_KodP { get; set; }
-    public String Knt_miasto { get; set; }
-    public String Knt_ulica { get; set; }
-    public String Knt_Adres { get; set; }
-    public String Knt_nip { get; set; }
-    public String Knt_telefon1 { get; set; }
-    public String Knt_telefon2 { get; set; }
-    public String Knt_telex { get; set; }
-    public String Knt_fax { get; set; }
-    public String Knt_email { get; set; }
-    public String Knt_url { get; set; }
-
-    public KntKarty(Int32 _Knt_GIDNumer, String _Knt_Akronim, String _Knt_nazwa1, String _Knt_nazwa2, String _Knt_nazwa3, String _Knt_KodP, String _Knt_miasto, String _Knt_ulica, String _Knt_Adres, String _Knt_nip, String _Knt_telefon1, String _Knt_telefon2, String _Knt_telex, String _Knt_fax, String _Knt_email, String _Knt_url)
-    {
-        Knt_GIDNumer = _Knt_GIDNumer;
-        Knt_Akronim = _Knt_Akronim;
-        Knt_nazwa1 = _Knt_nazwa1;
-        Knt_nazwa2 = _Knt_nazwa2;
-        Knt_nazwa3 = _Knt_nazwa3;
-        Knt_KodP = _Knt_KodP;
-        Knt_miasto = _Knt_miasto;
-        Knt_ulica = _Knt_ulica;
-        Knt_Adres = _Knt_Adres;
-        Knt_nip = _Knt_nip;
-        Knt_telefon1 = _Knt_telefon1;
-        Knt_telefon2 = _Knt_telefon2;
-        Knt_telex = _Knt_telex;
-        Knt_fax = _Knt_fax;
-        Knt_email = _Knt_email;
-        Knt_url = _Knt_url;
-    }
-
-    public KntKarty() { }
-}
-
-public class KntAdresy
-{
-    public Int32 Kna_GIDNumer { get; set; }
-    public Int32 Kna_GIDTyp { get; set; }
-    public Int32 Kna_KntNumer { get; set; }
-    public String Kna_Akronim { get; set; }
-    public String Kna_nazwa1 { get; set; }
-    public String Kna_nazwa2 { get; set; }
-    public String Kna_nazwa3 { get; set; }
-    public String Kna_KodP { get; set; }
-    public String Kna_miasto { get; set; }
-    public String Kna_ulica { get; set; }
-    public String Kna_Adres { get; set; }
-    public String Kna_nip { get; set; }
-    public String Kna_telefon1 { get; set; }
-    public String Kna_telefon2 { get; set; }
-    public String Kna_telex { get; set; }
-    public String Kna_fax { get; set; }
-    public String Kna_email { get; set; }
-
-    public KntAdresy(Int32 _Kna_GIDNumer, Int32 _Kna_GIDTyp, Int32 _Kna_KntNumer, String _Kna_Akronim, String _Kna_nazwa1, String _Kna_nazwa2, String _Kna_nazwa3, String _Kna_KodP, String _Kna_miasto, String _Kna_ulica, String _Kna_Adres, String _Kna_nip, String _Kna_telefon1, String _Kna_telefon2, String _Kna_telex, String _Kna_fax, String _Kna_email)
-    {
-        Kna_GIDNumer = _Kna_GIDNumer;
-        Kna_GIDTyp = _Kna_GIDTyp;
-        Kna_KntNumer = _Kna_KntNumer;
-        Kna_Akronim = _Kna_Akronim;
-        Kna_nazwa1 = _Kna_nazwa1;
-        Kna_nazwa2 = _Kna_nazwa2;
-        Kna_nazwa3 = _Kna_nazwa3;
-        Kna_KodP = _Kna_KodP;
-        Kna_miasto = _Kna_miasto;
-        Kna_ulica = _Kna_ulica;
-        Kna_Adres = _Kna_Adres;
-        Kna_nip = _Kna_nip;
-        Kna_telefon1 = _Kna_telefon1;
-        Kna_telefon2 = _Kna_telefon2;
-        Kna_telex = _Kna_telex;
-        Kna_fax = _Kna_fax;
-        Kna_email = _Kna_email;
-    }
-    public KntAdresy() { }
-}
-
-public class SrwZlcCzynnoci
-{
-    public Int32 szc_Id { get; set; }
-    public Int32 szc_sznId { get; set; }
-    public Int32 szc_Pozycja { get; set; }
-    public Int32 szc_TwrNumer { get; set; }
-    public Int32 szc_TwrTyp { get; set; }
-    public Double szc_Ilosc { get; set; }
-    public String Twr_Jm { get; set; }
-    public String szc_TwrNazwa { get; set; }
-    public String Twr_Kod { get; set; }
-
-    public SrwZlcCzynnoci(Int32 _szc_Id, Int32 _szc_sznId, Int32 _szc_Pozycja, Int32 _szc_TwrNumer, Int32 _szc_TwrTyp, Double _szc_Ilosc, String _Twr_Jm, String _szc_TwrNazwa, String _Twr_Kod)
-    {
-        szc_Id = _szc_Id;
-        szc_sznId = _szc_sznId;
-        szc_Pozycja = _szc_Pozycja;
-        szc_TwrNumer = _szc_TwrNumer;
-        szc_TwrTyp = _szc_TwrTyp;
-        szc_Ilosc = _szc_Ilosc;
-        Twr_Jm = _Twr_Jm;
-        szc_TwrNazwa = _szc_TwrNazwa;
-        Twr_Kod = _Twr_Kod;
-    }
-    public SrwZlcCzynnoci() { }
-}
-
-
-
-public class SrwZlcSkladniki
-{
-    public Int32 szs_Id { get; set; }
-    public Int32 szs_sznId { get; set; }
-    public Int32 szs_Pozycja { get; set; }
-    public Int32 szs_TwrNumer { get; set; }
-    public Int32 szs_TwrTyp { get; set; }
-    public Double szs_Ilosc { get; set; }
-    public String Twr_Jm { get; set; }
-    public String szs_TwrNazwa { get; set; }
-    public String Twr_Kod { get; set; }
-
-    public SrwZlcSkladniki(Int32 _szs_Id, Int32 _szs_sznId, Int32 _szs_Pozycja, Int32 _szs_TwrNumer, Int32 _szs_TwrTyp, Double _szs_Ilosc, String _Twr_Jm, String _szs_TwrNazwa, String _Twr_Kod)
-    {
-        szs_Id = _szs_Id;
-        szs_sznId = _szs_sznId;
-        szs_Pozycja = _szs_Pozycja;
-        szs_TwrNumer = _szs_TwrNumer;
-        szs_TwrTyp = _szs_TwrTyp;
-        szs_Ilosc = _szs_Ilosc;
-        Twr_Jm = _Twr_Jm;
-        szs_TwrNazwa = _szs_TwrNazwa;
-        Twr_Kod = _Twr_Kod;
-    }
-    public SrwZlcSkladniki() { }
-}
-
-public class TwrKartyTable
-{
-    public Int32 Twr_GIDTyp { get; set; }
-
-    public Int32 Twr_GIDNumer { get; set; }
-    
-    public String Twr_Kod { get; set; }
-
-    public Int32 Twr_Typ { get; set; }
-    
-    public String Twr_Nazwa { get; set; }
-
-    public String Twr_Nazwa1 { get; set; }
-
-    public String Twr_Jm { get; set; }
-
-    public TwrKartyTable(Int32 _Twr_GIDTyp, Int32 _Twr_GIDNumer, String _Twr_Kod, Int32 _Twr_Typ, String _Twr_Nazwa, String _Twr_Nazwa1, String _Twr_Jm)
-    {
-        Twr_GIDTyp = _Twr_GIDTyp;
-        Twr_GIDNumer = _Twr_GIDNumer;
-        Twr_Kod = _Twr_Kod;
-        Twr_Typ = _Twr_Typ;
-        Twr_Nazwa = _Twr_Nazwa;
-        Twr_Nazwa1 = _Twr_Nazwa1;
-        Twr_Jm = _Twr_Jm;
-    }
-
-    public TwrKartyTable() { }
 }

@@ -640,6 +640,7 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+
         public String SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciTable item)
         {
             String output = "";
@@ -718,6 +719,35 @@ namespace AplikacjaSerwisowa
             }
 
             return output;
+        }
+
+        public List<SrwZlcCzynnosciTable> SrwZlcCzynnosciSynchronizacja(int synchParam)
+        {
+            List<SrwZlcCzynnosciTable> srwZlcCzynnosciList = new List<SrwZlcCzynnosciTable>();
+
+            try
+            {
+                srwZlcCzynnosciList = db.Query<SrwZlcCzynnosciTable>("select * from SrwZlcCzynnosciTable where  SZC_Synchronizacja = " + synchParam.ToString());
+            }
+            catch(Exception)
+            {}
+
+            return srwZlcCzynnosciList;
+        }
+
+        public void SrwZlcCzynnosci_OznaczWyslane(List<int> wyslaneCzynnosciList, int wslaneParam)
+        {
+            for(int i = 0; i < wyslaneCzynnosciList.Count; i++)
+            {
+                var result = db.Query<SrwZlcCzynnosciTable>("UPDATE SrwZlcCzynnosciTable SET SZC_Synchronizacja = " + wslaneParam.ToString() + " where szc_sznId = " + wyslaneCzynnosciList[i].ToString());
+            }
+        }
+        public void SrwZlcCzynnosci_OznaczWyslane(List<SrwZlcCzynnosciTable> wyslaneCzynnosciList, int wslaneParam)
+        {
+            for(int i = 0; i < wyslaneCzynnosciList.Count; i++)
+            {
+                var result = db.Query<SrwZlcCzynnosciTable>("UPDATE SrwZlcCzynnosciTable SET SZC_Synchronizacja = " + wslaneParam.ToString() + " where szc_sznId = " + wyslaneCzynnosciList[i].szc_Id.ToString());
+            }
         }
 
 

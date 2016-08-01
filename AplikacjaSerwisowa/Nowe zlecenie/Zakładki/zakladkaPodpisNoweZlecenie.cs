@@ -131,6 +131,7 @@ namespace AplikacjaSerwisowa
                     srwZlcCzynnosc.szc_TwrNazwa = czynnosciList[i].Twr_Nazwa;
                     srwZlcCzynnosc.szc_Ilosc = czynnosciList[i].Ilosc;
                     srwZlcCzynnosc.Twr_Kod = czynnosciList[i].Twr_Kod;
+                    srwZlcCzynnosc.SZC_Synchronizacja = 1;
 
                     SrwZlcCzynnosciTableList.Add(srwZlcCzynnosc);
                 }
@@ -176,7 +177,7 @@ namespace AplikacjaSerwisowa
 
                     db.SrwZlcNag_InsertRecord(srwZlcNag);
 
-                    zapiszPodpis();
+                    //zapiszPodpis();
 
                     if(SrwZlcCzynnosciTableList != null)
                     {
@@ -233,6 +234,7 @@ namespace AplikacjaSerwisowa
 
             return str;
         }
+
 
         private void messagebox(String tekst, String tytul = "", Int32 icon = 1)
         {

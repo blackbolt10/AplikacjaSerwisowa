@@ -22,6 +22,8 @@ namespace AplikacjaSerwisowa
 
         public Int32 szc_TwrTyp { get; set; }
 
+        public Int32 SZC_Synchronizacja { get; set; }
+
         public double szc_Ilosc { get; set; }
 
         public String Twr_Jm { get; set; }

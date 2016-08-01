@@ -49,6 +49,10 @@ namespace AplikacjaSerwisowa.kwronski {
         
         private System.Threading.SendOrPostCallback synchronizujSrwZlcNagOperationCompleted;
         
+        private System.Threading.SendOrPostCallback synchronizujSrwZlcCzynnosciOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback synchronizujSrwZlcSkladnikiOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -116,6 +120,12 @@ namespace AplikacjaSerwisowa.kwronski {
         
         /// <remarks/>
         public event synchronizujSrwZlcNagCompletedEventHandler synchronizujSrwZlcNagCompleted;
+        
+        /// <remarks/>
+        public event synchronizujSrwZlcCzynnosciCompletedEventHandler synchronizujSrwZlcCzynnosciCompleted;
+        
+        /// <remarks/>
+        public event synchronizujSrwZlcSkladnikiCompletedEventHandler synchronizujSrwZlcSkladnikiCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/SayHelloToLame", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -392,6 +402,64 @@ namespace AplikacjaSerwisowa.kwronski {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/synchronizujSrwZlcCzynnosci", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string synchronizujSrwZlcCzynnosci(string inputJSON) {
+            object[] results = this.Invoke("synchronizujSrwZlcCzynnosci", new object[] {
+                        inputJSON});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void synchronizujSrwZlcCzynnosciAsync(string inputJSON) {
+            this.synchronizujSrwZlcCzynnosciAsync(inputJSON, null);
+        }
+        
+        /// <remarks/>
+        public void synchronizujSrwZlcCzynnosciAsync(string inputJSON, object userState) {
+            if ((this.synchronizujSrwZlcCzynnosciOperationCompleted == null)) {
+                this.synchronizujSrwZlcCzynnosciOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsynchronizujSrwZlcCzynnosciOperationCompleted);
+            }
+            this.InvokeAsync("synchronizujSrwZlcCzynnosci", new object[] {
+                        inputJSON}, this.synchronizujSrwZlcCzynnosciOperationCompleted, userState);
+        }
+        
+        private void OnsynchronizujSrwZlcCzynnosciOperationCompleted(object arg) {
+            if ((this.synchronizujSrwZlcCzynnosciCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.synchronizujSrwZlcCzynnosciCompleted(this, new synchronizujSrwZlcCzynnosciCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/synchronizujSrwZlcSkladniki", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string synchronizujSrwZlcSkladniki(string inputJSON) {
+            object[] results = this.Invoke("synchronizujSrwZlcSkladniki", new object[] {
+                        inputJSON});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void synchronizujSrwZlcSkladnikiAsync(string inputJSON) {
+            this.synchronizujSrwZlcSkladnikiAsync(inputJSON, null);
+        }
+        
+        /// <remarks/>
+        public void synchronizujSrwZlcSkladnikiAsync(string inputJSON, object userState) {
+            if ((this.synchronizujSrwZlcSkladnikiOperationCompleted == null)) {
+                this.synchronizujSrwZlcSkladnikiOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsynchronizujSrwZlcSkladnikiOperationCompleted);
+            }
+            this.InvokeAsync("synchronizujSrwZlcSkladniki", new object[] {
+                        inputJSON}, this.synchronizujSrwZlcSkladnikiOperationCompleted, userState);
+        }
+        
+        private void OnsynchronizujSrwZlcSkladnikiOperationCompleted(object arg) {
+            if ((this.synchronizujSrwZlcSkladnikiCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.synchronizujSrwZlcSkladnikiCompleted(this, new synchronizujSrwZlcSkladnikiCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -657,6 +725,58 @@ namespace AplikacjaSerwisowa.kwronski {
         private object[] results;
         
         internal synchronizujSrwZlcNagCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void synchronizujSrwZlcCzynnosciCompletedEventHandler(object sender, synchronizujSrwZlcCzynnosciCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class synchronizujSrwZlcCzynnosciCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal synchronizujSrwZlcCzynnosciCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void synchronizujSrwZlcSkladnikiCompletedEventHandler(object sender, synchronizujSrwZlcSkladnikiCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class synchronizujSrwZlcSkladnikiCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal synchronizujSrwZlcSkladnikiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

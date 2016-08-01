@@ -124,7 +124,25 @@ namespace WebApplication
             return new JavaScriptSerializer().Serialize(output);
         }
 
+        [WebMethod(Description = "Pozwala na synchronizację SrwZlcCzynnosci z urządzenia")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string synchronizujSrwZlcCzynnosci(String inputJSON)
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<int> output = dataBaseObject.synchronizujSrwZlcCzynnosci(inputJSON);
 
-        
+            return new JavaScriptSerializer().Serialize(output);
+        }
+
+        [WebMethod(Description = "Pozwala na synchronizację SrwZlcSkladniki z urządzenia")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string synchronizujSrwZlcSkladniki(String inputJSON)
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<string> output = dataBaseObject.synchronizujSrwZlcSkladniki(inputJSON);
+
+            return new JavaScriptSerializer().Serialize(output);
+        }
+
     }
 }

@@ -110,6 +110,34 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="synchronizujSrwZlcCzynnosci">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inputJSON" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="synchronizujSrwZlcCzynnosciResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="synchronizujSrwZlcCzynnosciResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="synchronizujSrwZlcSkladniki">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inputJSON" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="synchronizujSrwZlcSkladnikiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="synchronizujSrwZlcSkladnikiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="string" nillable="true" type="s:string" />
     </s:schema>
   </wsdl:types>
@@ -173,6 +201,18 @@
   <wsdl:message name="synchronizujSrwZlcNagSoapOut">
     <wsdl:part name="parameters" element="tns:synchronizujSrwZlcNagResponse" />
   </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcCzynnosciSoapIn">
+    <wsdl:part name="parameters" element="tns:synchronizujSrwZlcCzynnosci" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcCzynnosciSoapOut">
+    <wsdl:part name="parameters" element="tns:synchronizujSrwZlcCzynnosciResponse" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcSkladnikiSoapIn">
+    <wsdl:part name="parameters" element="tns:synchronizujSrwZlcSkladniki" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcSkladnikiSoapOut">
+    <wsdl:part name="parameters" element="tns:synchronizujSrwZlcSkladnikiResponse" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpGetIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -217,6 +257,18 @@
   <wsdl:message name="synchronizujSrwZlcNagHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcCzynnosciHttpGetIn">
+    <wsdl:part name="inputJSON" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcCzynnosciHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcSkladnikiHttpGetIn">
+    <wsdl:part name="inputJSON" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcSkladnikiHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpPostIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -259,6 +311,18 @@
     <wsdl:part name="inputJSON" type="s:string" />
   </wsdl:message>
   <wsdl:message name="synchronizujSrwZlcNagHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcCzynnosciHttpPostIn">
+    <wsdl:part name="inputJSON" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcCzynnosciHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcSkladnikiHttpPostIn">
+    <wsdl:part name="inputJSON" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="synchronizujSrwZlcSkladnikiHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
@@ -312,6 +376,16 @@
       <wsdl:input message="tns:synchronizujSrwZlcNagSoapIn" />
       <wsdl:output message="tns:synchronizujSrwZlcNagSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcCzynnosci">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na synchronizację SrwZlcCzynnosci z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:synchronizujSrwZlcCzynnosciSoapIn" />
+      <wsdl:output message="tns:synchronizujSrwZlcCzynnosciSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcSkladniki">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na synchronizację SrwZlcSkladniki z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:synchronizujSrwZlcSkladnikiSoapIn" />
+      <wsdl:output message="tns:synchronizujSrwZlcSkladnikiSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpGet">
     <wsdl:operation name="SayHelloToLame">
@@ -364,6 +438,16 @@
       <wsdl:input message="tns:synchronizujSrwZlcNagHttpGetIn" />
       <wsdl:output message="tns:synchronizujSrwZlcNagHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcCzynnosci">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na synchronizację SrwZlcCzynnosci z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:synchronizujSrwZlcCzynnosciHttpGetIn" />
+      <wsdl:output message="tns:synchronizujSrwZlcCzynnosciHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcSkladniki">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na synchronizację SrwZlcSkladniki z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:synchronizujSrwZlcSkladnikiHttpGetIn" />
+      <wsdl:output message="tns:synchronizujSrwZlcSkladnikiHttpGetOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpPost">
     <wsdl:operation name="SayHelloToLame">
@@ -415,6 +499,16 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na synchronizację SrwZlcNag z urządzenia</wsdl:documentation>
       <wsdl:input message="tns:synchronizujSrwZlcNagHttpPostIn" />
       <wsdl:output message="tns:synchronizujSrwZlcNagHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcCzynnosci">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na synchronizację SrwZlcCzynnosci z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:synchronizujSrwZlcCzynnosciHttpPostIn" />
+      <wsdl:output message="tns:synchronizujSrwZlcCzynnosciHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcSkladniki">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na synchronizację SrwZlcSkladniki z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:synchronizujSrwZlcSkladnikiHttpPostIn" />
+      <wsdl:output message="tns:synchronizujSrwZlcSkladnikiHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -502,6 +596,24 @@
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcNag">
       <soap:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcNag" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcCzynnosci">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcCzynnosci" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcSkladniki">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcSkladniki" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -602,6 +714,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcCzynnosci">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcCzynnosci" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcSkladniki">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcSkladniki" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpGet" type="tns:WebServiceHttpGet">
     <http:binding verb="GET" />
@@ -695,6 +825,24 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcCzynnosci">
+      <http:operation location="/synchronizujSrwZlcCzynnosci" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcSkladniki">
+      <http:operation location="/synchronizujSrwZlcSkladniki" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpPost" type="tns:WebServiceHttpPost">
     <http:binding verb="POST" />
@@ -781,6 +929,24 @@
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcNag">
       <http:operation location="/synchronizujSrwZlcNag" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcCzynnosci">
+      <http:operation location="/synchronizujSrwZlcCzynnosci" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="synchronizujSrwZlcSkladniki">
+      <http:operation location="/synchronizujSrwZlcSkladniki" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

@@ -26,9 +26,7 @@ namespace AplikacjaSerwisowa
     public class synchronizacja_Activity : Activity
     {
         private Button synchronizacja_Button, wyslij_Button;
-
         private AplikacjaSerwisowa.kwronski.WebService kwronskiService;
-
         private ProgressDialog progressDialog, progressDialogWysylanie;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -163,7 +161,7 @@ namespace AplikacjaSerwisowa
 
         private void tworzenieBazyKntKarty(String kntKartyString)
         {
-            var records = JsonConvert.DeserializeObject<List<KntKartyTable>>(kntKartyString);
+            List<KntKartyTable> records = JsonConvert.DeserializeObject<List<KntKartyTable>>(kntKartyString);
 
             DBRepository dbr = new DBRepository();
             String result = dbr.createDB();
@@ -194,7 +192,7 @@ namespace AplikacjaSerwisowa
 
         private void tworzenieBazyKntAdresy(String kntAdresyString)
         {
-            var records = JsonConvert.DeserializeObject<List<KntAdresyTable>>(kntAdresyString);
+            List<KntAdresyTable> records = JsonConvert.DeserializeObject<List<KntAdresyTable>>(kntAdresyString);
 
             DBRepository dbr = new DBRepository();
             String result = dbr.stworzKntAdresyTabele();
@@ -223,7 +221,7 @@ namespace AplikacjaSerwisowa
 
         private void tworzenieBazySrwZlcCzynnosci(String srwZlcCzynnosciString)
         {
-            var records = JsonConvert.DeserializeObject<List<SrwZlcCzynnosciTable>>(srwZlcCzynnosciString);
+            List<SrwZlcCzynnosciTable> records = JsonConvert.DeserializeObject<List<SrwZlcCzynnosciTable>>(srwZlcCzynnosciString);
 
             DBRepository dbr = new DBRepository();
             String result = dbr.stworzSrwZlcCzynnosciTable();
@@ -237,7 +235,7 @@ namespace AplikacjaSerwisowa
 
         private void tworzenieBazySrwZlcPodpisy(string podpisyString)
         {
-            var records = JsonConvert.DeserializeObject<List<SrwZlcPodpisTable>>(podpisyString);
+            List<SrwZlcPodpisTable> records = JsonConvert.DeserializeObject<List<SrwZlcPodpisTable>>(podpisyString);
 
             DBRepository dbr = new DBRepository();
             String result = dbr.stworzSrwZlcPodpisTable();
@@ -281,7 +279,7 @@ namespace AplikacjaSerwisowa
 
         private void tworzenieBazySrwZlcSkladniki(String srwZlcCzynnosciString)
         {
-            var records = JsonConvert.DeserializeObject<List<SrwZlcSkladnikiTable>>(srwZlcCzynnosciString);
+            List<SrwZlcSkladnikiTable> records = JsonConvert.DeserializeObject<List<SrwZlcSkladnikiTable>>(srwZlcCzynnosciString);
 
             DBRepository dbr = new DBRepository();
             String result = dbr.stworzSrwZlcSkladnikiTable();
@@ -310,7 +308,7 @@ namespace AplikacjaSerwisowa
 
         private void tworzenieBazySerwisoweZleceniaNaglowki(String serwisoweZlecenniaNaglowkiString)
         {
-            var records = JsonConvert.DeserializeObject<List<SrwZlcNagTable>>(serwisoweZlecenniaNaglowkiString);
+            List<SrwZlcNagTable> records = JsonConvert.DeserializeObject<List<SrwZlcNagTable>>(serwisoweZlecenniaNaglowkiString);
 
             DBRepository dbr = new DBRepository();
             String result = dbr.stworzSrwZlcNagTable();
@@ -338,7 +336,7 @@ namespace AplikacjaSerwisowa
         }
         private void tworzenieBazyTwrKarty(String twrKartyString)
         {
-            var records = JsonConvert.DeserializeObject<List<TwrKartyTable>>(twrKartyString);
+            List<TwrKartyTable> records = JsonConvert.DeserializeObject<List<TwrKartyTable>>(twrKartyString);
 
             DBRepository dbr = new DBRepository();
             String result = dbr.stworzTwrKartyTable();
@@ -404,7 +402,8 @@ namespace AplikacjaSerwisowa
             List<int> wyslaneCzynnosciList = wyslijSrwZlcCzynniki(wyslaneNagList);
             oznaczWyslaneSrwZlcCzynnosci(wyslaneCzynnosciList);
 
-            wyslijSrwZlcSkladniki(wyslaneNagList);
+            List<int> wyslaneSkladnikiList = wyslijSrwZlcSkladniki(wyslaneNagList);
+            oznaczWyslaneSrwZlcSkladniki(wyslaneSkladnikiList);
 
             progressDialogWysylanie.Dismiss();
         }
@@ -495,9 +494,46 @@ namespace AplikacjaSerwisowa
             db.SrwZlcCzynnosci_OznaczWyslane(wyslaneCzynnosciList, 3);
         }
 
-        private void wyslijSrwZlcSkladniki(List<int> wyslaneNagList)
+        private List<int> wyslijSrwZlcSkladniki(List<int> wyslaneNagList)
         {
-            
+            RunOnUiThread(() => progressDialogWysylanie.SetMessage("Przygotowywanie sk³adników zleceñ serwisowych."));
+
+            DBRepository db = new DBRepository();
+            List<int> wyslaneSkladnikiList = new List<int>();
+
+            List<SrwZlcSkladnikiTable> srwZlcSkladnikiList = db.SrwZlcSkladnikiSynchronizacja(1);
+
+            if(srwZlcSkladnikiList.Count > 0)
+            {
+                RunOnUiThread(() => progressDialogWysylanie.SetMessage("Wysy³anie sk³adników zleceñ serwisowych."));
+                String jsonOut = JsonConvert.SerializeObject(srwZlcSkladnikiList);
+
+                db.SrwZlcSkladniki_OznaczWyslane(srwZlcSkladnikiList, 2);
+
+                RunOnUiThread(() => progressDialogWysylanie.SetMessage("Oczekiwanie na potwierdzenie odebrania danych przez serwer."));
+                String result = kwronskiService.synchronizujSrwZlcSkladniki(jsonOut);
+
+                RunOnUiThread(() => progressDialogWysylanie.SetMessage("Przetwarzanie odwpowiedz serwera."));
+                if(result != "[]")
+                {
+                    result = result.Replace('[', ' ');
+                    result = result.Replace(']', ' ');
+
+                    String[] resultArray = result.Split(',');
+                    for(int i = 0; i < resultArray.Length; i++)
+                    {
+                        wyslaneSkladnikiList.Add(Convert.ToInt32(resultArray[i]));
+                    }
+                }
+            }
+            return wyslaneSkladnikiList;
+        }
+        private void oznaczWyslaneSrwZlcSkladniki(List<int> wyslaneSkladnikiList)
+        {
+            RunOnUiThread(() => progressDialogWysylanie.SetMessage("Oznaczanie wys³anych sk³adników"));
+
+            DBRepository db = new DBRepository();
+            db.SrwZlcSkladniki_OznaczWyslane(wyslaneSkladnikiList, 3);
         }
     }
 }

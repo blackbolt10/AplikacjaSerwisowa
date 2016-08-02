@@ -138,6 +138,16 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ZwrocListeOperatorow">
+        <s:complexType />
+      </s:element>
+      <s:element name="ZwrocListeOperatorowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZwrocListeOperatorowResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="string" nillable="true" type="s:string" />
     </s:schema>
   </wsdl:types>
@@ -213,6 +223,12 @@
   <wsdl:message name="synchronizujSrwZlcSkladnikiSoapOut">
     <wsdl:part name="parameters" element="tns:synchronizujSrwZlcSkladnikiResponse" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeOperatorowSoapIn">
+    <wsdl:part name="parameters" element="tns:ZwrocListeOperatorow" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeOperatorowSoapOut">
+    <wsdl:part name="parameters" element="tns:ZwrocListeOperatorowResponse" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpGetIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -269,6 +285,10 @@
   <wsdl:message name="synchronizujSrwZlcSkladnikiHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeOperatorowHttpGetIn" />
+  <wsdl:message name="ZwrocListeOperatorowHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpPostIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -323,6 +343,10 @@
     <wsdl:part name="inputJSON" type="s:string" />
   </wsdl:message>
   <wsdl:message name="synchronizujSrwZlcSkladnikiHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeOperatorowHttpPostIn" />
+  <wsdl:message name="ZwrocListeOperatorowHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
@@ -386,6 +410,11 @@
       <wsdl:input message="tns:synchronizujSrwZlcSkladnikiSoapIn" />
       <wsdl:output message="tns:synchronizujSrwZlcSkladnikiSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeOperatorow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie listy Operatorów</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeOperatorowSoapIn" />
+      <wsdl:output message="tns:ZwrocListeOperatorowSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpGet">
     <wsdl:operation name="SayHelloToLame">
@@ -448,6 +477,11 @@
       <wsdl:input message="tns:synchronizujSrwZlcSkladnikiHttpGetIn" />
       <wsdl:output message="tns:synchronizujSrwZlcSkladnikiHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeOperatorow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie listy Operatorów</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeOperatorowHttpGetIn" />
+      <wsdl:output message="tns:ZwrocListeOperatorowHttpGetOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpPost">
     <wsdl:operation name="SayHelloToLame">
@@ -509,6 +543,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na synchronizację SrwZlcSkladniki z urządzenia</wsdl:documentation>
       <wsdl:input message="tns:synchronizujSrwZlcSkladnikiHttpPostIn" />
       <wsdl:output message="tns:synchronizujSrwZlcSkladnikiHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeOperatorow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie listy Operatorów</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeOperatorowHttpPostIn" />
+      <wsdl:output message="tns:ZwrocListeOperatorowHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -614,6 +653,15 @@
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcSkladniki">
       <soap:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcSkladniki" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeOperatorow">
+      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeOperatorow" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -732,6 +780,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeOperatorow">
+      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeOperatorow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpGet" type="tns:WebServiceHttpGet">
     <http:binding verb="GET" />
@@ -843,6 +900,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeOperatorow">
+      <http:operation location="/ZwrocListeOperatorow" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpPost" type="tns:WebServiceHttpPost">
     <http:binding verb="POST" />
@@ -947,6 +1013,15 @@
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcSkladniki">
       <http:operation location="/synchronizujSrwZlcSkladniki" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeOperatorow">
+      <http:operation location="/ZwrocListeOperatorow" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

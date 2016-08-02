@@ -10,8 +10,7 @@ namespace AplikacjaSerwisowa
     {
         [PrimaryKey, AutoIncrement, Column("_Id")]
         public int Id { get; set; }
-
-        [Unique]
+        
         public Int32 szs_Id { get; set; }
         
         public Int32 szs_sznId { get; set; }
@@ -21,6 +20,8 @@ namespace AplikacjaSerwisowa
         public Int32 szs_TwrNumer { get; set; }
 
         public Int32 szs_TwrTyp { get; set; }
+
+        public Int32 SZS_Synchronizacja { get; set; }
 
         public double szs_Ilosc { get; set; }
 

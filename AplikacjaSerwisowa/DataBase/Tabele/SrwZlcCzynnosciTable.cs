@@ -10,8 +10,7 @@ namespace AplikacjaSerwisowa
     {
         [PrimaryKey, AutoIncrement, Column("_Id")]
         public int Id { get; set; }
-
-        [Unique]
+        
         public Int32 szc_Id { get; set; }
         
         public Int32 szc_sznId { get; set; }

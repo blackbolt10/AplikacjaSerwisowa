@@ -53,6 +53,8 @@ namespace AplikacjaSerwisowa.kwronski {
         
         private System.Threading.SendOrPostCallback synchronizujSrwZlcSkladnikiOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ZwrocListeOperatorowOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -126,6 +128,9 @@ namespace AplikacjaSerwisowa.kwronski {
         
         /// <remarks/>
         public event synchronizujSrwZlcSkladnikiCompletedEventHandler synchronizujSrwZlcSkladnikiCompleted;
+        
+        /// <remarks/>
+        public event ZwrocListeOperatorowCompletedEventHandler ZwrocListeOperatorowCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/SayHelloToLame", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -460,6 +465,33 @@ namespace AplikacjaSerwisowa.kwronski {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/ZwrocListeOperatorow", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string ZwrocListeOperatorow() {
+            object[] results = this.Invoke("ZwrocListeOperatorow", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeOperatorowAsync() {
+            this.ZwrocListeOperatorowAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeOperatorowAsync(object userState) {
+            if ((this.ZwrocListeOperatorowOperationCompleted == null)) {
+                this.ZwrocListeOperatorowOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZwrocListeOperatorowOperationCompleted);
+            }
+            this.InvokeAsync("ZwrocListeOperatorow", new object[0], this.ZwrocListeOperatorowOperationCompleted, userState);
+        }
+        
+        private void OnZwrocListeOperatorowOperationCompleted(object arg) {
+            if ((this.ZwrocListeOperatorowCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZwrocListeOperatorowCompleted(this, new ZwrocListeOperatorowCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -777,6 +809,32 @@ namespace AplikacjaSerwisowa.kwronski {
         private object[] results;
         
         internal synchronizujSrwZlcSkladnikiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void ZwrocListeOperatorowCompletedEventHandler(object sender, ZwrocListeOperatorowCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZwrocListeOperatorowCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZwrocListeOperatorowCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

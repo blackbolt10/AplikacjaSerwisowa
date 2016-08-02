@@ -39,7 +39,7 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public string CreateTable()
+        public string OperatorzyTable_CreateTable()
         {
             String output = "";
             try
@@ -62,7 +62,7 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public String InsertRecord(OperatorzyTable item)
+        public String OperatorzyTable_InsertRecord(OperatorzyTable item)
         {
             String output = "";
             try
@@ -78,15 +78,15 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public String GetAllRecords()
+        public String OperatorzyTable_GetAllRecords()
         {
             String output = "";
 
             try
             {
-                var table = db.Table<OperatorzyTable>();
+                TableQuery<OperatorzyTable> table = db.Table<OperatorzyTable>();
 
-                foreach(var item in table)
+                foreach(OperatorzyTable item in table)
                 {
                     output += "\n"+item.Id+": A:"+item.Akronim + ", H:" +item.Haslo + ", N:" +item.Nazwisko + ", I:" +item.Imie;
                 }
@@ -106,8 +106,6 @@ namespace AplikacjaSerwisowa
             {
                 try
                 {
-                    var table = db.Table<OperatorzyTable>();
-
                     var test = db.Query<OperatorzyTable>("select Haslo from OperatorzyTable where Akronim = '" + akronim + "'");
 
                     if (test.Count > 0)
@@ -727,7 +725,7 @@ namespace AplikacjaSerwisowa
 
             try
             {
-                srwZlcCzynnosciList = db.Query<SrwZlcCzynnosciTable>("select * from SrwZlcCzynnosciTable where  SZC_Synchronizacja = " + synchParam.ToString());
+                srwZlcCzynnosciList = db.Query<SrwZlcCzynnosciTable>("select * from SrwZlcCzynnosciTable where SZC_Synchronizacja = " + synchParam.ToString());
             }
             catch(Exception)
             {}
@@ -867,6 +865,35 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
+        public List<SrwZlcSkladnikiTable> SrwZlcSkladnikiSynchronizacja(int synchParam)
+        {
+            List<SrwZlcSkladnikiTable> srwZlcSkladnikiList = new List<SrwZlcSkladnikiTable>();
+
+            try
+            {
+                srwZlcSkladnikiList = db.Query<SrwZlcSkladnikiTable>("select * from SrwZlcSkladnikiTable where SZS_Synchronizacja = " + synchParam.ToString());
+            }
+            catch(Exception)
+            { }
+
+            return srwZlcSkladnikiList;
+        }
+
+        public void SrwZlcSkladniki_OznaczWyslane(List<int> wyslaneSkladnikiList, int wslaneParam)
+        {
+            for(int i = 0; i < wyslaneSkladnikiList.Count; i++)
+            {
+                var result = db.Query<SrwZlcSkladnikiTable>("UPDATE SrwZlcSkladnikiTable SET SZs_Synchronizacja = " + wslaneParam.ToString() + " where szs_sznId = " + wyslaneSkladnikiList[i].ToString());
+            }
+        }
+        public void SrwZlcSkladniki_OznaczWyslane(List<SrwZlcSkladnikiTable> wyslaneSkladnikiList, int wslaneParam)
+        {
+            for(int i = 0; i < wyslaneSkladnikiList.Count; i++)
+            {
+                var result = db.Query<SrwZlcSkladnikiTable>("UPDATE SrwZlcSkladnikiTable SET SZs_Synchronizacja = " + wslaneParam.ToString() + " where szs_sznId = " + wyslaneSkladnikiList[i].szs_Id.ToString());
+            }
+        }
+
 
 
 
@@ -880,7 +907,7 @@ namespace AplikacjaSerwisowa
             *|*********************************Tabela TwrKarty*******************************|
             *---------------------------------------------------------------------------------
         */
-        
+
         public string stworzTwrKartyTable()
         {
             String output = "";

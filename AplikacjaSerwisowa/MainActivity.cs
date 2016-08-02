@@ -102,7 +102,7 @@ namespace AplikacjaSerwisowa
             loadingAnimation_RelativeLayout.Visibility = ViewStates.Visible;
 
             DBRepository dbr = new DBRepository();
-            String result = dbr.GetAllRecords();
+            String result = dbr.OperatorzyTable_GetAllRecords();
             Toast.MakeText(this, result, ToastLength.Long).Show();
 
             loadingAnimation_RelativeLayout.Visibility = ViewStates.Invisible;

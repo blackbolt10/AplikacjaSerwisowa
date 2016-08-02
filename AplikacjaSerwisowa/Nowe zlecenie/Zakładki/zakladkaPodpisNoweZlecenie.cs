@@ -157,6 +157,7 @@ namespace AplikacjaSerwisowa
                     srwZlcSkladnik.szs_TwrNazwa = skladnikiList[i].Twr_Nazwa;
                     srwZlcSkladnik.szs_Ilosc = skladnikiList[i].Ilosc;
                     srwZlcSkladnik.Twr_Kod = skladnikiList[i].Twr_Kod;
+                    srwZlcSkladnik.SZS_Synchronizacja = 1;
 
                     SrwZlcSkladnikiTableList.Add(srwZlcSkladnik);
                 }
@@ -181,17 +182,19 @@ namespace AplikacjaSerwisowa
 
                     if(SrwZlcCzynnosciTableList != null)
                     {
+                        DBRepository dbr = new DBRepository();
                         for(int i = 0; i < SrwZlcCzynnosciTableList.Count; i++)
                         {
-                            db.SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciTableList[i]);
+                            dbr.SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciTableList[i]);
                         }
                     }
 
                     if(SrwZlcSkladnikiTableList != null)
                     {
+                        DBRepository dbr = new DBRepository();
                         for(int i = 0; i < SrwZlcSkladnikiTableList.Count; i++)
                         {
-                            db.SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiTableList[i]);
+                            dbr.SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiTableList[i]);
                         }
                     }
                 }

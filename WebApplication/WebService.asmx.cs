@@ -144,5 +144,15 @@ namespace WebApplication
             return new JavaScriptSerializer().Serialize(output);
         }
 
+        [WebMethod(Description = "Pozwala na wygenerowanie listy Operatorów")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ZwrocListeOperatorow()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<Operatorzy> output = dataBaseObject.wygenerujListeOperatorow();
+
+            return new JavaScriptSerializer().Serialize(output);
+        }
+        
     }
 }

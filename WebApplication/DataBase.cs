@@ -191,6 +191,45 @@ namespace WebApplication
                 return null;
             }
         }
+
+        public List<Operatorzy> wygenerujListeOperatorow()
+        {
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[Operatorzy]";
+
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return wygenerujListeOperatorow(pomDataTable);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private List<Operatorzy> wygenerujListeOperatorow(DataTable pomDataTable)
+        {
+            List<Operatorzy> result = new List<Operatorzy>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                String Akronim = pomDataTable.Rows[i]["GZO_Akronim"].ToString();
+                String Haslo = pomDataTable.Rows[i]["GZO_Haslo"].ToString();
+                String Imie = pomDataTable.Rows[i]["GZO_Imie"].ToString();
+                String Nazwisko = pomDataTable.Rows[i]["GZO_Nazwisko"].ToString();
+
+                result.Add(new Operatorzy(Akronim, Haslo, Imie, Nazwisko));
+            }
+            return result;
+        }
+
         public List<int> synchronizujSrwZlcNag(string inputJSON)
         {
             List<int> result = new List<int>();
@@ -532,7 +571,7 @@ namespace WebApplication
             else
             {
                 List<SrwZlcSkladniki> result = new List<SrwZlcSkladniki>();
-                result.Add(new SrwZlcSkladniki(0, 0, 0, 0, 0, 0, null, exc.Message, null));
+                result.Add(new SrwZlcSkladniki(0, 0, 0, 0, 0, 0, 0, null, exc.Message, null));
                 return result;
             }
         }
@@ -552,7 +591,7 @@ namespace WebApplication
                 String Twr_Jm = pomDataTable.Rows[i]["Twr_Jm"].ToString();
                 String Twr_Kod = pomDataTable.Rows[i]["Twr_Kod"].ToString();
 
-                result.Add(new SrwZlcSkladniki(szs_Id, szs_sznId, szs_Pozycja, szs_TwrNumer, szs_TwrTyp, szs_Ilosc, Twr_Jm, szs_TwrNazwa, Twr_Kod));
+                result.Add(new SrwZlcSkladniki(szs_Id, szs_sznId, szs_Pozycja, szs_TwrNumer, szs_TwrTyp, 0, szs_Ilosc, Twr_Jm, szs_TwrNazwa, Twr_Kod));
             }
             return result;
         }

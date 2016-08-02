@@ -87,7 +87,10 @@ namespace AplikacjaSerwisowa
 
         private Boolean pobierzInformacjeNaglowkowe()
         {
+            DBRepository dbr = new DBRepository();
+
             srwZlcNag = zakladkaOgolneNoweZlecenie.pobierzNaglowek();
+            srwZlcNag.SZN_Id = dbr.SrwZlcNagGenerujNoweID();
             srwZlcNag.SZN_Synchronizacja = 1;
 
             return true;
@@ -199,10 +202,8 @@ namespace AplikacjaSerwisowa
                     }
                 }
 
-
-
                 this.Activity.RunOnUiThread(() => Toast.MakeText(kontekst, "Zlecenie zostało stworzone.", ToastLength.Short));
-                Thread.Sleep(2000);
+                //Thread.Sleep(2000);
                 this.Activity.Finish();
             }
             catch(Exception exc)

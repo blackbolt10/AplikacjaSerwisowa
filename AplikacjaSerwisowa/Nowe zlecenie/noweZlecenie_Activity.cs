@@ -135,8 +135,8 @@ namespace AplikacjaSerwisowa
         public static SrwZlcNagTable pobierzNaglowek()
         {
             SrwZlcNagTable srwZlcNag = new SrwZlcNagTable();
-            srwZlcNag.SZN_DataRozpoczecia ="2015-08-01";
-            srwZlcNag.SZN_DataWystawienia = "2015-08-01";
+            srwZlcNag.SZN_DataRozpoczecia ="2016-08-01";
+            srwZlcNag.SZN_DataWystawienia = "2016-08-01";
             srwZlcNag.SZN_Opis = "to jest opis!";
 
             return srwZlcNag;

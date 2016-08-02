@@ -35,9 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/noweZlecenieZakCzynnSkladIloscIloscEditText"
-            android:layout_weight="14" 
+            android:layout_weight="14"
             android:inputType="numberDecimal"
-            android:digits="0123456789.,"/>
+            android:digits="0123456789.," />
         <TextView
             android:text="JM"
             android:layout_width="wrap_content"

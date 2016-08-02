@@ -581,7 +581,6 @@ namespace AplikacjaSerwisowa
             return wynik;
         }
 
-
         public int SrwZlcNagGenerujNoweID()
         {
             int result = 0;
@@ -596,7 +595,7 @@ namespace AplikacjaSerwisowa
 
             if(wynik.Count==1)
             {
-                if(wynik[0]< result)
+                if(wynik[0]<= result)
                 {
                     result = wynik[0]-1;
                 }

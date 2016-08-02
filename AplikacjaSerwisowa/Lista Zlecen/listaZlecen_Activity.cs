@@ -45,9 +45,11 @@ namespace AplikacjaSerwisowa
             {
                 String dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
                 SQLiteConnection db = new SQLiteConnection(dbPath);
-                var table = db.Table<SrwZlcNagTable>();
+                //var table = db.Table<SrwZlcNagTable>();
+                string zapytanie = "Select * from SrwZlcNagTable order by SZN_DataWystawienia desc";
+                var tableQuery = db.Query<SrwZlcNagTable>(zapytanie);
 
-                foreach(var item in table)
+                foreach(var item in tableQuery)
                 {
                     string wynik = "";
                     string kntKartaNazwa = pobierzInformacjeOKntKarta(item.SZN_KntNumer);
@@ -101,7 +103,7 @@ namespace AplikacjaSerwisowa
             }
             else
             {
-                adapter = new listaZlecen_ListViewAdapter(this, null, null, null, null, wykonanie_list);
+                adapter = null;
             }
 
             listaZlecen_ListView.Adapter = adapter;

@@ -8,6 +8,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
 
 namespace AplikacjaSerwisowa
@@ -19,6 +20,7 @@ namespace AplikacjaSerwisowa
         private TextView akronimTextView, nazwaTextView, jmTextView;
         private Button akceptujButton;
         private string czynnosc;
+        private InputMethodManager imm;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -40,6 +42,9 @@ namespace AplikacjaSerwisowa
             czynnosc = Intent.GetStringExtra("czynnosc") ?? "1";
 
             iloscEditText.Text = "";
+            iloscEditText.RequestFocus();
+            imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+            imm.ToggleSoftInput(ShowFlags.Forced, HideSoftInputFlags.ImplicitOnly);
         }
 
         private void AkceptujButton_Click(object sender, EventArgs e)
@@ -58,6 +63,7 @@ namespace AplikacjaSerwisowa
                     noweZlecenie_Activity.ustawIloscSkladnikow(wartosc);
                     zakladkaSkladnikiNoweZlecenie.aktualizujListeSkladnikow();
                 }
+                imm.HideSoftInputFromWindow(iloscEditText.WindowToken, 0);
                 this.Finish();
             }
             else

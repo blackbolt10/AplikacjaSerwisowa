@@ -37,6 +37,10 @@ namespace AplikacjaSerwisowa
         public static String akronimDocelowy;
         public static String NazwaDocelowy;
 
+        public static String opisSrwZlcNag;
+        public static String DataWystawienia;
+        public static String DataRealizacji;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -61,6 +65,32 @@ namespace AplikacjaSerwisowa
 
             skladnikiList = new List<TwrKartyTable>();
             czynnosciList = new List<TwrKartyTable>();
+
+            opisSrwZlcNag = "";
+            DataWystawienia = DateTime.Today.Year.ToString() + "-";
+            DataRealizacji = DateTime.Today.Year.ToString() + "-";
+
+            if(DateTime.Today.Month.ToString().Length == 1)
+            {
+                DataWystawienia += "0" + DateTime.Today.Month.ToString() + "-";
+                DataRealizacji += "0" + DateTime.Today.Month.ToString() + "-";
+            }
+            else
+            {
+                DataWystawienia += DateTime.Today.Month.ToString() + "-";
+                DataRealizacji += DateTime.Today.Month.ToString() + "-";
+            }
+
+            if(DateTime.Today.Day.ToString().Length == 1)
+            {
+                DataWystawienia += "0" + DateTime.Today.Day.ToString();
+                DataRealizacji += "0" + DateTime.Today.Day.ToString();
+            }
+            else
+            {
+                DataWystawienia += DateTime.Today.Day.ToString();
+                DataRealizacji += DateTime.Today.Day.ToString();
+            }
         }
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -125,34 +155,6 @@ namespace AplikacjaSerwisowa
         public override Android.Support.V4.App.Fragment GetItem(int position)
         {
             return mFragmentHolder[position];
-        }
-    }
-
-    public class zakladkaOgolneNoweZlecenie : Android.Support.V4.App.Fragment
-    {
-        private Button mButton;
-
-        public static SrwZlcNagTable pobierzNaglowek()
-        {
-            SrwZlcNagTable srwZlcNag = new SrwZlcNagTable();
-            srwZlcNag.SZN_DataRozpoczecia ="2016-08-01";
-            srwZlcNag.SZN_DataWystawienia = "2016-08-01";
-            srwZlcNag.SZN_Opis = "to jest opis!";
-
-            return srwZlcNag;
-        }
-
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            var view = inflater.Inflate(Resource.Layout.Frag3Layout, container, false);
-
-            mButton = view.FindViewById<Button>(Resource.Id.button1);
-            return view;
-        }
-
-        public override string ToString() //Called on line 156 in SlidingTabScrollView
-        {
-            return "Fragment noweZlecActiv?";
         }
     }
 }

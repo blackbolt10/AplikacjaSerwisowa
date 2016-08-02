@@ -184,6 +184,28 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+
+        public KntAdresyTable sprawdzLiczbeAdresow(Int32 KNT_GIDNumer)
+        {
+            KntAdresyTable KNTAdres = null;
+
+            try
+            {
+                string zapytanie = "";
+                List<KntAdresyTable> result = kntAdresy_GetFilteredRecords("", KNT_GIDNumer.ToString());
+                if(result != null)
+                {
+                    if(result.Count == 1)
+                    {
+                        KNTAdres = result[0];
+                    }
+                }
+            }
+            catch(Exception) {}
+
+            return KNTAdres;
+        }
+
         public String kartyTowarow_GetAllRecords()
         {
             String output = "";

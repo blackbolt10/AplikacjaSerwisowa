@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -110,7 +111,19 @@ namespace AplikacjaSerwisowa
 
         public static void aktualizujKontrahentaGlownego()
         {
+            sprawdzIloscAdresow();
             ustawWidocznosc();
+        }
+
+        private static void sprawdzIloscAdresow()
+        {
+            DBRepository dbr = new DBRepository();
+            KntAdresyTable KNTAdres = dbr.sprawdzLiczbeAdresow(noweZlecenie_Activity.Knt_GIDNumer);
+
+            if(KNTAdres != null)
+            {
+                noweZlecenie_Activity.aktualizujKontrahentaDocelowego(KNTAdres.Kna_Akronim, KNTAdres.Kna_nazwa1, KNTAdres.Kna_GIDNumer);
+            }
         }
 
         public static void aktualizujKontrahentaDocelowego()

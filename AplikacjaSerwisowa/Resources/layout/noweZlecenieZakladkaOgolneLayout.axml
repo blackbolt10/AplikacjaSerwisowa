@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayout1"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:padding="15px">
+    <TextView
+        android:text="Opis:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/noweZakOpisNagTextView" />
+    <EditText
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="150.0dp"
+        android:layout_below="@id/noweZakOpisNagTextView"
+        android:id="@+id/noweZakOpisNagEditText" />
+    <TextView
+        android:text="Data wystawienia:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noweZakOpisNagEditText"
+        android:id="@+id/noweZakDataWystawieniaTextView"
+        android:layout_marginTop="10px" />
+    <EditText
+        android:inputType="date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noweZakDataWystawieniaTextView"
+        android:id="@+id/noweZakDataWystawieniaEditText"
+        android:enabled="false" />
+    <Button
+        android:text="Kalendarz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noweZakDataWystawieniaEditText"
+        android:id="@+id/noweZakDataWystButton"
+        android:layout_alignParentRight="true" />
+    <TextView
+        android:text="Data realizacji:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noweZakDataWystButton"
+        android:id="@+id/noweZakDataRealizacjiTextView" />
+    <EditText
+        android:inputType="date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noweZakDataRealizacjiTextView"
+        android:id="@+id/noweZakDataRealizacjiEditText"
+        android:enabled="false" />
+    <Button
+        android:text="Kalendarz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noweZakDataRealizacjiEditText"
+        android:id="@+id/noweZakDataRealizButton"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>

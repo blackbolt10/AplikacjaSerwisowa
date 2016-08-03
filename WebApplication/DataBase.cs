@@ -674,12 +674,12 @@ namespace WebApplication
 
 
 
-        public List<SrwZlcSkladniki> GalSrv_Generuj_SrvZlcSkladniki()
+        public List<SrwZlcSkladniki> GalSrv_Generuj_SrwZlcSkladniki()
         {
             DataTable pomDataTable = new DataTable();
             try
             {
-                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcSkladniki]";
+                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcSkladniki] where [GZS_Sync] <> 4";
 
                 SqlDataAdapter da = zapytanieSerwis(zapytanieString);
                 da.Fill(pomDataTable);
@@ -688,7 +688,7 @@ namespace WebApplication
 
             if(pomDataTable.Rows.Count > 0)
             {
-                return GalSrv_GenerujListe_SrvZlcSkladniki(pomDataTable);
+                return GalSrv_GenerujListe_SrwZlcSkladniki(pomDataTable);
             }
             else
             {
@@ -696,7 +696,7 @@ namespace WebApplication
             }
         }
 
-        private List<SrwZlcSkladniki> GalSrv_GenerujListe_SrvZlcSkladniki(DataTable pomDataTable)
+        private List<SrwZlcSkladniki> GalSrv_GenerujListe_SrwZlcSkladniki(DataTable pomDataTable)
         {
             List<SrwZlcSkladniki> result = new List<SrwZlcSkladniki>();
 
@@ -716,12 +716,12 @@ namespace WebApplication
             return result;
         }
 
-        public List<SrwZlcCzynnoci> GalSrv_Generuj_SrvZlcCzynnosci()
+        public List<SrwZlcCzynnoci> GalSrv_Generuj_SrwZlcCzynnosci()
         {
             DataTable pomDataTable = new DataTable();
             try
             {
-                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcCzynnosci]";
+                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcCzynnosci] where [GZC_Sync] <> 4";
 
                 SqlDataAdapter da = zapytanieSerwis(zapytanieString);
                 da.Fill(pomDataTable);
@@ -730,7 +730,7 @@ namespace WebApplication
 
             if(pomDataTable.Rows.Count > 0)
             {
-                return GalSrv_GenerujListe_SrvZlcCzynnoci(pomDataTable);
+                return GalSrv_GenerujListe_SrwZlcCzynnoci(pomDataTable);
             }
             else
             {
@@ -738,7 +738,7 @@ namespace WebApplication
             }
         }
 
-        private List<SrwZlcCzynnoci> GalSrv_GenerujListe_SrvZlcCzynnoci(DataTable pomDataTable)
+        private List<SrwZlcCzynnoci> GalSrv_GenerujListe_SrwZlcCzynnoci(DataTable pomDataTable)
         {
             List<SrwZlcCzynnoci> result = new List<SrwZlcCzynnoci>();
 
@@ -758,12 +758,12 @@ namespace WebApplication
             return result;
         }
 
-        public List<SrwZlcNag> GalSrv_Generuj_SrvZlcNag()
+        public List<SrwZlcNag> GalSrv_Generuj_SrwZlcNag()
         {
             DataTable pomDataTable = new DataTable();
             try
             {
-                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcNag]";
+                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcNag] where [GZN_Sync] <> 4";
 
                 SqlDataAdapter da = zapytanieSerwis(zapytanieString);
                 da.Fill(pomDataTable);
@@ -772,7 +772,7 @@ namespace WebApplication
 
             if(pomDataTable.Rows.Count > 0)
             {
-                return GalSrv_GenerujListe_SrvZlcNag(pomDataTable);
+                return GalSrv_GenerujListe_SrwZlcNag(pomDataTable);
             }
             else
             {
@@ -780,7 +780,7 @@ namespace WebApplication
             }
         }
 
-        private List<SrwZlcNag> GalSrv_GenerujListe_SrvZlcNag(DataTable pomDataTable)
+        private List<SrwZlcNag> GalSrv_GenerujListe_SrwZlcNag(DataTable pomDataTable)
         {
             List<SrwZlcNag> result = new List<SrwZlcNag>();
 
@@ -805,6 +805,91 @@ namespace WebApplication
                 int SZN_Synch = Convert.ToInt32(pomDataTable.Rows[i]["GZN_Sync"].ToString());
 
                 result.Add(new SrwZlcNag(Dokument,SZN_Id,SZN_KntTyp,SZN_KntNumer,SZN_KnATyp,SZN_KnANumer,SZN_KnDTyp,SZN_KnDNumer,SZN_AdWTyp,SZN_AdWNumer,SZN_DataWystawienia,SZN_DataRozpoczecia,SZN_Stan,SZN_Status,SZN_CechaOpis,SZN_CechaOpis, SZN_Synch));
+            }
+            return result;
+        }
+
+        public string GalSrv_Potwierdz_SrwZlcNag(String listaPotwierdzonych)
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<Int32> records = ser.Deserialize<List<Int32>>(listaPotwierdzonych);
+            string result = "";
+
+            if(records!=null)
+            {
+                for(int i = 0; i < records.Count; i++)
+                {
+                    try
+                    {
+                        String zapytanieString = "UPDATE [GALXL_Serwis].[GAL].[SrwZlcNag] SET [GZN_Sync] = 4 WHERE [GZN_Id] = " + records[i].ToString();
+                        SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                        DataTable pomdatatable = new DataTable();
+                        da.Fill(pomdatatable);
+
+                        result += "zapisano: " + zapytanieString + "\n";
+                        result += "zapisano: " + records[i].ToString() + "\n";
+                    }
+                    catch(Exception exc)
+                    {
+                        result += "błąd: " + exc.Message + "\n";
+                    }
+                }
+            }
+            return result;
+        }
+
+        public string GalSrv_Potwierdz_SrwZlcCzynnosci(string listaPotwierdzonych)
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<Int32> records = ser.Deserialize<List<Int32>>(listaPotwierdzonych);
+            string result = "";
+            if(records != null)
+            {
+                for(int i = 0; i < records.Count; i++)
+                {
+                    try
+                    {
+                        String zapytanieString = "UPDATE [GALXL_Serwis].[GAL].[SrwZlcCzynnosci] SET [GZC_Sync] = 4 WHERE [GZC_Id] = " + records[i].ToString();
+                        SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                        DataTable pomdatatable = new DataTable();
+                        da.Fill(pomdatatable);
+
+                        result += "zapisano: " + zapytanieString + "\n";
+                        result += "zapisano: " + records[i].ToString() + "\n";
+                    }
+                    catch(Exception exc)
+                    {
+                        result += "błąd: " + exc.Message+"\n";
+                    }
+                }
+            }
+            return result;
+        }
+
+        public string GalSrv_Potwierdz_SrwZlcSkladniki(string listaPotwierdzonych)
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<Int32> records = ser.Deserialize<List<Int32>>(listaPotwierdzonych);
+            string result = "";
+            if(records != null)
+            {
+                for(int i = 0; i < records.Count; i++)
+                {
+                    try
+                    {
+                        String zapytanieString = "UPDATE [GALXL_Serwis].[GAL].[SrwZlcSkladniki] SET [GZS_Sync] = 4 WHERE [GZS_Id] = " + records[i].ToString();
+                        SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                        DataTable pomdatatable = new DataTable();
+                        da.Fill(pomdatatable);
+
+                        result += "zapisano: " + zapytanieString + "\n";
+                        result += "zapisano: " + records[i].ToString() + "\n";
+                    }
+                    catch(Exception exc)
+                    {
+                        result += "błąd: " + exc.Message + "\n";
+                    }
+                }
             }
             return result;
         }

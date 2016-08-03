@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace AplikacjaSerwisowa.kwronski {
+namespace AplikacjaSerwisowaUsluga.kwronski {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -71,7 +71,7 @@ namespace AplikacjaSerwisowa.kwronski {
         
         /// <remarks/>
         public WebService() {
-            this.Url = "http://91.196.9.105:8080/WebService.asmx";
+            this.Url = global::AplikacjaSerwisowaUsluga.Properties.Settings.Default.AplikacjaSerwisowaUsluga_kwronski_WebService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

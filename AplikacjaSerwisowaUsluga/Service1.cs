@@ -26,8 +26,8 @@ namespace AplikacjaSerwisowaUsluga
         {
             InitializeComponent();
             InitializeEventLog();
-            Synchroniacja synch = new Synchroniacja(null,null,null);
-            int wynik = synch.APIConnect();
+            //Synchronizacja synch = new Synchronizacja(null,null,null);
+            //int wynik = synch.APIConnect();
             //eventLog1.WriteEntry("Service1.ApiConnect() = " + wynik.ToString());
         }
 
@@ -102,7 +102,7 @@ namespace AplikacjaSerwisowaUsluga
             timer.Stop();
             eventLog1.WriteEntry("Synchronizacja start!");
 
-            Synchroniacja synch = new Synchroniacja(dbXL, dbSERWIS, eventLog1);
+            Synchronizacja synch = new Synchronizacja(dbXL, dbSERWIS, eventLog1);
             synch.Start();
 
             eventLog1.WriteEntry("Synchronizacja end!");

@@ -140,5 +140,89 @@ namespace AplikacjaSerwisowaUsluga
 
             return SrwZlcSkladnikiDT;
         }
+
+        public Boolean SrwZlcNag_InsertRecord(SrwZlcNagGalStruct SZN)
+        {
+            String zapytanieString = "";
+            try
+            {
+                zapytanieString = @"
+                    INSERT INTO [GAL].[SrwZlcNag] VALUES("+
+                    SZN.SZN_Synchronizacja.ToString()+", "+
+                    SZN.SZN_KntTyp.ToString() + ", " + SZN.SZN_KntNumer.ToString()+", " +
+                    SZN.SZN_KnATyp.ToString() + ", " + SZN.SZN_KnANumer.ToString() + ", " +
+                    SZN.SZN_KnDTyp.ToString() + ", " + SZN.SZN_KnDNumer.ToString() + ", " +
+                    SZN.SZN_KntTyp.ToString() + ", " + SZN.SZN_KntNumer.ToString() + ", " +
+                    "'"+SZN.SZN_DataWystawienia+ "', " +
+                    "'" + SZN.SZN_DataRozpoczecia + "', " +
+                    "'" + SZN.SZN_Opis + "')";
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                DataTable pomDataTable = new DataTable();
+                da.Fill(pomDataTable);
+
+                return true;
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Błąd funkcji DataBase.SrwZlcNag_InsertRecord(" + SZN.SZN_Id + "):\n" + exc.Message+"\nZapytanie: "+zapytanieString, EventLogEntryType.Error);
+                return false;
+            }
+        }
+
+        public Boolean SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciGalStruct SZC)
+        {
+            String zapytanieString = "";
+            try
+            {
+                zapytanieString = @"
+                    INSERT INTO [GALXL_Serwis].[GAL].[SrwZlcCzynnosci] VALUES(" +
+                    SZC.SZC_Synchronizacja.ToString()+", "+
+                    SZC.szc_sznId.ToString() + ", " +
+                    SZC.szc_Pozycja.ToString() + ", " +
+                    SZC.szc_TwrTyp.ToString() + ", " +
+                    SZC.szc_TwrNumer.ToString() + ", " +
+                    "'"+SZC.szc_Ilosc+"', "+
+                    "'')"; //opis
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                DataTable pomDataTable = new DataTable();
+                da.Fill(pomDataTable);
+
+                eventLog.WriteEntry("dodano: "+ SZC.szc_Id.ToString());
+                return true;
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Błąd funkcji DataBase.SrwZlcCzynnosci_InsertRecord(" + SZC.szc_sznId + "):\n" + exc.Message+" "+ zapytanieString, EventLogEntryType.Error);
+                return false;
+            }
+        }
+
+        public Boolean SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiGalStruct SZS)
+        {
+            String zapytanieString = "";
+            try
+            {
+                zapytanieString = @"
+                    INSERT INTO [GALXL_Serwis].[GAL].[SrwZlcSkladniki] VALUES(" +
+                    SZS.SZS_Synchronizacja.ToString() + ", " +
+                    SZS.szs_Ilosc.ToString() + ", " +
+                    SZS.szs_Pozycja.ToString() + ", " +
+                    SZS.szs_TwrTyp.ToString() + ", " +
+                    SZS.szs_TwrNumer.ToString() + ", " +
+                    "'" + SZS.szs_Ilosc + "', " +
+                    "'')"; //opis
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                DataTable pomDataTable = new DataTable();
+                da.Fill(pomDataTable);
+
+                eventLog.WriteEntry("dodano: " + SZS.szs_Id.ToString());
+                return true;
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Błąd funkcji DataBase.SrwZlcSkladniki_InsertRecord(" + SZS.szs_sznId + "):\n" + exc.Message + " " + zapytanieString, EventLogEntryType.Error);
+                return false;
+            }
+        }
     }
 }

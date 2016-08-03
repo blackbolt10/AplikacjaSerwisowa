@@ -161,37 +161,60 @@ namespace WebApplication
 
 
 
-        [WebMethod(Description = "... do GalSrv SrvZlcNag")]
+        [WebMethod(Description = "... do GalSrv SrwZlcNag")]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string GalSrv_SrvZlcNag()
+        public string GalSrv_SrwZlcNag()
         {
             DataBase dataBaseObject = new DataBase();
-            List<SrwZlcNag> output = dataBaseObject.GalSrv_Generuj_SrvZlcNag();
+            List<SrwZlcNag> output = dataBaseObject.GalSrv_Generuj_SrwZlcNag();
 
             return new JavaScriptSerializer().Serialize(output);
         }
 
-        [WebMethod(Description = "... do GalSrv SrvZlcCzynnosci")]
+        [WebMethod(Description = "GalSrv SrwZlcNagPotwierdzenie")]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string GalSrv_SrvZlcCzynnosci()
+        public string GalSrv_SrwZlcNagPotwierdzenie(String listaPotwierdzonych)
         {
             DataBase dataBaseObject = new DataBase();
-            List<SrwZlcCzynnoci> output = dataBaseObject.GalSrv_Generuj_SrvZlcCzynnosci();
+            string result =  dataBaseObject.GalSrv_Potwierdz_SrwZlcNag(listaPotwierdzonych);
+            return result;
+        }
+
+        [WebMethod(Description = "... do GalSrv SrwZlcCzynnosci")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GalSrv_SrwZlcCzynnosci()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<SrwZlcCzynnoci> output = dataBaseObject.GalSrv_Generuj_SrwZlcCzynnosci();
 
             return new JavaScriptSerializer().Serialize(output);
         }
 
-        [WebMethod(Description = "... do GalSrv SrvZlcNag")]
+        [WebMethod(Description = "GalSrv SrwZlcCzynnosciPotwierdzenie")]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string GalSrv_SrvZlcSkladniki()
+        public string GalSrv_SrwZlcCzynnosciPotwierdzenie(String listaPotwierdzonych)
         {
             DataBase dataBaseObject = new DataBase();
-            List<SrwZlcSkladniki> output = dataBaseObject.GalSrv_Generuj_SrvZlcSkladniki();
+            string result =  dataBaseObject.GalSrv_Potwierdz_SrwZlcCzynnosci(listaPotwierdzonych);
+            return result;
+        }
+
+        [WebMethod(Description = "... do GalSrv SrwZlcSkladniki")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GalSrv_SrwZlcSkladniki()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<SrwZlcSkladniki> output = dataBaseObject.GalSrv_Generuj_SrwZlcSkladniki();
 
             return new JavaScriptSerializer().Serialize(output);
         }
 
-
-
+        [WebMethod(Description = "GalSrv SrwZlcSkladnikiPotwierdzenie")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void GalSrv_SrwZlcSkladnikiPotwierdzenie(String listaPotwierdzonych)
+        {
+            DataBase dataBaseObject = new DataBase();
+            dataBaseObject.GalSrv_Potwierdz_SrwZlcSkladniki(listaPotwierdzonych);
+        }
     }
 }

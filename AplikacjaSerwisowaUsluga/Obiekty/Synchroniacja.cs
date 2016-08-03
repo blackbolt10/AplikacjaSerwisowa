@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 
 using cdn_api;
 
+using Newtonsoft.Json;
+
 namespace AplikacjaSerwisowaUsluga
 {
-    class Synchroniacja
+    class Synchronizacja
     {
         private DataBase dbXL;
         private DataBase dbSERWIS;
@@ -20,18 +22,24 @@ namespace AplikacjaSerwisowaUsluga
         private int IDDokSrwZlcNag = 0;
         private static Int32 Sesja = 0;
 
+        private AplikacjaSerwisowaUsluga.kwronski.WebService kwronskiService;
+
         [DllImport("ClaRUN.dll")]
         public static extern void AttachThreadToClarion(bool x);
 
-        public Synchroniacja(DataBase _dbXL, DataBase _dbSERWIS, EventLog _eventLog)
+        public Synchronizacja(DataBase _dbXL, DataBase _dbSERWIS, EventLog _eventLog)
         {
             dbXL = _dbXL;
             dbSERWIS = _dbSERWIS;
             eventLog = _eventLog;
+            
+            kwronskiService = new AplikacjaSerwisowaUsluga.kwronski.WebService();
         }
 
         public void Start()
         {
+            synchronizacjaWebService();
+
             int wynik = APIConnect();
             if(wynik == 0)
             {
@@ -42,6 +50,156 @@ namespace AplikacjaSerwisowaUsluga
                 ApiLogout();
             }
         }
+
+        private void synchronizacjaWebService()
+        {
+            pobierzSrwZlcNag();
+            pobierzSrwZlcCzynnosci();
+            pobierzSrwZlcSkladniki();
+        }
+
+        private void pobierzSrwZlcNag()
+        {
+            List<Int32> listaZapisanych = new List<Int32>();
+            try
+            {
+                eventLog.WriteEntry("przed naglowkami");
+                String SrwZlcNagString = kwronskiService.GalSrv_SrwZlcNag();
+                List<SrwZlcNagGalStruct> records = JsonConvert.DeserializeObject<List<SrwZlcNagGalStruct>>(SrwZlcNagString);
+                eventLog.WriteEntry("Pobrane naglowki:" + records.Count.ToString());
+
+                if(records!=null)
+                {
+                    for(int i = 0; i < records.Count; i++)
+                    {
+                        Boolean wynik = dbSERWIS.SrwZlcNag_InsertRecord(records[i]);
+
+                        if(wynik)
+                        {
+                            listaZapisanych.Add(records[i].SZN_Id);
+                        }
+                    }
+                    if(listaZapisanych.Count > 0)
+                    {
+                        potwierdzZapisanieSrwZlcNag(listaZapisanych);
+                    }
+                }
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Wystąpił błąd funkcji pobierzSrwZlcNag():\n"+exc.Message, EventLogEntryType.Error);
+            }
+        }
+
+        private void potwierdzZapisanieSrwZlcNag(List<int> listaZapisanych)
+        {
+            try
+            {
+                String listaSrwZlcNagWprowadzone = JsonConvert.SerializeObject(listaZapisanych);
+                eventLog.WriteEntry("Wysyłane zaptanie:" + listaSrwZlcNagWprowadzone);
+                kwronskiService.GalSrv_SrwZlcNagPotwierdzenie(listaSrwZlcNagWprowadzone);
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Wystąpił błąd funkcji potwierdzZapisanieSrwZlcNag():\n" + exc.Message, EventLogEntryType.Error);
+            }
+        }
+
+        private void potwierdzZapisanieSrwZlcCzynnosci(List<int> listaZapisanych)
+        {
+            try
+            {
+                String listaSrwZlcCzynnosciWprowadzone = JsonConvert.SerializeObject(listaZapisanych);
+                eventLog.WriteEntry("Wysyłane zaptanie:" + listaSrwZlcCzynnosciWprowadzone);
+                kwronskiService.GalSrv_SrwZlcCzynnosciPotwierdzenie(listaSrwZlcCzynnosciWprowadzone);
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Wystąpił błąd funkcji potwierdzZapisanieSrwZlcCzynnosci():\n" + exc.Message, EventLogEntryType.Error);
+            }
+        }
+
+        private void potwierdzZapisanieSrwZlcSkladniki(List<int> listaZapisanych)
+        {
+            try
+            {
+                String listaSrwZlcSkladnikiWprowadzone = JsonConvert.SerializeObject(listaZapisanych);
+                eventLog.WriteEntry("Wysyłane zaptanie:" + listaSrwZlcSkladnikiWprowadzone);
+                kwronskiService.GalSrv_SrwZlcSkladnikiPotwierdzenie(listaSrwZlcSkladnikiWprowadzone);
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Wystąpił błąd funkcji potwierdzZapisanieSrwZlcSkladniki():\n" + exc.Message, EventLogEntryType.Error);
+            }
+        }
+
+        private void pobierzSrwZlcCzynnosci()
+        {
+            List<Int32> listaZapisanych = new List<Int32>();
+            try
+            {
+                eventLog.WriteEntry("przed pobieraniem skladnikow");
+                String SrwZlcCzynnosciString = kwronskiService.GalSrv_SrwZlcCzynnosci();
+                eventLog.WriteEntry("skladnikow pobrane:" + SrwZlcCzynnosciString);
+                List<SrwZlcCzynnosciGalStruct> records = JsonConvert.DeserializeObject<List<SrwZlcCzynnosciGalStruct>>(SrwZlcCzynnosciString);
+                eventLog.WriteEntry("skladnikow pobrane rekordy:" + records.Count.ToString());
+
+                if(records != null)
+                {
+                    for(int i = 0; i < records.Count; i++)
+                    {
+                        Boolean wynik = dbSERWIS.SrwZlcCzynnosci_InsertRecord(records[i]);
+
+                        if(wynik)
+                        {
+                            listaZapisanych.Add(records[i].szc_Id);
+                        }
+                    }
+                    if(listaZapisanych.Count > 0)
+                    {
+                        potwierdzZapisanieSrwZlcCzynnosci(listaZapisanych);
+                    }
+                }
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Wystąpił błąd funkcji pobierzSrwZlcCzynnosci():\n" + exc.Message, EventLogEntryType.Error);
+            }
+        }
+
+        private void pobierzSrwZlcSkladniki()
+        {
+            List<Int32> listaZapisanych = new List<Int32>();
+            try
+            {
+                eventLog.WriteEntry("przed pobieraniem skladnikow");
+                String SrwZlcSkladnikiString = kwronskiService.GalSrv_SrwZlcSkladniki();
+                eventLog.WriteEntry("skladniki pobrane:" + SrwZlcSkladnikiString);
+                List<SrwZlcSkladnikiGalStruct> records = JsonConvert.DeserializeObject<List<SrwZlcSkladnikiGalStruct>>(SrwZlcSkladnikiString);
+
+                if(records != null)
+                {
+                    for(int i = 0; i < records.Count; i++)
+                    {
+                        Boolean wynik = dbSERWIS.SrwZlcSkladniki_InsertRecord(records[i]);
+
+                        if(wynik)
+                        {
+                            listaZapisanych.Add(records[i].szs_Id);
+                        }
+                    }
+                    if(listaZapisanych.Count > 0)
+                    {
+                        potwierdzZapisanieSrwZlcSkladniki(listaZapisanych);
+                    }
+                }
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Wystąpił błąd funkcji pobierzSrwZlcSkladniki():\n" + exc.Message, EventLogEntryType.Error);
+            }
+        }
+
         public Int32 APIConnect()
         {
             Hasla haslo = new Hasla(2);

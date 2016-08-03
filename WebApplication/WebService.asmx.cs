@@ -153,6 +153,45 @@ namespace WebApplication
 
             return new JavaScriptSerializer().Serialize(output);
         }
-        
+
+
+
+
+
+
+
+
+        [WebMethod(Description = "... do GalSrv SrvZlcNag")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GalSrv_SrvZlcNag()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<SrwZlcNag> output = dataBaseObject.GalSrv_Generuj_SrvZlcNag();
+
+            return new JavaScriptSerializer().Serialize(output);
+        }
+
+        [WebMethod(Description = "... do GalSrv SrvZlcCzynnosci")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GalSrv_SrvZlcCzynnosci()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<SrwZlcCzynnoci> output = dataBaseObject.GalSrv_Generuj_SrvZlcCzynnosci();
+
+            return new JavaScriptSerializer().Serialize(output);
+        }
+
+        [WebMethod(Description = "... do GalSrv SrvZlcNag")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GalSrv_SrvZlcSkladniki()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<SrwZlcSkladniki> output = dataBaseObject.GalSrv_Generuj_SrvZlcSkladniki();
+
+            return new JavaScriptSerializer().Serialize(output);
+        }
+
+
+
     }
 }

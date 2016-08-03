@@ -19,14 +19,16 @@ namespace WebApplication
 
         public DataBase()
         {
-            podlaczDoBazyDanych();
-            podlaczDoBazyDanychSerwis();
+            int hasloSRV = 4;                               //modyfikacja hasel do bazy
+
+            podlaczDoBazyDanych(hasloSRV);
+            podlaczDoBazyDanychSerwis(hasloSRV);
         }
 
-        private Boolean podlaczDoBazyDanych()
+        private Boolean podlaczDoBazyDanych(int hasloSRV)
         {
             Boolean wynikLogowaniaDoBD = false;
-            hasla haslo = new hasla(4);
+            hasla haslo = new hasla(hasloSRV);
 
             try
             {
@@ -44,10 +46,10 @@ namespace WebApplication
             return wynikLogowaniaDoBD;
         }
 
-        private Boolean podlaczDoBazyDanychSerwis()
+        private Boolean podlaczDoBazyDanychSerwis(int hasloSRV)
         {
             Boolean wynikLogowaniaDoBD = false;
-            hasla haslo = new hasla(4);
+            hasla haslo = new hasla(hasloSRV);
 
             try
             {
@@ -655,5 +657,156 @@ namespace WebApplication
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public List<SrwZlcSkladniki> GalSrv_Generuj_SrvZlcSkladniki()
+        {
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcSkladniki]";
+
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return GalSrv_GenerujListe_SrvZlcSkladniki(pomDataTable);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private List<SrwZlcSkladniki> GalSrv_GenerujListe_SrvZlcSkladniki(DataTable pomDataTable)
+        {
+            List<SrwZlcSkladniki> result = new List<SrwZlcSkladniki>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                Int32 GZS_Id = Convert.ToInt32(pomDataTable.Rows[i]["GZS_Id"].ToString());
+                Int32 GZS_Sync = Convert.ToInt32(pomDataTable.Rows[i]["GZS_Sync"].ToString());
+                Int32 GZS_GZNId = Convert.ToInt32(pomDataTable.Rows[i]["GZS_GZNId"].ToString());
+                Int32 GZS_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["GZS_Pozycja"].ToString());
+                Int32 GZS_TwrTyp = Convert.ToInt32(pomDataTable.Rows[i]["GZS_TwrTyp"].ToString());
+                Int32 GZS_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["GZS_TwrNumer"].ToString());
+                Double GZS_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["GZS_Ilosc"].ToString());
+                String GZS_Opis = pomDataTable.Rows[i]["GZS_Opis"].ToString();
+
+                result.Add(new SrwZlcSkladniki(GZS_Id, GZS_Sync, GZS_Pozycja, GZS_TwrNumer, GZS_TwrTyp, 3, GZS_Ilosc, "", "", ""));
+            }
+            return result;
+        }
+
+        public List<SrwZlcCzynnoci> GalSrv_Generuj_SrvZlcCzynnosci()
+        {
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcCzynnosci]";
+
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return GalSrv_GenerujListe_SrvZlcCzynnoci(pomDataTable);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private List<SrwZlcCzynnoci> GalSrv_GenerujListe_SrvZlcCzynnoci(DataTable pomDataTable)
+        {
+            List<SrwZlcCzynnoci> result = new List<SrwZlcCzynnoci>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                Int32 GZC_Id = Convert.ToInt32(pomDataTable.Rows[i]["GZC_Id"].ToString());
+                Int32 GZC_Sync = Convert.ToInt32(pomDataTable.Rows[i]["GZC_Sync"].ToString());
+                Int32 GZC_GZNId = Convert.ToInt32(pomDataTable.Rows[i]["GZC_GZNId"].ToString());
+                Int32 GZC_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["GZC_Pozycja"].ToString());
+                Int32 GZC_TwrTyp = Convert.ToInt32(pomDataTable.Rows[i]["GZC_TwrTyp"].ToString());
+                Int32 GZC_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["GZC_TwrNumer"].ToString());
+                Double GZC_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["GZC_Ilosc"].ToString());
+                String GZC_Opis = pomDataTable.Rows[i]["GZC_Opis"].ToString();
+
+                result.Add(new SrwZlcCzynnoci(GZC_Id, GZC_Sync, GZC_Pozycja, GZC_TwrNumer, GZC_TwrTyp, 3, GZC_Ilosc, "", "", ""));
+            }
+            return result;
+        }
+
+        public List<SrwZlcNag> GalSrv_Generuj_SrvZlcNag()
+        {
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcNag]";
+
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return GalSrv_GenerujListe_SrvZlcNag(pomDataTable);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private List<SrwZlcNag> GalSrv_GenerujListe_SrvZlcNag(DataTable pomDataTable)
+        {
+            List<SrwZlcNag> result = new List<SrwZlcNag>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                String Dokument = "";
+                int SZN_Id = Convert.ToInt32(pomDataTable.Rows[i]["GZN_Id"].ToString());
+                int SZN_KntTyp = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntTyp"].ToString());
+                int SZN_KntNumer = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntNumer"].ToString());
+                int SZN_KnATyp = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KnATyp"].ToString());
+                int SZN_KnANumer = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KnANumer"].ToString());
+                int SZN_KnDTyp = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntTyp"].ToString());
+                int SZN_KnDNumer = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntNumer"].ToString());
+                int SZN_AdWTyp = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntTyp"].ToString());
+                int SZN_AdWNumer = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntNumer"].ToString());
+                String SZN_DataWystawienia = pomDataTable.Rows[i]["GZN_DataWystawienia"].ToString();
+                String SZN_DataRozpoczecia = pomDataTable.Rows[i]["GZN_DataRozpoczecia"].ToString();
+                String SZN_Stan = "";
+                String SZN_Status = "";
+                String SZN_CechaOpis = "";
+                String SZN_Opis = pomDataTable.Rows[i]["GZN_Opis"].ToString();
+                int SZN_Synch = Convert.ToInt32(pomDataTable.Rows[i]["GZN_Sync"].ToString());
+
+                result.Add(new SrwZlcNag(Dokument,SZN_Id,SZN_KntTyp,SZN_KntNumer,SZN_KnATyp,SZN_KnANumer,SZN_KnDTyp,SZN_KnDNumer,SZN_AdWTyp,SZN_AdWNumer,SZN_DataWystawienia,SZN_DataRozpoczecia,SZN_Stan,SZN_Status,SZN_CechaOpis,SZN_CechaOpis, SZN_Synch));
+            }
+            return result;
+        }
     }
 }

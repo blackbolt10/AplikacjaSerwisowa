@@ -521,6 +521,8 @@ namespace AplikacjaSerwisowaKomp
             XlSerwisCzynnoscInfo.TwrTyp = 16;
             XlSerwisCzynnoscInfo.TwrNumer = 1271;
             XlSerwisCzynnoscInfo.Ilosc = "7";
+            XlSerwisCzynnoscInfo.Opis = "lama!";
+
 
             Int32 wynik = cdn_api.cdn_api.XLDodajCzynnoscSerwis(ref IDDok, XlSerwisCzynnoscInfo);
             if(wynik != 0)

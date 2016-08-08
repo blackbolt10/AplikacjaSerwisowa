@@ -221,10 +221,10 @@ namespace AplikacjaSerwisowa
 
         private void tworzenieBazySrwZlcCzynnosci(String srwZlcCzynnosciString)
         {
-            List<SrwZlcCzynnosciTable> records = JsonConvert.DeserializeObject<List<SrwZlcCzynnosciTable>>(srwZlcCzynnosciString);
+            List<SrwZlcCzynnosci> records = JsonConvert.DeserializeObject<List<SrwZlcCzynnosci>>(srwZlcCzynnosciString);
 
             DBRepository dbr = new DBRepository();
-            String result = dbr.stworzSrwZlcCzynnosciTable();
+            String result = dbr.stworzSrwZlcCzynnosci();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
             if(records.Count > 0)
@@ -262,7 +262,7 @@ namespace AplikacjaSerwisowa
             }
         }
 
-        private void wprowadzWpisyDoTabeliSrwZlcCzynnosci(List<SrwZlcCzynnosciTable> records, DBRepository dbr)
+        private void wprowadzWpisyDoTabeliSrwZlcCzynnosci(List<SrwZlcCzynnosci> records, DBRepository dbr)
         {
             RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie czynnoœci zleceñ serwisowych..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
@@ -272,17 +272,17 @@ namespace AplikacjaSerwisowa
             {
                 RunOnUiThread(() => progressDialog.Progress++);
 
-                SrwZlcCzynnosciTable szc = records[i];
+                SrwZlcCzynnosci szc = records[i];
                 dbr.SrwZlcCzynnosci_InsertRecord(szc);
             }
         }
 
         private void tworzenieBazySrwZlcSkladniki(String srwZlcCzynnosciString)
         {
-            List<SrwZlcSkladnikiTable> records = JsonConvert.DeserializeObject<List<SrwZlcSkladnikiTable>>(srwZlcCzynnosciString);
+            List<SrwZlcSkladniki> records = JsonConvert.DeserializeObject<List<SrwZlcSkladniki>>(srwZlcCzynnosciString);
 
             DBRepository dbr = new DBRepository();
-            String result = dbr.stworzSrwZlcSkladnikiTable();
+            String result = dbr.stworzSrwZlcSkladniki();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
             if(records.Count > 0)
@@ -291,7 +291,7 @@ namespace AplikacjaSerwisowa
             }
         }
 
-        private void wprowadzWpisyDoTabeliSrwZlcSkladniki(List<SrwZlcSkladnikiTable> records, DBRepository dbr)
+        private void wprowadzWpisyDoTabeliSrwZlcSkladniki(List<SrwZlcSkladniki> records, DBRepository dbr)
         {
             RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie sk³adniki zleceñ serwisowych..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
@@ -301,17 +301,17 @@ namespace AplikacjaSerwisowa
             {
                 RunOnUiThread(() => progressDialog.Progress++);
 
-                SrwZlcSkladnikiTable szs = records[i];
+                SrwZlcSkladniki szs = records[i];
                 dbr.SrwZlcSkladniki_InsertRecord(szs);
             }
         }
 
         private void tworzenieBazySerwisoweZleceniaNaglowki(String serwisoweZlecenniaNaglowkiString)
         {
-            List<SrwZlcNagTable> records = JsonConvert.DeserializeObject<List<SrwZlcNagTable>>(serwisoweZlecenniaNaglowkiString);
+            List<SrwZlcNag> records = JsonConvert.DeserializeObject<List<SrwZlcNag>>(serwisoweZlecenniaNaglowkiString);
 
             DBRepository dbr = new DBRepository();
-            String result = dbr.stworzSrwZlcNagTable();
+            String result = dbr.stworzSrwZlcNag();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
             if(records.Count > 0)
@@ -320,7 +320,7 @@ namespace AplikacjaSerwisowa
             }
         }
 
-        private void wprowadzWpisyDoTabeliSerwisoweZleceniaNaglowki(List<SrwZlcNagTable> records, DBRepository dbr)
+        private void wprowadzWpisyDoTabeliSerwisoweZleceniaNaglowki(List<SrwZlcNag> records, DBRepository dbr)
         {
             RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie nag³ówków zleceñ serwisowych..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
@@ -330,7 +330,7 @@ namespace AplikacjaSerwisowa
             {
                 RunOnUiThread(() => progressDialog.Progress++);
 
-                SrwZlcNagTable szn = records[i];
+                SrwZlcNag szn = records[i];
                 dbr.SrwZlcNag_InsertRecord(szn);
             }
         }
@@ -415,7 +415,7 @@ namespace AplikacjaSerwisowa
             List<int> wyslaneNagList = new List<int>();
             DBRepository db = new DBRepository();
 
-            List<SrwZlcNagTable> srwZlcNagList = db.SrwZlcNagSynchronizacja(1);
+            List<SrwZlcNag> srwZlcNagList = db.SrwZlcNagSynchronizacja(1);
 
             if(srwZlcNagList.Count > 0)
             {
@@ -458,7 +458,7 @@ namespace AplikacjaSerwisowa
             DBRepository db = new DBRepository();
             List<int> wyslaneczynnosciList = new List<int>();
 
-            List<SrwZlcCzynnosciTable> srwZlcCzynnosciList = db.SrwZlcCzynnosciSynchronizacja(1);
+            List<SrwZlcCzynnosci> srwZlcCzynnosciList = db.SrwZlcCzynnosciSynchronizacja(1);
 
             if(srwZlcCzynnosciList.Count > 0)
             {
@@ -501,7 +501,7 @@ namespace AplikacjaSerwisowa
             DBRepository db = new DBRepository();
             List<int> wyslaneSkladnikiList = new List<int>();
 
-            List<SrwZlcSkladnikiTable> srwZlcSkladnikiList = db.SrwZlcSkladnikiSynchronizacja(1);
+            List<SrwZlcSkladniki> srwZlcSkladnikiList = db.SrwZlcSkladnikiSynchronizacja(1);
 
             if(srwZlcSkladnikiList.Count > 0)
             {
@@ -581,7 +581,7 @@ namespace AplikacjaSerwisowa
 
 
             //string url = @"http://91.196.8.98/AplikacjaSerwisowa/WebService.asmx/test";
-            //string url = @"http://kwronski.hostingasp.pl/WebService.asmx?op=test";
+            //string url = @"http://91.196.9.105/WebService.asmx?op=test";
 
             /* HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
              req.Host = "91.196.8.98"; 
@@ -600,7 +600,7 @@ namespace AplikacjaSerwisowa
  request.ContentType = "text/xml; charset=utf-8";
  GetResponse(request);*/
 
-//string url = @"http://kwronski.hostingasp.pl/WebService.asmx/test";
+//string url = @"http://91.196.9.105/WebService.asmx/test";
 //string url = @"http://91.196.8.98/AplikacjaSerwisowa/WebService.asmx/test";
 
 /*HttpWebRequest req = WebRequest.Create(url) as HttpWebRequest;

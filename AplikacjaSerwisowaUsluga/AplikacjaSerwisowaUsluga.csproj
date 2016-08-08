@@ -112,12 +112,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="struktury\SrvZlcCzynnosciGalStruct.cs" />
-    <Compile Include="struktury\SrvZlcNagGalStruct.cs" />
-    <Compile Include="struktury\SrvZlcSkladnikiGalStruct.cs" />
-    <Compile Include="struktury\SrwZlcSkladnikiStruct.cs" />
-    <Compile Include="struktury\SrwZlcCzynnosciStruct.cs" />
-    <Compile Include="struktury\SrwZlcNagStruct.cs" />
+    <Compile Include="struktury\SrwZlcSkladniki.cs" />
+    <Compile Include="struktury\SrwZlcCzynnosci.cs" />
+    <Compile Include="struktury\SrwZlcNag.cs" />
     <Compile Include="Obiekty\Synchroniacja.cs" />
     <Compile Include="Web References\kwronski\Reference.cs">
       <AutoGen>True</AutoGen>

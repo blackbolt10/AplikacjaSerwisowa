@@ -14,12 +14,12 @@ namespace AplikacjaSerwisowa
 {
     class listaZlecenSzczegolySkladniki_ListViewAdapter : BaseAdapter<string>
     {
-        List<SrwZlcSkladnikiTable> szsList;
+        List<SrwZlcSkladniki> szsList;
 
         Context mContext;
 
 
-        public listaZlecenSzczegolySkladniki_ListViewAdapter(Context context, List<SrwZlcSkladnikiTable> _szsList)
+        public listaZlecenSzczegolySkladniki_ListViewAdapter(Context context, List<SrwZlcSkladniki> _szsList)
         {
             szsList = _szsList;
             mContext = context;
@@ -49,19 +49,21 @@ namespace AplikacjaSerwisowa
             TextView nazwa_TextView = row.FindViewById<TextView>(Resource.Id.nazwaSkladnikiListaZlecenSzczegolyTextView);
             TextView jm_TextView = row.FindViewById<TextView>(Resource.Id.jmSkladnikiListaZlecenSzczegolyTextView);
 
+            DBRepository dbr = new DBRepository();
+            TwrKartyTable twrKarta = dbr.TwrKartyTable_GetRecord(szsList[position].SZS_TwrNumer);
 
-            akronim_TextView.Text = szsList[position].Twr_Kod;
-            pozycja_TextView.Text = szsList[position].szs_Pozycja.ToString();
-            ilosc_TextView.Text = szsList[position].szs_Ilosc.ToString();
-            nazwa_TextView.Text = szsList[position].szs_TwrNazwa;
-            jm_TextView.Text = szsList[position].Twr_Jm;
+            akronim_TextView.Text = twrKarta.Twr_Kod;
+            pozycja_TextView.Text = szsList[position].SZS_Pozycja.ToString();
+            ilosc_TextView.Text = szsList[position].SZS_Ilosc.ToString();
+            nazwa_TextView.Text = twrKarta.Twr_Nazwa;
+            jm_TextView.Text = twrKarta.Twr_Jm;
 
             return row;
         }
 
         public override string this[int position]
         {
-            get { return szsList[position].szs_Id.ToString(); }
+            get { return szsList[position].SZS_Id.ToString(); }
         }
     }
 }

@@ -76,9 +76,9 @@
     <Compile Include="DataBase\DBRepository.cs" />
     <Compile Include="DataBase\Tabele\SrwZlcPodpisTable.cs" />
     <Compile Include="DataBase\Tabele\TwrKartyTable.cs" />
-    <Compile Include="DataBase\Tabele\SrwZlcNagTable.cs" />
-    <Compile Include="DataBase\Tabele\SrwZlcSkladnikiTable.cs" />
-    <Compile Include="DataBase\Tabele\SrwZlcCzynnosciTable.cs" />
+    <Compile Include="DataBase\Tabele\SrwZlcNag.cs" />
+    <Compile Include="DataBase\Tabele\SrwZlcSkladniki.cs" />
+    <Compile Include="DataBase\Tabele\SrwZlcCzynnosci.cs" />
     <Compile Include="glowneOkno_Activity.cs" />
     <Compile Include="DataBase\Tabele\KntAdresyTable.cs" />
     <Compile Include="DataBase\Tabele\KntKartyTable.cs" />

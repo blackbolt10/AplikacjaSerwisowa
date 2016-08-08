@@ -27,10 +27,10 @@ namespace AplikacjaSerwisowa
     class zakladkaPodpisNoweZlecenie : Android.Support.V4.App.Fragment
     {
         private Button zapiszButton;
-        private List<SrwZlcCzynnosciTable> SrwZlcCzynnosciTableList;
-        private List<SrwZlcSkladnikiTable> SrwZlcSkladnikiTableList;
+        private List<SrwZlcCzynnosci> SrwZlcCzynnosciList;
+        private List<SrwZlcSkladniki> SrwZlcSkladnikiList;
         private List<TwrKartyTable> skladnikiList;
-        private SrwZlcNagTable srwZlcNag;
+        private SrwZlcNag srwZlcNag;
         private SignaturePadView signature;
         private Context kontekst;
 
@@ -90,7 +90,7 @@ namespace AplikacjaSerwisowa
             DBRepository dbr = new DBRepository();
 
             srwZlcNag = zakladkaOgolneNoweZlecenie.pobierzNaglowek();
-            srwZlcNag.SZN_Id = dbr.SrwZlcNagGenerujNoweID();
+            srwZlcNag.SZN_Id = dbr.SrwZlcNagGenerujNoweID(this.Activity);
             srwZlcNag.SZN_Synchronizacja = 1;
 
             return true;
@@ -120,23 +120,22 @@ namespace AplikacjaSerwisowa
         private Boolean pobierzCzynnosci()
         {
             List<TwrKartyTable> czynnosciList = zakladkaCzynnosciNoweZlecenie.pobierzListeCzynnosci();
-            SrwZlcCzynnosciTableList = new List<SrwZlcCzynnosciTable>();
+            SrwZlcCzynnosciList = new List<SrwZlcCzynnosci>();
 
             if(czynnosciList != null)
             {
                 for(int i = 0; i < czynnosciList.Count; i++)
                 {
-                    SrwZlcCzynnosciTable srwZlcCzynnosc = new SrwZlcCzynnosciTable();
-                    srwZlcCzynnosc.szc_sznId = srwZlcNag.SZN_Id;
-                    srwZlcCzynnosc.szc_Pozycja = i + 1;
-                    srwZlcCzynnosc.szc_TwrNumer = czynnosciList[i].Twr_GIDNumer;
-                    srwZlcCzynnosc.szc_TwrTyp = czynnosciList[i].Twr_GIDTyp;
-                    srwZlcCzynnosc.szc_TwrNazwa = czynnosciList[i].Twr_Nazwa;
-                    srwZlcCzynnosc.szc_Ilosc = czynnosciList[i].Ilosc;
-                    srwZlcCzynnosc.Twr_Kod = czynnosciList[i].Twr_Kod;
+                    SrwZlcCzynnosci srwZlcCzynnosc = new SrwZlcCzynnosci();
+                    srwZlcCzynnosc.SZC_SZNId = srwZlcNag.SZN_Id;
+                    srwZlcCzynnosc.SZC_Pozycja = i + 1;
+                    srwZlcCzynnosc.SZC_TwrNumer = czynnosciList[i].Twr_GIDNumer;
+                    srwZlcCzynnosc.SZC_TwrTyp = czynnosciList[i].Twr_GIDTyp;
+                    srwZlcCzynnosc.SZC_TwrNazwa = czynnosciList[i].Twr_Nazwa;
+                    srwZlcCzynnosc.SZC_Ilosc = czynnosciList[i].Ilosc;
                     srwZlcCzynnosc.SZC_Synchronizacja = 1;
 
-                    SrwZlcCzynnosciTableList.Add(srwZlcCzynnosc);
+                    SrwZlcCzynnosciList.Add(srwZlcCzynnosc);
                 }
             }
 
@@ -146,23 +145,22 @@ namespace AplikacjaSerwisowa
         private Boolean pobierzSkladniki()
         {
             skladnikiList = zakladkaSkladnikiNoweZlecenie.pobierzListSkladnikow();
-            SrwZlcSkladnikiTableList = new List<SrwZlcSkladnikiTable>();
+            SrwZlcSkladnikiList = new List<SrwZlcSkladniki>();
 
             if(skladnikiList != null)
             {
                 for(int i = 0; i < skladnikiList.Count; i++)
                 {
-                    SrwZlcSkladnikiTable srwZlcSkladnik = new SrwZlcSkladnikiTable();
-                    srwZlcSkladnik.szs_sznId = srwZlcNag.SZN_Id;
-                    srwZlcSkladnik.szs_Pozycja = i + 1;
-                    srwZlcSkladnik.szs_TwrNumer = skladnikiList[i].Twr_GIDNumer;
-                    srwZlcSkladnik.szs_TwrTyp = skladnikiList[i].Twr_GIDTyp;
-                    srwZlcSkladnik.szs_TwrNazwa = skladnikiList[i].Twr_Nazwa;
-                    srwZlcSkladnik.szs_Ilosc = skladnikiList[i].Ilosc;
-                    srwZlcSkladnik.Twr_Kod = skladnikiList[i].Twr_Kod;
+                    SrwZlcSkladniki srwZlcSkladnik = new SrwZlcSkladniki();
+                    srwZlcSkladnik.SZS_SZNId = srwZlcNag.SZN_Id;
+                    srwZlcSkladnik.SZS_Pozycja = i + 1;
+                    srwZlcSkladnik.SZS_TwrNumer = skladnikiList[i].Twr_GIDNumer;
+                    srwZlcSkladnik.SZS_TwrTyp = skladnikiList[i].Twr_GIDTyp;
+                    srwZlcSkladnik.SZS_TwrNazwa = skladnikiList[i].Twr_Nazwa;
+                    srwZlcSkladnik.SZS_Ilosc = skladnikiList[i].Ilosc;
                     srwZlcSkladnik.SZS_Synchronizacja = 1;
 
-                    SrwZlcSkladnikiTableList.Add(srwZlcSkladnik);
+                    SrwZlcSkladnikiList.Add(srwZlcSkladnik);
                 }
             }
 
@@ -183,21 +181,21 @@ namespace AplikacjaSerwisowa
 
                     //zapiszPodpis();
 
-                    if(SrwZlcCzynnosciTableList != null)
+                    if(SrwZlcCzynnosciList != null)
                     {
                         DBRepository dbr = new DBRepository();
-                        for(int i = 0; i < SrwZlcCzynnosciTableList.Count; i++)
+                        for(int i = 0; i < SrwZlcCzynnosciList.Count; i++)
                         {
-                            dbr.SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciTableList[i]);
+                            dbr.SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciList[i]);
                         }
                     }
 
-                    if(SrwZlcSkladnikiTableList != null)
+                    if(SrwZlcSkladnikiList != null)
                     {
                         DBRepository dbr = new DBRepository();
-                        for(int i = 0; i < SrwZlcSkladnikiTableList.Count; i++)
+                        for(int i = 0; i < SrwZlcSkladnikiList.Count; i++)
                         {
-                            dbr.SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiTableList[i]);
+                            dbr.SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiList[i]);
                         }
                     }
                 }
@@ -272,12 +270,6 @@ namespace AplikacjaSerwisowa
             
             srwZlcNag.SZN_KntNumer = knaKarty.Kna_KntNumer;
             srwZlcNag.SZN_KntTyp = knaKarty.Kna_GIDTyp;
-
-            srwZlcNag.SZN_KnDNumer = knaKarty.Kna_KntNumer;
-            srwZlcNag.SZN_KnDTyp = knaKarty.Kna_GIDTyp;
-
-            srwZlcNag.SZN_AdWNumer = knaKarty.Kna_GIDNumer;
-            srwZlcNag.SZN_AdWTyp = knaKarty.Kna_GIDTyp;
         }
 
         public override string ToString() //Called on line 156 in SlidingTabScrollView

@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System;
+using System.Data;
+using System.IO;
+using SQLite;
 
-namespace WebApplication
+namespace AplikacjaSerwisowa
 {
-    class SrwZlcNag
+    [Table("SrwZlcNag")]
+    public class SrwZlcNag
     {
         public int Id { get; set; }
         public int SZN_Id { get; set; }

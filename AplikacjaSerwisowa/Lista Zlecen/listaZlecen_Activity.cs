@@ -45,15 +45,15 @@ namespace AplikacjaSerwisowa
             {
                 String dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
                 SQLiteConnection db = new SQLiteConnection(dbPath);
-                //var table = db.Table<SrwZlcNagTable>();
-                string zapytanie = "Select * from SrwZlcNagTable order by SZN_DataWystawienia desc";
-                var tableQuery = db.Query<SrwZlcNagTable>(zapytanie);
+                //var table = db.Table<SrwZlcNag>();
+                string zapytanie = "Select * from SrwZlcNag order by SZN_DataWystawienia desc";
+                var tableQuery = db.Query<SrwZlcNag>(zapytanie);
 
                 foreach(var item in tableQuery)
                 {
                     string wynik = "";
                     string kntKartaNazwa = pobierzInformacjeOKntKarta(item.SZN_KntNumer);
-                    string kntAdresNazwa = pobierzInformacjeOKntKarta(item.SZN_KnDNumer);
+                    string kntAdresNazwa = pobierzInformacjeOKntKarta(item.SZN_KnANumer);
 
                     if(kntKartaNazwa!="" && kntAdresNazwa!="")
                     {
@@ -82,7 +82,7 @@ namespace AplikacjaSerwisowa
                     kontrahenci_List.Add(wynik);
                     data_list.Add(item.SZN_DataWystawienia.Split(' ')[0]);
                     stan_List.Add(item.SZN_Stan);
-                    naglowki_list.Add(item.Dokument);
+                    naglowki_list.Add(item.SZN_Dokument);
                     szn_ID_list.Add(item.SZN_Id.ToString());
 
                     Random test = new Random();

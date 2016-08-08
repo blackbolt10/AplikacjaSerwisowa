@@ -67,7 +67,7 @@ namespace AplikacjaSerwisowaUsluga
             return WynikWylogowania;
         }
 
-        public Int32 wygenerujZlcSrwNag(SrwZlcNagStruct srwZlcNag)
+        public Int32 wygenerujZlcSrwNag(SrwZlcNag srwZlcNag)
         {
             int wynik = -100;
             try
@@ -76,19 +76,19 @@ namespace AplikacjaSerwisowaUsluga
                 DokumentXLSerwisNagInfo.Wersja = 20162;
                 DokumentXLSerwisNagInfo.Tryb = 2;
 
-                DokumentXLSerwisNagInfo.Opis = srwZlcNag.Opis;
+                DokumentXLSerwisNagInfo.Opis = srwZlcNag.SZN_Opis;
 
-                DokumentXLSerwisNagInfo.KntTyp = srwZlcNag.KntTyp;
-                DokumentXLSerwisNagInfo.KntNumer = srwZlcNag.KntNumer;
+                DokumentXLSerwisNagInfo.KntTyp = srwZlcNag.SZN_KntTyp;
+                DokumentXLSerwisNagInfo.KntNumer = srwZlcNag.SZN_KntNumer;
 
-                DokumentXLSerwisNagInfo.KnATyp = srwZlcNag.KnATyp;
-                DokumentXLSerwisNagInfo.KnANumer = srwZlcNag.KnANumer;
+                DokumentXLSerwisNagInfo.KnATyp = srwZlcNag.SZN_KnATyp;
+                DokumentXLSerwisNagInfo.KnANumer = srwZlcNag.SZN_KnANumer;
 
-                DokumentXLSerwisNagInfo.KnDTyp = srwZlcNag.KndTyp;
-                DokumentXLSerwisNagInfo.KnDNumer = srwZlcNag.KndNumer;
+                DokumentXLSerwisNagInfo.KnDTyp = srwZlcNag.SZN_KntTyp;
+                DokumentXLSerwisNagInfo.KnDNumer = srwZlcNag.SZN_KntNumer;
 
-                DokumentXLSerwisNagInfo.KnPTyp = srwZlcNag.KnPTyp;
-                DokumentXLSerwisNagInfo.KnPNumer = srwZlcNag.KnPNumer;
+                DokumentXLSerwisNagInfo.KnPTyp = srwZlcNag.SZN_KntTyp;
+                DokumentXLSerwisNagInfo.KnPNumer = srwZlcNag.SZN_KntNumer;
 
                 wynik = cdn_api.cdn_api.XLNoweZlecenieSerwis(Sesja, ref IDDokSrwZlcNag, DokumentXLSerwisNagInfo);
             }

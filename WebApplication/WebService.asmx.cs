@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Services;
 using System.Web.Script.Services;
 using System.Web.Script.Serialization;
-using System.Xml;
 
 
 namespace WebApplication
@@ -13,7 +12,7 @@ namespace WebApplication
     /// <summary>
     /// Summary description for WebService
     /// </summary>
-    [WebService(Namespace = "http://kwronski.hostingasp.pl/")]
+    [WebService(Namespace = "http://91.196.9.105/")]
     //[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     //[System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
@@ -32,27 +31,6 @@ namespace WebApplication
         {
             return "You find secret lame!";
         }
-
-        [WebMethod(Description = "Wstępnie do usunięcia")]
-        public string XMLZwrocListeKntKarty()
-        {
-            DataBase dataBaseObject = new DataBase();
-            String result = dataBaseObject.pobierzKntKarty();
-
-            return result.ToString();
-        }
-
-
-
-
-
-
-
-
-
-
-
-
 
         [WebMethod(Description = "Pozwala na wygenerowanie KntAdresy")]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -89,7 +67,7 @@ namespace WebApplication
         public string ZwrocListeZlecenSerwisowychCzynnosci()
         {
             DataBase dataBaseObject = new DataBase();
-            List<SrwZlcCzynnoci> listaSerwisoweZlecenCzynnosci = dataBaseObject.wygenerujListeSrwZlcCzynnoci();
+            List<SrwZlcCzynnosci> listaSerwisoweZlecenCzynnosci = dataBaseObject.wygenerujListeSrwZlcCzynnosci();
 
             return new JavaScriptSerializer().Serialize(listaSerwisoweZlecenCzynnosci);
         }
@@ -139,7 +117,7 @@ namespace WebApplication
         public string synchronizujSrwZlcSkladniki(String inputJSON)
         {
             DataBase dataBaseObject = new DataBase();
-            List<string> output = dataBaseObject.synchronizujSrwZlcSkladniki(inputJSON);
+            List<int> output = dataBaseObject.synchronizujSrwZlcSkladniki(inputJSON);
 
             return new JavaScriptSerializer().Serialize(output);
         }
@@ -153,13 +131,6 @@ namespace WebApplication
 
             return new JavaScriptSerializer().Serialize(output);
         }
-
-
-
-
-
-
-
 
         [WebMethod(Description = "... do GalSrv SrwZlcNag")]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -185,7 +156,7 @@ namespace WebApplication
         public string GalSrv_SrwZlcCzynnosci()
         {
             DataBase dataBaseObject = new DataBase();
-            List<SrwZlcCzynnoci> output = dataBaseObject.GalSrv_Generuj_SrwZlcCzynnosci();
+            List<SrwZlcCzynnosci> output = dataBaseObject.GalSrv_Generuj_SrwZlcCzynnosci();
 
             return new JavaScriptSerializer().Serialize(output);
         }

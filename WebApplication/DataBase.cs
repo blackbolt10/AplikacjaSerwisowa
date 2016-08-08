@@ -89,55 +89,11 @@ namespace WebApplication
             return wynik;
         }
 
-        private void zapiszDB(string zapytanie1)
-        {
-            SqlCommand polecenieSQL = new SqlCommand(zapytanie1);
-            polecenieSQL.Connection = uchwytBD;
-            polecenieSQL.ExecuteNonQuery();
-        }
-
-        public String pobierzKntKarty()
-        {
-            DataTable pomDataTable = new DataTable();
-            try
-            {
-                String zapytanieString = "select knt.knt_GIDNumer, knt.knt_Akronim, knt.knt_nazwa1, knt.knt_nazwa2, knt.knt_nazwa3, knt.knt_KodP, knt.knt_miasto, knt.knt_ulica, knt.knt_Adres, knt.knt_nip, knt.knt_telefon1, knt.knt_telefon2, knt.knt_telex, knt.knt_fax, knt.knt_email, knt.knt_url from cdn.kntkarty knt";
-                SqlDataAdapter da = zapytanie(zapytanieString);
-                da.Fill(pomDataTable);
-            }
-            catch(Exception) { }
-
-            if(pomDataTable.Rows.Count > 0)
-            {
-                String result = wygenerujPlikXML("KntKarty", "KntKarta", pomDataTable);
-                return result;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private String wygenerujPlikXML(String glownaNazwa, String pomocniczaNazwa, DataTable pomDataTable)
-        {
-            String output = "";
-
-            DataSet ds = new DataSet(glownaNazwa);
-            ds.Tables.Add(pomDataTable);
-            ds.Tables[0].TableName = pomocniczaNazwa;
-
-            using(StringWriter stringWriter = new StringWriter())
-            {
-                ds.WriteXml(new XmlTextWriter(stringWriter));
-                output = stringWriter.ToString();
-            };
-
-            return output;
-        }
-         
         public List<SrwZlcNag> wygenerujListeSerwisowychZlecenNaglowki()
         {
+            List<SrwZlcNag> result = new List<SrwZlcNag>();
             DateTime data = DateTime.Now.AddMonths(liczbaMiesiecyWstecz);
+
             String zapytanieSerwisowaLista = @"SELECT 
             CDN.NumerDokumentu(4700,4700,4700,SZN_Numer,SZN_Rok,SZN_Seria,SZN_Miesiac) as Dokument
 
@@ -162,7 +118,8 @@ namespace WebApplication
 
             , isNull(B.SLW_WartoscS,'') as Status
 
-            ,  A.SZN_CechaOpis, A.SZN_Opis
+            --, A.SZN_CechaOpis
+            , A.SZN_Opis
             --, A.SZN_MagZNumer, A.SZN_SlwStatus, B.SLW_ID, B.SLW_Predefiniowany
 
             FROM  CDN.SrwZlcNag A 
@@ -172,10 +129,10 @@ namespace WebApplication
             LEFT OUTER JOIN CDN.KntKarty E ON  A.SZN_KnDTyp= E.Knt_GIDTyp AND  A.SZN_KnDNumer= E.Knt_GIDNumer --Docelowy
             --LEFT OUTER JOIN CDN.KntAdresy F ON  A.SZN_KnATyp= F.KnA_GIDTyp AND  A.SZN_KnANumer= F.KnA_GIDNumer 
             LEFT OUTER JOIN CDN.KntKarty G ON  A.SZN_KntTyp= G.Knt_GIDTyp AND  A.SZN_KntNumer= G.Knt_GIDNumer   --Kontrahent
-            WHERE (DATEADD(DAY,A.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'"+data.Year.ToString()+"-"+data.Month.ToString()+@"-01') 
+            WHERE (DATEADD(DAY,A.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'" + data.Year.ToString() + "-" + data.Month.ToString() + @"-01') 
             ORDER BY  A.SZN_Rok,  A.SZN_Miesiac,  A.SZN_Seria,  A.SZN_Numer";
 
-        DataTable pomDataTable = new DataTable();
+            DataTable pomDataTable = new DataTable();
             try
             {
                 String zapytanieString = zapytanieSerwisowaLista;
@@ -186,20 +143,136 @@ namespace WebApplication
 
             if(pomDataTable.Rows.Count > 0)
             {
-                return wygenerujListeSerwisowychZlecen(pomDataTable);
+                result =  wygenerujListeSerwisowychZlecen(pomDataTable);
             }
-            else
-            {
-                return null;
-            }
+            return result;
         }
 
-        public List<Operatorzy> wygenerujListeOperatorow()
+        private List<SrwZlcNag> wygenerujListeSerwisowychZlecen(DataTable pomDataTable)
         {
+            List<SrwZlcNag> result = new List<SrwZlcNag>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                int SZN_Id = Convert.ToInt32(pomDataTable.Rows[i]["SZN_Id"].ToString());
+                int SZN_Synchronizacja = 0;
+                int SZN_KntTyp = Convert.ToInt32(pomDataTable.Rows[i]["SZN_KntTyp"].ToString());
+                int SZN_KntNumer = Convert.ToInt32(pomDataTable.Rows[i]["SZN_KntNumer"].ToString());
+                int SZN_KnATyp = Convert.ToInt32(pomDataTable.Rows[i]["SZN_KnATyp"].ToString());
+                int SZN_KnANumer = Convert.ToInt32(pomDataTable.Rows[i]["SZN_KnANumer"].ToString());
+                String SZN_Dokument = pomDataTable.Rows[i]["Dokument"].ToString();
+                String SZN_DataWystawienia = pomDataTable.Rows[i]["DataWystawienia"].ToString();
+                String SZN_DataRozpoczecia = pomDataTable.Rows[i]["DataRozpoczecia"].ToString();
+                String SZN_Stan = pomDataTable.Rows[i]["Stan"].ToString();
+                String SZN_Status = pomDataTable.Rows[i]["Status"].ToString();
+                String SZN_Opis = pomDataTable.Rows[i]["SZN_Opis"].ToString();
+
+                result.Add(new SrwZlcNag(SZN_Id, SZN_Synchronizacja, SZN_KntTyp, SZN_KntNumer, SZN_KnATyp, SZN_KnANumer, SZN_Dokument, SZN_DataWystawienia, SZN_DataRozpoczecia, SZN_Stan, SZN_Status, SZN_Opis));
+            }
+            return result;
+        }
+
+        public List<SrwZlcCzynnosci> wygenerujListeSrwZlcCzynnosci()
+        {
+            DateTime data = DateTime.Now.AddMonths(liczbaMiesiecyWstecz);
+            List<SrwZlcCzynnosci> result = new List<SrwZlcCzynnosci>();
+
             DataTable pomDataTable = new DataTable();
             try
             {
-                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[Operatorzy]";
+                String zapytanieString = @"select SZC_Id, SZC_SZNId, SZC_SZUId, SZC_Pozycja, SZC_Ilosc, SZC_TwrNumer, SZC_TwrTyp, SZC_TwrNazwa, SZC_Opis
+                    from cdn.SrwZlcCzynnosci
+                    LEFT OUTER JOIN cdn.srwzlcnag szn on szn.szn_id = SZC_sznid
+                    where (DATEADD(DAY,szn.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'" + data.Year.ToString() + "-" + data.Month.ToString() + "-01')";
+
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                result = wygenerujListeSrwZlcCzynnosci(pomDataTable);
+            }
+            return result;
+        }
+
+        private List<SrwZlcCzynnosci> wygenerujListeSrwZlcCzynnosci(DataTable pomDataTable)
+        {
+            List<SrwZlcCzynnosci> result = new List<SrwZlcCzynnosci>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                Int32 SZC_Id = Convert.ToInt32(pomDataTable.Rows[i]["SZC_Id"].ToString());
+                Int32 SZC_SZNId = Convert.ToInt32(pomDataTable.Rows[i]["SZC_SZNId"].ToString());
+                Int32 SZC_SZUId = Convert.ToInt32(pomDataTable.Rows[i]["SZC_SZUId"].ToString());
+                Int32 SZC_Synchronizacja = 0;
+                Int32 SZC_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["SZC_Pozycja"].ToString());
+                Int32 SZC_TwrTyp = Convert.ToInt32(pomDataTable.Rows[i]["SZC_TwrTyp"].ToString());
+                Int32 SZC_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["SZC_TwrNumer"].ToString());
+                String SZC_TwrNazwa = pomDataTable.Rows[i]["SZC_TwrNazwa"].ToString();
+                Double SZC_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["SZC_Ilosc"].ToString());
+                String SZC_Opis = pomDataTable.Rows[i]["SZC_Opis"].ToString();
+
+                result.Add(new SrwZlcCzynnosci(SZC_Id, SZC_SZNId, SZC_SZUId, SZC_Synchronizacja, SZC_Pozycja, SZC_TwrTyp, SZC_TwrNumer, SZC_TwrNazwa, SZC_Ilosc, SZC_Opis));
+            }
+            return result;
+        }
+
+        public List<SrwZlcSkladniki> wygenerujListeSrwZlcSkladniki()
+        {
+            List<SrwZlcSkladniki> result = new List<SrwZlcSkladniki>();
+            DateTime data = DateTime.Now.AddMonths(liczbaMiesiecyWstecz);
+
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = @"select SZS_Id, SZS_SZNId, SZS_Pozycja, SZS_TwrTyp, SZS_TwrNumer, SZS_TwrNazwa, SZS_Ilosc, SZS_Opis
+                    from cdn.SrwZlcSkladniki
+                    LEFT OUTER JOIN cdn.srwzlcnag szn on szn.szn_id = szs_sznid
+                    where (DATEADD(DAY,szn.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'" + data.Year.ToString() + "-" + data.Month.ToString() + "-01')";
+
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception)
+            {}
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                result = wygenerujListeSrwZlcSkladniki(pomDataTable);
+            }
+            return result;
+        }
+        private List<SrwZlcSkladniki> wygenerujListeSrwZlcSkladniki(DataTable pomDataTable)
+        {
+            List<SrwZlcSkladniki> result = new List<SrwZlcSkladniki>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                Int32 SZS_Id = Convert.ToInt32(pomDataTable.Rows[i]["SZS_Id"].ToString());
+                Int32 SZS_sznId = Convert.ToInt32(pomDataTable.Rows[i]["SZS_SZNId"].ToString());
+                Int32 SZS_Synchronizacja = 0;
+                Int32 SZS_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["SZS_Pozycja"].ToString());
+                Int32 SZS_TwrTyp = Convert.ToInt32(pomDataTable.Rows[i]["SZS_TwrTyp"].ToString());
+                Int32 SZS_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["SZS_TwrNumer"].ToString());
+                String SZS_TwrNazwa = pomDataTable.Rows[i]["SZS_TwrNazwa"].ToString();
+                Double SZS_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["SZS_Ilosc"].ToString());
+                String SZS_Opis= pomDataTable.Rows[i]["SZS_Opis"].ToString();
+
+                result.Add(new SrwZlcSkladniki(SZS_Id, SZS_sznId, SZS_Synchronizacja, SZS_Pozycja, SZS_Ilosc, SZS_TwrNumer, SZS_TwrTyp, SZS_TwrNazwa, SZS_Opis));
+            }
+            return result;
+        }
+        public List<Operatorzy> wygenerujListeOperatorow()
+        {
+            List<Operatorzy> result = new List<Operatorzy>();
+            DataTable pomDataTable = new DataTable();
+
+            try
+            {
+                String zapytanieString = @"SELECT GZO_Id, GZO_Akronim, GZO_Haslo, GZO_Imie, GZO_Nazwisko 
+                    FROM [GALXL_Serwis].[GAL].[Operatorzy]";
 
                 SqlDataAdapter da = zapytanieSerwis(zapytanieString);
                 da.Fill(pomDataTable);
@@ -208,12 +281,9 @@ namespace WebApplication
 
             if(pomDataTable.Rows.Count > 0)
             {
-                return wygenerujListeOperatorow(pomDataTable);
+                result = wygenerujListeOperatorow(pomDataTable);
             }
-            else
-            {
-                return null;
-            }
+            return result;
         }
 
         private List<Operatorzy> wygenerujListeOperatorow(DataTable pomDataTable)
@@ -222,161 +292,15 @@ namespace WebApplication
 
             for(int i = 0; i < pomDataTable.Rows.Count; i++)
             {
-                String Akronim = pomDataTable.Rows[i]["GZO_Akronim"].ToString();
-                String Haslo = pomDataTable.Rows[i]["GZO_Haslo"].ToString();
-                String Imie = pomDataTable.Rows[i]["GZO_Imie"].ToString();
-                String Nazwisko = pomDataTable.Rows[i]["GZO_Nazwisko"].ToString();
+                String GZO_Akronim = pomDataTable.Rows[i]["GZO_Akronim"].ToString();
+                String GZO_Haslo = pomDataTable.Rows[i]["GZO_Haslo"].ToString();
+                String GZO_Imie = pomDataTable.Rows[i]["GZO_Imie"].ToString();
+                String GZO_Nazwisko = pomDataTable.Rows[i]["GZO_Nazwisko"].ToString();
 
-                result.Add(new Operatorzy(Akronim, Haslo, Imie, Nazwisko));
+                result.Add(new Operatorzy(GZO_Akronim, GZO_Haslo, GZO_Imie, GZO_Nazwisko));
             }
             return result;
         }
-
-        public List<int> synchronizujSrwZlcNag(string inputJSON)
-        {
-            List<int> result = new List<int>();
-
-            JavaScriptSerializer ser = new JavaScriptSerializer();
-            List<SrwZlcNag> records = ser.Deserialize<List<SrwZlcNag>>(inputJSON);
-
-            for(int i =0;i<records.Count;i++)
-            {
-                Boolean wynik = zapiszSrwZlcNagSerwis(records[i]);
-                if(wynik)
-                {
-                    result.Add(records[i].SZN_Id);
-                }
-            }
-
-            return result;
-        }
-
-        private Boolean zapiszSrwZlcNagSerwis(SrwZlcNag srwZlcNag)
-        {
-            DataTable pomdatatable = new DataTable();
-
-            try
-            {
-                String zapytanieString = "INSERT INTO [GAL].[SrwZlcNag] VALUES(0, "+srwZlcNag.SZN_KntTyp+ ", " + srwZlcNag.SZN_KntNumer + ", " + srwZlcNag.SZN_KnATyp + ", " + srwZlcNag.SZN_KnANumer + ", " + srwZlcNag.SZN_KntTyp + ", " + srwZlcNag.SZN_KntNumer + ", " + srwZlcNag.SZN_KntTyp + ", " + srwZlcNag.SZN_KntNumer + ", '"+srwZlcNag.SZN_DataWystawienia+ "', '" + srwZlcNag.SZN_DataRozpoczecia + "', '" + srwZlcNag.SZN_Opis+ "')";
-                SqlDataAdapter da =  zapytanieSerwis(zapytanieString);
-                da.Fill(pomdatatable);
-
-                return true;
-            }
-            catch(Exception)
-            {
-                return false;
-            }
-        }
-
-        public List<int> synchronizujSrwZlcCzynnosci(string inputJSON)
-        {
-            List<int> result = new List<int>();
-
-            JavaScriptSerializer ser = new JavaScriptSerializer();
-            List<SrwZlcCzynnoci> records = ser.Deserialize<List<SrwZlcCzynnoci>>(inputJSON);
-
-            for(int i = 0; i < records.Count; i++)
-            {
-                Boolean wynik = zapiszSrwZlcCzynnosciSerwis(records[i]);
-                if(wynik)
-                {
-                    result.Add(records[i].szc_Id);
-                }
-            }
-
-            return result;
-        }
-
-        private Boolean zapiszSrwZlcCzynnosciSerwis(SrwZlcCzynnoci srwZlcCzynnosc)
-        {
-            DataTable pomdatatable = new DataTable();
-
-            try
-            {
-                String zapytanieString = "INSERT INTO [GAL].[SrwZlcCzynnosci] VALUES(" + srwZlcCzynnosc.szc_Id+ ", "+srwZlcCzynnosc.szc_sznId+", "+ srwZlcCzynnosc .szc_Pozycja+ ", "+ srwZlcCzynnosc.szc_TwrTyp + ", "+ srwZlcCzynnosc.szc_TwrNumer+ ", '"+ srwZlcCzynnosc.szc_Ilosc+ "', '')"; //[LAMA] '' - brakuje opisu?
-                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
-                da.Fill(pomdatatable);
-
-                return true;
-            }
-            catch(Exception)
-            {
-                return false;
-            }
-        }
-
-        public List<string> synchronizujSrwZlcSkladniki(string inputJSON)
-        {
-            List<string> result = new List<string>();
-
-            JavaScriptSerializer ser = new JavaScriptSerializer();
-            List<SrwZlcSkladniki> records = ser.Deserialize<List<SrwZlcSkladniki>>(inputJSON);
-
-            for(int i = 0; i < records.Count; i++)
-            {
-                string wynik = zapiszSrwZlcSkladnikiSerwis(records[i]);
-                if(wynik.Length !=0)
-                {
-                    result.Add(wynik);
-                    //result.Add(records[i].szs_Id);
-                }
-            }
-
-            return result;
-        }
-
-        private string zapiszSrwZlcSkladnikiSerwis(SrwZlcSkladniki srwZlcCzynnosc)
-        {
-            DataTable pomdatatable = new DataTable();
-
-            try
-            {
-                String zapytanieString = "INSERT INTO [GAL].[SrwZlcSkladniki] VALUES(" + srwZlcCzynnosc.szs_Id + ", " + srwZlcCzynnosc.szs_sznId + ", " + srwZlcCzynnosc.szs_Pozycja + ", " + srwZlcCzynnosc.szs_TwrTyp + ", " + srwZlcCzynnosc.szs_TwrNumer + ", '" + srwZlcCzynnosc.szs_Ilosc + "', '')"; //[LAMA] '' - brakuje opisu?
-                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
-                da.Fill(pomdatatable);
-
-                return "";
-            }
-            catch(Exception exc)
-            {
-                return exc.Message;
-            }
-        }
-
-
-        private List<SrwZlcNag> wygenerujListeSerwisowychZlecen(DataTable pomDataTable)
-        {
-            List<SrwZlcNag> result = new List<SrwZlcNag>();
-
-            for(int i=0;i<pomDataTable.Rows.Count;i++)
-            {
-                String Dokument = pomDataTable.Rows[i]["Dokument"].ToString();
-                int SZN_Id = Convert.ToInt32(pomDataTable.Rows[i]["SZN_Id"].ToString());
-                int SZN_KntTyp = Convert.ToInt32(pomDataTable.Rows[i]["SZN_KntTyp"].ToString());
-                int SZN_KntNumer = Convert.ToInt32(pomDataTable.Rows[i]["SZN_KntNumer"].ToString());
-                int SZN_KnATyp = Convert.ToInt32(pomDataTable.Rows[i]["SZN_KnATyp"].ToString());
-                int SZN_KnANumer = Convert.ToInt32(pomDataTable.Rows[i]["SZN_KnANumer"].ToString());
-                int SZN_KnDTyp = Convert.ToInt32(pomDataTable.Rows[i]["SZN_KnDTyp"].ToString());
-                int SZN_KnDNumer = Convert.ToInt32(pomDataTable.Rows[i]["SZN_KnDNumer"].ToString());
-                int SZN_AdWTyp = Convert.ToInt32(pomDataTable.Rows[i]["SZN_AdWTyp"].ToString());
-                int SZN_AdWNumer = Convert.ToInt32(pomDataTable.Rows[i]["SZN_AdWNumer"].ToString());
-                String SZN_DataWystawienia = pomDataTable.Rows[i]["DataWystawienia"].ToString();
-                String SZN_DataRozpoczecia = pomDataTable.Rows[i]["DataRozpoczecia"].ToString();
-                String SZN_Stan = pomDataTable.Rows[i]["Stan"].ToString();
-                String SZN_Status = pomDataTable.Rows[i]["Status"].ToString();
-                String SZN_CechaOpis = pomDataTable.Rows[i]["SZN_CechaOpis"].ToString();
-                String SZN_Opis = pomDataTable.Rows[i]["SZN_Opis"].ToString();
-
-                result.Add(new SrwZlcNag(Dokument, SZN_Id, SZN_KntTyp, SZN_KntNumer, SZN_KnATyp, SZN_KnANumer, SZN_KnDTyp, SZN_KnDNumer, SZN_AdWTyp, SZN_AdWNumer, SZN_DataWystawienia, SZN_DataRozpoczecia, SZN_Stan, SZN_Status, SZN_CechaOpis, SZN_Opis, 0));
-            }
-            return result;
-        }
-
-
-
-
-
 
         public List<KntKarty> wygenerujListeKntKarty()
         {
@@ -477,135 +401,10 @@ namespace WebApplication
                 String Kna_fax = pomDataTable.Rows[i]["Kna_fax"].ToString();
                 String Kna_email = pomDataTable.Rows[i]["Kna_email"].ToString();
 
-                result.Add(new KntAdresy(Kna_GIDNumer, Kna_GIDTyp, Kna_KntNumer,Kna_Akronim,Kna_nazwa1,Kna_nazwa2,Kna_nazwa3,Kna_KodP,Kna_miasto,Kna_ulica,Kna_Adres,Kna_nip,Kna_telefon1,Kna_telefon2,Kna_telex,Kna_fax,Kna_email));
+                result.Add(new KntAdresy(Kna_GIDNumer, Kna_GIDTyp, Kna_KntNumer, Kna_Akronim, Kna_nazwa1, Kna_nazwa2, Kna_nazwa3, Kna_KodP, Kna_miasto, Kna_ulica, Kna_Adres, Kna_nip, Kna_telefon1, Kna_telefon2, Kna_telex, Kna_fax, Kna_email));
             }
             return result;
         }
-
-
-
-
-
-
-        public List<SrwZlcCzynnoci> wygenerujListeSrwZlcCzynnoci()
-        {
-            DateTime data = DateTime.Now.AddMonths(liczbaMiesiecyWstecz);
-
-            DataTable pomDataTable = new DataTable();
-            try
-            {
-                String zapytanieString = @"select szc_Id, szc_sznId, szc_Pozycja, szc_TwrNumer, szc_TwrTyp, szc_Ilosc, twrk.twr_jm, szc_TwrNazwa, twrk.Twr_Kod from cdn.SrwZlcCzynnosci
-                        LEFT OUTER JOIN cdn.srwzlcnag szn on szn.szn_id = szc_sznid
-                        left outer join cdn.twrkarty twrk on twrk.twr_gidnumer = szc_twrnumer
-                        where (DATEADD(DAY,szn.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'" + data.Year.ToString()+"-"+data.Month.ToString()+"-01')";
-
-                SqlDataAdapter da = zapytanie(zapytanieString);
-                da.Fill(pomDataTable);
-            }
-            catch(Exception) { }
-
-            if(pomDataTable.Rows.Count > 0)
-            {
-                return wygenerujListeSrwZlcCzynnoci(pomDataTable);
-            }
-            else
-            {
-                return null;
-            }
-        }
-        private List<SrwZlcCzynnoci> wygenerujListeSrwZlcCzynnoci(DataTable pomDataTable)
-        {
-            List<SrwZlcCzynnoci> result = new List<SrwZlcCzynnoci>();
-
-            for(int i = 0; i < pomDataTable.Rows.Count; i++)
-            {
-                Int32 szc_Id = Convert.ToInt32(pomDataTable.Rows[i]["szc_Id"].ToString());
-                Int32 szc_sznId = Convert.ToInt32(pomDataTable.Rows[i]["szc_sznId"].ToString());
-                Int32 szc_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["szc_Pozycja"].ToString());
-                Int32 szc_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["szc_TwrNumer"].ToString());
-                Int32 szc_TwrTyp = Convert.ToInt32(pomDataTable.Rows[i]["szc_TwrTyp"].ToString());
-                Double szc_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["szc_Ilosc"].ToString());
-                String szc_TwrNazwa = pomDataTable.Rows[i]["szc_TwrNazwa"].ToString();
-                String Twr_Jm = pomDataTable.Rows[i]["Twr_Jm"].ToString();
-                String Twr_Kod = pomDataTable.Rows[i]["Twr_Kod"].ToString();
-
-                result.Add(new SrwZlcCzynnoci(szc_Id, szc_sznId, szc_Pozycja, szc_TwrNumer, szc_TwrTyp, 0, szc_Ilosc, Twr_Jm, szc_TwrNazwa, Twr_Kod));
-            }
-            return result;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-        public List<SrwZlcSkladniki> wygenerujListeSrwZlcSkladniki()
-        {
-            DateTime data = DateTime.Now.AddMonths(liczbaMiesiecyWstecz);
-            Exception exc = new Exception();
-
-            DataTable pomDataTable = new DataTable();
-            try
-            {
-                String zapytanieString = @"select szs_Id, szs_sznId, szs_Pozycja, szs_TwrNumer, szs_TwrTyp, szs_Ilosc, twrk.twr_jm, szs_TwrNazwa, twrk.Twr_Kod from cdn.SrwZlcSkladniki
-                        LEFT OUTER JOIN cdn.srwzlcnag szn on szn.szn_id = szs_sznid
-                        left outer join cdn.twrkarty twrk on twrk.twr_gidnumer = szs_twrnumer
-                        where (DATEADD(DAY,szn.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'" + data.Year.ToString() + "-" + data.Month.ToString() + "-01')";
-
-                SqlDataAdapter da = zapytanie(zapytanieString);
-                da.Fill(pomDataTable);
-            }
-            catch(Exception _exc)
-            {
-                exc = _exc;
-            }
-
-            if(pomDataTable.Rows.Count > 0)
-            {
-                return wygenerujListeSrwZlcSkladniki(pomDataTable);
-            }
-            else
-            {
-                List<SrwZlcSkladniki> result = new List<SrwZlcSkladniki>();
-                result.Add(new SrwZlcSkladniki(0, 0, 0, 0, 0, 0, 0, null, exc.Message, null));
-                return result;
-            }
-        }
-        private List<SrwZlcSkladniki> wygenerujListeSrwZlcSkladniki(DataTable pomDataTable)
-        {
-            List<SrwZlcSkladniki> result = new List<SrwZlcSkladniki>();
-
-            for(int i = 0; i < pomDataTable.Rows.Count; i++)
-            {
-                Int32 szs_Id = Convert.ToInt32(pomDataTable.Rows[i]["szs_Id"].ToString());
-                Int32 szs_sznId = Convert.ToInt32(pomDataTable.Rows[i]["szs_sznId"].ToString());
-                Int32 szs_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["szs_Pozycja"].ToString());
-                Int32 szs_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["szs_TwrNumer"].ToString());
-                Int32 szs_TwrTyp = Convert.ToInt32(pomDataTable.Rows[i]["szs_TwrTyp"].ToString());
-                Double szs_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["szs_Ilosc"].ToString());
-                String szs_TwrNazwa = pomDataTable.Rows[i]["szs_TwrNazwa"].ToString();
-                String Twr_Jm = pomDataTable.Rows[i]["Twr_Jm"].ToString();
-                String Twr_Kod = pomDataTable.Rows[i]["Twr_Kod"].ToString();
-
-                result.Add(new SrwZlcSkladniki(szs_Id, szs_sznId, szs_Pozycja, szs_TwrNumer, szs_TwrTyp, 0, szs_Ilosc, Twr_Jm, szs_TwrNazwa, Twr_Kod));
-            }
-            return result;
-        }
-
-
-
-
-
-
-
-
-
 
         public List<TwrKartyTable> wygenerujListeTwrKarty()
         {
@@ -656,30 +455,271 @@ namespace WebApplication
             return result;
         }
 
+        public List<int> synchronizujSrwZlcNag(string inputJSON)
+        {
+            List<int> result = new List<int>();
 
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<SrwZlcNag> records = ser.Deserialize<List<SrwZlcNag>>(inputJSON);
 
+            for(int i = 0; i < records.Count; i++)
+            {
+                Boolean wynik = zapiszSrwZlcNagSerwis(records[i]);
+                if(wynik)
+                {
+                    result.Add(records[i].SZN_Id);
+                }
+            }
 
+            return result;
+        }
 
+        private Boolean zapiszSrwZlcNagSerwis(SrwZlcNag SZN)
+        {
+            DataTable pomdatatable = new DataTable();
 
+            try
+            {
+                String zapytanieString = @"INSERT INTO [GAL].[SrwZlcNag] VALUES("+ SZN .SZN_Id+ ", 0, " + SZN.SZN_KntTyp + ", " + SZN.SZN_KntNumer + ", " + SZN.SZN_KnATyp + ", " + SZN.SZN_KnANumer + ", '" + SZN.SZN_Dokument + "', '" + SZN.SZN_DataWystawienia + "', '" + SZN.SZN_DataRozpoczecia + "', '" + SZN.SZN_Stan + "', '" + SZN.SZN_Status + "', '" + SZN.SZN_Opis + "')";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
 
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
 
+        public List<int> synchronizujSrwZlcCzynnosci(string inputJSON)
+        {
+            List<int> result = new List<int>();
 
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<SrwZlcCzynnosci> records = ser.Deserialize<List<SrwZlcCzynnosci>>(inputJSON);
 
+            for(int i = 0; i < records.Count; i++)
+            {
+                Boolean wynik = zapiszSrwZlcCzynnosciSerwis(records[i]);
+                if(wynik)
+                {
+                    result.Add(records[i].SZC_Id);
+                }
+            }
 
+            return result;
+        }
 
+        private Boolean zapiszSrwZlcCzynnosciSerwis(SrwZlcCzynnosci SZC)
+        {
+            DataTable pomdatatable = new DataTable();
 
+            try
+            {
+                String zapytanieString = "INSERT INTO [GAL].[SrwZlcCzynnosci] VALUES(" + SZC.SZC_Id + ", " + SZC.SZC_SZNId + ", " + SZC.SZC_SZUId + ", 0, " + SZC.SZC_Pozycja + ", " + SZC.SZC_TwrTyp+", "+ SZC.SZC_TwrNumer+", '"+ SZC.SZC_TwrNazwa+"', '" + SZC.SZC_Ilosc + "', '" + SZC.SZC_Opis + "')";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
 
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
 
+        public List<int> synchronizujSrwZlcSkladniki(string inputJSON)
+        {
+            List<int> result = new List<int>();
 
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<SrwZlcSkladniki> records = ser.Deserialize<List<SrwZlcSkladniki>>(inputJSON);
 
+            for(int i = 0; i < records.Count; i++)
+            {
+                Boolean wynik = zapiszSrwZlcSkladnikiSerwis(records[i]);
+                if(wynik)
+                {
+                    result.Add(records[i].SZS_Id);
+                }
+            }
 
+            return result;
+        }
+
+        private Boolean zapiszSrwZlcSkladnikiSerwis(SrwZlcSkladniki SZS)
+        {
+            DataTable pomdatatable = new DataTable();
+
+            try
+            {
+                String zapytanieString = "INSERT INTO [GAL].[SrwZlcSkladniki] VALUES(" + SZS.SZS_Id + ", " + SZS.SZS_SZNId + ", 0, " + SZS.SZS_Pozycja + ", " + SZS.SZS_TwrTyp + ", " + SZS.SZS_TwrNumer + ", '" + SZS.SZS_TwrNazwa + "', '" + SZS.SZS_Ilosc + "', '" + SZS.SZS_Opis + "')";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
+
+        public List<SrwZlcNag> GalSrv_Generuj_SrwZlcNag()
+        {
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcNag] where [GZN_Synchronizacja] <> 4";
+
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return GalSrv_GenerujListe_SrwZlcNag(pomDataTable);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private List<SrwZlcNag> GalSrv_GenerujListe_SrwZlcNag(DataTable pomDataTable)
+        {
+            List<SrwZlcNag> result = new List<SrwZlcNag>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                int GZN_Id = Convert.ToInt32(pomDataTable.Rows[i]["GZN_Id"].ToString());
+                int GZN_Synchronizacja = Convert.ToInt32(pomDataTable.Rows[i]["[GZN_Synchronizacja]"].ToString());
+                int GZN_KntTyp = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntTyp"].ToString());
+                int GZN_KntNumer = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntNumer"].ToString());
+                int GZN_KnATyp = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KnATyp"].ToString());
+                int GZN_KnANumer = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KnANumer"].ToString());
+                String Dokument = pomDataTable.Rows[i]["GZN_Dokument"].ToString();
+                String GZN_DataWystawienia = pomDataTable.Rows[i]["GZN_DataWystawienia"].ToString();
+                String GZN_DataRozpoczecia = pomDataTable.Rows[i]["GZN_DataRozpoczecia"].ToString();
+                String GZN_Stan = pomDataTable.Rows[i]["GZN_Stan"].ToString();
+                String GZN_Status = pomDataTable.Rows[i]["GZN_Status"].ToString();
+                String GZN_Opis = pomDataTable.Rows[i]["GZN_Opis"].ToString();
+
+                result.Add(new SrwZlcNag(GZN_Id, GZN_Synchronizacja,GZN_KntTyp,GZN_KntNumer,GZN_KnATyp,GZN_KnANumer,Dokument,GZN_DataWystawienia,GZN_DataRozpoczecia,GZN_Stan,GZN_Status,GZN_Opis));
+            }
+            return result;
+        }
+
+        public string GalSrv_Potwierdz_SrwZlcNag(String listaPotwierdzonych)
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<Int32> records = ser.Deserialize<List<Int32>>(listaPotwierdzonych);
+            string result = "";
+
+            if(records != null)
+            {
+                for(int i = 0; i < records.Count; i++)
+                {
+                    try
+                    {
+                        String zapytanieString = "UPDATE [GALXL_Serwis].[GAL].[SrwZlcNag] SET [GZN_Synchronizacja] = 4 WHERE [GZN_Id] = " + records[i].ToString();
+                        SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                        DataTable pomdatatable = new DataTable();
+                        da.Fill(pomdatatable);
+
+                        result += "zapisano: " + zapytanieString + "\n";
+                        result += "zapisano: " + records[i].ToString() + "\n";
+                    }
+                    catch(Exception exc)
+                    {
+                        result += "błąd: " + exc.Message + "\n";
+                    }
+                }
+            }
+            return result;
+        }
+
+        public List<SrwZlcCzynnosci> GalSrv_Generuj_SrwZlcCzynnosci()
+        {
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcCzynnosci] where [GZC_Synchronizacja] <> 4";
+
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return GalSrv_GenerujListe_SrwZlcCzynnosci(pomDataTable);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private List<SrwZlcCzynnosci> GalSrv_GenerujListe_SrwZlcCzynnosci(DataTable pomDataTable)
+        {
+            List<SrwZlcCzynnosci> result = new List<SrwZlcCzynnosci>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                Int32 GZC_Id = Convert.ToInt32(pomDataTable.Rows[i]["GZC_Id"].ToString());
+                Int32 GZC_GZCId = Convert.ToInt32(pomDataTable.Rows[i]["GZC_GZCId"].ToString());
+                Int32 GZC_GZNId = Convert.ToInt32(pomDataTable.Rows[i]["GZC_GZNId"].ToString());
+                Int32 GZC_GZUId = Convert.ToInt32(pomDataTable.Rows[i]["GZC_GZUId"].ToString());
+                Int32 GZC_Synchronizacja = Convert.ToInt32(pomDataTable.Rows[i]["GZC_Synchronizacja"].ToString());
+                Int32 GZC_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["GZC_Pozycja"].ToString());
+                Int32 GZC_TwrTyp = Convert.ToInt32(pomDataTable.Rows[i]["GZC_TwrTyp"].ToString());
+                Int32 GZC_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["GZC_TwrNumer"].ToString());
+                String GZC_TwrNazwa = pomDataTable.Rows[i]["GZC_TwrNazwa"].ToString();
+                Double GZC_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["GZC_Ilosc"].ToString());
+                String GZC_Opis = pomDataTable.Rows[i]["GZC_Opis"].ToString();
+
+                result.Add(new SrwZlcCzynnosci(GZC_GZCId, GZC_GZNId, GZC_GZUId,GZC_Synchronizacja, GZC_Pozycja,GZC_TwrTyp,GZC_TwrNumer,GZC_TwrNazwa,GZC_Ilosc,GZC_Opis));
+            }
+            return result;
+        }
+
+        public string GalSrv_Potwierdz_SrwZlcCzynnosci(string listaPotwierdzonych)
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<Int32> records = ser.Deserialize<List<Int32>>(listaPotwierdzonych);
+            string result = "";
+            if(records != null)
+            {
+                for(int i = 0; i < records.Count; i++)
+                {
+                    try
+                    {
+                        String zapytanieString = "UPDATE [GALXL_Serwis].[GAL].[SrwZlcCzynnosci] SET [GZC_Synchronizacja] = 4 WHERE [GZC_Id] = " + records[i].ToString();
+                        SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                        DataTable pomdatatable = new DataTable();
+                        da.Fill(pomdatatable);
+
+                        result += "zapisano: " + zapytanieString + "\n";
+                        result += "zapisano: " + records[i].ToString() + "\n";
+                    }
+                    catch(Exception exc)
+                    {
+                        result += "błąd: " + exc.Message + "\n";
+                    }
+                }
+            }
+            return result;
+        }
 
         public List<SrwZlcSkladniki> GalSrv_Generuj_SrwZlcSkladniki()
         {
             DataTable pomDataTable = new DataTable();
             try
             {
-                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcSkladniki] where [GZS_Sync] <> 4";
+                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcSkladniki] where [GZS_Synchronizacja] <> 4";
 
                 SqlDataAdapter da = zapytanieSerwis(zapytanieString);
                 da.Fill(pomDataTable);
@@ -703,165 +743,17 @@ namespace WebApplication
             for(int i = 0; i < pomDataTable.Rows.Count; i++)
             {
                 Int32 GZS_Id = Convert.ToInt32(pomDataTable.Rows[i]["GZS_Id"].ToString());
-                Int32 GZS_Sync = Convert.ToInt32(pomDataTable.Rows[i]["GZS_Sync"].ToString());
-                Int32 GZS_GZNId = Convert.ToInt32(pomDataTable.Rows[i]["GZS_GZNId"].ToString());
+                Int32 GZS_GZSId = Convert.ToInt32(pomDataTable.Rows[i]["GZS_GZSId"].ToString());
+                Int32 GZS_GZSNId = Convert.ToInt32(pomDataTable.Rows[i]["GZS_GZNId"].ToString());
+                Int32 GZS_Synchronizacja = Convert.ToInt32(pomDataTable.Rows[i]["GZS_Synchronizacja"].ToString());
                 Int32 GZS_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["GZS_Pozycja"].ToString());
                 Int32 GZS_TwrTyp = Convert.ToInt32(pomDataTable.Rows[i]["GZS_TwrTyp"].ToString());
                 Int32 GZS_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["GZS_TwrNumer"].ToString());
+                String GZS_TwrNazwa = pomDataTable.Rows[i]["GZS_TwrNazwa"].ToString();
                 Double GZS_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["GZS_Ilosc"].ToString());
                 String GZS_Opis = pomDataTable.Rows[i]["GZS_Opis"].ToString();
 
-                result.Add(new SrwZlcSkladniki(GZS_Id, GZS_Sync, GZS_Pozycja, GZS_TwrNumer, GZS_TwrTyp, 3, GZS_Ilosc, "", "", ""));
-            }
-            return result;
-        }
-
-        public List<SrwZlcCzynnoci> GalSrv_Generuj_SrwZlcCzynnosci()
-        {
-            DataTable pomDataTable = new DataTable();
-            try
-            {
-                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcCzynnosci] where [GZC_Sync] <> 4";
-
-                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
-                da.Fill(pomDataTable);
-            }
-            catch(Exception) { }
-
-            if(pomDataTable.Rows.Count > 0)
-            {
-                return GalSrv_GenerujListe_SrwZlcCzynnoci(pomDataTable);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private List<SrwZlcCzynnoci> GalSrv_GenerujListe_SrwZlcCzynnoci(DataTable pomDataTable)
-        {
-            List<SrwZlcCzynnoci> result = new List<SrwZlcCzynnoci>();
-
-            for(int i = 0; i < pomDataTable.Rows.Count; i++)
-            {
-                Int32 GZC_Id = Convert.ToInt32(pomDataTable.Rows[i]["GZC_Id"].ToString());
-                Int32 GZC_Sync = Convert.ToInt32(pomDataTable.Rows[i]["GZC_Sync"].ToString());
-                Int32 GZC_GZNId = Convert.ToInt32(pomDataTable.Rows[i]["GZC_GZNId"].ToString());
-                Int32 GZC_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["GZC_Pozycja"].ToString());
-                Int32 GZC_TwrTyp = Convert.ToInt32(pomDataTable.Rows[i]["GZC_TwrTyp"].ToString());
-                Int32 GZC_TwrNumer = Convert.ToInt32(pomDataTable.Rows[i]["GZC_TwrNumer"].ToString());
-                Double GZC_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["GZC_Ilosc"].ToString());
-                String GZC_Opis = pomDataTable.Rows[i]["GZC_Opis"].ToString();
-
-                result.Add(new SrwZlcCzynnoci(GZC_Id, GZC_Sync, GZC_Pozycja, GZC_TwrNumer, GZC_TwrTyp, 3, GZC_Ilosc, "", "", ""));
-            }
-            return result;
-        }
-
-        public List<SrwZlcNag> GalSrv_Generuj_SrwZlcNag()
-        {
-            DataTable pomDataTable = new DataTable();
-            try
-            {
-                String zapytanieString = "SELECT * FROM [GALXL_Serwis].[GAL].[SrwZlcNag] where [GZN_Sync] <> 4";
-
-                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
-                da.Fill(pomDataTable);
-            }
-            catch(Exception) { }
-
-            if(pomDataTable.Rows.Count > 0)
-            {
-                return GalSrv_GenerujListe_SrwZlcNag(pomDataTable);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private List<SrwZlcNag> GalSrv_GenerujListe_SrwZlcNag(DataTable pomDataTable)
-        {
-            List<SrwZlcNag> result = new List<SrwZlcNag>();
-
-            for(int i = 0; i < pomDataTable.Rows.Count; i++)
-            {
-                String Dokument = "";
-                int SZN_Id = Convert.ToInt32(pomDataTable.Rows[i]["GZN_Id"].ToString());
-                int SZN_KntTyp = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntTyp"].ToString());
-                int SZN_KntNumer = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntNumer"].ToString());
-                int SZN_KnATyp = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KnATyp"].ToString());
-                int SZN_KnANumer = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KnANumer"].ToString());
-                int SZN_KnDTyp = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntTyp"].ToString());
-                int SZN_KnDNumer = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntNumer"].ToString());
-                int SZN_AdWTyp = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntTyp"].ToString());
-                int SZN_AdWNumer = Convert.ToInt32(pomDataTable.Rows[i]["GZN_KntNumer"].ToString());
-                String SZN_DataWystawienia = pomDataTable.Rows[i]["GZN_DataWystawienia"].ToString();
-                String SZN_DataRozpoczecia = pomDataTable.Rows[i]["GZN_DataRozpoczecia"].ToString();
-                String SZN_Stan = "";
-                String SZN_Status = "";
-                String SZN_CechaOpis = "";
-                String SZN_Opis = pomDataTable.Rows[i]["GZN_Opis"].ToString();
-                int SZN_Synch = Convert.ToInt32(pomDataTable.Rows[i]["GZN_Sync"].ToString());
-
-                result.Add(new SrwZlcNag(Dokument,SZN_Id,SZN_KntTyp,SZN_KntNumer,SZN_KnATyp,SZN_KnANumer,SZN_KnDTyp,SZN_KnDNumer,SZN_AdWTyp,SZN_AdWNumer,SZN_DataWystawienia,SZN_DataRozpoczecia,SZN_Stan,SZN_Status,SZN_CechaOpis,SZN_CechaOpis, SZN_Synch));
-            }
-            return result;
-        }
-
-        public string GalSrv_Potwierdz_SrwZlcNag(String listaPotwierdzonych)
-        {
-            JavaScriptSerializer ser = new JavaScriptSerializer();
-            List<Int32> records = ser.Deserialize<List<Int32>>(listaPotwierdzonych);
-            string result = "";
-
-            if(records!=null)
-            {
-                for(int i = 0; i < records.Count; i++)
-                {
-                    try
-                    {
-                        String zapytanieString = "UPDATE [GALXL_Serwis].[GAL].[SrwZlcNag] SET [GZN_Sync] = 4 WHERE [GZN_Id] = " + records[i].ToString();
-                        SqlDataAdapter da = zapytanieSerwis(zapytanieString);
-                        DataTable pomdatatable = new DataTable();
-                        da.Fill(pomdatatable);
-
-                        result += "zapisano: " + zapytanieString + "\n";
-                        result += "zapisano: " + records[i].ToString() + "\n";
-                    }
-                    catch(Exception exc)
-                    {
-                        result += "błąd: " + exc.Message + "\n";
-                    }
-                }
-            }
-            return result;
-        }
-
-        public string GalSrv_Potwierdz_SrwZlcCzynnosci(string listaPotwierdzonych)
-        {
-            JavaScriptSerializer ser = new JavaScriptSerializer();
-            List<Int32> records = ser.Deserialize<List<Int32>>(listaPotwierdzonych);
-            string result = "";
-            if(records != null)
-            {
-                for(int i = 0; i < records.Count; i++)
-                {
-                    try
-                    {
-                        String zapytanieString = "UPDATE [GALXL_Serwis].[GAL].[SrwZlcCzynnosci] SET [GZC_Sync] = 4 WHERE [GZC_Id] = " + records[i].ToString();
-                        SqlDataAdapter da = zapytanieSerwis(zapytanieString);
-                        DataTable pomdatatable = new DataTable();
-                        da.Fill(pomdatatable);
-
-                        result += "zapisano: " + zapytanieString + "\n";
-                        result += "zapisano: " + records[i].ToString() + "\n";
-                    }
-                    catch(Exception exc)
-                    {
-                        result += "błąd: " + exc.Message+"\n";
-                    }
-                }
+                result.Add(new SrwZlcSkladniki(GZS_Id,GZS_GZSId,GZS_Synchronizacja,GZS_Pozycja,GZS_Ilosc,GZS_TwrNumer,GZS_TwrTyp,GZS_TwrNazwa,GZS_Opis));
             }
             return result;
         }
@@ -877,7 +769,7 @@ namespace WebApplication
                 {
                     try
                     {
-                        String zapytanieString = "UPDATE [GALXL_Serwis].[GAL].[SrwZlcSkladniki] SET [GZS_Sync] = 4 WHERE [GZS_Id] = " + records[i].ToString();
+                        String zapytanieString = "UPDATE [GALXL_Serwis].[GAL].[SrwZlcSkladniki] SET [GZS_Synchronizacja] = 4 WHERE [GZS_Id] = " + records[i].ToString();
                         SqlDataAdapter da = zapytanieSerwis(zapytanieString);
                         DataTable pomdatatable = new DataTable();
                         da.Fill(pomdatatable);

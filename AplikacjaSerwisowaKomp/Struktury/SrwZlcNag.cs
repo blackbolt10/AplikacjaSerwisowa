@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AplikacjaSerwisowaKomp.Struktury
+namespace AplikacjaSerwisowaKomp
 {
     class SrwZlcNag
     {
@@ -19,11 +19,10 @@ namespace AplikacjaSerwisowaKomp.Struktury
         public String SZN_DataRozpoczecia { get; set; }
         public String SZN_Stan { get; set; }
         public String SZN_Status { get; set; }
-        public String SZN_CechaOpis { get; set; }
         public String SZN_Opis { get; set; }
 
 
-        public SrwZlcNag(int _SZN_Id, int _SZN_Synchronizacja, int _SZN_KntTyp, int _SZN_KntNumer, int _SZN_KnATyp, int _SZN_KnANumer, String _SZN_Dokument, String _SZN_DataWystawienia, String _SZN_DataRozpoczecia, String _SZN_Stan, String _SZN_Status, String _SZN_CechaOpis, String _SZN_Opis)
+        public SrwZlcNag(int _SZN_Id, int _SZN_Synchronizacja, int _SZN_KntTyp, int _SZN_KntNumer, int _SZN_KnATyp, int _SZN_KnANumer, String _SZN_Dokument, String _SZN_DataWystawienia, String _SZN_DataRozpoczecia, String _SZN_Stan, String _SZN_Status, String _SZN_Opis)
         {
             this.SZN_Id = _SZN_Id;
             this.SZN_Synchronizacja = _SZN_Synchronizacja;
@@ -36,7 +35,6 @@ namespace AplikacjaSerwisowaKomp.Struktury
             this.SZN_DataRozpoczecia = _SZN_DataRozpoczecia;
             this.SZN_Stan = _SZN_Stan;
             this.SZN_Status = _SZN_Status;
-            this.SZN_CechaOpis = _SZN_CechaOpis;
             this.SZN_Opis = _SZN_Opis;
         }
 

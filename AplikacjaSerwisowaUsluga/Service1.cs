@@ -26,9 +26,6 @@ namespace AplikacjaSerwisowaUsluga
         {
             InitializeComponent();
             InitializeEventLog();
-            //Synchronizacja synch = new Synchronizacja(null,null,null);
-            //int wynik = synch.APIConnect();
-            //eventLog1.WriteEntry("Service1.ApiConnect() = " + wynik.ToString());
         }
 
         protected override void OnStart(string[] args)

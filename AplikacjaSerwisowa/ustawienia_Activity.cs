@@ -26,7 +26,6 @@ namespace AplikacjaSerwisowa
         private AplikacjaSerwisowa.kwronski.WebService kwronskiService;
         private ProgressDialog progressDialog;
 
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

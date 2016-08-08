@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System;
+using System.Data;
+using System.IO;
+using SQLite;
 
-namespace AplikacjaSerwisowaKomp
+namespace AplikacjaSerwisowa
 {
-    class SrwZlcCzynnosci
+    [Table("SrwZlcCzynnosci")]
+    public class SrwZlcCzynnosci
     {
         public Int32 ID { get; set; }
         public Int32 SZC_Id { get; set; }

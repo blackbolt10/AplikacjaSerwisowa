@@ -68,9 +68,9 @@ namespace AplikacjaSerwisowa
             StartActivity(noweZlcenieDataIntent);
         }
 
-        public static SrwZlcNagTable pobierzNaglowek()
+        public static SrwZlcNag pobierzNaglowek()
         {
-            SrwZlcNagTable srwZlcNag = new SrwZlcNagTable();
+            SrwZlcNag srwZlcNag = new SrwZlcNag();
             srwZlcNag.SZN_DataRozpoczecia = dataRealizEditText.Text;
             srwZlcNag.SZN_DataWystawienia = dataWystawEditText.Text;
             srwZlcNag.SZN_Opis = opisEditText.Text;

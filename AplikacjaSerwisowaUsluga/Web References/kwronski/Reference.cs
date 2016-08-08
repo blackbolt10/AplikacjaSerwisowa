@@ -26,14 +26,12 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="WebServiceSoap", Namespace="http://kwronski.hostingasp.pl/")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="WebServiceSoap", Namespace="http://91.196.9.105/")]
     public partial class WebService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback SayHelloToLameOperationCompleted;
         
         private System.Threading.SendOrPostCallback lamaOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback XMLZwrocListeKntKartyOperationCompleted;
         
         private System.Threading.SendOrPostCallback ZwrocListeKntAdresyOperationCompleted;
         
@@ -112,9 +110,6 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         public event lamaCompletedEventHandler lamaCompleted;
         
         /// <remarks/>
-        public event XMLZwrocListeKntKartyCompletedEventHandler XMLZwrocListeKntKartyCompleted;
-        
-        /// <remarks/>
         public event ZwrocListeKntAdresyCompletedEventHandler ZwrocListeKntAdresyCompleted;
         
         /// <remarks/>
@@ -163,7 +158,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         public event GalSrv_SrwZlcSkladnikiPotwierdzenieCompletedEventHandler GalSrv_SrwZlcSkladnikiPotwierdzenieCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/SayHelloToLame", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/SayHelloToLame", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string SayHelloToLame(string test) {
             object[] results = this.Invoke("SayHelloToLame", new object[] {
                         test});
@@ -192,7 +187,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/lama", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/lama", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string lama() {
             object[] results = this.Invoke("lama", new object[0]);
             return ((string)(results[0]));
@@ -219,34 +214,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/XMLZwrocListeKntKarty", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string XMLZwrocListeKntKarty() {
-            object[] results = this.Invoke("XMLZwrocListeKntKarty", new object[0]);
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void XMLZwrocListeKntKartyAsync() {
-            this.XMLZwrocListeKntKartyAsync(null);
-        }
-        
-        /// <remarks/>
-        public void XMLZwrocListeKntKartyAsync(object userState) {
-            if ((this.XMLZwrocListeKntKartyOperationCompleted == null)) {
-                this.XMLZwrocListeKntKartyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnXMLZwrocListeKntKartyOperationCompleted);
-            }
-            this.InvokeAsync("XMLZwrocListeKntKarty", new object[0], this.XMLZwrocListeKntKartyOperationCompleted, userState);
-        }
-        
-        private void OnXMLZwrocListeKntKartyOperationCompleted(object arg) {
-            if ((this.XMLZwrocListeKntKartyCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.XMLZwrocListeKntKartyCompleted(this, new XMLZwrocListeKntKartyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/ZwrocListeKntAdresy", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/ZwrocListeKntAdresy", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string ZwrocListeKntAdresy() {
             object[] results = this.Invoke("ZwrocListeKntAdresy", new object[0]);
             return ((string)(results[0]));
@@ -273,7 +241,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/ZwrocListeKntKarty", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/ZwrocListeKntKarty", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string ZwrocListeKntKarty() {
             object[] results = this.Invoke("ZwrocListeKntKarty", new object[0]);
             return ((string)(results[0]));
@@ -300,7 +268,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychNaglowki", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/ZwrocListeZlecenSerwisowychNaglowki", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string ZwrocListeZlecenSerwisowychNaglowki() {
             object[] results = this.Invoke("ZwrocListeZlecenSerwisowychNaglowki", new object[0]);
             return ((string)(results[0]));
@@ -327,7 +295,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychCzynnosci", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/ZwrocListeZlecenSerwisowychCzynnosci", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string ZwrocListeZlecenSerwisowychCzynnosci() {
             object[] results = this.Invoke("ZwrocListeZlecenSerwisowychCzynnosci", new object[0]);
             return ((string)(results[0]));
@@ -354,7 +322,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychSkladniki", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/ZwrocListeZlecenSerwisowychSkladniki", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string ZwrocListeZlecenSerwisowychSkladniki() {
             object[] results = this.Invoke("ZwrocListeZlecenSerwisowychSkladniki", new object[0]);
             return ((string)(results[0]));
@@ -381,7 +349,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/ZwrocListeTwrKarty", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/ZwrocListeTwrKarty", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string ZwrocListeTwrKarty() {
             object[] results = this.Invoke("ZwrocListeTwrKarty", new object[0]);
             return ((string)(results[0]));
@@ -408,7 +376,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/synchronizujSrwZlcNag", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/synchronizujSrwZlcNag", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string synchronizujSrwZlcNag(string inputJSON) {
             object[] results = this.Invoke("synchronizujSrwZlcNag", new object[] {
                         inputJSON});
@@ -437,7 +405,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/synchronizujSrwZlcCzynnosci", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/synchronizujSrwZlcCzynnosci", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string synchronizujSrwZlcCzynnosci(string inputJSON) {
             object[] results = this.Invoke("synchronizujSrwZlcCzynnosci", new object[] {
                         inputJSON});
@@ -466,7 +434,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/synchronizujSrwZlcSkladniki", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/synchronizujSrwZlcSkladniki", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string synchronizujSrwZlcSkladniki(string inputJSON) {
             object[] results = this.Invoke("synchronizujSrwZlcSkladniki", new object[] {
                         inputJSON});
@@ -495,7 +463,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/ZwrocListeOperatorow", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/ZwrocListeOperatorow", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string ZwrocListeOperatorow() {
             object[] results = this.Invoke("ZwrocListeOperatorow", new object[0]);
             return ((string)(results[0]));
@@ -522,7 +490,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/GalSrv_SrwZlcNag", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/GalSrv_SrwZlcNag", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string GalSrv_SrwZlcNag() {
             object[] results = this.Invoke("GalSrv_SrwZlcNag", new object[0]);
             return ((string)(results[0]));
@@ -549,7 +517,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/GalSrv_SrwZlcNagPotwierdzenie", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/GalSrv_SrwZlcNagPotwierdzenie", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string GalSrv_SrwZlcNagPotwierdzenie(string listaPotwierdzonych) {
             object[] results = this.Invoke("GalSrv_SrwZlcNagPotwierdzenie", new object[] {
                         listaPotwierdzonych});
@@ -578,7 +546,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/GalSrv_SrwZlcCzynnosci", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/GalSrv_SrwZlcCzynnosci", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string GalSrv_SrwZlcCzynnosci() {
             object[] results = this.Invoke("GalSrv_SrwZlcCzynnosci", new object[0]);
             return ((string)(results[0]));
@@ -605,7 +573,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/GalSrv_SrwZlcCzynnosciPotwierdzenie", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/GalSrv_SrwZlcCzynnosciPotwierdzenie", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string GalSrv_SrwZlcCzynnosciPotwierdzenie(string listaPotwierdzonych) {
             object[] results = this.Invoke("GalSrv_SrwZlcCzynnosciPotwierdzenie", new object[] {
                         listaPotwierdzonych});
@@ -634,7 +602,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/GalSrv_SrwZlcSkladniki", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/GalSrv_SrwZlcSkladniki", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string GalSrv_SrwZlcSkladniki() {
             object[] results = this.Invoke("GalSrv_SrwZlcSkladniki", new object[0]);
             return ((string)(results[0]));
@@ -661,7 +629,7 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://kwronski.hostingasp.pl/GalSrv_SrwZlcSkladnikiPotwierdzenie", RequestNamespace="http://kwronski.hostingasp.pl/", ResponseNamespace="http://kwronski.hostingasp.pl/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://91.196.9.105/GalSrv_SrwZlcSkladnikiPotwierdzenie", RequestNamespace="http://91.196.9.105/", ResponseNamespace="http://91.196.9.105/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GalSrv_SrwZlcSkladnikiPotwierdzenie(string listaPotwierdzonych) {
             this.Invoke("GalSrv_SrwZlcSkladnikiPotwierdzenie", new object[] {
                         listaPotwierdzonych});
@@ -746,32 +714,6 @@ namespace AplikacjaSerwisowaUsluga.kwronski {
         private object[] results;
         
         internal lamaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
-    public delegate void XMLZwrocListeKntKartyCompletedEventHandler(object sender, XMLZwrocListeKntKartyCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class XMLZwrocListeKntKartyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal XMLZwrocListeKntKartyCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

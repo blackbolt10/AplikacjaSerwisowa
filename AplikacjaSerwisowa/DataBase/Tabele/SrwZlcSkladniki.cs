@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System;
+using System.Data;
+using System.IO;
+using SQLite;
 
-namespace WebApplication
+namespace AplikacjaSerwisowa
 {
-    class SrwZlcSkladniki
+    [Table("SrwZlcSkladniki")]
+    public class SrwZlcSkladniki
     {
+        [PrimaryKey, AutoIncrement, Column("_Id")]
         public Int32 ID { get; set; }
         public Int32 SZS_Id { get; set; }
         public Int32 SZS_SZNId { get; set; }

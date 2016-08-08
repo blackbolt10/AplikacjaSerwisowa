@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://kwronski.hostingasp.pl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://kwronski.hostingasp.pl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://91.196.9.105/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://91.196.9.105/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <s:schema elementFormDefault="qualified" targetNamespace="http://kwronski.hostingasp.pl/">
+    <s:schema elementFormDefault="qualified" targetNamespace="http://91.196.9.105/">
       <s:element name="SayHelloToLame">
         <s:complexType>
           <s:sequence>
@@ -23,16 +23,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="lamaResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="XMLZwrocListeKntKarty">
-        <s:complexType />
-      </s:element>
-      <s:element name="XMLZwrocListeKntKartyResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="XMLZwrocListeKntKartyResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -231,12 +221,6 @@
   <wsdl:message name="lamaSoapOut">
     <wsdl:part name="parameters" element="tns:lamaResponse" />
   </wsdl:message>
-  <wsdl:message name="XMLZwrocListeKntKartySoapIn">
-    <wsdl:part name="parameters" element="tns:XMLZwrocListeKntKarty" />
-  </wsdl:message>
-  <wsdl:message name="XMLZwrocListeKntKartySoapOut">
-    <wsdl:part name="parameters" element="tns:XMLZwrocListeKntKartyResponse" />
-  </wsdl:message>
   <wsdl:message name="ZwrocListeKntAdresySoapIn">
     <wsdl:part name="parameters" element="tns:ZwrocListeKntAdresy" />
   </wsdl:message>
@@ -343,10 +327,6 @@
   <wsdl:message name="lamaHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
-  <wsdl:message name="XMLZwrocListeKntKartyHttpGetIn" />
-  <wsdl:message name="XMLZwrocListeKntKartyHttpGetOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
   <wsdl:message name="ZwrocListeKntAdresyHttpGetIn" />
   <wsdl:message name="ZwrocListeKntAdresyHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
@@ -429,10 +409,6 @@
   </wsdl:message>
   <wsdl:message name="lamaHttpPostIn" />
   <wsdl:message name="lamaHttpPostOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
-  <wsdl:message name="XMLZwrocListeKntKartyHttpPostIn" />
-  <wsdl:message name="XMLZwrocListeKntKartyHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="ZwrocListeKntAdresyHttpPostIn" />
@@ -519,11 +495,6 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca tajny kod!</wsdl:documentation>
       <wsdl:input message="tns:lamaSoapIn" />
       <wsdl:output message="tns:lamaSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="XMLZwrocListeKntKarty">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Wstępnie do usunięcia</wsdl:documentation>
-      <wsdl:input message="tns:XMLZwrocListeKntKartySoapIn" />
-      <wsdl:output message="tns:XMLZwrocListeKntKartySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie KntAdresy</wsdl:documentation>
@@ -617,11 +588,6 @@
       <wsdl:input message="tns:lamaHttpGetIn" />
       <wsdl:output message="tns:lamaHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="XMLZwrocListeKntKarty">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Wstępnie do usunięcia</wsdl:documentation>
-      <wsdl:input message="tns:XMLZwrocListeKntKartyHttpGetIn" />
-      <wsdl:output message="tns:XMLZwrocListeKntKartyHttpGetOut" />
-    </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie KntAdresy</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeKntAdresyHttpGetIn" />
@@ -714,11 +680,6 @@
       <wsdl:input message="tns:lamaHttpPostIn" />
       <wsdl:output message="tns:lamaHttpPostOut" />
     </wsdl:operation>
-    <wsdl:operation name="XMLZwrocListeKntKarty">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Wstępnie do usunięcia</wsdl:documentation>
-      <wsdl:input message="tns:XMLZwrocListeKntKartyHttpPostIn" />
-      <wsdl:output message="tns:XMLZwrocListeKntKartyHttpPostOut" />
-    </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie KntAdresy</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeKntAdresyHttpPostIn" />
@@ -803,7 +764,7 @@
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="SayHelloToLame">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/SayHelloToLame" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/SayHelloToLame" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -812,16 +773,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="lama">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/lama" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="XMLZwrocListeKntKarty">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/XMLZwrocListeKntKarty" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/lama" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -830,7 +782,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeKntAdresy" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/ZwrocListeKntAdresy" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -839,7 +791,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntKarty">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeKntKarty" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/ZwrocListeKntKarty" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -848,7 +800,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychNaglowki" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/ZwrocListeZlecenSerwisowychNaglowki" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -857,7 +809,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychCzynnosci" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/ZwrocListeZlecenSerwisowychCzynnosci" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -866,7 +818,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychSkladniki" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/ZwrocListeZlecenSerwisowychSkladniki" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -875,7 +827,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeTwrKarty">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeTwrKarty" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/ZwrocListeTwrKarty" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -884,7 +836,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcNag">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcNag" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/synchronizujSrwZlcNag" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -893,7 +845,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcCzynnosci">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcCzynnosci" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/synchronizujSrwZlcCzynnosci" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -902,7 +854,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcSkladniki">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcSkladniki" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/synchronizujSrwZlcSkladniki" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -911,7 +863,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeOperatorow">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeOperatorow" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/ZwrocListeOperatorow" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -920,7 +872,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcNag">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/GalSrv_SrwZlcNag" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcNag" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -929,7 +881,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcNagPotwierdzenie">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/GalSrv_SrwZlcNagPotwierdzenie" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcNagPotwierdzenie" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -938,7 +890,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcCzynnosci">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/GalSrv_SrwZlcCzynnosci" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcCzynnosci" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -947,7 +899,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcCzynnosciPotwierdzenie">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/GalSrv_SrwZlcCzynnosciPotwierdzenie" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcCzynnosciPotwierdzenie" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -956,7 +908,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcSkladniki">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/GalSrv_SrwZlcSkladniki" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcSkladniki" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -965,7 +917,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcSkladnikiPotwierdzenie">
-      <soap:operation soapAction="http://kwronski.hostingasp.pl/GalSrv_SrwZlcSkladnikiPotwierdzenie" style="document" />
+      <soap:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcSkladnikiPotwierdzenie" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -977,7 +929,7 @@
   <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="SayHelloToLame">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/SayHelloToLame" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/SayHelloToLame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -986,16 +938,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="lama">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/lama" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="XMLZwrocListeKntKarty">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/XMLZwrocListeKntKarty" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/lama" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1004,7 +947,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeKntAdresy" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeKntAdresy" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1013,7 +956,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntKarty">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeKntKarty" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeKntKarty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1022,7 +965,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychNaglowki" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeZlecenSerwisowychNaglowki" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1031,7 +974,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychCzynnosci" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeZlecenSerwisowychCzynnosci" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1040,7 +983,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeZlecenSerwisowychSkladniki" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeZlecenSerwisowychSkladniki" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1049,7 +992,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeTwrKarty">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeTwrKarty" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeTwrKarty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1058,7 +1001,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcNag">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcNag" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/synchronizujSrwZlcNag" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1067,7 +1010,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcCzynnosci">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcCzynnosci" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/synchronizujSrwZlcCzynnosci" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1076,7 +1019,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcSkladniki">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/synchronizujSrwZlcSkladniki" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/synchronizujSrwZlcSkladniki" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1085,7 +1028,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeOperatorow">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/ZwrocListeOperatorow" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeOperatorow" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1094,7 +1037,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcNag">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/GalSrv_SrwZlcNag" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcNag" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1103,7 +1046,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcNagPotwierdzenie">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/GalSrv_SrwZlcNagPotwierdzenie" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcNagPotwierdzenie" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1112,7 +1055,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcCzynnosci">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/GalSrv_SrwZlcCzynnosci" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcCzynnosci" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1121,7 +1064,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcCzynnosciPotwierdzenie">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/GalSrv_SrwZlcCzynnosciPotwierdzenie" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcCzynnosciPotwierdzenie" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1130,7 +1073,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcSkladniki">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/GalSrv_SrwZlcSkladniki" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcSkladniki" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1139,7 +1082,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcSkladnikiPotwierdzenie">
-      <soap12:operation soapAction="http://kwronski.hostingasp.pl/GalSrv_SrwZlcSkladnikiPotwierdzenie" style="document" />
+      <soap12:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcSkladnikiPotwierdzenie" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1161,15 +1104,6 @@
     </wsdl:operation>
     <wsdl:operation name="lama">
       <http:operation location="/lama" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="XMLZwrocListeKntKarty">
-      <http:operation location="/XMLZwrocListeKntKarty" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -1333,15 +1267,6 @@
     </wsdl:operation>
     <wsdl:operation name="lama">
       <http:operation location="/lama" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="XMLZwrocListeKntKarty">
-      <http:operation location="/XMLZwrocListeKntKarty" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

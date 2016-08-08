@@ -65,7 +65,7 @@ namespace AplikacjaSerwisowaUsluga
             {
                 eventLog.WriteEntry("przed naglowkami");
                 String SrwZlcNagString = kwronskiService.GalSrv_SrwZlcNag();
-                List<SrwZlcNagGalStruct> records = JsonConvert.DeserializeObject<List<SrwZlcNagGalStruct>>(SrwZlcNagString);
+                List<SrwZlcNag> records = JsonConvert.DeserializeObject<List<SrwZlcNag>>(SrwZlcNagString);
                 eventLog.WriteEntry("Pobrane naglowki:" + records.Count.ToString());
 
                 if(records!=null)
@@ -141,7 +141,7 @@ namespace AplikacjaSerwisowaUsluga
                 eventLog.WriteEntry("przed pobieraniem skladnikow");
                 String SrwZlcCzynnosciString = kwronskiService.GalSrv_SrwZlcCzynnosci();
                 eventLog.WriteEntry("skladnikow pobrane:" + SrwZlcCzynnosciString);
-                List<SrwZlcCzynnosciGalStruct> records = JsonConvert.DeserializeObject<List<SrwZlcCzynnosciGalStruct>>(SrwZlcCzynnosciString);
+                List<SrwZlcCzynnosci> records = JsonConvert.DeserializeObject<List<SrwZlcCzynnosci>>(SrwZlcCzynnosciString);
                 eventLog.WriteEntry("skladnikow pobrane rekordy:" + records.Count.ToString());
 
                 if(records != null)
@@ -152,7 +152,7 @@ namespace AplikacjaSerwisowaUsluga
 
                         if(wynik)
                         {
-                            listaZapisanych.Add(records[i].szc_Id);
+                            listaZapisanych.Add(records[i].SZC_Id);
                         }
                     }
                     if(listaZapisanych.Count > 0)
@@ -175,7 +175,7 @@ namespace AplikacjaSerwisowaUsluga
                 eventLog.WriteEntry("przed pobieraniem skladnikow");
                 String SrwZlcSkladnikiString = kwronskiService.GalSrv_SrwZlcSkladniki();
                 eventLog.WriteEntry("skladniki pobrane:" + SrwZlcSkladnikiString);
-                List<SrwZlcSkladnikiGalStruct> records = JsonConvert.DeserializeObject<List<SrwZlcSkladnikiGalStruct>>(SrwZlcSkladnikiString);
+                List<SrwZlcSkladniki> records = JsonConvert.DeserializeObject<List<SrwZlcSkladniki>>(SrwZlcSkladnikiString);
 
                 if(records != null)
                 {
@@ -185,7 +185,7 @@ namespace AplikacjaSerwisowaUsluga
 
                         if(wynik)
                         {
-                            listaZapisanych.Add(records[i].szs_Id);
+                            listaZapisanych.Add(records[i].SZS_Id);
                         }
                     }
                     if(listaZapisanych.Count > 0)
@@ -256,25 +256,23 @@ namespace AplikacjaSerwisowaUsluga
 
         private void wprowadzWierszSrwZlcNagDoXL(DataRow dataRow)
         {
-            SrwZlcNagStruct srwZlcNag = new SrwZlcNagStruct();
+            SrwZlcNag srwZlcNag = new SrwZlcNag();
             try
             {
-                Int32 Id = Convert.ToInt32(dataRow["GZN_Id"].ToString());
-                Int32 KntNumer = Convert.ToInt32(dataRow["GZN_KntNumer"].ToString());
-                Int32 KntTyp = Convert.ToInt32(dataRow["GZN_KntTyp"].ToString());
-                Int32 KnANumer = Convert.ToInt32(dataRow["GZN_KnANumer"].ToString());
-                Int32 KnATyp = Convert.ToInt32(dataRow["GZN_KnATyp"].ToString());
-                Int32 KndNumer = Convert.ToInt32(dataRow["GZN_KndNumer"].ToString());
-                Int32 KndTyp = Convert.ToInt32(dataRow["GZN_KndTyp"].ToString());
-                Int32 KnPNumer = Convert.ToInt32(dataRow["GZN_KnPNumer"].ToString());
-                Int32 KnPTyp = Convert.ToInt32(dataRow["GZN_KnPTyp"].ToString());
-                
-                DateTime DataWystawienia = wygenerujDate(dataRow["GZN_DataWystawienia"].ToString());
-                DateTime DataRozpoczecia = wygenerujDate(dataRow["GZN_DataRozpoczecia"].ToString());
+                Int32 GZN_Id = Convert.ToInt32(dataRow["GZN_Id"].ToString());
+                Int32 GZN_Synchronizacja = Convert.ToInt32(dataRow["GZN_Synchronizacja"].ToString());
+                Int32 GZN_KntNumer = Convert.ToInt32(dataRow["GZN_KntNumer"].ToString());
+                Int32 GZN_KntTyp = Convert.ToInt32(dataRow["GZN_KntTyp"].ToString());
+                Int32 GZN_KnANumer = Convert.ToInt32(dataRow["GZN_KnANumer"].ToString());
+                Int32 GZN_KnATyp = Convert.ToInt32(dataRow["GZN_KnATyp"].ToString());
+                String GZN_Dokument = dataRow["GZN_Dokument"].ToString();
+                String GZN_DataWystawienia = dataRow["GZN_DataWystawienia"].ToString();
+                String GZN_DataRozpoczecia = dataRow["GZN_DataRozpoczecia"].ToString();
+                String GZN_Stan = dataRow["GZN_Stan"].ToString();
+                String GZN_Status = dataRow["GZN_Status"].ToString();
+                String GZN_Opis = dataRow["GZN_Opis"].ToString();
 
-                String Opis = dataRow["GZN_Opis"].ToString();
-
-                srwZlcNag = new SrwZlcNagStruct(Id, KntTyp, KntNumer, KnATyp, KnANumer, KndTyp, KndNumer, KnPTyp, KnPNumer, DataWystawienia, DataRozpoczecia, Opis);
+                srwZlcNag = new SrwZlcNag(GZN_Id, GZN_Synchronizacja, GZN_KntTyp, GZN_KntNumer, GZN_KnATyp, GZN_KnANumer, GZN_Dokument, GZN_DataWystawienia, GZN_DataRozpoczecia, GZN_Stan, GZN_Status, GZN_Opis);
             }
             catch(Exception exc)
             {
@@ -333,20 +331,21 @@ namespace AplikacjaSerwisowaUsluga
 
         private Boolean wprowadzWierszSrwZlcCzynnosci(DataRow dataRow)
         {
-            SrwZlcCzynnosciStruct srwZlcCzynnosc = new SrwZlcCzynnosciStruct();
+            SrwZlcCzynnosci srwZlcCzynnosc = new SrwZlcCzynnosci();
             try
             {
-                Int32 Id = Convert.ToInt32(dataRow["GZC_Id"].ToString());
-                Int32 Sync = Convert.ToInt32(dataRow["GZC_Sync"].ToString());
-                Int32 GZNId = Convert.ToInt32(dataRow["GZC_GZNId"].ToString());
-                Int32 Pozycja = Convert.ToInt32(dataRow["GZC_Pozycja"].ToString());
-                Int32 TwrTyp = Convert.ToInt32(dataRow["GZC_TwrTyp"].ToString());
-                Int32 TwrNumer = Convert.ToInt32(dataRow["GZC_TwrNumer"].ToString());
+                Int32 GZC_GZCId = Convert.ToInt32(dataRow["GZC_GZCId"].ToString());
+                Int32 GZC_GZNId = Convert.ToInt32(dataRow["GZC_GZNId"].ToString());
+                Int32 GZC_GZUId = Convert.ToInt32(dataRow["GZC_GZUId"].ToString());
+                Int32 GZC_Synchronizacja = Convert.ToInt32(dataRow["GZC_Synchronizacja"].ToString());
+                Int32 GZC_Pozycja = Convert.ToInt32(dataRow["GZC_Pozycja"].ToString());
+                Int32 GZC_TwrTyp = Convert.ToInt32(dataRow["GZC_TwrTyp"].ToString());
+                Int32 GZC_TwrNumer = Convert.ToInt32(dataRow["GZC_TwrNumer"].ToString());
+                String GZC_TwrNazwa = dataRow["GZC_TwrNazwa"].ToString();
+                Double GZC_Ilosc = Convert.ToDouble(dataRow["GZC_Ilosc"].ToString());
+                String GZC_Opis = dataRow["GZC_Opis"].ToString();
 
-                String Ilosc = dataRow["GZC_Ilosc"].ToString();
-                String Opis = dataRow["GZC_Opis"].ToString();
-
-                srwZlcCzynnosc = new SrwZlcCzynnosciStruct(Id, Sync, GZNId, Pozycja, TwrTyp, TwrNumer, Ilosc, Opis);
+                srwZlcCzynnosc = new SrwZlcCzynnosci(GZC_GZCId, GZC_GZNId, GZC_GZUId, GZC_Synchronizacja, GZC_Pozycja, GZC_TwrTyp, GZC_TwrNumer, GZC_TwrNazwa, GZC_Ilosc, GZC_Opis);
             }
             catch(Exception exc)
             {
@@ -387,20 +386,20 @@ namespace AplikacjaSerwisowaUsluga
 
         private bool wprowadzWierszSrwZlcSkladniki(DataRow dataRow)
         {
-            SrwZlcSkladnikiStruct srwZlcSkladnik = new SrwZlcSkladnikiStruct();
+            SrwZlcSkladniki srwZlcSkladnik = new SrwZlcSkladniki();
             try
             {
-                Int32 Id = Convert.ToInt32(dataRow["GZS_Id"].ToString());
-                Int32 Sync = Convert.ToInt32(dataRow["GZS_Sync"].ToString());
-                Int32 GZNId = Convert.ToInt32(dataRow["GZS_GZNId"].ToString());
-                Int32 Pozycja = Convert.ToInt32(dataRow["GZS_Pozycja"].ToString());
-                Int32 TwrTyp = Convert.ToInt32(dataRow["GZS_TwrTyp"].ToString());
-                Int32 TwrNumer = Convert.ToInt32(dataRow["GZS_TwrNumer"].ToString());
+                Int32 GZS_GZSId = Convert.ToInt32(dataRow["GZS_GZSId"].ToString());
+                Int32 GZS_GZNId = Convert.ToInt32(dataRow["GZS_GZNId"].ToString());
+                Int32 GZS_Synchronizacja = Convert.ToInt32(dataRow["GZS_Synchronizacja"].ToString());
+                Int32 GZS_Pozycja = Convert.ToInt32(dataRow["GZS_Pozycja"].ToString());
+                Int32 GZS_TwrTyp = Convert.ToInt32(dataRow["GZS_TwrTyp"].ToString());
+                Int32 GZS_TwrNumer = Convert.ToInt32(dataRow["GZS_TwrNumer"].ToString());
+                String GZS_TwrNazwa= dataRow["GZS_TwrNazwa"].ToString();
+                Double GZS_Ilosc = Convert.ToDouble(dataRow["GZS_Ilosc"].ToString());
+                String GZS_Opis = dataRow["GZS_Opis"].ToString();
 
-                String Ilosc = dataRow["GZS_Ilosc"].ToString();
-                String Opis = dataRow["GZS_Opis"].ToString();
-
-                srwZlcSkladnik = new SrwZlcSkladnikiStruct(Id, Sync, GZNId, Pozycja, TwrTyp, TwrNumer, Ilosc, Opis);
+                srwZlcSkladnik = new SrwZlcSkladniki(GZS_GZSId, GZS_GZNId, GZS_Synchronizacja, GZS_Pozycja, GZS_Ilosc, GZS_TwrNumer, GZS_TwrTyp, GZS_TwrNazwa, GZS_Opis);
             }
             catch(Exception exc)
             {
@@ -420,7 +419,7 @@ namespace AplikacjaSerwisowaUsluga
             }
         }
 
-        public Int32 wygenerujZlcSrwNag(SrwZlcNagStruct srwZlcNag)
+        public Int32 wygenerujZlcSrwNag(SrwZlcNag srwZlcNag)
         {
             int wynik = -100;
             try
@@ -436,19 +435,19 @@ namespace AplikacjaSerwisowaUsluga
                 DokumentXLSerwisNagInfo.Miesiac = srwZlcNag.DataWystawienia.Month;
                 */
 
-                DokumentXLSerwisNagInfo.Opis = srwZlcNag.Opis;
+                DokumentXLSerwisNagInfo.Opis = srwZlcNag.SZN_Opis;
 
-                DokumentXLSerwisNagInfo.KntTyp = srwZlcNag.KntTyp;
-                DokumentXLSerwisNagInfo.KntNumer = srwZlcNag.KntNumer;
+                DokumentXLSerwisNagInfo.KntTyp = srwZlcNag.SZN_KntTyp;
+                DokumentXLSerwisNagInfo.KntNumer = srwZlcNag.SZN_KntNumer;
 
-                DokumentXLSerwisNagInfo.KnATyp = srwZlcNag.KnATyp;
-                DokumentXLSerwisNagInfo.KnANumer = srwZlcNag.KnANumer;
+                DokumentXLSerwisNagInfo.KnATyp = srwZlcNag.SZN_KnATyp;
+                DokumentXLSerwisNagInfo.KnANumer = srwZlcNag.SZN_KnANumer;
 
-                DokumentXLSerwisNagInfo.KnDTyp = srwZlcNag.KndTyp;
-                DokumentXLSerwisNagInfo.KnDNumer = srwZlcNag.KndNumer;
+                DokumentXLSerwisNagInfo.KnDTyp = srwZlcNag.SZN_KntTyp;
+                DokumentXLSerwisNagInfo.KnDNumer = srwZlcNag.SZN_KntTyp;
 
-                DokumentXLSerwisNagInfo.KnPTyp = srwZlcNag.KnPTyp;
-                DokumentXLSerwisNagInfo.KnPNumer = srwZlcNag.KnPNumer;
+                DokumentXLSerwisNagInfo.KnPTyp = srwZlcNag.SZN_KntTyp;
+                DokumentXLSerwisNagInfo.KnPNumer = srwZlcNag.SZN_KntNumer;
 
                 wynik = cdn_api.cdn_api.XLNoweZlecenieSerwis(Sesja, ref IDDokSrwZlcNag, DokumentXLSerwisNagInfo);
             }
@@ -476,64 +475,64 @@ namespace AplikacjaSerwisowaUsluga
             return date;
         }
 
-        private int wygenerujZlcSrwCzynnosc(SrwZlcCzynnosciStruct srwZlcCzynnosc)
+        private int wygenerujZlcSrwCzynnosc(SrwZlcCzynnosci srwZlcCzynnosc)
         {
             int wynik = -100;
             try
             {
                 XLSerwisCzynnoscInfo_20162 DokumentXLSerwisCzynnoscInfo = new XLSerwisCzynnoscInfo_20162();
                 DokumentXLSerwisCzynnoscInfo.Wersja = 20162;
-                DokumentXLSerwisCzynnoscInfo.TwrTyp = srwZlcCzynnosc.GZC_TwrTyp;
-                DokumentXLSerwisCzynnoscInfo.TwrNumer = srwZlcCzynnosc.GZC_TwrNumer;
-                DokumentXLSerwisCzynnoscInfo.Ilosc = srwZlcCzynnosc.GZC_Ilosc;
-                DokumentXLSerwisCzynnoscInfo.Opis = srwZlcCzynnosc.GZC_Opis;
+                DokumentXLSerwisCzynnoscInfo.TwrTyp = srwZlcCzynnosc.SZC_TwrTyp;
+                DokumentXLSerwisCzynnoscInfo.TwrNumer = srwZlcCzynnosc.SZC_TwrNumer;
+                DokumentXLSerwisCzynnoscInfo.Ilosc = srwZlcCzynnosc.SZC_Ilosc.ToString();
+                DokumentXLSerwisCzynnoscInfo.Opis = srwZlcCzynnosc.SZC_Opis;
 
 
                 wynik = cdn_api.cdn_api.XLDodajCzynnoscSerwis(ref IDDokSrwZlcNag, DokumentXLSerwisCzynnoscInfo);
             }
             catch(Exception exc)
             {
-                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwCzynnosc(" + srwZlcCzynnosc.GZC_Id + "):\n" + exc.Message, EventLogEntryType.Error);
+                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwCzynnosc(" + srwZlcCzynnosc.SZC_Id + "):\n" + exc.Message, EventLogEntryType.Error);
             }
 
             if(wynik != 0)
             {
-                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwCzynnosc(" + srwZlcCzynnosc.GZC_Id + ") result = " + wynik, EventLogEntryType.Error);
+                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwCzynnosc(" + srwZlcCzynnosc.SZC_Id + ") result = " + wynik, EventLogEntryType.Error);
             }
             else
             {
-                eventLog.WriteEntry("wygenerujZlcSrwCzynnosc(" + srwZlcCzynnosc.GZC_Id + ") iddokumentu = " + IDDokSrwZlcNag);
+                eventLog.WriteEntry("wygenerujZlcSrwCzynnosc(" + srwZlcCzynnosc.SZC_Id + ") iddokumentu = " + IDDokSrwZlcNag);
             }
             return wynik;
         }
 
-        private int wygenerujZlcSrwSkladnik(SrwZlcSkladnikiStruct srwZlcSkladnik)
+        private int wygenerujZlcSrwSkladnik(SrwZlcSkladniki srwZlcSkladnik)
         {
             int wynik = -100;
             try
             {
                 XLSerwisSkladnikInfo_20162 XlSerwisSkladnikInfo = new XLSerwisSkladnikInfo_20162();
                 XlSerwisSkladnikInfo.Wersja = 20162;
-                XlSerwisSkladnikInfo.TwrTyp = srwZlcSkladnik.GZS_TwrTyp;
-                XlSerwisSkladnikInfo.TwrNumer = srwZlcSkladnik.GZS_TwrNumer;
-                XlSerwisSkladnikInfo.Ilosc = srwZlcSkladnik.GZS_Ilosc;
-                XlSerwisSkladnikInfo.Opis = srwZlcSkladnik.GZS_Opis;
+                XlSerwisSkladnikInfo.TwrTyp = srwZlcSkladnik.SZS_TwrTyp;
+                XlSerwisSkladnikInfo.TwrNumer = srwZlcSkladnik.SZS_TwrNumer;
+                XlSerwisSkladnikInfo.Ilosc = srwZlcSkladnik.SZS_Ilosc.ToString();
+                XlSerwisSkladnikInfo.Opis = srwZlcSkladnik.SZS_Opis;
 
 
                 wynik = cdn_api.cdn_api.XLDodajSkladnikSerwis(ref IDDokSrwZlcNag, XlSerwisSkladnikInfo);
             }
             catch(Exception exc)
             {
-                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwSkladnik(" + srwZlcSkladnik.GZS_Id + "):\n" + exc.Message, EventLogEntryType.Error);
+                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwSkladnik(" + srwZlcSkladnik.SZS_Id + "):\n" + exc.Message, EventLogEntryType.Error);
             }
 
             if(wynik != 0)
             {
-                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwSkladnik(" + srwZlcSkladnik.GZS_Id + ") result = " + wynik, EventLogEntryType.Error);
+                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwSkladnik(" + srwZlcSkladnik.SZS_Id + ") result = " + wynik, EventLogEntryType.Error);
             }
             else
             {
-                eventLog.WriteEntry("wygenerujZlcSrwSkladnik(" + srwZlcSkladnik.GZS_Id + ") iddokumentu = " + IDDokSrwZlcNag);
+                eventLog.WriteEntry("wygenerujZlcSrwSkladnik(" + srwZlcSkladnik.SZS_Id + ") iddokumentu = " + IDDokSrwZlcNag);
             }
             return wynik;
         }

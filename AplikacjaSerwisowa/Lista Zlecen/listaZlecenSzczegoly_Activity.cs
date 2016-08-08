@@ -107,7 +107,7 @@ namespace AplikacjaSerwisowa
 
         private void ustawDaneZlecenia()
         {
-            SrwZlcNagTable szn = null;
+            SrwZlcNag szn = null;
             DBRepository dbr = new DBRepository();
 
             try
@@ -121,11 +121,11 @@ namespace AplikacjaSerwisowa
 
             if(szn != null)
             {
-                dataNumerTextView.Text = szn.SZN_DataWystawienia.Split(' ')[0] + " - " + szn.Dokument;
+                dataNumerTextView.Text = szn.SZN_DataWystawienia.Split(' ')[0] + " - " + szn.SZN_Dokument;
                 stanTextView.Text = szn.SZN_Stan;
-                if(szn.SZN_AdWNumer != 0)
+                if(szn.SZN_KnANumer != 0)
                 {
-                    kontrahentDocelowyTextView.Text = dbr.kntAdresy_GetRecord(szn.SZN_AdWNumer.ToString()).Kna_nazwa1;
+                    kontrahentDocelowyTextView.Text = dbr.kntAdresy_GetRecord(szn.SZN_KnANumer.ToString()).Kna_nazwa1;
                 }
                 else
                 {
@@ -133,14 +133,14 @@ namespace AplikacjaSerwisowa
                 }
                 if(szn.SZN_KntNumer != 0)
                 {
-                    kontrahentGlownyTextView.Text = dbr.kntKarty_GetRecord(szn.SZN_KnDNumer.ToString()).Knt_nazwa1;
+                    kontrahentGlownyTextView.Text = dbr.kntKarty_GetRecord(szn.SZN_KntNumer.ToString()).Knt_nazwa1;
                 }
                 else
                 {
                     kontrahentGlownyTextView.Text = "{brak kontrahenta g³ównego}";
                 }
                 listaZlecenSzczegoly_Activity.knt_GidNumer = szn.SZN_KntNumer.ToString();
-                listaZlecenSzczegoly_Activity.szn_AdWNumer = szn.SZN_AdWNumer.ToString();
+                listaZlecenSzczegoly_Activity.szn_AdWNumer = szn.SZN_KnANumer.ToString();
             }
         }
 
@@ -419,7 +419,7 @@ namespace AplikacjaSerwisowa
         private Context kontekst;
 
         private string szn_ID;
-        List<SrwZlcCzynnosciTable> szcList;
+        List<SrwZlcCzynnosci> szcList;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -440,7 +440,7 @@ namespace AplikacjaSerwisowa
         private listaZlecenSzczegolyCzynnosci_ListViewAdapter przygotujAdapter()
         {
             listaZlecenSzczegolyCzynnosci_ListViewAdapter adapter = null;
-            szcList = new List<SrwZlcCzynnosciTable>();
+            szcList = new List<SrwZlcCzynnosci>();
 
 
             try
@@ -478,7 +478,7 @@ namespace AplikacjaSerwisowa
         private Context kontekst;
 
         private string szn_ID;
-        List<SrwZlcSkladnikiTable> szcList;
+        List<SrwZlcSkladniki> szcList;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -499,7 +499,7 @@ namespace AplikacjaSerwisowa
         private listaZlecenSzczegolySkladniki_ListViewAdapter przygotujAdapter()
         {
             listaZlecenSzczegolySkladniki_ListViewAdapter adapter = null;
-            szcList = new List<SrwZlcSkladnikiTable>();
+            szcList = new List<SrwZlcSkladniki>();
 
             try
             {

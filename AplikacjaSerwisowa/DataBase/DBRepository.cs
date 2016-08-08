@@ -4,6 +4,14 @@ using System.Data;
 using System.IO;
 using SQLite;
 
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Net;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+
 namespace AplikacjaSerwisowa
 {
     public class DBRepository
@@ -13,7 +21,7 @@ namespace AplikacjaSerwisowa
 
         public DBRepository()
         {
-            dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+            dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
             db = new SQLiteConnection(dbPath);
         }
 
@@ -26,7 +34,7 @@ namespace AplikacjaSerwisowa
             try
             {
                 output += "creating database if it doesn't exist";
-                String dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ormdemo.db3");
+                String dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
 
                 SQLiteConnection db = new SQLiteConnection(dbPath);
                 output = "Database created...";
@@ -498,29 +506,29 @@ namespace AplikacjaSerwisowa
             *---------------------------------------------------------------------------------
         */
 
-        public string stworzSrwZlcNagTable()
+        public string stworzSrwZlcNag()
         {
             String output = "";
             try
             {
                 try
                 {
-                    db.DropTable<SrwZlcNagTable>();
+                    db.DropTable<SrwZlcNag>();
                 }
                 catch(Exception) { }
 
-                db.CreateTable<SrwZlcNagTable>();
+                db.CreateTable<SrwZlcNag>();
 
-                output = "Tabela SrwZlcNagTable zosta³a stworzona...";
+                output = "Tabela SrwZlcNag zosta³a stworzona...";
             }
             catch(Exception exc)
             {
-                output = "DBRepository.stworzSrwZlcNagTable() Error: " + exc.Message;
+                output = "DBRepository.stworzSrwZlcNag() Error: " + exc.Message;
             }
 
             return output;
         }
-        public String SrwZlcNag_InsertRecord(SrwZlcNagTable item)
+        public String SrwZlcNag_InsertRecord(SrwZlcNag item)
         {
             String output = "";
             try
@@ -540,28 +548,28 @@ namespace AplikacjaSerwisowa
         {
             for(int i = 0; i < wyslaneNagList.Count; i++)
             {
-                var result = db.Query<SrwZlcNagTable>("UPDATE SrwZlcNagTable SET SZN_Synchronizacja = " + wslaneParam.ToString() + " where SZN_Id = " + wyslaneNagList[i].ToString());
+                var result = db.Query<SrwZlcNag>("UPDATE SrwZlcNag SET SZN_Synchronizacja = " + wslaneParam.ToString() + " where SZN_Id = " + wyslaneNagList[i].ToString());
             }
         }
-        public void SrwZlcNag_OznaczWyslane(List<SrwZlcNagTable> wyslaneNagList, int wslaneParam)
+        public void SrwZlcNag_OznaczWyslane(List<SrwZlcNag> wyslaneNagList, int wslaneParam)
         {
             for(int i = 0; i < wyslaneNagList.Count; i++)
             {
-                var result = db.Query<SrwZlcNagTable>("UPDATE SrwZlcNagTable SET SZN_Synchronizacja = " + wslaneParam.ToString() + " where SZN_Id = " + wyslaneNagList[i].SZN_Id.ToString());
+                var result = db.Query<SrwZlcNag>("UPDATE SrwZlcNag SET SZN_Synchronizacja = " + wslaneParam.ToString() + " where SZN_Id = " + wyslaneNagList[i].SZN_Id.ToString());
             }
         }
 
-        public SrwZlcNagTable SrwZlcNag_GetRecordGetRecord(String szn_ID)
+        public SrwZlcNag SrwZlcNag_GetRecordGetRecord(String szn_ID)
         {
-            SrwZlcNagTable output = null;
+            SrwZlcNag output = null;
 
             if(szn_ID.Length > 0)
             {
                 try
                 {
-                    var table = db.Table<SrwZlcNagTable>();
+                    var table = db.Table<SrwZlcNag>();
 
-                    var result = db.Query<SrwZlcNagTable>("select * from SrwZlcNagTable where SZN_Id = " + szn_ID);
+                    var result = db.Query<SrwZlcNag>("select * from SrwZlcNag where SZN_Id = " + szn_ID);
 
                     if(result.Count > 0)
                     {
@@ -576,13 +584,13 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public List<SrwZlcNagTable> SrwZlcNagSynchronizacja(int synchParam)
+        public List<SrwZlcNag> SrwZlcNagSynchronizacja(int synchParam)
         {
-            List<SrwZlcNagTable> srwZlcNagList = new List<SrwZlcNagTable>();
+            List<SrwZlcNag> srwZlcNagList = new List<SrwZlcNag>();
 
             try
             {
-                srwZlcNagList = db.Query<SrwZlcNagTable>("select * from SrwZlcNagTable where  SZN_Synchronizacja = " + synchParam.ToString());
+                srwZlcNagList = db.Query<SrwZlcNag>("select * from SrwZlcNag where  SZN_Synchronizacja = " + synchParam.ToString());
             }
             catch(Exception)
             {
@@ -591,40 +599,28 @@ namespace AplikacjaSerwisowa
             //return lamadodajDosynch();
         }
 
-        private List<SrwZlcNagTable> lamadodajDosynch()
+        public int SrwZlcNagGenerujNoweID(Context kontekst)
         {
-            List<SrwZlcNagTable> wynik = new List<SrwZlcNagTable>();
-
-            for(int i = 0; i < 3; i++)
-            {
-                SrwZlcNagTable lama = new SrwZlcNagTable("test", -1 - i, 0, 0,0, 0, 0, 0, 0, 0, "2015-01-10", "2015-01-10", "", "", "", "lama!" + i, 1);
-                wynik.Add(lama);
-            }
-            return wynik;
-        }
-
-        public int SrwZlcNagGenerujNoweID()
-        {
-            int result = 0;
-            List<int> wynik = new List<int>();
-
-            try
-            {
-                wynik = db.Query<int>("select min(SZN_Id) as min from SrwZlcNagTable");
-            }
-            catch(Exception)
-            {}
-
-            if(wynik.Count==1)
-            {
-                if(wynik[0]<= result)
-                {
-                    result = wynik[0]-1;
-                }
-            }
+            int result = Odczyt(kontekst);
+            result = result - 1;
+            zapisDanychDoPamieciUrzadzenia(result, kontekst);
+            
             return result;
         }
+        private void zapisDanychDoPamieciUrzadzenia(Int32 SZN_ID, Context kontekst)
+        {
+            ISharedPreferences prefs = Android.Preferences.PreferenceManager.GetDefaultSharedPreferences(kontekst);
+            ISharedPreferencesEditor editor = prefs.Edit();
+            editor.PutInt("SZN_ID", SZN_ID);
+            editor.Apply();
+        }
+        private Int32 Odczyt(Context kontekst)
+        {
+            ISharedPreferences prefs = Android.Preferences.PreferenceManager.GetDefaultSharedPreferences(kontekst);
 
+            Int32 result = prefs.GetInt("SZN_ID", -1);
+            return result;
+        }
 
 
 
@@ -637,20 +633,20 @@ namespace AplikacjaSerwisowa
             *---------------------------------------------------------------------------------
         */
 
-        public string stworzSrwZlcCzynnosciTable()
+        public string stworzSrwZlcCzynnosci()
         {
             String output = "";
             try
             {
                 try
                 {
-                    db.DropTable<SrwZlcCzynnosciTable>();
+                    db.DropTable<SrwZlcCzynnosci>();
                 }
                 catch(Exception) { }
 
-                db.CreateTable<SrwZlcCzynnosciTable>();
+                db.CreateTable<SrwZlcCzynnosci>();
 
-                output = "Tabela SrwZlcCzynnosciTable zosta³a stworzona...";
+                output = "Tabela SrwZlcCzynnosci zosta³a stworzona...";
             }
             catch(Exception exc)
             {
@@ -660,7 +656,7 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public String SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosciTable item)
+        public String SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosci item)
         {
             String output = "";
             try
@@ -676,30 +672,33 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public List<SrwZlcCzynnosciTable> SrwZlcCzynnosci_GetRecords(String szn_ID)
+        public List<SrwZlcCzynnosci> SrwZlcCzynnosci_GetRecords(String szn_ID)
         {
-            List<SrwZlcCzynnosciTable> output = new List<SrwZlcCzynnosciTable>();
+            List<SrwZlcCzynnosci> output = new List<SrwZlcCzynnosci>();
 
             if(szn_ID.Length > 0)
             {
                 try
                 {
-                    var table = db.Table<SrwZlcCzynnosciTable>();
+                    var table = db.Table<SrwZlcCzynnosci>();
 
-                    var result = db.Query<SrwZlcCzynnosciTable>("select * from SrwZlcCzynnosciTable where szc_sznId = " + szn_ID);
+                    var result = db.Query<SrwZlcCzynnosci>("select * from SrwZlcCzynnosci where szc_sznId = " + szn_ID);
 
                     if(result.Count > 0)
                     {
                         for(int i=0;i<result.Count;i++)
                         {
-                            SrwZlcCzynnosciTable szc = new SrwZlcCzynnosciTable();
-                            szc.szc_Id = result[i].szc_Id;
-                            szc.szc_Ilosc = result[i].szc_Ilosc;
-                            szc.szc_Pozycja = result[i].szc_Pozycja;
-                            szc.szc_sznId = result[i].szc_sznId;
-                            szc.Twr_Jm = result[i].Twr_Jm;
-                            szc.szc_TwrNazwa = result[i].szc_TwrNazwa;
-                            szc.Twr_Kod = result[i].Twr_Kod;
+                            SrwZlcCzynnosci szc = new SrwZlcCzynnosci();
+                            szc.SZC_Id = result[i].SZC_Id;
+                            szc.SZC_SZNId = result[i].SZC_SZNId;
+                            szc.SZC_SZUId = result[i].SZC_SZUId;
+                            szc.SZC_Synchronizacja = result[i].SZC_Synchronizacja;
+                            szc.SZC_Pozycja = result[i].SZC_Pozycja;
+                            szc.SZC_TwrTyp = result[i].SZC_TwrTyp;
+                            szc.SZC_TwrNumer = result[i].SZC_TwrNumer;
+                            szc.SZC_TwrNazwa = result[i].SZC_TwrNazwa;
+                            szc.SZC_Ilosc = result[i].SZC_Ilosc;
+                            szc.SZC_Opis = result[i].SZC_Opis;
 
                             output.Add(szc);
                         }
@@ -713,20 +712,20 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public List<SrwZlcCzynnosciTable> SrwZlcCzynnosciTable_GetFilteredRecords(String filtr)
+        public List<SrwZlcCzynnosci> SrwZlcCzynnosci_GetFilteredRecords(String filtr)
         {
-            List<SrwZlcCzynnosciTable> output = new List<SrwZlcCzynnosciTable>();
+            List<SrwZlcCzynnosci> output = new List<SrwZlcCzynnosci>();
             try
             {
-                var table = db.Table<SrwZlcCzynnosciTable>();
-                string zapytanie = "select * from SrwZlcCzynnosciTable ";
+                var table = db.Table<SrwZlcCzynnosci>();
+                string zapytanie = "select * from SrwZlcCzynnosci ";
 
                 if(filtr != "")
                 {
                     zapytanie += "where szc_TwrNazwa like '%" + filtr + "%' or Twr_Kod like '%" + filtr + "%'";
                 }
 
-                var result = db.Query<SrwZlcCzynnosciTable>(zapytanie);
+                var result = db.Query<SrwZlcCzynnosci>(zapytanie);
 
                 for(int i = 0; i < result.Count; i++)
                 {
@@ -740,13 +739,13 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public List<SrwZlcCzynnosciTable> SrwZlcCzynnosciSynchronizacja(int synchParam)
+        public List<SrwZlcCzynnosci> SrwZlcCzynnosciSynchronizacja(int synchParam)
         {
-            List<SrwZlcCzynnosciTable> srwZlcCzynnosciList = new List<SrwZlcCzynnosciTable>();
+            List<SrwZlcCzynnosci> srwZlcCzynnosciList = new List<SrwZlcCzynnosci>();
 
             try
             {
-                srwZlcCzynnosciList = db.Query<SrwZlcCzynnosciTable>("select * from SrwZlcCzynnosciTable where SZC_Synchronizacja = " + synchParam.ToString());
+                srwZlcCzynnosciList = db.Query<SrwZlcCzynnosci>("select * from SrwZlcCzynnosci where SZC_Synchronizacja = " + synchParam.ToString());
             }
             catch(Exception)
             {}
@@ -758,14 +757,14 @@ namespace AplikacjaSerwisowa
         {
             for(int i = 0; i < wyslaneCzynnosciList.Count; i++)
             {
-                var result = db.Query<SrwZlcCzynnosciTable>("UPDATE SrwZlcCzynnosciTable SET SZC_Synchronizacja = " + wslaneParam.ToString() + " where szc_sznId = " + wyslaneCzynnosciList[i].ToString());
+                var result = db.Query<SrwZlcCzynnosci>("UPDATE SrwZlcCzynnosci SET SZC_Synchronizacja = " + wslaneParam.ToString() + " where szc_sznId = " + wyslaneCzynnosciList[i].ToString());
             }
         }
-        public void SrwZlcCzynnosci_OznaczWyslane(List<SrwZlcCzynnosciTable> wyslaneCzynnosciList, int wslaneParam)
+        public void SrwZlcCzynnosci_OznaczWyslane(List<SrwZlcCzynnosci> wyslaneCzynnosciList, int wslaneParam)
         {
             for(int i = 0; i < wyslaneCzynnosciList.Count; i++)
             {
-                var result = db.Query<SrwZlcCzynnosciTable>("UPDATE SrwZlcCzynnosciTable SET SZC_Synchronizacja = " + wslaneParam.ToString() + " where szc_sznId = " + wyslaneCzynnosciList[i].szc_Id.ToString());
+                var result = db.Query<SrwZlcCzynnosci>("UPDATE SrwZlcCzynnosci SET SZC_Synchronizacja = " + wslaneParam.ToString() + " where szc_sznId = " + wyslaneCzynnosciList[i].SZC_Id.ToString());
             }
         }
 
@@ -784,29 +783,29 @@ namespace AplikacjaSerwisowa
             *---------------------------------------------------------------------------------
         */
 
-        public string stworzSrwZlcSkladnikiTable()
+        public string stworzSrwZlcSkladniki()
         {
             String output = "";
             try
             {
                 try
                 {
-                    db.DropTable<SrwZlcSkladnikiTable>();
+                    db.DropTable<SrwZlcSkladniki>();
                 }
                 catch(Exception) { }
 
-                db.CreateTable<SrwZlcSkladnikiTable>();
+                db.CreateTable<SrwZlcSkladniki>();
 
-                output = "Tabela SrwZlcSkladnikiTable zosta³a stworzona...";
+                output = "Tabela SrwZlcSkladniki zosta³a stworzona...";
             }
             catch(Exception exc)
             {
-                output = "DBRepository.stworzSrwZlcSkladnikiTable() Error: " + exc.Message;
+                output = "DBRepository.stworzSrwZlcSkladniki() Error: " + exc.Message;
             }
 
             return output;
         }
-        public String SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiTable item)
+        public String SrwZlcSkladniki_InsertRecord(SrwZlcSkladniki item)
         {
             String output = "";
             try
@@ -822,30 +821,32 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public List<SrwZlcSkladnikiTable> SrwZlcSkladniki_GetRecords(String szn_ID)
+        public List<SrwZlcSkladniki> SrwZlcSkladniki_GetRecords(String szn_ID)
         {
-            List<SrwZlcSkladnikiTable> output = new List<SrwZlcSkladnikiTable>();
+            List<SrwZlcSkladniki> output = new List<SrwZlcSkladniki>();
 
             if(szn_ID.Length > 0)
             {
                 try
                 {
-                    var table = db.Table<SrwZlcSkladnikiTable>();
+                    var table = db.Table<SrwZlcSkladniki>();
 
-                    var result = db.Query<SrwZlcSkladnikiTable>("select * from SrwZlcSkladnikiTable where szs_sznId = " + szn_ID);
+                    var result = db.Query<SrwZlcSkladniki>("select * from SrwZlcSkladniki where szs_sznId = " + szn_ID);
 
                     if(result.Count > 0)
                     {
                         for(int i = 0; i < result.Count; i++)
                         {
-                            SrwZlcSkladnikiTable szs = new SrwZlcSkladnikiTable();
-                            szs.szs_Id = result[i].szs_Id;
-                            szs.szs_Ilosc = result[i].szs_Ilosc;
-                            szs.szs_Pozycja = result[i].szs_Pozycja;
-                            szs.szs_sznId = result[i].szs_sznId;
-                            szs.Twr_Jm = result[i].Twr_Jm;
-                            szs.szs_TwrNazwa = result[i].szs_TwrNazwa;
-                            szs.Twr_Kod = result[i].Twr_Kod;
+                            SrwZlcSkladniki szs = new SrwZlcSkladniki();
+                            szs.SZS_Id = result[i].SZS_Id;
+                            szs.SZS_SZNId = result[i].SZS_SZNId;
+                            szs.SZS_Synchronizacja = result[i].SZS_Synchronizacja;
+                            szs.SZS_Pozycja = result[i].SZS_Pozycja;
+                            szs.SZS_Ilosc = result[i].SZS_Ilosc;
+                            szs.SZS_TwrNumer = result[i].SZS_TwrNumer;
+                            szs.SZS_TwrTyp = result[i].SZS_TwrTyp;
+                            szs.SZS_TwrNazwa = result[i].SZS_TwrNazwa;
+                            szs.SZS_Opis = result[i].SZS_Opis;
 
                             output.Add(szs);
                         }
@@ -859,20 +860,20 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public List<SrwZlcSkladnikiTable> SrwZlcSkladnikiTable_GetFilteredRecords(String filtr)
+        public List<SrwZlcSkladniki> SrwZlcSkladniki_GetFilteredRecords(String filtr)
         {
-            List<SrwZlcSkladnikiTable> output = new List<SrwZlcSkladnikiTable>();
+            List<SrwZlcSkladniki> output = new List<SrwZlcSkladniki>();
             try
             {
-                var table = db.Table<SrwZlcSkladnikiTable>();
-                string zapytanie = "select * from SrwZlcSkladnikiTable ";
+                var table = db.Table<SrwZlcSkladniki>();
+                string zapytanie = "select * from SrwZlcSkladniki ";
 
                 if(filtr != "")
                 {
                     zapytanie += "where szs_TwrNazwa like '%" + filtr + "%' or Twr_Kod like '%" + filtr + "%'";
                 }
 
-                var result = db.Query<SrwZlcSkladnikiTable>(zapytanie);
+                var result = db.Query<SrwZlcSkladniki>(zapytanie);
 
                 for(int i = 0; i < result.Count; i++)
                 {
@@ -886,13 +887,13 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public List<SrwZlcSkladnikiTable> SrwZlcSkladnikiSynchronizacja(int synchParam)
+        public List<SrwZlcSkladniki> SrwZlcSkladnikiSynchronizacja(int synchParam)
         {
-            List<SrwZlcSkladnikiTable> srwZlcSkladnikiList = new List<SrwZlcSkladnikiTable>();
+            List<SrwZlcSkladniki> srwZlcSkladnikiList = new List<SrwZlcSkladniki>();
 
             try
             {
-                srwZlcSkladnikiList = db.Query<SrwZlcSkladnikiTable>("select * from SrwZlcSkladnikiTable where SZS_Synchronizacja = " + synchParam.ToString());
+                srwZlcSkladnikiList = db.Query<SrwZlcSkladniki>("select * from SrwZlcSkladniki where SZS_Synchronizacja = " + synchParam.ToString());
             }
             catch(Exception)
             { }
@@ -904,14 +905,14 @@ namespace AplikacjaSerwisowa
         {
             for(int i = 0; i < wyslaneSkladnikiList.Count; i++)
             {
-                var result = db.Query<SrwZlcSkladnikiTable>("UPDATE SrwZlcSkladnikiTable SET SZs_Synchronizacja = " + wslaneParam.ToString() + " where szs_sznId = " + wyslaneSkladnikiList[i].ToString());
+                var result = db.Query<SrwZlcSkladniki>("UPDATE SrwZlcSkladniki SET SZs_Synchronizacja = " + wslaneParam.ToString() + " where szs_sznId = " + wyslaneSkladnikiList[i].ToString());
             }
         }
-        public void SrwZlcSkladniki_OznaczWyslane(List<SrwZlcSkladnikiTable> wyslaneSkladnikiList, int wslaneParam)
+        public void SrwZlcSkladniki_OznaczWyslane(List<SrwZlcSkladniki> wyslaneSkladnikiList, int wslaneParam)
         {
             for(int i = 0; i < wyslaneSkladnikiList.Count; i++)
             {
-                var result = db.Query<SrwZlcSkladnikiTable>("UPDATE SrwZlcSkladnikiTable SET SZs_Synchronizacja = " + wslaneParam.ToString() + " where szs_sznId = " + wyslaneSkladnikiList[i].szs_Id.ToString());
+                var result = db.Query<SrwZlcSkladniki>("UPDATE SrwZlcSkladniki SET SZs_Synchronizacja = " + wslaneParam.ToString() + " where szs_sznId = " + wyslaneSkladnikiList[i].SZS_Id.ToString());
             }
         }
 
@@ -1008,9 +1009,30 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
+        public TwrKartyTable TwrKartyTable_GetRecord(int TwrNumer)
+        {
+            TwrKartyTable output = new TwrKartyTable();
+
+            try
+            {
+                var table = db.Table<TwrKartyTable>();
+                string zapytanie = "select * from TwrKartyTable where Twr_GIDNumer = "+TwrNumer.ToString();
+
+                var result = db.Query<TwrKartyTable>(zapytanie);
+
+                if (result.Count == 1)
+                {
+                    output = result[0];
+                }
+            }
+            catch(Exception)
+            {
+            }
+            return output;
+        }
 
 
-        
+
 
 
 

@@ -38,14 +38,12 @@ namespace AplikacjaSerwisowaUsluga
 
         public void Start()
         {
-            synchronizacjaWebService();
+            //synchronizacjaWebService();
 
             int wynik = APIConnect();
             if(wynik == 0)
             {
                 dodajSrwZlcNag();
-
-
 
                 ApiLogout();
             }
@@ -261,10 +259,10 @@ namespace AplikacjaSerwisowaUsluga
             {
                 Int32 GZN_Id = Convert.ToInt32(dataRow["GZN_Id"].ToString());
                 Int32 GZN_Synchronizacja = Convert.ToInt32(dataRow["GZN_Synchronizacja"].ToString());
-                Int32 GZN_KntNumer = Convert.ToInt32(dataRow["GZN_KntNumer"].ToString());
                 Int32 GZN_KntTyp = Convert.ToInt32(dataRow["GZN_KntTyp"].ToString());
-                Int32 GZN_KnANumer = Convert.ToInt32(dataRow["GZN_KnANumer"].ToString());
+                Int32 GZN_KntNumer = Convert.ToInt32(dataRow["GZN_KntNumer"].ToString());
                 Int32 GZN_KnATyp = Convert.ToInt32(dataRow["GZN_KnATyp"].ToString());
+                Int32 GZN_KnANumer = Convert.ToInt32(dataRow["GZN_KnANumer"].ToString());
                 String GZN_Dokument = dataRow["GZN_Dokument"].ToString();
                 String GZN_DataWystawienia = dataRow["GZN_DataWystawienia"].ToString();
                 String GZN_DataRozpoczecia = dataRow["GZN_DataRozpoczecia"].ToString();
@@ -312,6 +310,7 @@ namespace AplikacjaSerwisowaUsluga
 
         private Boolean dodajSrwZlcCzynnosci(int GZN_Id)
         {
+            eventLog.WriteEntry("dodajSrwZlcCzynnosci("+ GZN_Id + ")");
             DataTable noweCzynnosciZleceniaDT = dbSERWIS.pobierzSrwZlcCzynnosci(GZN_Id);
             Boolean wynikDodawaniaCzynnosci = true;
 
@@ -331,6 +330,7 @@ namespace AplikacjaSerwisowaUsluga
 
         private Boolean wprowadzWierszSrwZlcCzynnosci(DataRow dataRow)
         {
+            eventLog.WriteEntry("wprowadzWierszSrwZlcCzynnosci()");
             SrwZlcCzynnosci srwZlcCzynnosc = new SrwZlcCzynnosci();
             try
             {
@@ -367,6 +367,7 @@ namespace AplikacjaSerwisowaUsluga
 
         private Boolean dodajSrwZlcSkladniki(int GZN_Id)
         {
+            eventLog.WriteEntry("dodajSrwZlcSkladniki("+ GZN_Id+")");
             DataTable noweSkladnikiZleceniaDT = dbSERWIS.pobierzSrwZlcSkladniki(GZN_Id);
             Boolean wynikDodawaniaSkladnikow = true;
 
@@ -386,6 +387,7 @@ namespace AplikacjaSerwisowaUsluga
 
         private bool wprowadzWierszSrwZlcSkladniki(DataRow dataRow)
         {
+            eventLog.WriteEntry("wprowadzWierszSrwZlcSkladniki()");
             SrwZlcSkladniki srwZlcSkladnik = new SrwZlcSkladniki();
             try
             {
@@ -421,6 +423,7 @@ namespace AplikacjaSerwisowaUsluga
 
         public Int32 wygenerujZlcSrwNag(SrwZlcNag srwZlcNag)
         {
+            eventLog.WriteEntry("wygenerujZlcSrwNag("+ srwZlcNag.SZN_Id+ ")");
             int wynik = -100;
             try
             {
@@ -443,40 +446,34 @@ namespace AplikacjaSerwisowaUsluga
                 DokumentXLSerwisNagInfo.KnATyp = srwZlcNag.SZN_KnATyp;
                 DokumentXLSerwisNagInfo.KnANumer = srwZlcNag.SZN_KnANumer;
 
-                DokumentXLSerwisNagInfo.KnDTyp = srwZlcNag.SZN_KntTyp;
-                DokumentXLSerwisNagInfo.KnDNumer = srwZlcNag.SZN_KntTyp;
+                //DokumentXLSerwisNagInfo.KnDTyp = srwZlcNag.SZN_KntTyp;
+                //DokumentXLSerwisNagInfo.KnDNumer = srwZlcNag.SZN_KntNumer;
 
-                DokumentXLSerwisNagInfo.KnPTyp = srwZlcNag.SZN_KntTyp;
-                DokumentXLSerwisNagInfo.KnPNumer = srwZlcNag.SZN_KntNumer;
+               // DokumentXLSerwisNagInfo.KnPTyp = srwZlcNag.SZN_KntTyp;
+               // DokumentXLSerwisNagInfo.KnPNumer = srwZlcNag.SZN_KntNumer;
 
                 wynik = cdn_api.cdn_api.XLNoweZlecenieSerwis(Sesja, ref IDDokSrwZlcNag, DokumentXLSerwisNagInfo);
             }
             catch(Exception exc)
             {
-                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwNag(" + srwZlcNag.Id + "):\n" + exc.Message, EventLogEntryType.Error);
+                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwNag(" + srwZlcNag.SZN_Id + "):\n" + exc.Message, EventLogEntryType.Error);
             }
 
             if(wynik != 0)
             {
-                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwNag(" + srwZlcNag.Id + ") result = " + wynik, EventLogEntryType.Error);
+                eventLog.WriteEntry("Wystąpił błąd funkcji wygenerujZlcSrwNag(" + srwZlcNag.SZN_Id + ") result = " + wynik, EventLogEntryType.Error);
             }
             else
             {
-                eventLog.WriteEntry("wygenerujZlcSrwNag(" + srwZlcNag.Id + ") iddokumentu = " + IDDokSrwZlcNag);
+                eventLog.WriteEntry("wygenerujZlcSrwNag(" + srwZlcNag.SZN_Id + ") iddokumentu = " + IDDokSrwZlcNag);
             }
 
             return wynik;
         }
-        
-        private DateTime wygenerujDate(String data)
-        {
-            String[] dataArray = data.Split('-', ':', ' ');
-            DateTime date = new DateTime(Convert.ToInt32(dataArray[0]), Convert.ToInt32(dataArray[1]), Convert.ToInt32(dataArray[2]));
-            return date;
-        }
 
         private int wygenerujZlcSrwCzynnosc(SrwZlcCzynnosci srwZlcCzynnosc)
         {
+            eventLog.WriteEntry("wygenerujZlcSrwCzynnosc(" + srwZlcCzynnosc.SZC_Id + ")");
             int wynik = -100;
             try
             {
@@ -508,6 +505,7 @@ namespace AplikacjaSerwisowaUsluga
 
         private int wygenerujZlcSrwSkladnik(SrwZlcSkladniki srwZlcSkladnik)
         {
+            eventLog.WriteEntry("wygenerujZlcSrwSkladnik(" + srwZlcSkladnik.ID + ")");
             int wynik = -100;
             try
             {
@@ -537,16 +535,9 @@ namespace AplikacjaSerwisowaUsluga
             return wynik;
         }
 
-
-        private int zwrocDateClarion(DateTime dataRozpoczecia)
-        {
-            DateTime date = new DateTime(1800, 12, 28, 0, 0, 0);
-            int daysSince = (DateTime.Now - date).Days;
-            return daysSince;
-        }
-
         public Int32 zmknijZlcSrwNag(Int32 srwZlcNagId)
         {
+            eventLog.WriteEntry("zmknijZlcSrwNag(" + srwZlcNagId + ")");
             cdn_api.XLZamkniecieSerwisNagInfo_20162 XLZamkniecieSerwisNagInfo = new XLZamkniecieSerwisNagInfo_20162();
             XLZamkniecieSerwisNagInfo.Wersja = 20162;
             XLZamkniecieSerwisNagInfo.TrybZamkniecia = 6;

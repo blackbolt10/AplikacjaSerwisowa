@@ -46,16 +46,27 @@ namespace AplikacjaSerwisowa
 
         private void synchronizacja()
         {
-            progressDialog = new ProgressDialog(this);
-            progressDialog.SetTitle("Synchronizacja");
-            progressDialog.SetMessage("Proszê czekaæ...");
-            progressDialog.SetProgressStyle(ProgressDialogStyle.Horizontal);
-            progressDialog.SetCancelable(false);
-            progressDialog.Max = 1;
-            progressDialog.Show();
+            ConnectivityManager connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
+            NetworkInfo activeConnection = connectivityManager.ActiveNetworkInfo;
+            bool isOnline = (activeConnection != null) && activeConnection.IsConnected;
 
-            Thread th = new Thread(() => pobieranieOperatorowWebService());
-            th.Start();
+            if(isOnline)
+            {
+                progressDialog = new ProgressDialog(this);
+                progressDialog.SetTitle("Synchronizacja");
+                progressDialog.SetMessage("Proszê czekaæ...");
+                progressDialog.SetProgressStyle(ProgressDialogStyle.Horizontal);
+                progressDialog.SetCancelable(false);
+                progressDialog.Max = 1;
+                progressDialog.Show();
+
+                Thread th = new Thread(() => pobieranieOperatorowWebService());
+                th.Start();
+            }
+            else
+            {
+                Toast.MakeText(this, "Brak dostêpu do internetu", ToastLength.Short).Show();
+            }
         }
 
         private void pobieranieOperatorowWebService()

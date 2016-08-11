@@ -19,7 +19,7 @@ namespace WebApplication
 
         public DataBase()
         {
-            int hasloSRV = 4;                               //modyfikacja hasel do bazy
+            int hasloSRV = 2;                               //modyfikacja hasel do bazy
 
             podlaczDoBazyDanych(hasloSRV);
             podlaczDoBazyDanychSerwis(hasloSRV);

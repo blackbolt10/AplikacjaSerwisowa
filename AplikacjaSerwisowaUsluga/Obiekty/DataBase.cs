@@ -30,6 +30,7 @@ namespace AplikacjaSerwisowaUsluga
                 String hasloBD = haslo.GetInstancePassword();
                 String instancja = haslo.GetInstanceName();
                 String bazaDanych = "";
+
                 if(baza == 0)
                 {
                     bazaDanych = haslo.GetDataBaseNameXL();

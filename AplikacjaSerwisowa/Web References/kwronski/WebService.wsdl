@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://91.196.9.105/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://91.196.9.105/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="galsoftsrv" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="galsoftsrv" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <s:schema elementFormDefault="qualified" targetNamespace="http://91.196.9.105/">
+    <s:schema elementFormDefault="qualified" targetNamespace="galsoftsrv">
       <s:element name="SayHelloToLame">
         <s:complexType>
           <s:sequence>
@@ -764,7 +764,7 @@
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="SayHelloToLame">
-      <soap:operation soapAction="http://91.196.9.105/SayHelloToLame" style="document" />
+      <soap:operation soapAction="galsoftsrv/SayHelloToLame" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -773,7 +773,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="lama">
-      <soap:operation soapAction="http://91.196.9.105/lama" style="document" />
+      <soap:operation soapAction="galsoftsrv/lama" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -782,7 +782,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
-      <soap:operation soapAction="http://91.196.9.105/ZwrocListeKntAdresy" style="document" />
+      <soap:operation soapAction="galsoftsrv/ZwrocListeKntAdresy" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -791,7 +791,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntKarty">
-      <soap:operation soapAction="http://91.196.9.105/ZwrocListeKntKarty" style="document" />
+      <soap:operation soapAction="galsoftsrv/ZwrocListeKntKarty" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -800,7 +800,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
-      <soap:operation soapAction="http://91.196.9.105/ZwrocListeZlecenSerwisowychNaglowki" style="document" />
+      <soap:operation soapAction="galsoftsrv/ZwrocListeZlecenSerwisowychNaglowki" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -809,7 +809,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
-      <soap:operation soapAction="http://91.196.9.105/ZwrocListeZlecenSerwisowychCzynnosci" style="document" />
+      <soap:operation soapAction="galsoftsrv/ZwrocListeZlecenSerwisowychCzynnosci" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -818,7 +818,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
-      <soap:operation soapAction="http://91.196.9.105/ZwrocListeZlecenSerwisowychSkladniki" style="document" />
+      <soap:operation soapAction="galsoftsrv/ZwrocListeZlecenSerwisowychSkladniki" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -827,7 +827,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeTwrKarty">
-      <soap:operation soapAction="http://91.196.9.105/ZwrocListeTwrKarty" style="document" />
+      <soap:operation soapAction="galsoftsrv/ZwrocListeTwrKarty" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -836,7 +836,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcNag">
-      <soap:operation soapAction="http://91.196.9.105/synchronizujSrwZlcNag" style="document" />
+      <soap:operation soapAction="galsoftsrv/synchronizujSrwZlcNag" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -845,7 +845,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcCzynnosci">
-      <soap:operation soapAction="http://91.196.9.105/synchronizujSrwZlcCzynnosci" style="document" />
+      <soap:operation soapAction="galsoftsrv/synchronizujSrwZlcCzynnosci" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -854,7 +854,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcSkladniki">
-      <soap:operation soapAction="http://91.196.9.105/synchronizujSrwZlcSkladniki" style="document" />
+      <soap:operation soapAction="galsoftsrv/synchronizujSrwZlcSkladniki" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -863,7 +863,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeOperatorow">
-      <soap:operation soapAction="http://91.196.9.105/ZwrocListeOperatorow" style="document" />
+      <soap:operation soapAction="galsoftsrv/ZwrocListeOperatorow" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -872,7 +872,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcNag">
-      <soap:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcNag" style="document" />
+      <soap:operation soapAction="galsoftsrv/GalSrv_SrwZlcNag" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -881,7 +881,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcNagPotwierdzenie">
-      <soap:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcNagPotwierdzenie" style="document" />
+      <soap:operation soapAction="galsoftsrv/GalSrv_SrwZlcNagPotwierdzenie" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -890,7 +890,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcCzynnosci">
-      <soap:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcCzynnosci" style="document" />
+      <soap:operation soapAction="galsoftsrv/GalSrv_SrwZlcCzynnosci" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -899,7 +899,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcCzynnosciPotwierdzenie">
-      <soap:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcCzynnosciPotwierdzenie" style="document" />
+      <soap:operation soapAction="galsoftsrv/GalSrv_SrwZlcCzynnosciPotwierdzenie" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -908,7 +908,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcSkladniki">
-      <soap:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcSkladniki" style="document" />
+      <soap:operation soapAction="galsoftsrv/GalSrv_SrwZlcSkladniki" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -917,7 +917,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcSkladnikiPotwierdzenie">
-      <soap:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcSkladnikiPotwierdzenie" style="document" />
+      <soap:operation soapAction="galsoftsrv/GalSrv_SrwZlcSkladnikiPotwierdzenie" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -929,7 +929,7 @@
   <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="SayHelloToLame">
-      <soap12:operation soapAction="http://91.196.9.105/SayHelloToLame" style="document" />
+      <soap12:operation soapAction="galsoftsrv/SayHelloToLame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -938,7 +938,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="lama">
-      <soap12:operation soapAction="http://91.196.9.105/lama" style="document" />
+      <soap12:operation soapAction="galsoftsrv/lama" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -947,7 +947,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntAdresy">
-      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeKntAdresy" style="document" />
+      <soap12:operation soapAction="galsoftsrv/ZwrocListeKntAdresy" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -956,7 +956,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeKntKarty">
-      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeKntKarty" style="document" />
+      <soap12:operation soapAction="galsoftsrv/ZwrocListeKntKarty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -965,7 +965,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychNaglowki">
-      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeZlecenSerwisowychNaglowki" style="document" />
+      <soap12:operation soapAction="galsoftsrv/ZwrocListeZlecenSerwisowychNaglowki" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -974,7 +974,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychCzynnosci">
-      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeZlecenSerwisowychCzynnosci" style="document" />
+      <soap12:operation soapAction="galsoftsrv/ZwrocListeZlecenSerwisowychCzynnosci" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -983,7 +983,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeZlecenSerwisowychSkladniki">
-      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeZlecenSerwisowychSkladniki" style="document" />
+      <soap12:operation soapAction="galsoftsrv/ZwrocListeZlecenSerwisowychSkladniki" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -992,7 +992,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeTwrKarty">
-      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeTwrKarty" style="document" />
+      <soap12:operation soapAction="galsoftsrv/ZwrocListeTwrKarty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1001,7 +1001,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcNag">
-      <soap12:operation soapAction="http://91.196.9.105/synchronizujSrwZlcNag" style="document" />
+      <soap12:operation soapAction="galsoftsrv/synchronizujSrwZlcNag" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1010,7 +1010,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcCzynnosci">
-      <soap12:operation soapAction="http://91.196.9.105/synchronizujSrwZlcCzynnosci" style="document" />
+      <soap12:operation soapAction="galsoftsrv/synchronizujSrwZlcCzynnosci" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1019,7 +1019,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="synchronizujSrwZlcSkladniki">
-      <soap12:operation soapAction="http://91.196.9.105/synchronizujSrwZlcSkladniki" style="document" />
+      <soap12:operation soapAction="galsoftsrv/synchronizujSrwZlcSkladniki" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1028,7 +1028,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeOperatorow">
-      <soap12:operation soapAction="http://91.196.9.105/ZwrocListeOperatorow" style="document" />
+      <soap12:operation soapAction="galsoftsrv/ZwrocListeOperatorow" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1037,7 +1037,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcNag">
-      <soap12:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcNag" style="document" />
+      <soap12:operation soapAction="galsoftsrv/GalSrv_SrwZlcNag" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1046,7 +1046,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcNagPotwierdzenie">
-      <soap12:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcNagPotwierdzenie" style="document" />
+      <soap12:operation soapAction="galsoftsrv/GalSrv_SrwZlcNagPotwierdzenie" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1055,7 +1055,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcCzynnosci">
-      <soap12:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcCzynnosci" style="document" />
+      <soap12:operation soapAction="galsoftsrv/GalSrv_SrwZlcCzynnosci" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1064,7 +1064,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcCzynnosciPotwierdzenie">
-      <soap12:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcCzynnosciPotwierdzenie" style="document" />
+      <soap12:operation soapAction="galsoftsrv/GalSrv_SrwZlcCzynnosciPotwierdzenie" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1073,7 +1073,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcSkladniki">
-      <soap12:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcSkladniki" style="document" />
+      <soap12:operation soapAction="galsoftsrv/GalSrv_SrwZlcSkladniki" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1082,7 +1082,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcSkladnikiPotwierdzenie">
-      <soap12:operation soapAction="http://91.196.9.105/GalSrv_SrwZlcSkladnikiPotwierdzenie" style="document" />
+      <soap12:operation soapAction="galsoftsrv/GalSrv_SrwZlcSkladnikiPotwierdzenie" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1419,16 +1419,16 @@
   </wsdl:binding>
   <wsdl:service name="WebService">
     <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
-      <soap:address location="http://91.196.9.105:8080/WebService.asmx" />
+      <soap:address location="http://91.196.8.98:8080/WebService.asmx" />
     </wsdl:port>
     <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
-      <soap12:address location="http://91.196.9.105:8080/WebService.asmx" />
+      <soap12:address location="http://91.196.8.98:8080/WebService.asmx" />
     </wsdl:port>
     <wsdl:port name="WebServiceHttpGet" binding="tns:WebServiceHttpGet">
-      <http:address location="http://91.196.9.105:8080/WebService.asmx" />
+      <http:address location="http://91.196.8.98:8080/WebService.asmx" />
     </wsdl:port>
     <wsdl:port name="WebServiceHttpPost" binding="tns:WebServiceHttpPost">
-      <http:address location="http://91.196.9.105:8080/WebService.asmx" />
+      <http:address location="http://91.196.8.98:8080/WebService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

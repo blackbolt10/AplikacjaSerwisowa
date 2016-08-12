@@ -281,28 +281,28 @@ namespace AplikacjaSerwisowaUsluga
 
             if(wynikWgenerujZlcSrwNag == 0)
             {
-                Boolean wynikDodawaniaCzynnosci = dodajSrwZlcCzynnosci(srwZlcNag.Id);
-                Boolean wynikDodawaniaSkladnikow = dodajSrwZlcSkladniki(srwZlcNag.Id);
+                Boolean wynikDodawaniaCzynnosci = dodajSrwZlcCzynnosci(srwZlcNag.SZN_Id);
+                Boolean wynikDodawaniaSkladnikow = dodajSrwZlcSkladniki(srwZlcNag.SZN_Id);
 
                 if(wynikDodawaniaCzynnosci && wynikDodawaniaSkladnikow)
                 {
-                    Int32 wynikZmknijZlcSrwNag = zmknijZlcSrwNag(srwZlcNag.Id);
+                    Int32 wynikZmknijZlcSrwNag = zmknijZlcSrwNag(srwZlcNag.SZN_Id);
 
                     if(wynikZmknijZlcSrwNag == 0)
                     {
-                        dbSERWIS.oznaczZlcSrwNagZapisany(srwZlcNag.Id, 1);
+                        dbSERWIS.oznaczZlcSrwNagZapisany(srwZlcNag.SZN_Id, 1);
                     }
                 }
                 else
                 {
                     if(!wynikDodawaniaCzynnosci)
                     {
-                        dbSERWIS.oznaczZlcSrwNagZapisany(srwZlcNag.Id, 2);
+                        dbSERWIS.oznaczZlcSrwNagZapisany(srwZlcNag.SZN_Id, 2);
                     }
 
                     if(!wynikDodawaniaSkladnikow)
                     {
-                        dbSERWIS.oznaczZlcSrwNagZapisany(srwZlcNag.Id, 3);
+                        dbSERWIS.oznaczZlcSrwNagZapisany(srwZlcNag.SZN_Id, 3);
                     }
                 }
             }
@@ -322,6 +322,10 @@ namespace AplikacjaSerwisowaUsluga
                     {
                         wynikDodawaniaCzynnosci = false;
                         break;
+                    }
+                    else
+                    {
+                        dbSERWIS.oznaczZlcSrwCzynnosciZapisany(GZN_Id, 1);
                     }
                 }
             }
@@ -379,6 +383,10 @@ namespace AplikacjaSerwisowaUsluga
                     {
                         wynikDodawaniaSkladnikow = false;
                         break;
+                    }
+                    else
+                    {
+                        dbSERWIS.oznaczZlcSrwSkladnikiZapisany(GZN_Id, 1);
                     }
                 }
             }

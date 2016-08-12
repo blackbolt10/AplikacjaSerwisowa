@@ -53,7 +53,7 @@ namespace AplikacjaSerwisowa
                 {
                     string wynik = "";
                     string kntKartaNazwa = pobierzInformacjeOKntKarta(item.SZN_KntNumer);
-                    string kntAdresNazwa = pobierzInformacjeOKntKarta(item.SZN_KnANumer);
+                    string kntAdresNazwa = pobierzInformacjeOKntAdres(item.SZN_KnANumer);
 
                     if(kntKartaNazwa!="" && kntAdresNazwa!="")
                     {
@@ -122,24 +122,39 @@ namespace AplikacjaSerwisowa
             {
                 Toast.MakeText(this, "B³¹d listaZlecen_Activity.pobierzInformacjeOKntKarta():\n" + exc.Message, ToastLength.Short);
             }
-            return kntKarta.Knt_nazwa1;
+
+            if(kntKarta != null)
+            {
+                return kntKarta.Knt_nazwa1;
+            }
+            else
+            {
+                return "";
+            }
         }
 
-        private String pobierzInformacjeOKntAdres(int sZN_AdWNumer)
+        private String pobierzInformacjeOKntAdres(int SZN_KnaNumer)
         {
             KntAdresyTable kntAdres = new KntAdresyTable();
 
             try
             {
                 DBRepository dbr = new DBRepository();
-                kntAdres = dbr.kntAdresy_GetRecord(sZN_AdWNumer.ToString());
+                kntAdres = dbr.kntAdresy_GetRecord(SZN_KnaNumer.ToString());
             }
             catch(Exception exc)
             {
                 Toast.MakeText(this, "B³¹d listaZlecen_Activity.pobierzInformacjeOKntAdres():\n" + exc.Message, ToastLength.Short);
             }
-           
-            return kntAdres.Kna_nazwa1;
+
+            if(kntAdres != null)
+            {
+                return kntAdres.Kna_nazwa1;
+            }
+            else
+            {
+                return "";
+            }
         }
 
         private void messagebox(String tekst, String tytul = "", Int32 icon = 1)

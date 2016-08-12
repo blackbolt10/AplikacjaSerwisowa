@@ -106,6 +106,31 @@ namespace AplikacjaSerwisowaUsluga
             }
         }
 
+        public void oznaczZlcSrwCzynnosciZapisany(int id, int oznaczenie)
+        {
+            try
+            {
+                String zapytanieString = "UPDATE [GAL].[SrwZlcCzynnosci] SET [GZC_Synchronizacja] = " + oznaczenie + " WHERE [GZC_GZNId] = " + id.ToString();
+                zapiszDB(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Błąd funkcji DataBase.oznaczZlcSrwCzynnosciZapisany(" + id.ToString() + "):\n" + exc.Message, EventLogEntryType.Error);
+            }
+        }
+        public void oznaczZlcSrwSkladnikiZapisany(int id, int oznaczenie)
+        {
+            try
+            {
+                String zapytanieString = "UPDATE [GAL].[SrwZlcSkladniki] SET [GZS_Synchronizacja] = " + oznaczenie + " WHERE [GZS_GZNId] = " + id.ToString();
+                zapiszDB(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                eventLog.WriteEntry("Błąd funkcji DataBase.oznaczZlcSrwSkladnikiZapisany(" + id.ToString() + "):\n" + exc.Message, EventLogEntryType.Error);
+            }
+        }
+
         public DataTable pobierzSrwZlcCzynnosci(int GZN_Id)
         {
             DataTable SrwZlcCzynnosciDT = new DataTable();

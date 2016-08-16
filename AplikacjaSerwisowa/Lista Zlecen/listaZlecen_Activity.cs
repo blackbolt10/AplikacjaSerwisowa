@@ -11,6 +11,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Text;
 
 namespace AplikacjaSerwisowa
 {
@@ -18,13 +19,9 @@ namespace AplikacjaSerwisowa
     public class listaZlecen_Activity : Activity 
     {
         private ListView listaZlecen_ListView;
-        private List<String> kontrahenci_List;
-        private List<String> stan_List;
-        private List<String> data_list;
-        private List<String> naglowki_list;
-        private List<String> wykonanie_list;
-        private List<String> szn_ID_list;
-
+        private EditText filtrEditText;
+        Button filtrButton;
+        private List<SrwZlcNag> srwZlcNagList;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,61 +31,33 @@ namespace AplikacjaSerwisowa
             listaZlecen_ListView = FindViewById<ListView>(Resource.Id.listView1);
             listaZlecen_ListView.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs e) { itemClick_Function(sender,e); };
 
-            kontrahenci_List = new List<string>();
-            stan_List = new List<string>();
-            data_list = new List<string>();
-            naglowki_list = new List<string>();
-            wykonanie_list = new List<string>();
-            szn_ID_list = new List<string>();
-            
+            filtrButton = FindViewById<Button>(Resource.Id.filtrListaZlecenButton);
+            filtrButton.Click += FiltrButton_Click;
+
+            filtrEditText = FindViewById<EditText>(Resource.Id.filtrListaZlecenTextView);
+            filtrEditText.TextChanged += new EventHandler<TextChangedEventArgs>(FiltrEditText_TextChanged);
+
+            generujListeSrwZlcNag();
+        }
+
+        private void FiltrButton_Click(object sender, EventArgs e)
+        {
+            filtrEditText.Text = "";
+        }
+
+        private void FiltrEditText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            generujListeSrwZlcNag();
+        }
+
+        private void generujListeSrwZlcNag()
+        {
+            srwZlcNagList = new List<SrwZlcNag>();
+
             try
             {
-                String dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
-                SQLiteConnection db = new SQLiteConnection(dbPath);
-                //var table = db.Table<SrwZlcNag>();
-                string zapytanie = "Select * from SrwZlcNag order by SZN_DataWystawienia desc";
-                var tableQuery = db.Query<SrwZlcNag>(zapytanie);
-
-                foreach(var item in tableQuery)
-                {
-                    string wynik = "";
-                    string kntKartaNazwa = pobierzInformacjeOKntKarta(item.SZN_KntNumer);
-                    string kntAdresNazwa = pobierzInformacjeOKntAdres(item.SZN_KnANumer);
-
-                    if(kntKartaNazwa!="" && kntAdresNazwa!="")
-                    {
-                        if(kntKartaNazwa == kntAdresNazwa)
-                        {
-                            wynik = kntKartaNazwa;
-                        }
-                        else
-                        {
-                            wynik = kntKartaNazwa + "\n" + kntAdresNazwa;
-                        }
-                    }
-                    else if(kntKartaNazwa != "" && kntAdresNazwa == "")
-                    {
-                        wynik = kntKartaNazwa;
-                    }
-                    else if(kntKartaNazwa == "" && kntAdresNazwa != "")
-                    {
-                        wynik = kntAdresNazwa;
-                    }
-                    else 
-                    {
-                        wynik = "{brak nazwy}";
-                    }
-
-                    kontrahenci_List.Add(wynik);
-                    data_list.Add(item.SZN_DataWystawienia.Split(' ')[0]);
-                    stan_List.Add(item.SZN_Stan);
-                    naglowki_list.Add(item.SZN_Dokument);
-                    szn_ID_list.Add(item.SZN_Id.ToString());
-
-                    Random test = new Random();
-                    test.Next(0, 1);
-                    wykonanie_list.Add(test.Next(0, 1).ToString());
-                }
+                DBRepository dbr = new DBRepository();
+                srwZlcNagList = dbr.pobierzListeSrwZlcNag(filtrEditText.Text);
             }
             catch(Exception exc)
             {
@@ -97,65 +66,16 @@ namespace AplikacjaSerwisowa
 
             listaZlecen_ListViewAdapter adapter;
 
-            if(kontrahenci_List.Count > 0 && stan_List.Count > 0)
+            if(srwZlcNagList.Count > 0)
             {
-                adapter = new listaZlecen_ListViewAdapter(this, kontrahenci_List, stan_List, naglowki_list, data_list, wykonanie_list);
+                adapter = new listaZlecen_ListViewAdapter(this, srwZlcNagList);
             }
             else
             {
                 adapter = null;
             }
-
             listaZlecen_ListView.Adapter = adapter;
-        }
-
-        private String pobierzInformacjeOKntKarta(int sZN_KnANumer)
-        {
-            KntKartyTable kntKarta = new KntKartyTable();
-
-            try
-            {
-                DBRepository dbr = new DBRepository();
-                kntKarta = dbr.kntKarty_GetRecord(sZN_KnANumer.ToString());
-            }
-            catch(Exception exc)
-            {
-                Toast.MakeText(this, "B³¹d listaZlecen_Activity.pobierzInformacjeOKntKarta():\n" + exc.Message, ToastLength.Short);
-            }
-
-            if(kntKarta != null)
-            {
-                return kntKarta.Knt_nazwa1;
-            }
-            else
-            {
-                return "";
-            }
-        }
-
-        private String pobierzInformacjeOKntAdres(int SZN_KnaNumer)
-        {
-            KntAdresyTable kntAdres = new KntAdresyTable();
-
-            try
-            {
-                DBRepository dbr = new DBRepository();
-                kntAdres = dbr.kntAdresy_GetRecord(SZN_KnaNumer.ToString());
-            }
-            catch(Exception exc)
-            {
-                Toast.MakeText(this, "B³¹d listaZlecen_Activity.pobierzInformacjeOKntAdres():\n" + exc.Message, ToastLength.Short);
-            }
-
-            if(kntAdres != null)
-            {
-                return kntAdres.Kna_nazwa1;
-            }
-            else
-            {
-                return "";
-            }
-        }
+        }        
 
         private void messagebox(String tekst, String tytul = "", Int32 icon = 1)
         {
@@ -176,14 +96,8 @@ namespace AplikacjaSerwisowa
 
         private void itemClick_Function(object sender, AdapterView.ItemClickEventArgs e)
         {
-            /*ListView test = (ListView) sender;
-            String test1 = test.GetItemAtPosition(Convert.ToInt32(e.Id)).ToString();
-            String gidnumer = szn_ID_list[Convert.ToInt32(e.Id)];
-            Toast.MakeText(this, e.Id.ToString()+"\n"+ test1+"\n"+ gidnumer, ToastLength.Short).Show();
-            */
-
             Intent listaZlecenSzczegolyIntent = new Intent(this, typeof(listaZlecenSzczegoly_Activity));
-            listaZlecenSzczegolyIntent.PutExtra("szn_ID", szn_ID_list[e.Position]);
+            listaZlecenSzczegolyIntent.PutExtra("szn_ID", srwZlcNagList[e.Position].SZN_Id.ToString());
             StartActivity(listaZlecenSzczegolyIntent);
         }
     }

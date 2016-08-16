@@ -123,17 +123,48 @@ namespace AplikacjaSerwisowa
             {
                 dataNumerTextView.Text = szn.SZN_DataWystawienia.Split(' ')[0] + " - " + szn.SZN_Dokument;
                 stanTextView.Text = szn.SZN_Stan;
-                if(szn.SZN_KnANumer != 0)
+                if(szn.SZN_KnANumer != -1)
                 {
-                    kontrahentDocelowyTextView.Text = dbr.kntAdresy_GetRecord(szn.SZN_KnANumer.ToString()).Kna_nazwa1;
+                    KntAdresyTable kntAdres = dbr.kntAdresy_GetRecord(szn.SZN_KnANumer.ToString());
+                    if(kntAdres!=null)
+                    {
+                        if(kntAdres.Kna_nazwa1 != "")
+                        {
+                            kontrahentDocelowyTextView.Text = kntAdres.Kna_nazwa1;
+                        }
+                        else if(kntAdres.Kna_Akronim != "")
+                        {
+                            kontrahentDocelowyTextView.Text = kntAdres.Kna_Akronim;
+                        }
+                        else
+                        {
+                            kontrahentDocelowyTextView.Text = "{brak kontrahenta docelowego}";
+                        }
+                    }
                 }
                 else
                 {
                     kontrahentDocelowyTextView.Text = "{brak kontrahenta docelowego}";
                 }
-                if(szn.SZN_KntNumer != 0)
+
+                if(szn.SZN_KntNumer != -1)
                 {
-                    kontrahentGlownyTextView.Text = dbr.kntKarty_GetRecord(szn.SZN_KntNumer.ToString()).Knt_nazwa1;
+                    KntKartyTable kntKarta = dbr.kntKarty_GetRecord(szn.SZN_KntNumer.ToString());
+                    if(kntKarta != null)
+                    {
+                        if(kntKarta.Knt_nazwa1 != "")
+                        {
+                            kontrahentGlownyTextView.Text = kntKarta.Knt_nazwa1;
+                        }
+                        else if(kntKarta.Knt_Akronim != "")
+                        {
+                            kontrahentGlownyTextView.Text = kntKarta.Knt_Akronim;
+                        }
+                        else
+                        {
+                            kontrahentGlownyTextView.Text = "{brak kontrahenta g³ównego}";
+                        }
+                    }
                 }
                 else
                 {

@@ -199,7 +199,6 @@ namespace AplikacjaSerwisowa
 
             try
             {
-                string zapytanie = "";
                 List<KntAdresyTable> result = kntAdresy_GetFilteredRecords("", KNT_GIDNumer.ToString());
                 if(result != null)
                 {
@@ -326,12 +325,31 @@ namespace AplikacjaSerwisowa
                         output = result[0];
                     }
                 }
-                catch(Exception)
-                {
-                }
+                catch(Exception) {}
             }
 
             return output;
+        }
+
+        private List<int> kntKarty_GetFiltredGidNumers(string filtr)
+        {
+            List<int> kntKartyList = new List<int>();
+            
+            try
+            {
+                List<KntKartyTable> result = db.Query<KntKartyTable>("select * from KntKartyTable where Knt_Akronim like '%" + filtr + "%'");
+
+                if(result != null)
+                {
+                    foreach(var item in result)
+                    {
+                        kntKartyList.Add(item.Knt_GIDNumer);
+                    }
+                }
+            }
+            catch(Exception) {}
+
+            return kntKartyList;
         }
 
         public List<KntKartyTable> kntKarty_GetFilteredRecords(String filtr)
@@ -487,6 +505,25 @@ namespace AplikacjaSerwisowa
 
 
 
+        private List<int> kntAdresy_GetFiltredGidNumers(string filtr)
+        {
+            List<int> kntAdresyList = new List<int>();
+
+            try
+            {
+                string zapytanie = "select * from KntAdresyTable where Kna_Akronim like '&" + filtr + "&'";
+                List<KntAdresyTable> result = db.Query<KntAdresyTable>(zapytanie);
+
+                foreach(var item in result)
+                {
+                    kntAdresyList.Add(item.Kna_GIDNumer);
+                }
+            }
+            catch(Exception) {}
+
+            return kntAdresyList;
+        }
+
 
 
 
@@ -582,6 +619,47 @@ namespace AplikacjaSerwisowa
             }
 
             return output;
+        }
+
+        public List<SrwZlcNag> pobierzListeSrwZlcNag(String filtr)
+        {
+            List<SrwZlcNag> output = new List<SrwZlcNag>();
+            try
+            {
+                List<int> kntKarty = kntKarty_GetFiltredGidNumers(filtr);
+                String kntKartyString = generujListeGuidNumer(kntKarty);
+
+                List<int> kntAdresy = kntAdresy_GetFiltredGidNumers(filtr);
+                String kntAdresyString = generujListeGuidNumer(kntKarty);
+
+                String zapParam = "";
+
+                if(filtr != "")
+                {
+                   zapParam = " where SZN_Dokument like '%"+filtr+ "%' or SZN_DataWystawienia like '%" + filtr + "%' or SZN_KntNumer in "+kntKartyString+ " or SZN_KnANumer in "+kntAdresyString;
+                }
+
+                List<SrwZlcNag> result = db.Query<SrwZlcNag>("select * from SrwZlcNag "+ zapParam +" order by SZN_DataWystawienia desc");
+
+                if(result != null)
+                {
+                    output = result;
+                }
+            }
+            catch(Exception) { }
+
+            return output;
+        }
+
+        private string generujListeGuidNumer(List<int> kntKarty)
+        {
+            string result = "(-1";
+            for(int i = 0;i<kntKarty.Count;i++)
+            {
+                result += ", " + kntKarty[i].ToString();
+            }
+            result += ")";
+            return result;
         }
 
         public List<SrwZlcNag> SrwZlcNagSynchronizacja(int synchParam)

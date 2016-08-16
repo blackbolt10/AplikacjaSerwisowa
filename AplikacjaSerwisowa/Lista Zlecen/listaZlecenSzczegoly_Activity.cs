@@ -50,8 +50,6 @@ namespace AplikacjaSerwisowa
         }
     }
 
-
-
     public class SamplePagerAdapterListaZlecenSerwisowych : FragmentPagerAdapter
     {
         private List<Android.Support.V4.App.Fragment> mFragmentHolder;

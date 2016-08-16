@@ -357,7 +357,6 @@ namespace AplikacjaSerwisowa
             List<KntKartyTable> output = new List<KntKartyTable>();
             try
             {
-                var table = db.Table<KntKartyTable>();
                 string zapytanie = "select * from KntKartyTable ";
 
                 if(filtr !="")
@@ -365,16 +364,9 @@ namespace AplikacjaSerwisowa
                     zapytanie+= "where Knt_Akronim like '%" + filtr + "%' or Knt_nazwa1 like '%" + filtr + "%' or Knt_nazwa2 like '%" + filtr + "%' or Knt_nazwa3 like '%" + filtr + "%'";
                 }
 
-                var result = db.Query<KntKartyTable>(zapytanie);
-
-                for(int i =0;i<result.Count;i++)
-                { 
-                    output.Add(result[i]);
-                }
+                output = db.Query<KntKartyTable>(zapytanie);
             }
-            catch(Exception)
-            {
-            }
+            catch(Exception) {}
 
             return output;
         }

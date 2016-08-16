@@ -21,19 +21,19 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/textView1">
-          <Button
-              android:text="X"
-              android:id="@+id/filtrListaZlecenButton"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignParentRight="true" />
+            <Button
+                android:text="X"
+                android:id="@+id/filtrListaZlecenButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" />
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/filtrListaZlecenTextView"
                 android:inputType="text"
                 android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@id/filtrListaZlecenButton"/>
+                android:layout_toLeftOf="@id/filtrListaZlecenButton" />
         </RelativeLayout>
     </RelativeLayout>
     <ListView

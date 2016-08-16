@@ -55,18 +55,34 @@ namespace AplikacjaSerwisowa
             mViewPager.Adapter = new SamplePagerAdapterNoweZlecenie(SupportFragmentManager);
             mScrollView.ViewPager = mViewPager;
 
-            Knt_GIDNumer = -1;
-            akronimGlowny = "";
-            NazwaGlowny = "";
-
-            Kna_GIDNumer = -1;
-            akronimDocelowy = "";
-            NazwaDocelowy = "";
+            String KNT_GIDNumer = Intent.GetStringExtra("KNT_GIDNumer") ?? "no data avalible";
+            if(KNT_GIDNumer != "no data avalible")
+            {
+                Knt_GIDNumer = Convert.ToInt32(KNT_GIDNumer);
+                pobierzKntKarte();
+            }
+            else
+            {
+                parametryStartowe();
+            }
 
             skladnikiList = new List<TwrKartyTable>();
             czynnosciList = new List<TwrKartyTable>();
 
             opisSrwZlcNag = "";
+            ustawDaty();
+        }
+
+        private void pobierzKntKarte()
+        {
+            DBRepository dbr = new DBRepository();
+            KntKartyTable kntKarta =  dbr.kntKarty_GetRecord(Knt_GIDNumer.ToString());
+            akronimGlowny = kntKarta.Knt_Akronim;
+            NazwaGlowny = kntKarta.Knt_nazwa1;
+        }
+
+        private void ustawDaty()
+        {
             DataWystawienia = DateTime.Today.Year.ToString() + "-";
             DataRealizacji = DateTime.Today.Year.ToString() + "-";
 
@@ -92,6 +108,18 @@ namespace AplikacjaSerwisowa
                 DataRealizacji += DateTime.Today.Day.ToString();
             }
         }
+
+        private void parametryStartowe()
+        {
+            Knt_GIDNumer = -1;
+            akronimGlowny = "";
+            NazwaGlowny = "";
+
+            Kna_GIDNumer = -1;
+            akronimDocelowy = "";
+            NazwaDocelowy = "";            
+        }
+
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.glowneOkno_Menu, menu);

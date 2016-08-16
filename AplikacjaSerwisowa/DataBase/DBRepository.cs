@@ -107,6 +107,11 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
+        internal bool sprawdzNoweZlecenia()
+        {
+            throw new NotImplementedException();
+        }
+
         public String Login(String akronim, String haslo)
         {
             String output = "";
@@ -687,7 +692,6 @@ namespace AplikacjaSerwisowa
             {
             }
             return srwZlcNagList;
-            //return lamadodajDosynch();
         }
 
         public int SrwZlcNagGenerujNoweID(Context kontekst)

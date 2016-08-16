@@ -51,8 +51,11 @@ namespace AplikacjaSerwisowa
 
             mAkronimDocelowyTextView = view.FindViewById<TextView>(Resource.Id.akronimDocelowyNoweZlecenieTextView);
             mNazwaDocelowyTextView = view.FindViewById<TextView>(Resource.Id.nazwaDocelowyNoweZlecenieTextView);
-            mAkronimDocelowyTextView.Text = noweZlecenie_Activity.akronimDocelowy;
-            mNazwaDocelowyTextView.Text = noweZlecenie_Activity.NazwaDocelowy;
+
+            sprawdzIloscAdresow();
+
+            //mAkronimDocelowyTextView.Text = noweZlecenie_Activity.akronimDocelowy;
+            //mNazwaDocelowyTextView.Text = noweZlecenie_Activity.NazwaDocelowy;
 
             ustawWidocznosc();
 

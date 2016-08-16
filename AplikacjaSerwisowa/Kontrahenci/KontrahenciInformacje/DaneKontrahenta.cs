@@ -20,7 +20,7 @@ namespace AplikacjaSerwisowa
         private TextView mGidNumerTextView, mKodPMiastoTextView, mUlicaTextView;
 
         private TextView mTelefonNazwaTextView, mFaxNazwaTextView, mEmailNazwaTextView, mUrlNazwaTextView;
-        private String mGidNumerKontrahenta;
+        private String mKNT_GIDNumer;
         private Context kontekstGlowny;
 
         private Boolean mUkrywanie = true;
@@ -29,7 +29,7 @@ namespace AplikacjaSerwisowa
         {
             View view = inflater.Inflate(Resource.Layout.Frag1Layout, container, false);
 
-            mGidNumerKontrahenta = kontrahenciInformacje.GetKnt_GidNumer();
+            mKNT_GIDNumer = kontrahenciInformacje.GetKnt_GidNumer();
             kontekstGlowny = kontrahenciInformacje.GetContext();
 
             mAkronimTextView = view.FindViewById<TextView>(Resource.Id.akronimFrag1TextView);
@@ -60,7 +60,7 @@ namespace AplikacjaSerwisowa
             try
             {
                 DBRepository dbr = new DBRepository();
-                KntKartyTable result = dbr.kntKarty_GetRecord(mGidNumerKontrahenta);
+                KntKartyTable result = dbr.kntKarty_GetRecord(mKNT_GIDNumer);
 
                 mGidNumerTextView.Text = result.Knt_GIDNumer.ToString();
                 if(mUkrywanie)

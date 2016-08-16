@@ -28,6 +28,7 @@ namespace AplikacjaSerwisowa
         private Button synchronizacja_Button, wyslij_Button;
         private AplikacjaSerwisowa.kwronski.WebService kwronskiService;
         private ProgressDialog progressDialog, progressDialogWysylanie;
+        private Thread wysylanieThread;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -70,11 +71,40 @@ namespace AplikacjaSerwisowa
 
             if(isOnline)
             {
-                rozpocznijPobieranie();
+                sprawdzNoweZlecenia();
             }
             else
             {
                 Toast.MakeText(this, "Brak dostêpu do internetu", ToastLength.Short).Show();
+            }
+        }
+
+        private void sprawdzNoweZlecenia()
+        {
+            DBRepository dbr = new DBRepository();
+            List<SrwZlcNag> srwZlcNagList = dbr.SrwZlcNagSynchronizacja(1);
+            if(srwZlcNagList.Count>0)
+            {
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                
+                alert.SetTitle("Informacja");
+                alert.SetMessage("W pamiêci urz¹dzenia znajduj¹ siê nowe nie zsynchronizowane zlecenia serwisowe. Synchronizacja spowoduje ich usuniêcie. Czy chcesz wczeœniej wys³aæ dane?");
+                alert.SetPositiveButton("Tak", (senderAlert, args) => 
+                    {
+                        wyslijDane();
+                        rozpocznijPobieranie();
+                    });
+                alert.SetNegativeButton("Nie", (senderAlert, args) => 
+                    {
+                        rozpocznijPobieranie();
+                    });
+
+                Dialog dialog = alert.Create();
+                dialog.Show();
+            }
+            else
+            {
+                rozpocznijPobieranie();
             }
         }
 
@@ -94,6 +124,11 @@ namespace AplikacjaSerwisowa
 
         private void pobieranieDanychWebService()
         {
+            if(wysylanieThread.IsAlive)
+            {
+                wysylanieThread.Join();
+            }
+
             RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 1/7..."));
             RunOnUiThread(() => progressDialog.SetMessage("Pobieranie nag³ówków kontrahentów..."));
             String kntKartyString = kwronskiService.ZwrocListeKntKarty();
@@ -390,8 +425,8 @@ namespace AplikacjaSerwisowa
             progressDialogWysylanie.Max = 1;
             progressDialogWysylanie.Show();
 
-            Thread thread = new Thread(() => wysylanieDanychWebService());
-            thread.Start();
+            wysylanieThread = new Thread(() => wysylanieDanychWebService());
+            wysylanieThread.Start();
         }
 
         private void wysylanieDanychWebService()

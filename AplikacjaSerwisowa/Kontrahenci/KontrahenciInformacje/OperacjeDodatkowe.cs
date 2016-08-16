@@ -15,6 +15,8 @@ namespace AplikacjaSerwisowa
     public class OperacjeDodatkowe : Android.Support.V4.App.Fragment
     {
         private Button mNoweZleceniButton;
+        private string mKNT_GIDNumer;
+        private Context mContext;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -23,12 +25,17 @@ namespace AplikacjaSerwisowa
             mNoweZleceniButton = view.FindViewById<Button>(Resource.Id.kontrahenciOperacjeNoweZlecenieButton);
             mNoweZleceniButton.Click += mNoweZleceniButton_Click;
 
+            mKNT_GIDNumer = kontrahenciInformacje.GetKnt_GidNumer();
+            mContext = kontrahenciInformacje.GetContext();
+
             return view;
         }
 
         private void mNoweZleceniButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Intent noweZlecenieActivity = new Intent(mContext, typeof(noweZlecenie_Activity));
+            noweZlecenieActivity.PutExtra("KNT_GIDNumer", mKNT_GIDNumer);
+            StartActivity(noweZlecenieActivity);
         }
 
         public override string ToString() //Called on line 156 in SlidingTabScrollView

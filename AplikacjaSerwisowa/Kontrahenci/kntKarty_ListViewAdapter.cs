@@ -61,7 +61,7 @@ namespace AplikacjaSerwisowa
             LinearLayout daneKontrahenta1_LinearLayout = row.FindViewById<LinearLayout>(Resource.Id.daneKontrahenta1inearLayout);
             LinearLayout daneKontrahenta2_LinearLayout = row.FindViewById<LinearLayout>(Resource.Id.daneKontrahenta2LinearLayout);
             
-            knt_akronimNazwa_TextView.Text = "["+ mKntKartyList[position].Knt_Akronim+"] "+ mKntKartyList[position].Knt_nazwa1;
+            knt_akronimNazwa_TextView.Text = "["+ mKntKartyList[position].Knt_Akronim+"]\n"+ mKntKartyList[position].Knt_nazwa1;
             knt_gidnumer_TextView.Text = mKntKartyList[position].Knt_GIDNumer.ToString();
 
             if(mKntKartyList[position].Knt_ulica == "" && mKntKartyList[position].Knt_ulica == "")

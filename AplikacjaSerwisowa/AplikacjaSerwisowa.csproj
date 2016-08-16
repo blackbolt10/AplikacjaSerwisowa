@@ -85,6 +85,9 @@
     <Compile Include="Kontrahenci\kntKarty_ListViewAdapter.cs" />
     <Compile Include="Kontrahenci\kontrahenciAdresy_ListViewAdapter.cs" />
     <Compile Include="Kontrahenci\kontrahenciInformacje.cs" />
+    <Compile Include="Kontrahenci\KontrahenciInformacje\AdresyKontrahenta.cs" />
+    <Compile Include="Kontrahenci\KontrahenciInformacje\DaneKontrahenta.cs" />
+    <Compile Include="Kontrahenci\KontrahenciInformacje\OperacjeDodatkowe.cs" />
     <Compile Include="Kontrahenci\kontrahenci_Activity.cs" />
     <Compile Include="Lista zlecen\listaZlecenSzczegolySkladniki_ListViewAdapter.cs" />
     <Compile Include="Lista zlecen\listaZlecenSzczegolyCzynnosci_ListViewAdapter.cs" />
@@ -187,6 +190,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\noweZlecenieDataPickerLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\kontrahenciOperacjeDodatkowe.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="Web References\kwronski\Reference.map">

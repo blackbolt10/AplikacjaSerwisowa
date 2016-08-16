@@ -468,6 +468,27 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
+        public List<KntAdresyTable> kntAdresy_GetRecords(String KNT_GIDNumer)
+        {
+            List<KntAdresyTable> output = null;
+
+            if(KNT_GIDNumer.Length > 0)
+            {
+                try
+                {
+                    var result = db.Query<KntAdresyTable>("select * from KntAdresyTable where Kna_KntNumer = " + KNT_GIDNumer);
+
+                    if(result.Count > 0)
+                    {
+                        output = result;
+                    }
+                }
+                catch(Exception) {}
+            }
+
+            return output;
+        }
+
         public List<KntAdresyTable> kntAdresy_GetFilteredRecords(String filtr, String knt_GidNumer)
         {
             List<KntAdresyTable> output = new List<KntAdresyTable>();

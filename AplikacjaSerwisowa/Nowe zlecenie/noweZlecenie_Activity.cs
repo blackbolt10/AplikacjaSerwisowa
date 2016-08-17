@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
-using SQLite;
 
 using Android.App;
 using Android.Content;
@@ -17,7 +15,7 @@ using Android.Widget;
 
 namespace AplikacjaSerwisowa
 {
-    [Activity(Label = "noweZlecenie_Activity")]
+    [Activity(Label = "Nowe zlecenie")]
     public class noweZlecenie_Activity : FragmentActivity
     {
         private ViewPager mViewPager;
@@ -120,11 +118,6 @@ namespace AplikacjaSerwisowa
             NazwaDocelowy = "";            
         }
 
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.glowneOkno_Menu, menu);
-            return base.OnCreateOptionsMenu(menu);
-        }
         public static Context GetContext()
         {
             return kontekst;
@@ -157,9 +150,6 @@ namespace AplikacjaSerwisowa
             zakladkaKontrahentNoweZlecenie.aktualizujKontrahentaDocelowego();
         }
     }
-
-
-    
 
     public class SamplePagerAdapterNoweZlecenie : FragmentPagerAdapter
     {

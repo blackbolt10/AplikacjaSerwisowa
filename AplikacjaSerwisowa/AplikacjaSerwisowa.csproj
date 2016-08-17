@@ -94,6 +94,12 @@
     <Compile Include="Lista zlecen\listaZlecenSzczegoly_Activity.cs" />
     <Compile Include="Lista zlecen\listaZlecen_Activity.cs" />
     <Compile Include="Lista zlecen\listaZlecen_ListViewAdapter.cs" />
+    <Compile Include="Lista zlecen\Zakladki\czynnosciListaZlecen.cs" />
+    <Compile Include="Lista zlecen\Zakladki\kontrahentListaZlecen.cs" />
+    <Compile Include="Lista zlecen\Zakladki\ogolneListaZlecen.cs" />
+    <Compile Include="Lista zlecen\Zakladki\podpisListaZlecen.cs" />
+    <Compile Include="Lista zlecen\Zakladki\skladnikiListaZlecen.cs" />
+    <Compile Include="Lista zlecen\Zakladki\urzadzeniaListaZlecen.cs" />
     <Compile Include="Magazyn\kartyTowarowTable.cs" />
     <Compile Include="Magazyn\kartyTowarow_ListViewAdapter.cs" />
     <Compile Include="Magazyn\magazyn_Activity.cs" />
@@ -193,6 +199,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\kontrahenciOperacjeDodatkowe.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\podpisListaZlecenLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="Web References\kwronski\Reference.map">

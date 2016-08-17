@@ -45,6 +45,8 @@ namespace AplikacjaSerwisowa.kwronski {
         
         private System.Threading.SendOrPostCallback ZwrocListeTwrKartyOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ZwrocListePodpisowOperationCompleted;
+        
         private System.Threading.SendOrPostCallback synchronizujSrwZlcNagOperationCompleted;
         
         private System.Threading.SendOrPostCallback synchronizujSrwZlcCzynnosciOperationCompleted;
@@ -126,6 +128,9 @@ namespace AplikacjaSerwisowa.kwronski {
         
         /// <remarks/>
         public event ZwrocListeTwrKartyCompletedEventHandler ZwrocListeTwrKartyCompleted;
+        
+        /// <remarks/>
+        public event ZwrocListePodpisowCompletedEventHandler ZwrocListePodpisowCompleted;
         
         /// <remarks/>
         public event synchronizujSrwZlcNagCompletedEventHandler synchronizujSrwZlcNagCompleted;
@@ -372,6 +377,33 @@ namespace AplikacjaSerwisowa.kwronski {
             if ((this.ZwrocListeTwrKartyCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ZwrocListeTwrKartyCompleted(this, new ZwrocListeTwrKartyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/ZwrocListePodpisow", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string ZwrocListePodpisow() {
+            object[] results = this.Invoke("ZwrocListePodpisow", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZwrocListePodpisowAsync() {
+            this.ZwrocListePodpisowAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ZwrocListePodpisowAsync(object userState) {
+            if ((this.ZwrocListePodpisowOperationCompleted == null)) {
+                this.ZwrocListePodpisowOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZwrocListePodpisowOperationCompleted);
+            }
+            this.InvokeAsync("ZwrocListePodpisow", new object[0], this.ZwrocListePodpisowOperationCompleted, userState);
+        }
+        
+        private void OnZwrocListePodpisowOperationCompleted(object arg) {
+            if ((this.ZwrocListePodpisowCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZwrocListePodpisowCompleted(this, new ZwrocListePodpisowCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -870,6 +902,32 @@ namespace AplikacjaSerwisowa.kwronski {
         private object[] results;
         
         internal ZwrocListeTwrKartyCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void ZwrocListePodpisowCompletedEventHandler(object sender, ZwrocListePodpisowCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZwrocListePodpisowCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZwrocListePodpisowCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

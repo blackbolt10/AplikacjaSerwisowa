@@ -11,6 +11,7 @@ using Android.Net;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Graphics;
 
 namespace AplikacjaSerwisowa
 {
@@ -21,7 +22,7 @@ namespace AplikacjaSerwisowa
 
         public DBRepository()
         {
-            dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
+            dbPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
             db = new SQLiteConnection(dbPath);
         }
 
@@ -34,7 +35,7 @@ namespace AplikacjaSerwisowa
             try
             {
                 output += "creating database if it doesn't exist";
-                String dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
+                String dbPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
 
                 SQLiteConnection db = new SQLiteConnection(dbPath);
                 output = "Database created...";
@@ -1195,6 +1196,36 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
+        public byte[] pobierzPodpis(string SZN_Id)
+        {
+            byte[] byteArray = new byte[0];
+
+            try
+            {
+                var result = db.Query<SrwZlcPodpisTable>("select * from SrwZlcPodpisTable where SZN_Id = " + SZN_Id.ToString());
+
+                if(result.Count > 0)
+                {
+                    byteArray = wygenerujByteArray(result[0].Podpis);
+                }
+            }
+            catch(Exception exc) {}
+
+            return byteArray;
+        }
+
+        private byte[] wygenerujByteArray(string podpis)
+        {
+            String[] stringArray = podpis.Split(',');
+            byte[] byteArray = new byte[stringArray.Length];
+
+            for(int i=0;i<stringArray.Length;i++)
+            {
+                byteArray[i] = Convert.ToByte(stringArray[i]);
+            }
+
+            return byteArray;
+        }
     }
 }
 

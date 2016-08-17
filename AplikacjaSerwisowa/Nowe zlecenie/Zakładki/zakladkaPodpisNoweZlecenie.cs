@@ -179,7 +179,7 @@ namespace AplikacjaSerwisowa
 
                     db.SrwZlcNag_InsertRecord(srwZlcNag);
 
-                    //zapiszPodpis();
+                    zapiszPodpis();
 
                     if(SrwZlcCzynnosciList != null)
                     {
@@ -217,6 +217,7 @@ namespace AplikacjaSerwisowa
             SrwZlcPodpisTable szp = new SrwZlcPodpisTable();
             szp.SZN_Id = srwZlcNag.SZN_Id;
             szp.Podpis = BitMapToString(podpisBitmap);
+            szp.SZP_Synchronizacja = 1;
 
             DBRepository db = new DBRepository();
             db.SrwZlcPodpis_InsertRecord(szp);
@@ -224,19 +225,23 @@ namespace AplikacjaSerwisowa
 
         public String BitMapToString(Android.Graphics.Bitmap bitmap)
         {
-            MemoryStream byteArrayOutputStream = new MemoryStream();
-            bitmap.Compress(Bitmap.CompressFormat.Png, 100, byteArrayOutputStream);
-            byte[] byteArray = byteArrayOutputStream.ToArray();
-
-            String str = byteArray[0].ToString();
-            for(int i = 1; i < byteArray.Length; i++)
+            string str = "";
+            try
             {
-                str += ","+byteArray[i].ToString();
+                MemoryStream stream = new MemoryStream();
+                bitmap.Compress(Bitmap.CompressFormat.Png, 0, stream);
+                byte[] byteArray = stream.ToArray();
+
+                str = byteArray[0].ToString();
+                for(int i = 1; i < byteArray.Length; i++)
+                {
+                    str += "," + byteArray[i].ToString();
+                }
             }
+            catch(Exception) {}
 
             return str;
         }
-
 
         private void messagebox(String tekst, String tytul = "", Int32 icon = 1)
         {

@@ -185,7 +185,7 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progressDialog.SetMessage("Pobieranie podpisów..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.Max = 1);
-            String podpisyString = kwronskiService.ZwrocListeTwrKarty();
+            String podpisyString = kwronskiService.ZwrocListePodpisow();
 
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy podpisów..."));
             tworzenieBazySrwZlcPodpisy(podpisyString);

@@ -1,17 +1,14 @@
-using System;
-using System.Data;
-using System.IO;
-using SQLite;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace AplikacjaSerwisowa
+namespace WebApplication
 {
-    [Table("SrwZlcPodpisTable")]
     public class SrwZlcPodpisTable
     {
-        [PrimaryKey, AutoIncrement, Column("_Id")]
         public int Id { get; set; }
 
-        [Unique]
         public Int32 SZN_Id { get; set; }
 
         public Int32 SZP_Synchronizacja { get; set; }
@@ -29,6 +26,6 @@ namespace AplikacjaSerwisowa
             OsobaPodpisujaca = _OsobaPodpisujaca;
         }
 
-        public SrwZlcPodpisTable() { }
+        public SrwZlcPodpisTable() {}
     }
 }

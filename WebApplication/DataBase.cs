@@ -89,6 +89,43 @@ namespace WebApplication
             return wynik;
         }
 
+        internal List<SrwZlcPodpisTable> wygenerujListeSrwZlcPodpis()
+        {
+            List<SrwZlcPodpisTable> result = new List<SrwZlcPodpisTable>();
+            
+
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = "Select * from [GAL].[SrwZlcPodpis] where [GZP_Synchronizacja] <> 4";
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                result = wygenerujListeSerwisowychZlecenPodpisy(pomDataTable);
+            }
+            return result;
+        }
+
+        private List<SrwZlcPodpisTable> wygenerujListeSerwisowychZlecenPodpisy(DataTable pomDataTable)
+        {
+            List<SrwZlcPodpisTable> result = new List<SrwZlcPodpisTable>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                int GZP_Id = Convert.ToInt32(pomDataTable.Rows[i]["GZP_Id"].ToString());
+                int GZP_Synchronizacja = 0;
+                String Podpis = pomDataTable.Rows[i]["GZP_Podpis"].ToString();
+                String OsobaPodpisujaca = pomDataTable.Rows[i]["GZP_OsobaPodpisujaca"].ToString();
+
+                result.Add(new SrwZlcPodpisTable(GZP_Id, GZP_Synchronizacja, Podpis,OsobaPodpisujaca));
+            }
+            return result;
+        }
+
         public List<SrwZlcNag> wygenerujListeSerwisowychZlecenNaglowki()
         {
             List<SrwZlcNag> result = new List<SrwZlcNag>();

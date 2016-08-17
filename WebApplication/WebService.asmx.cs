@@ -92,6 +92,16 @@ namespace WebApplication
             return new JavaScriptSerializer().Serialize(twrKartyList);
         }
 
+        [WebMethod(Description = "Pozwala na wygenerowanie SrwZlcPodpisTable")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ZwrocListePodpisow()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<SrwZlcPodpisTable> podpisyList = dataBaseObject.wygenerujListeSrwZlcPodpis();
+
+            return new JavaScriptSerializer().Serialize(podpisyList);
+        }
+
         [WebMethod(Description = "Pozwala na synchronizację SrwZlcNag z urządzenia")]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string synchronizujSrwZlcNag(String inputJSON)

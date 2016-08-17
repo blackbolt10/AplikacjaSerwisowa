@@ -90,6 +90,7 @@
     <Compile Include="Struktury\KntKarty.cs" />
     <Compile Include="Struktury\SrwZlcCzynnoci.cs" />
     <Compile Include="Struktury\SrwZlcNag.cs" />
+    <Compile Include="Struktury\SrwZlcPodpis.cs" />
     <Compile Include="Struktury\SrwZlcSkladniki.cs" />
     <Compile Include="Struktury\TwrKartyTable.cs" />
     <Compile Include="WebService.asmx.cs">

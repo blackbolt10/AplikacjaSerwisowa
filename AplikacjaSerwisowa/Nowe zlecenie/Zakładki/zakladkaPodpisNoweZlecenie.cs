@@ -45,7 +45,7 @@ namespace AplikacjaSerwisowa
               //  LineWidth = 3f
             };
 
-            linear.AddView(signature, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FillParent, 450));
+            linear.AddView(signature, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, 450));
 
             kontekst = noweZlecenie_Activity.GetContext();
 

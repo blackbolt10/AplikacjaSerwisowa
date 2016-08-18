@@ -1209,7 +1209,7 @@ namespace AplikacjaSerwisowa
                     byteArray = wygenerujByteArray(result[0].Podpis);
                 }
             }
-            catch(Exception exc) {}
+            catch(Exception) {}
 
             return byteArray;
         }

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/noweZlecenieZakladkaCzynnSkladDodajButton" />
         <Button
-            android:text="Usuń"
+            android:text="Usuń zaznaczone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/noweZlecenieZakladkaCzynnSkladUsunButton"

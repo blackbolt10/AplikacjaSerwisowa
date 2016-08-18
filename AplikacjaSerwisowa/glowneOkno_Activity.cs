@@ -57,7 +57,7 @@ namespace AplikacjaSerwisowa
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.SetTitle("Potwierdzenie zamykania");
             alert.SetMessage("Czy zamkn¹æ aplikacjê?");
-            alert.SetPositiveButton("Tak", (senderAlert, args) => { Finish(); });
+            alert.SetPositiveButton("Tak", (senderAlert, args) => { this.FinishAffinity(); });
             alert.SetNegativeButton("Nie", (senderAlert, args) => { });
 
             Dialog dialog = alert.Create();

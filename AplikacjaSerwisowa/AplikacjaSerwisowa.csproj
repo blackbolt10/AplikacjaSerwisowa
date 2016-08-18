@@ -108,6 +108,7 @@
     <Compile Include="Nowe zlecenie\listaKontrahentow_ListViewAdapter.cs" />
     <Compile Include="Nowe zlecenie\listaCzynnSklad_ListViewAdapter.cs" />
     <Compile Include="Nowe zlecenie\noweZlecenieDodajCzynnSklad_Activit.cs" />
+    <Compile Include="Nowe zlecenie\noweZlecenieZapisz.cs" />
     <Compile Include="Nowe zlecenie\noweZlecenie_Activity.cs" />
     <Compile Include="Nowe zlecenie\noweZlecenieDodajKontrahenta_Activity.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\noweZlecenieDatePickerActivity.cs" />

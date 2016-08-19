@@ -26,9 +26,6 @@ namespace AplikacjaSerwisowa
             db = new SQLiteConnection(dbPath);
         }
 
-
-
-
         public string createDB()
         {
             String output = "";
@@ -151,11 +148,6 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-
-
-
-
-
         /*
             *---------------------------------------------------------------------------------
             *|*********************************Tabela towarów********************************|
@@ -239,16 +231,6 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
-
-
-
-
-
-
-
-
-
-
 
         /*
             *---------------------------------------------------------------------------------
@@ -377,14 +359,6 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-
-
-
-
-
-
-
-
         /*
             *---------------------------------------------------------------------------------
             *|*********************************Tabela kontrahentowAdresy*********************|
@@ -413,6 +387,7 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+
         public String kntAdresy_InsertRecord(KntAdresyTable item)
         {
             String output = "";
@@ -542,19 +517,6 @@ namespace AplikacjaSerwisowa
 
             return kntAdresyList;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         /*
             *---------------------------------------------------------------------------------
@@ -718,11 +680,6 @@ namespace AplikacjaSerwisowa
             return result;
         }
 
-
-
-
-
-
         /*
             *---------------------------------------------------------------------------------
             *|*********************************Tabela SrwZlcCzynnosci************************|
@@ -864,15 +821,6 @@ namespace AplikacjaSerwisowa
             }
         }
 
-
-
-
-
-
-
-
-
-
         /*
             *---------------------------------------------------------------------------------
             *|*********************************Tabela SrwZlcCzynnosci************************|
@@ -1012,14 +960,6 @@ namespace AplikacjaSerwisowa
             }
         }
 
-
-
-
-
-
-
-
-
         /*
             *---------------------------------------------------------------------------------
             *|*********************************Tabela TwrKarty*******************************|
@@ -1127,11 +1067,6 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-
-
-
-
-
         /*
             *---------------------------------------------------------------------------------
             *|*********************************Tabela SrwZlcPodpis***************************|
@@ -1225,6 +1160,183 @@ namespace AplikacjaSerwisowa
             }
 
             return byteArray;
+        }
+
+
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela SrwUrzadzenia**************************|
+            *---------------------------------------------------------------------------------
+        */
+        public string stworzSrwUrzadzenia()
+        {
+            String output = "";
+            try
+            {
+                try
+                {
+                    db.DropTable<SrwUrzadzenia>();
+                }
+                catch(Exception) { }
+
+                db.CreateTable<SrwUrzadzenia>();
+
+                output = "Tabela SrwUrzadzenia zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzSrwUrzadzenia() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+
+        public String SrwUrzadzenia_InsertRecord(SrwUrzadzenia item)
+        {
+            String output = "";
+            try
+            {
+                db.Insert(item);
+                output = "Wpis dodany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzadzenia_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+        
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela SrwUrzParDef***************************|
+            *---------------------------------------------------------------------------------
+        */
+        public string stworzSrwUrzParDef()
+        {
+            String output = "";
+            try
+            {
+                try
+                {
+                    db.DropTable<SrwUrzParDef>();
+                }
+                catch(Exception) { }
+
+                db.CreateTable<SrwUrzParDef>();
+
+                output = "Tabela SrwUrzParDef zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzSrwUrzParDef() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+
+        public String SrwUrzParDef_InsertRecord(SrwUrzParDef item)
+        {
+            String output = "";
+            try
+            {
+                db.Insert(item);
+                output = "Wpis dodany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzParDef_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+        
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela SrwUrzRodzPar**************************|
+            *---------------------------------------------------------------------------------
+        */
+        public string stworzSrwUrzRodzPar()
+        {
+            String output = "";
+            try
+            {
+                try
+                {
+                    db.DropTable<SrwUrzRodzPar>();
+                }
+                catch(Exception) { }
+
+                db.CreateTable<SrwUrzRodzPar>();
+
+                output = "Tabela SrwUrzRodzPar zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzSrwUrzRodzPar() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+
+        public String SrwUrzRodzPar_InsertRecord(SrwUrzRodzPar item)
+        {
+            String output = "";
+            try
+            {
+                db.Insert(item);
+                output = "Wpis dodany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzRodzPar_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela SrwUrzRodzaje**************************|
+            *---------------------------------------------------------------------------------
+        */
+        public string stworzSrwUrzRodzaje()
+        {
+            String output = "";
+            try
+            {
+                try
+                {
+                    db.DropTable<SrwUrzRodzaje>();
+                }
+                catch(Exception) { }
+
+                db.CreateTable<SrwUrzRodzaje>();
+
+                output = "Tabela SrwUrzRodzaje zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzSrwUrzRodzaje() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+        
+        public String SrwUrzRodzaje_InsertRecord(SrwUrzRodzaje item)
+        {
+            String output = "";
+            try
+            {
+                db.Insert(item);
+                output = "Wpis dodany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzRodzaje_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
         }
     }
 }

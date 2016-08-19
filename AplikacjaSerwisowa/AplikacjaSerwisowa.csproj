@@ -74,6 +74,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase\DBRepository.cs" />
+    <Compile Include="DataBase\Tabele\SrwUrzadzenia.cs" />
+    <Compile Include="DataBase\Tabele\SrwUrzRodzaje.cs" />
+    <Compile Include="DataBase\Tabele\SrwUrzRodzPar.cs" />
+    <Compile Include="DataBase\Tabele\SrwUrzParDef.cs" />
     <Compile Include="DataBase\Tabele\SrwZlcPodpisTable.cs" />
     <Compile Include="DataBase\Tabele\TwrKartyTable.cs" />
     <Compile Include="DataBase\Tabele\SrwZlcNag.cs" />

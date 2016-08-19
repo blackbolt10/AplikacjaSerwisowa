@@ -45,6 +45,14 @@ namespace AplikacjaSerwisowa.kwronski {
         
         private System.Threading.SendOrPostCallback ZwrocListeTwrKartyOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ZwrocListeSrwUrzRodzajeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ZwrocListeSrwUrzadzeniaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ZwrocListeSrwUrzRodzParOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ZwrocListeSrwUrzParDefOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ZwrocListePodpisowOperationCompleted;
         
         private System.Threading.SendOrPostCallback synchronizujSrwZlcNagOperationCompleted;
@@ -128,6 +136,18 @@ namespace AplikacjaSerwisowa.kwronski {
         
         /// <remarks/>
         public event ZwrocListeTwrKartyCompletedEventHandler ZwrocListeTwrKartyCompleted;
+        
+        /// <remarks/>
+        public event ZwrocListeSrwUrzRodzajeCompletedEventHandler ZwrocListeSrwUrzRodzajeCompleted;
+        
+        /// <remarks/>
+        public event ZwrocListeSrwUrzadzeniaCompletedEventHandler ZwrocListeSrwUrzadzeniaCompleted;
+        
+        /// <remarks/>
+        public event ZwrocListeSrwUrzRodzParCompletedEventHandler ZwrocListeSrwUrzRodzParCompleted;
+        
+        /// <remarks/>
+        public event ZwrocListeSrwUrzParDefCompletedEventHandler ZwrocListeSrwUrzParDefCompleted;
         
         /// <remarks/>
         public event ZwrocListePodpisowCompletedEventHandler ZwrocListePodpisowCompleted;
@@ -377,6 +397,114 @@ namespace AplikacjaSerwisowa.kwronski {
             if ((this.ZwrocListeTwrKartyCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ZwrocListeTwrKartyCompleted(this, new ZwrocListeTwrKartyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/ZwrocListeSrwUrzRodzaje", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string ZwrocListeSrwUrzRodzaje() {
+            object[] results = this.Invoke("ZwrocListeSrwUrzRodzaje", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeSrwUrzRodzajeAsync() {
+            this.ZwrocListeSrwUrzRodzajeAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeSrwUrzRodzajeAsync(object userState) {
+            if ((this.ZwrocListeSrwUrzRodzajeOperationCompleted == null)) {
+                this.ZwrocListeSrwUrzRodzajeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZwrocListeSrwUrzRodzajeOperationCompleted);
+            }
+            this.InvokeAsync("ZwrocListeSrwUrzRodzaje", new object[0], this.ZwrocListeSrwUrzRodzajeOperationCompleted, userState);
+        }
+        
+        private void OnZwrocListeSrwUrzRodzajeOperationCompleted(object arg) {
+            if ((this.ZwrocListeSrwUrzRodzajeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZwrocListeSrwUrzRodzajeCompleted(this, new ZwrocListeSrwUrzRodzajeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/ZwrocListeSrwUrzadzenia", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string ZwrocListeSrwUrzadzenia() {
+            object[] results = this.Invoke("ZwrocListeSrwUrzadzenia", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeSrwUrzadzeniaAsync() {
+            this.ZwrocListeSrwUrzadzeniaAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeSrwUrzadzeniaAsync(object userState) {
+            if ((this.ZwrocListeSrwUrzadzeniaOperationCompleted == null)) {
+                this.ZwrocListeSrwUrzadzeniaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZwrocListeSrwUrzadzeniaOperationCompleted);
+            }
+            this.InvokeAsync("ZwrocListeSrwUrzadzenia", new object[0], this.ZwrocListeSrwUrzadzeniaOperationCompleted, userState);
+        }
+        
+        private void OnZwrocListeSrwUrzadzeniaOperationCompleted(object arg) {
+            if ((this.ZwrocListeSrwUrzadzeniaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZwrocListeSrwUrzadzeniaCompleted(this, new ZwrocListeSrwUrzadzeniaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/ZwrocListeSrwUrzRodzPar", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string ZwrocListeSrwUrzRodzPar() {
+            object[] results = this.Invoke("ZwrocListeSrwUrzRodzPar", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeSrwUrzRodzParAsync() {
+            this.ZwrocListeSrwUrzRodzParAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeSrwUrzRodzParAsync(object userState) {
+            if ((this.ZwrocListeSrwUrzRodzParOperationCompleted == null)) {
+                this.ZwrocListeSrwUrzRodzParOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZwrocListeSrwUrzRodzParOperationCompleted);
+            }
+            this.InvokeAsync("ZwrocListeSrwUrzRodzPar", new object[0], this.ZwrocListeSrwUrzRodzParOperationCompleted, userState);
+        }
+        
+        private void OnZwrocListeSrwUrzRodzParOperationCompleted(object arg) {
+            if ((this.ZwrocListeSrwUrzRodzParCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZwrocListeSrwUrzRodzParCompleted(this, new ZwrocListeSrwUrzRodzParCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/ZwrocListeSrwUrzParDef", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string ZwrocListeSrwUrzParDef() {
+            object[] results = this.Invoke("ZwrocListeSrwUrzParDef", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeSrwUrzParDefAsync() {
+            this.ZwrocListeSrwUrzParDefAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeSrwUrzParDefAsync(object userState) {
+            if ((this.ZwrocListeSrwUrzParDefOperationCompleted == null)) {
+                this.ZwrocListeSrwUrzParDefOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZwrocListeSrwUrzParDefOperationCompleted);
+            }
+            this.InvokeAsync("ZwrocListeSrwUrzParDef", new object[0], this.ZwrocListeSrwUrzParDefOperationCompleted, userState);
+        }
+        
+        private void OnZwrocListeSrwUrzParDefOperationCompleted(object arg) {
+            if ((this.ZwrocListeSrwUrzParDefCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZwrocListeSrwUrzParDefCompleted(this, new ZwrocListeSrwUrzParDefCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -902,6 +1030,110 @@ namespace AplikacjaSerwisowa.kwronski {
         private object[] results;
         
         internal ZwrocListeTwrKartyCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void ZwrocListeSrwUrzRodzajeCompletedEventHandler(object sender, ZwrocListeSrwUrzRodzajeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZwrocListeSrwUrzRodzajeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZwrocListeSrwUrzRodzajeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void ZwrocListeSrwUrzadzeniaCompletedEventHandler(object sender, ZwrocListeSrwUrzadzeniaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZwrocListeSrwUrzadzeniaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZwrocListeSrwUrzadzeniaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void ZwrocListeSrwUrzRodzParCompletedEventHandler(object sender, ZwrocListeSrwUrzRodzParCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZwrocListeSrwUrzRodzParCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZwrocListeSrwUrzRodzParCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void ZwrocListeSrwUrzParDefCompletedEventHandler(object sender, ZwrocListeSrwUrzParDefCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZwrocListeSrwUrzParDefCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZwrocListeSrwUrzParDefCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

@@ -86,6 +86,46 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ZwrocListeSrwUrzRodzaje">
+        <s:complexType />
+      </s:element>
+      <s:element name="ZwrocListeSrwUrzRodzajeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZwrocListeSrwUrzRodzajeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZwrocListeSrwUrzadzenia">
+        <s:complexType />
+      </s:element>
+      <s:element name="ZwrocListeSrwUrzadzeniaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZwrocListeSrwUrzadzeniaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZwrocListeSrwUrzRodzPar">
+        <s:complexType />
+      </s:element>
+      <s:element name="ZwrocListeSrwUrzRodzParResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZwrocListeSrwUrzRodzParResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZwrocListeSrwUrzParDef">
+        <s:complexType />
+      </s:element>
+      <s:element name="ZwrocListeSrwUrzParDefResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZwrocListeSrwUrzParDefResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ZwrocListePodpisow">
         <s:complexType />
       </s:element>
@@ -267,6 +307,30 @@
   <wsdl:message name="ZwrocListeTwrKartySoapOut">
     <wsdl:part name="parameters" element="tns:ZwrocListeTwrKartyResponse" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzRodzajeSoapIn">
+    <wsdl:part name="parameters" element="tns:ZwrocListeSrwUrzRodzaje" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzRodzajeSoapOut">
+    <wsdl:part name="parameters" element="tns:ZwrocListeSrwUrzRodzajeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzadzeniaSoapIn">
+    <wsdl:part name="parameters" element="tns:ZwrocListeSrwUrzadzenia" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzadzeniaSoapOut">
+    <wsdl:part name="parameters" element="tns:ZwrocListeSrwUrzadzeniaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzRodzParSoapIn">
+    <wsdl:part name="parameters" element="tns:ZwrocListeSrwUrzRodzPar" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzRodzParSoapOut">
+    <wsdl:part name="parameters" element="tns:ZwrocListeSrwUrzRodzParResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzParDefSoapIn">
+    <wsdl:part name="parameters" element="tns:ZwrocListeSrwUrzParDef" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzParDefSoapOut">
+    <wsdl:part name="parameters" element="tns:ZwrocListeSrwUrzParDefResponse" />
+  </wsdl:message>
   <wsdl:message name="ZwrocListePodpisowSoapIn">
     <wsdl:part name="parameters" element="tns:ZwrocListePodpisow" />
   </wsdl:message>
@@ -367,6 +431,22 @@
   <wsdl:message name="ZwrocListeTwrKartyHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzRodzajeHttpGetIn" />
+  <wsdl:message name="ZwrocListeSrwUrzRodzajeHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzadzeniaHttpGetIn" />
+  <wsdl:message name="ZwrocListeSrwUrzadzeniaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzRodzParHttpGetIn" />
+  <wsdl:message name="ZwrocListeSrwUrzRodzParHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzParDefHttpGetIn" />
+  <wsdl:message name="ZwrocListeSrwUrzParDefHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="ZwrocListePodpisowHttpGetIn" />
   <wsdl:message name="ZwrocListePodpisowHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
@@ -453,6 +533,22 @@
   </wsdl:message>
   <wsdl:message name="ZwrocListeTwrKartyHttpPostIn" />
   <wsdl:message name="ZwrocListeTwrKartyHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzRodzajeHttpPostIn" />
+  <wsdl:message name="ZwrocListeSrwUrzRodzajeHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzadzeniaHttpPostIn" />
+  <wsdl:message name="ZwrocListeSrwUrzadzeniaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzRodzParHttpPostIn" />
+  <wsdl:message name="ZwrocListeSrwUrzRodzParHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZwrocListeSrwUrzParDefHttpPostIn" />
+  <wsdl:message name="ZwrocListeSrwUrzParDefHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="ZwrocListePodpisowHttpPostIn" />
@@ -549,6 +645,26 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie TwrKartyTable</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeTwrKartySoapIn" />
       <wsdl:output message="tns:ZwrocListeTwrKartySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzaje">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwUrzRodzaje</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeSrwUrzRodzajeSoapIn" />
+      <wsdl:output message="tns:ZwrocListeSrwUrzRodzajeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzadzenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwUrzRodzaje</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeSrwUrzadzeniaSoapIn" />
+      <wsdl:output message="tns:ZwrocListeSrwUrzadzeniaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzPar">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwUrzRodzPar</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeSrwUrzRodzParSoapIn" />
+      <wsdl:output message="tns:ZwrocListeSrwUrzRodzParSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzParDef">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwUrzParDef</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeSrwUrzParDefSoapIn" />
+      <wsdl:output message="tns:ZwrocListeSrwUrzParDefSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListePodpisow">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcPodpisTable</wsdl:documentation>
@@ -647,6 +763,26 @@
       <wsdl:input message="tns:ZwrocListeTwrKartyHttpGetIn" />
       <wsdl:output message="tns:ZwrocListeTwrKartyHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzaje">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwUrzRodzaje</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeSrwUrzRodzajeHttpGetIn" />
+      <wsdl:output message="tns:ZwrocListeSrwUrzRodzajeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzadzenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwUrzRodzaje</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeSrwUrzadzeniaHttpGetIn" />
+      <wsdl:output message="tns:ZwrocListeSrwUrzadzeniaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzPar">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwUrzRodzPar</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeSrwUrzRodzParHttpGetIn" />
+      <wsdl:output message="tns:ZwrocListeSrwUrzRodzParHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzParDef">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwUrzParDef</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeSrwUrzParDefHttpGetIn" />
+      <wsdl:output message="tns:ZwrocListeSrwUrzParDefHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="ZwrocListePodpisow">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcPodpisTable</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListePodpisowHttpGetIn" />
@@ -743,6 +879,26 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie TwrKartyTable</wsdl:documentation>
       <wsdl:input message="tns:ZwrocListeTwrKartyHttpPostIn" />
       <wsdl:output message="tns:ZwrocListeTwrKartyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzaje">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwUrzRodzaje</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeSrwUrzRodzajeHttpPostIn" />
+      <wsdl:output message="tns:ZwrocListeSrwUrzRodzajeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzadzenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwUrzRodzaje</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeSrwUrzadzeniaHttpPostIn" />
+      <wsdl:output message="tns:ZwrocListeSrwUrzadzeniaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzPar">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwUrzRodzPar</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeSrwUrzRodzParHttpPostIn" />
+      <wsdl:output message="tns:ZwrocListeSrwUrzRodzParHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzParDef">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwUrzParDef</wsdl:documentation>
+      <wsdl:input message="tns:ZwrocListeSrwUrzParDefHttpPostIn" />
+      <wsdl:output message="tns:ZwrocListeSrwUrzParDefHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="ZwrocListePodpisow">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pozwala na wygenerowanie SrwZlcPodpisTable</wsdl:documentation>
@@ -867,6 +1023,42 @@
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeTwrKarty">
       <soap:operation soapAction="galsoftsrv/ZwrocListeTwrKarty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzaje">
+      <soap:operation soapAction="galsoftsrv/ZwrocListeSrwUrzRodzaje" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzadzenia">
+      <soap:operation soapAction="galsoftsrv/ZwrocListeSrwUrzadzenia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzPar">
+      <soap:operation soapAction="galsoftsrv/ZwrocListeSrwUrzRodzPar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzParDef">
+      <soap:operation soapAction="galsoftsrv/ZwrocListeSrwUrzParDef" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1048,6 +1240,42 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzaje">
+      <soap12:operation soapAction="galsoftsrv/ZwrocListeSrwUrzRodzaje" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzadzenia">
+      <soap12:operation soapAction="galsoftsrv/ZwrocListeSrwUrzadzenia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzPar">
+      <soap12:operation soapAction="galsoftsrv/ZwrocListeSrwUrzRodzPar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzParDef">
+      <soap12:operation soapAction="galsoftsrv/ZwrocListeSrwUrzParDef" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ZwrocListePodpisow">
       <soap12:operation soapAction="galsoftsrv/ZwrocListePodpisow" style="document" />
       <wsdl:input>
@@ -1222,6 +1450,42 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzaje">
+      <http:operation location="/ZwrocListeSrwUrzRodzaje" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzadzenia">
+      <http:operation location="/ZwrocListeSrwUrzadzenia" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzPar">
+      <http:operation location="/ZwrocListeSrwUrzRodzPar" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzParDef">
+      <http:operation location="/ZwrocListeSrwUrzParDef" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ZwrocListePodpisow">
       <http:operation location="/ZwrocListePodpisow" />
       <wsdl:input>
@@ -1387,6 +1651,42 @@
     </wsdl:operation>
     <wsdl:operation name="ZwrocListeTwrKarty">
       <http:operation location="/ZwrocListeTwrKarty" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzaje">
+      <http:operation location="/ZwrocListeSrwUrzRodzaje" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzadzenia">
+      <http:operation location="/ZwrocListeSrwUrzadzenia" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzRodzPar">
+      <http:operation location="/ZwrocListeSrwUrzRodzPar" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZwrocListeSrwUrzParDef">
+      <http:operation location="/ZwrocListeSrwUrzParDef" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

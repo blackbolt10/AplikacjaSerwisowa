@@ -658,7 +658,7 @@ namespace AplikacjaSerwisowa
                    zapParam = " where SZN_Dokument like '%"+filtr+ "%' or SZN_DataWystawienia like '%" + filtr + "%' or SZN_KntNumer in "+kntKartyString+ " or SZN_KnANumer in "+kntAdresyString;
                 }
 
-                List<SrwZlcNag> result = db.Query<SrwZlcNag>("select * from SrwZlcNag "+ zapParam +" order by SZN_DataWystawienia desc");
+                List<SrwZlcNag> result = db.Query<SrwZlcNag>("select * from SrwZlcNag "+ zapParam + " order by SZN_DataWystawienia desc, SZN_Id asc");
 
                 if(result != null)
                 {

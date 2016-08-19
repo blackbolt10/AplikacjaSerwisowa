@@ -106,7 +106,7 @@ namespace AplikacjaSerwisowa
             }
             else
             {
-                iloscEditText.Text = "0";
+                iloscEditText.Text = "1";
             }
 
             return poprawny;

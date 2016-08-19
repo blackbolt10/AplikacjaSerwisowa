@@ -56,15 +56,21 @@ namespace AplikacjaSerwisowa
 
         private void DataRealizButton_Click(object sender, EventArgs e)
         {
+            String dataWystawienia = dataWystawEditText.Text;
+
             Intent noweZlcenieDataIntent = new Intent(this.Activity, typeof(noweZlecenieDatePickerActivity));
-            noweZlcenieDataIntent.PutExtra("DataWystawienia", "0");
+            noweZlcenieDataIntent.PutExtra("czyWystawienia", "0");
+            noweZlcenieDataIntent.PutExtra("dataWystawienia", dataWystawienia);
             StartActivity(noweZlcenieDataIntent);
         }
 
         private void DataWystButton_Click(object sender, EventArgs e)
         {
+            String dataWystawienia = dataWystawEditText.Text;
+
             Intent noweZlcenieDataIntent = new Intent(this.Activity, typeof(noweZlecenieDatePickerActivity));
-            noweZlcenieDataIntent.PutExtra("DataWystawienia", "1");
+            noweZlcenieDataIntent.PutExtra("czyWystawienia", "1");
+            noweZlcenieDataIntent.PutExtra("dataWystawienia", dataWystawienia);
             StartActivity(noweZlcenieDataIntent);
         }
 

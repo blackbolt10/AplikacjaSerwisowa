@@ -124,9 +124,12 @@ namespace AplikacjaSerwisowa
 
         private void pobieranieDanychWebService()
         {
-            if(wysylanieThread.IsAlive)
+            if(wysylanieThread != null)
             {
-                wysylanieThread.Join();
+                if(wysylanieThread.IsAlive)
+                {
+                    wysylanieThread.Join();
+                }
             }
 
             RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 1/7..."));

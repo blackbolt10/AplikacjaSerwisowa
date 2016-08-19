@@ -90,11 +90,13 @@ namespace AplikacjaSerwisowa
             if(noweZlecenie_Activity.Knt_GIDNumer == -1)
             {
                 mGlownyLinearLayout.Visibility = ViewStates.Gone;
+                mGlownyButton.Text = "Dodaj";
                 mDocelowyButton.Enabled = false;
             }
             else
             {
                 mGlownyLinearLayout.Visibility = ViewStates.Visible;
+                mGlownyButton.Text = "Zmień";
                 mDocelowyButton.Enabled = true;
                 mAkronimGlownyTextView.Text = noweZlecenie_Activity.akronimGlowny;
                 mNazwaGlownyTextView.Text = noweZlecenie_Activity.NazwaGlowny;
@@ -103,10 +105,12 @@ namespace AplikacjaSerwisowa
             if(noweZlecenie_Activity.Kna_GIDNumer == -1)
             {
                 mDocelowyLinearLayout.Visibility = ViewStates.Gone;
+                mDocelowyButton.Text = "Dodaj";
             }
             else
             {
                 mDocelowyLinearLayout.Visibility = ViewStates.Visible;
+                mDocelowyButton.Text = "Zmień";
                 mAkronimDocelowyTextView.Text = noweZlecenie_Activity.akronimDocelowy;
                 mNazwaDocelowyTextView.Text = noweZlecenie_Activity.NazwaDocelowy;
             }

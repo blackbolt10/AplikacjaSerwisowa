@@ -18,7 +18,7 @@ using System.IO;
 
 namespace AplikacjaSerwisowa
 {
-    [Activity(Label = "noweZlecenieZapisz")]
+    [Activity(Label = "Podpis")]
     public class noweZlecenieZapisz : Activity
     {
         private Button zapiszButton;

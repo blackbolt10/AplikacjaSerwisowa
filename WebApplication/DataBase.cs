@@ -89,7 +89,7 @@ namespace WebApplication
             return wynik;
         }
 
-        internal List<SrwZlcPodpisTable> wygenerujListeSrwZlcPodpis()
+        public List<SrwZlcPodpisTable> wygenerujListeSrwZlcPodpis()
         {
             List<SrwZlcPodpisTable> result = new List<SrwZlcPodpisTable>();
             
@@ -122,6 +122,159 @@ namespace WebApplication
                 String OsobaPodpisujaca = pomDataTable.Rows[i]["GZP_OsobaPodpisujaca"].ToString();
 
                 result.Add(new SrwZlcPodpisTable(GZP_Id, GZP_Synchronizacja, Podpis,OsobaPodpisujaca));
+            }
+            return result;
+        }
+
+        public List<SrwUrzParDef> wygenerujListeSrwUrzParDef()
+        {
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = @"select SUD_Id, SUD_Nazwa, SUD_Format, SUD_Archiwalna from CDN.SrwUrzParDef";
+
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return wygenerujListeSrwUrzParDef(pomDataTable);
+            }
+            else
+            {
+                return new List<SrwUrzParDef>();
+            }
+        }
+
+        private List<SrwUrzParDef> wygenerujListeSrwUrzParDef(DataTable pomDataTable)
+        {
+            List<SrwUrzParDef> result = new List<SrwUrzParDef>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                int SUD_Id = Convert.ToInt32(pomDataTable.Rows[i]["SUD_Id"].ToString());
+                String SUD_Nazwa = pomDataTable.Rows[i]["SUD_Nazwa"].ToString();
+                String SUD_Format = pomDataTable.Rows[i]["SUD_Format"].ToString();
+                int SUD_Archiwalna = Convert.ToInt32(pomDataTable.Rows[i]["SUD_Archiwalna"].ToString());
+
+                result.Add(new SrwUrzParDef(SUD_Id, SUD_Nazwa, SUD_Format, SUD_Archiwalna));
+            }
+            return result;
+        }
+
+        public List<SrwUrzRodzaje> wygenerujListeSrwUrzRodzaje()
+        {
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = @"SELECT SUR_Id, SUR_Kod, SUR_Nazwa FROM CDN.SrwUrzRodzaje";
+
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return wygenerujListeSrwUrzRodzaje(pomDataTable);
+            }
+            else
+            {
+                return new List<SrwUrzRodzaje>();
+            }
+        }
+
+        private List<SrwUrzRodzaje> wygenerujListeSrwUrzRodzaje(DataTable pomDataTable)
+        {
+            List<SrwUrzRodzaje> result = new List<SrwUrzRodzaje>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                int SUR_Id = Convert.ToInt32(pomDataTable.Rows[i]["SUR_Id"].ToString());
+                String SUR_Kod = pomDataTable.Rows[i]["SUR_Kod"].ToString();
+                String SUR_Nazwa = pomDataTable.Rows[i]["SUR_Nazwa"].ToString();
+
+                result.Add(new SrwUrzRodzaje(SUR_Id, SUR_Kod, SUR_Nazwa));
+            }
+            return result;
+        }
+
+        public List<SrwUrzRodzPar> wygenerujListeSrwUrzRodzPar()
+        {
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = @"select SRP_Id, SRP_SURId, SRP_SUDId, SRP_Lp from CDN.SrwUrzRodzPar";
+
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return wygenerujListeSrwUrzRodzPar(pomDataTable);
+            }
+            else
+            {
+                return new List<SrwUrzRodzPar>();
+            }
+        }
+
+        private List<SrwUrzRodzPar> wygenerujListeSrwUrzRodzPar(DataTable pomDataTable)
+        {
+            List<SrwUrzRodzPar> result = new List<SrwUrzRodzPar>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                int SRP_Id = Convert.ToInt32(pomDataTable.Rows[i]["SRP_Id"].ToString());
+                int SRP_SURId = Convert.ToInt32(pomDataTable.Rows[i]["SRP_SURId"].ToString());
+                int SRP_SUDId = Convert.ToInt32(pomDataTable.Rows[i]["SRP_SUDId"].ToString());
+                int SRP_Lp = Convert.ToInt32(pomDataTable.Rows[i]["SRP_Lp"].ToString());
+
+                result.Add(new SrwUrzRodzPar(SRP_Id, SRP_SURId, SRP_SUDId, SRP_Lp));
+            }
+            return result;
+        }
+    
+
+        public List<SrwUrzadzenia> wygenerujListeSrwUrzadzenia()
+        {
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = @"select SrU_Id, SrU_SURId, Sru_Nazwa, SrU_Opis, SrU_Archiwalne from cdn.SrwUrzadzenia";
+
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return wygenerujListeSrwUrzadzenia(pomDataTable);
+            }
+            else
+            {
+                return new List<SrwUrzadzenia>();
+            }
+        }
+
+        private List<SrwUrzadzenia> wygenerujListeSrwUrzadzenia(DataTable pomDataTable)
+        {
+            List<SrwUrzadzenia> result = new List<SrwUrzadzenia>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                int SrU_Id = Convert.ToInt32(pomDataTable.Rows[i]["SrU_Id"].ToString());
+                int SrU_SURId = Convert.ToInt32(pomDataTable.Rows[i]["SrU_SURId"].ToString());
+                String Sru_Nazwa = pomDataTable.Rows[i]["Sru_Nazwa"].ToString();
+                String SrU_Opis = pomDataTable.Rows[i]["SrU_Opis"].ToString();
+                int SrU_Archiwalne = Convert.ToInt32(pomDataTable.Rows[i]["SrU_Archiwalne"].ToString());
+
+                result.Add(new SrwUrzadzenia(SrU_Id, SrU_SURId, Sru_Nazwa, SrU_Opis, SrU_Archiwalne));
             }
             return result;
         }
@@ -445,8 +598,6 @@ namespace WebApplication
 
         public List<TwrKartyTable> wygenerujListeTwrKarty()
         {
-            Exception exc = new Exception();
-
             DataTable pomDataTable = new DataTable();
             try
             {
@@ -456,10 +607,7 @@ namespace WebApplication
                 SqlDataAdapter da = zapytanie(zapytanieString);
                 da.Fill(pomDataTable);
             }
-            catch(Exception _exc)
-            {
-                exc = _exc;
-            }
+            catch(Exception) { }
 
             if(pomDataTable.Rows.Count > 0)
             {
@@ -467,9 +615,7 @@ namespace WebApplication
             }
             else
             {
-                List<TwrKartyTable> result = new List<TwrKartyTable>();
-                result.Add(new TwrKartyTable(0, 0, exc.Message, 0, "", "", ""));
-                return result;
+                return new List<TwrKartyTable>();
             }
         }
         private List<TwrKartyTable> wygenerujListeTwrKarty(DataTable pomDataTable)

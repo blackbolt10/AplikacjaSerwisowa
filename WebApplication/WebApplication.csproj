@@ -88,10 +88,14 @@
     <Compile Include="Struktury\Operatorzy.cs" />
     <Compile Include="Struktury\KntAdresy.cs" />
     <Compile Include="Struktury\KntKarty.cs" />
+    <Compile Include="Struktury\SrwUrzParDef.cs" />
+    <Compile Include="Struktury\SrwUrzRodzPar.cs" />
+    <Compile Include="Struktury\SrwUrzadzenia.cs" />
     <Compile Include="Struktury\SrwZlcCzynnoci.cs" />
     <Compile Include="Struktury\SrwZlcNag.cs" />
     <Compile Include="Struktury\SrwZlcPodpis.cs" />
     <Compile Include="Struktury\SrwZlcSkladniki.cs" />
+    <Compile Include="Struktury\SrwUrzRodzaje.cs" />
     <Compile Include="Struktury\TwrKartyTable.cs" />
     <Compile Include="WebService.asmx.cs">
       <DependentUpon>WebService.asmx</DependentUpon>

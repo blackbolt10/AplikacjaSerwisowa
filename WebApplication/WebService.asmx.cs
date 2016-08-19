@@ -92,6 +92,46 @@ namespace WebApplication
             return new JavaScriptSerializer().Serialize(twrKartyList);
         }
 
+        [WebMethod(Description = "Pozwala na wygenerowanie SrwUrzRodzaje")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ZwrocListeSrwUrzRodzaje()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<SrwUrzRodzaje> SrwUrzRodzajeList = dataBaseObject.wygenerujListeSrwUrzRodzaje();
+
+            return new JavaScriptSerializer().Serialize(SrwUrzRodzajeList);
+        }
+
+        [WebMethod(Description = "Pozwala na wygenerowanie SrwUrzRodzaje")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ZwrocListeSrwUrzadzenia()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<SrwUrzadzenia> SrwUrzadzeniaList = dataBaseObject.wygenerujListeSrwUrzadzenia();
+
+            return new JavaScriptSerializer().Serialize(SrwUrzadzeniaList);
+        }
+
+        [WebMethod(Description = "Pozwala na wygenerowanie SrwUrzRodzPar")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ZwrocListeSrwUrzRodzPar()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<SrwUrzRodzPar> SrwUrzRodzParList = dataBaseObject.wygenerujListeSrwUrzRodzPar();
+
+            return new JavaScriptSerializer().Serialize(SrwUrzRodzParList);
+        }
+
+        [WebMethod(Description = "Pozwala na wygenerowanie SrwUrzParDef")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ZwrocListeSrwUrzParDef()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<SrwUrzParDef> SrwUrzParDefList = dataBaseObject.wygenerujListeSrwUrzParDef();
+
+            return new JavaScriptSerializer().Serialize(SrwUrzParDefList);
+        }
+
         [WebMethod(Description = "Pozwala na wygenerowanie SrwZlcPodpisTable")]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string ZwrocListePodpisow()

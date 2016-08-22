@@ -26,7 +26,6 @@ namespace AplikacjaSerwisowa
     public class synchronizacja_Activity : Activity
     {
         private Button synchronizacja_Button, wyslij_Button;
-        private AplikacjaSerwisowa.kwronski.WebService kwronskiService;
         private ProgressDialog progressDialog, progressDialogWysylanie;
         private Thread wysylanieThread;
 
@@ -40,10 +39,8 @@ namespace AplikacjaSerwisowa
 
             wyslij_Button = FindViewById<Button>(Resource.Id.SynchronizacjaWyslijDaneButton);
             wyslij_Button.Click += delegate { synchronizacjaWysylanie(); };
-            
-            // Create your application here
 
-            kwronskiService = new AplikacjaSerwisowa.kwronski.WebService();
+            // Create your application here
         }
 
         private void messagebox(String tekst, String tytul = "", Int32 icon = 1)
@@ -132,100 +129,118 @@ namespace AplikacjaSerwisowa
                 }
             }
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 1/10..."));
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie"));
             RunOnUiThread(() => progressDialog.SetMessage("Pobieranie nag³ówków kontrahentów..."));
-            String kntKartyString = kwronskiService.ZwrocListeKntKarty();
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 11);
+            String kntKartyString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListeKntKarty();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie"));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie adresów kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress++);
+            String kntAdresyString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListeKntAdresy();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie"));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie nag³ówków zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress++);
+            String serwisoweZlecenniaNaglowkiString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListeZlecenSerwisowychNaglowki();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie"));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie czynnosci zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress++);
+            String srwZlcCzynnosciString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListeZlecenSerwisowychCzynnosci();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie"));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie skladniki zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress++);
+            String srwZlcSkladnikiString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListeZlecenSerwisowychSkladniki();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie"));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie kart towarowych..."));
+            RunOnUiThread(() => progressDialog.Progress++);
+            String twrKartyString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListeTwrKarty();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie"));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie podpisów..."));
+            RunOnUiThread(() => progressDialog.Progress++);
+            String podpisyString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListePodpisow();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie"));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress++);
+            String urzadeniaString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListeSrwUrzadzenia();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie"));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie definicji parametrów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress++);
+            String SrwUrzParDefString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListeSrwUrzParDef();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie"));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie definicji rodzajów parametrów..."));
+            RunOnUiThread(() => progressDialog.Progress++);
+            String SrwUrzRodzParString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListeSrwUrzRodzPar();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie"));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie definicji rodzajów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress++);
+            String SrwUrzRodzajeString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListeSrwUrzRodzaje();
+
+
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 1/10"));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
 
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy nag³ówków kontrahentów..."));
             tworzenieBazyKntKarty(kntKartyString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 2/10..."));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie adresów kontrahentów..."));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 2/11"));
             RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-            String kntAdresyString = kwronskiService.ZwrocListeKntAdresy();
-
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy adresów kontrahentów..."));
             tworzenieBazyKntAdresy(kntAdresyString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 3/10..."));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie nag³ówków zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 3/11"));
             RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-            String serwisoweZlecenniaNaglowkiString = kwronskiService.ZwrocListeZlecenSerwisowychNaglowki();
-
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy nag³ówków zleceñ serwisowych..."));
             tworzenieBazySerwisoweZleceniaNaglowki(serwisoweZlecenniaNaglowkiString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 4/10..."));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie czynnosci zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 4/11"));
             RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-            String srwZlcCzynnosciString = kwronskiService.ZwrocListeZlecenSerwisowychCzynnosci();
-
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy czynnosci zleceñ serwisowych..."));
             tworzenieBazySrwZlcCzynnosci(srwZlcCzynnosciString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 5/10..."));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie skladniki zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 5/11"));
             RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-            String srwZlcSkladnikiString = kwronskiService.ZwrocListeZlecenSerwisowychSkladniki();
-
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy skladniki zleceñ serwisowych..."));
             tworzenieBazySrwZlcSkladniki(srwZlcSkladnikiString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 6/10..."));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie kart towarowych..."));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 6/11"));
             RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-            String twrKartyString = kwronskiService.ZwrocListeTwrKarty();
-
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy kart towarowych..."));
             tworzenieBazyTwrKarty(twrKartyString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 7/10..."));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie podpisów..."));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 7/11"));
             RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-            String podpisyString = kwronskiService.ZwrocListePodpisow();
-
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy podpisów..."));
             tworzenieBazySrwZlcPodpisy(podpisyString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 8/10..."));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 8/11"));
             RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-            String urzadeniaString = kwronskiService.ZwrocListeSrwUrzadzenia();
-            
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy urz¹dzeñ..."));
             tworzenieBazySrwUrzadzenia(urzadeniaString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 8/10..."));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie definicji parametrów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 9/11"));
             RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-            String SrwUrzParDefString = kwronskiService.ZwrocListeSrwUrzParDef();
-
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy definicji parametrów urz¹dzeñ..."));
             tworzenieBazySrwUrzParDef(SrwUrzParDefString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 9/10..."));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie definicji rodzajów parametrów..."));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 10/11"));
             RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-            String SrwUrzRodzParString = kwronskiService.ZwrocListeSrwUrzRodzPar();
-
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy definicji rodzajów parametrów..."));
             tworzenieBazySrwUrzRodzPar(SrwUrzRodzParString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie 10/10..."));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie definicji rodzajów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 11/11"));
             RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-            String SrwUrzRodzajeString = kwronskiService.ZwrocListeSrwUrzRodzaje();
-
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy definicji rodzajów urz¹dzeñ..."));
             tworzenieBazySrwUrzRodzaje(SrwUrzRodzajeString);
 
@@ -623,7 +638,7 @@ namespace AplikacjaSerwisowa
                 db.SrwZlcNag_OznaczWyslane(srwZlcNagList, 2);
 
                 RunOnUiThread(() => progressDialogWysylanie.SetMessage("Oczekiwanie na potwierdzenie odebrania danych przez serwer."));
-                String result = kwronskiService.synchronizujSrwZlcNag(jsonOut);
+                String result = new AplikacjaSerwisowa.kwronski.WebService().synchronizujSrwZlcNag(jsonOut);
 
                 RunOnUiThread(() => progressDialogWysylanie.SetMessage("Przetwarzanie odwpowiedz serwera."));
                 if(result != "[]")
@@ -666,7 +681,7 @@ namespace AplikacjaSerwisowa
                 db.SrwZlcCzynnosci_OznaczWyslane(srwZlcCzynnosciList, 2);
 
                 RunOnUiThread(() => progressDialogWysylanie.SetMessage("Oczekiwanie na potwierdzenie odebrania danych przez serwer."));
-                String result = kwronskiService.synchronizujSrwZlcCzynnosci(jsonOut);
+                String result = new AplikacjaSerwisowa.kwronski.WebService().synchronizujSrwZlcCzynnosci(jsonOut);
 
                 RunOnUiThread(() => progressDialogWysylanie.SetMessage("Przetwarzanie odwpowiedz serwera."));
                 if(result != "[]")
@@ -709,7 +724,7 @@ namespace AplikacjaSerwisowa
                 db.SrwZlcSkladniki_OznaczWyslane(srwZlcSkladnikiList, 2);
 
                 RunOnUiThread(() => progressDialogWysylanie.SetMessage("Oczekiwanie na potwierdzenie odebrania danych przez serwer."));
-                String result = kwronskiService.synchronizujSrwZlcSkladniki(jsonOut);
+                String result = new AplikacjaSerwisowa.kwronski.WebService().synchronizujSrwZlcSkladniki(jsonOut);
 
                 RunOnUiThread(() => progressDialogWysylanie.SetMessage("Przetwarzanie odwpowiedz serwera."));
                 if(result != "[]")
@@ -774,8 +789,8 @@ namespace AplikacjaSerwisowa
 /*
  * private void synchronizacjaGalsoft()
         {
-            AplikacjaSerwisowa.kwronski.WebService kwronskiService = new AplikacjaSerwisowa.kwronski.WebService();
-            String teasfgsgsagsa = kwronskiService.HelloWorld("lama");
+            AplikacjaSerwisowa.kwronski.WebService new AplikacjaSerwisowa.kwronski.WebService() = new AplikacjaSerwisowa.kwronski.WebService();
+            String teasfgsgsagsa = new AplikacjaSerwisowa.kwronski.WebService().HelloWorld("lama");
 
 
             //string url = @"http://91.196.8.98/AplikacjaSerwisowa/WebService.asmx/test";

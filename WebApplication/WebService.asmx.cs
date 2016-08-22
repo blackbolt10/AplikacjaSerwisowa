@@ -39,7 +39,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<KntAdresy> listaKntAdresy = dataBaseObject.wygenerujListeKntAdresy();
 
-            return new JavaScriptSerializer().Serialize(listaKntAdresy);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(listaKntAdresy);
         }
 
         [WebMethod(Description = "Pozwala na wygenerowanie KntKarty")]
@@ -49,7 +52,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<KntKarty> listaKntKarty = dataBaseObject.wygenerujListeKntKarty();
 
-            return new JavaScriptSerializer().Serialize(listaKntKarty);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(listaKntKarty);
         }
 
         [WebMethod(Description = "Pozwala na wygenerowanie SrwZlcNag")]
@@ -59,7 +65,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<SrwZlcNag> listaSerwisoweZlecenNaglowki = dataBaseObject.wygenerujListeSerwisowychZlecenNaglowki();
 
-            return new JavaScriptSerializer().Serialize(listaSerwisoweZlecenNaglowki);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(listaSerwisoweZlecenNaglowki);
         }
 
         [WebMethod(Description = "Pozwala na wygenerowanie SrwZlcCzynnosci")]
@@ -69,7 +78,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<SrwZlcCzynnosci> listaSerwisoweZlecenCzynnosci = dataBaseObject.wygenerujListeSrwZlcCzynnosci();
 
-            return new JavaScriptSerializer().Serialize(listaSerwisoweZlecenCzynnosci);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(listaSerwisoweZlecenCzynnosci);
         }
 
         [WebMethod(Description = "Pozwala na wygenerowanie SrwZlcSkladniki")]
@@ -79,7 +91,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<SrwZlcSkladniki> listaSerwisoweZlecenCzynnosci = dataBaseObject.wygenerujListeSrwZlcSkladniki();
 
-            return new JavaScriptSerializer().Serialize(listaSerwisoweZlecenCzynnosci);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(listaSerwisoweZlecenCzynnosci);
         }
 
         [WebMethod(Description = "Pozwala na wygenerowanie TwrKartyTable")]
@@ -89,7 +104,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<TwrKartyTable> twrKartyList = dataBaseObject.wygenerujListeTwrKarty();
 
-            return new JavaScriptSerializer().Serialize(twrKartyList);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(twrKartyList);
         }
 
         [WebMethod(Description = "Pozwala na wygenerowanie SrwUrzRodzaje")]
@@ -99,7 +117,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<SrwUrzRodzaje> SrwUrzRodzajeList = dataBaseObject.wygenerujListeSrwUrzRodzaje();
 
-            return new JavaScriptSerializer().Serialize(SrwUrzRodzajeList);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwUrzRodzajeList);
         }
 
         [WebMethod(Description = "Pozwala na wygenerowanie SrwUrzRodzaje")]
@@ -109,7 +130,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<SrwUrzadzenia> SrwUrzadzeniaList = dataBaseObject.wygenerujListeSrwUrzadzenia();
 
-            return new JavaScriptSerializer().Serialize(SrwUrzadzeniaList);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwUrzadzeniaList);
         }
 
         [WebMethod(Description = "Pozwala na wygenerowanie SrwUrzRodzPar")]
@@ -119,7 +143,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<SrwUrzRodzPar> SrwUrzRodzParList = dataBaseObject.wygenerujListeSrwUrzRodzPar();
 
-            return new JavaScriptSerializer().Serialize(SrwUrzRodzParList);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwUrzRodzParList);
         }
 
         [WebMethod(Description = "Pozwala na wygenerowanie SrwUrzParDef")]
@@ -129,7 +156,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<SrwUrzParDef> SrwUrzParDefList = dataBaseObject.wygenerujListeSrwUrzParDef();
 
-            return new JavaScriptSerializer().Serialize(SrwUrzParDefList);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwUrzParDefList);
         }
 
         [WebMethod(Description = "Pozwala na wygenerowanie SrwZlcPodpisTable")]
@@ -139,7 +169,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<SrwZlcPodpisTable> podpisyList = dataBaseObject.wygenerujListeSrwZlcPodpis();
 
-            return new JavaScriptSerializer().Serialize(podpisyList);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(podpisyList);
         }
 
         [WebMethod(Description = "Pozwala na synchronizację SrwZlcNag z urządzenia")]
@@ -149,7 +182,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<int> output = dataBaseObject.synchronizujSrwZlcNag(inputJSON);
 
-            return new JavaScriptSerializer().Serialize(output);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
         }
 
         [WebMethod(Description = "Pozwala na synchronizację SrwZlcCzynnosci z urządzenia")]
@@ -159,7 +195,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<int> output = dataBaseObject.synchronizujSrwZlcCzynnosci(inputJSON);
 
-            return new JavaScriptSerializer().Serialize(output);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
         }
 
         [WebMethod(Description = "Pozwala na synchronizację SrwZlcSkladniki z urządzenia")]
@@ -169,7 +208,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<int> output = dataBaseObject.synchronizujSrwZlcSkladniki(inputJSON);
 
-            return new JavaScriptSerializer().Serialize(output);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
         }
 
         [WebMethod(Description = "Pozwala na wygenerowanie listy Operatorów")]
@@ -179,7 +221,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<Operatorzy> output = dataBaseObject.wygenerujListeOperatorow();
 
-            return new JavaScriptSerializer().Serialize(output);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
         }
 
         [WebMethod(Description = "... do GalSrv SrwZlcNag")]
@@ -189,7 +234,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<SrwZlcNag> output = dataBaseObject.GalSrv_Generuj_SrwZlcNag();
 
-            return new JavaScriptSerializer().Serialize(output);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
         }
 
         [WebMethod(Description = "GalSrv SrwZlcNagPotwierdzenie")]
@@ -208,7 +256,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<SrwZlcCzynnosci> output = dataBaseObject.GalSrv_Generuj_SrwZlcCzynnosci();
 
-            return new JavaScriptSerializer().Serialize(output);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
         }
 
         [WebMethod(Description = "GalSrv SrwZlcCzynnosciPotwierdzenie")]
@@ -227,7 +278,10 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             List<SrwZlcSkladniki> output = dataBaseObject.GalSrv_Generuj_SrwZlcSkladniki();
 
-            return new JavaScriptSerializer().Serialize(output);
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
         }
 
         [WebMethod(Description = "GalSrv SrwZlcSkladnikiPotwierdzenie")]

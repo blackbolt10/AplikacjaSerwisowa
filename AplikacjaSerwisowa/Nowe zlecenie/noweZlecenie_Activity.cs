@@ -26,6 +26,7 @@ namespace AplikacjaSerwisowa
 
         public static List<TwrKartyTable> skladnikiList;
         public static List<TwrKartyTable> czynnosciList;
+        public static List<SrwUrzadzenia> urzadzeniaList;
 
         public static Int32 Knt_GIDNumer;
         public static String akronimGlowny;
@@ -66,6 +67,7 @@ namespace AplikacjaSerwisowa
 
             skladnikiList = new List<TwrKartyTable>();
             czynnosciList = new List<TwrKartyTable>();
+            urzadzeniaList = new List<SrwUrzadzenia>();
 
             opisSrwZlcNag = "";
             ustawDaty();
@@ -160,6 +162,7 @@ namespace AplikacjaSerwisowa
             mFragmentHolder = new List<Android.Support.V4.App.Fragment>();
             mFragmentHolder.Add(new zakladkaOgolneNoweZlecenie());
             mFragmentHolder.Add(new zakladkaKontrahentNoweZlecenie());
+            mFragmentHolder.Add(new zakladkaUrzadzeniaNoweZlecenie());
             mFragmentHolder.Add(new zakladkaCzynnosciNoweZlecenie());
             mFragmentHolder.Add(new zakladkaSkladnikiNoweZlecenie());
             mFragmentHolder.Add(new zakladkaPodpisNoweZlecenie());

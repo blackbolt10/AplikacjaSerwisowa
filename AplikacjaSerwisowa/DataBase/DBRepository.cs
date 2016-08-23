@@ -1206,7 +1206,43 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
-        
+
+        public List<SrwUrzadzenia> SrwUrzadzenia_GetFilteredRecords(string filtrEditText, string filtr, bool KntFiltr, Int32 KNT_GIDNumer)
+        {
+            List<SrwUrzadzenia> output = new List<SrwUrzadzenia>();
+            try
+            {
+                string zapytanie = "select * from SrwUrzadzenia where SrU_Archiwalne <> 1";
+
+                if(filtrEditText != "")
+                {
+                    zapytanie += " and Sru_Nazwa like '%" + filtrEditText + "%'";
+                }
+
+                if(!KntFiltr)
+                {
+                    zapytanie += " and SUW_WlaNumer = " + KNT_GIDNumer;
+                }
+
+                if(filtr != "")
+                {
+                    zapytanie += " and SrU_SURId not in (" + filtr + ")";
+                }
+
+                var result = db.Query<SrwUrzadzenia>(zapytanie);
+
+                for(int i = 0; i < result.Count; i++)
+                {
+                    output.Add(result[i]);
+                }
+            }
+            catch(Exception)
+            {
+            }
+
+            return output;
+        }
+
         /*
             *---------------------------------------------------------------------------------
             *|*********************************Tabela SrwUrzParDef***************************|

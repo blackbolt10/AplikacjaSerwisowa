@@ -245,7 +245,7 @@ namespace WebApplication
             DataTable pomDataTable = new DataTable();
             try
             {
-                String zapytanieString = @"select SrU_Id, SrU_SURId, Sru_Nazwa, SrU_Opis, SrU_Archiwalne from cdn.SrwUrzadzenia";
+                String zapytanieString = @"select SU.SrU_Id, SU.SrU_SURId, SU.Sru_Kod, SU.Sru_Nazwa, SU.SrU_Opis, SU.SrU_Archiwalne, SUW.SUW_WlaNumer from CDN.SrwUrzadzenia SU join [CDN].[SrwUrzWlasc] SUW on SU.SrU_Id = SUW.SUW_SrUId";
 
                 SqlDataAdapter da = zapytanie(zapytanieString);
                 da.Fill(pomDataTable);
@@ -270,11 +270,13 @@ namespace WebApplication
             {
                 int SrU_Id = Convert.ToInt32(pomDataTable.Rows[i]["SrU_Id"].ToString());
                 int SrU_SURId = Convert.ToInt32(pomDataTable.Rows[i]["SrU_SURId"].ToString());
+                String Sru_Kod = pomDataTable.Rows[i]["Sru_Kod"].ToString();
                 String Sru_Nazwa = pomDataTable.Rows[i]["Sru_Nazwa"].ToString();
                 String SrU_Opis = pomDataTable.Rows[i]["SrU_Opis"].ToString();
                 int SrU_Archiwalne = Convert.ToInt32(pomDataTable.Rows[i]["SrU_Archiwalne"].ToString());
+                int SUW_WlaNumer = Convert.ToInt32(pomDataTable.Rows[i]["SUW_WlaNumer"].ToString());
 
-                result.Add(new SrwUrzadzenia(SrU_Id, SrU_SURId, Sru_Nazwa, SrU_Opis, SrU_Archiwalne));
+                result.Add(new SrwUrzadzenia(SrU_Id, SrU_SURId, Sru_Kod, Sru_Nazwa, SrU_Opis, SrU_Archiwalne, SUW_WlaNumer));
             }
             return result;
         }

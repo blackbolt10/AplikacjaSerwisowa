@@ -109,14 +109,17 @@
     <Compile Include="Magazyn\magazyn_Activity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="DataBase\Tabele\OperatorzyTable.cs" />
+    <Compile Include="Nowe zlecenie\listaUrzadzenia_ListViewAdapter.cs" />
     <Compile Include="Nowe zlecenie\listaKontrahentow_ListViewAdapter.cs" />
     <Compile Include="Nowe zlecenie\listaCzynnSklad_ListViewAdapter.cs" />
+    <Compile Include="Nowe zlecenie\noweZlecenieDodajUrzadzenie_Activit.cs" />
     <Compile Include="Nowe zlecenie\noweZlecenieDodajCzynnSklad_Activit.cs" />
     <Compile Include="Nowe zlecenie\noweZlecenieZapisz.cs" />
     <Compile Include="Nowe zlecenie\noweZlecenie_Activity.cs" />
     <Compile Include="Nowe zlecenie\noweZlecenieDodajKontrahenta_Activity.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\noweZlecenieDatePickerActivity.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\noweZlecenieDodajCzynnSkladIlosc_Activit.cs" />
+    <Compile Include="Nowe zlecenie\Zakładki\zakladkaUrzadzeniaNoweZlecenie.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\zakladkaCzynnosciNoweZlecenie.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\zakladkaKontrahentNoweZlecenie.cs" />
     <Compile Include="Nowe zlecenie\Zakładki\zakladkaOgolneNoweZlecenie.cs" />
@@ -207,6 +210,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\podpisListaZlecenLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\noweZlecenieDodawanieUrzadzeniaLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="Web References\kwronski\Reference.map">

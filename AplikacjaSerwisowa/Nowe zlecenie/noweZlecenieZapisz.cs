@@ -24,7 +24,9 @@ namespace AplikacjaSerwisowa
         private Button zapiszButton;
         private List<SrwZlcCzynnosci> SrwZlcCzynnosciList;
         private List<SrwZlcSkladniki> SrwZlcSkladnikiList;
+        private List<SrwZlcUrz> SrwZlcUrzadzeniaList;
         private List<TwrKartyTable> skladnikiList;
+        private List<SrwUrzadzenia> urzadzeniaList;
         private SrwZlcNag srwZlcNag;
         private SignaturePadView signature;
         private Context kontekst;        
@@ -57,6 +59,7 @@ namespace AplikacjaSerwisowa
             Boolean kontrahenci = false;
             Boolean czynnosci = false;
             Boolean skladniki = false;
+            Boolean urzadzenia = false;
             Boolean naglowki = pobierzInformacjeNaglowkowe();
 
             if(naglowki)
@@ -72,7 +75,12 @@ namespace AplikacjaSerwisowa
 
                         if(skladniki)
                         {
-                            wygenerujZlecenie();
+                            urzadzenia = pobierzUrzadzenia();
+
+                            if(urzadzenia)
+                            {
+                                wygenerujZlecenie();
+                            }
                         }
                     }
                 }
@@ -86,6 +94,7 @@ namespace AplikacjaSerwisowa
             srwZlcNag = zakladkaOgolneNoweZlecenie.pobierzNaglowek();
             srwZlcNag.SZN_Id = dbr.SrwZlcNagGenerujNoweID(this);
             srwZlcNag.SZN_Synchronizacja = 1;
+            srwZlcNag.SZN_Stan = "Niezatwierdzone";
 
             return true;
         }
@@ -160,6 +169,28 @@ namespace AplikacjaSerwisowa
             return true;
         }
 
+        private bool pobierzUrzadzenia()
+        {
+            urzadzeniaList = zakladkaUrzadzeniaNoweZlecenie.pobierzListeUrzadzen();
+            SrwZlcUrzadzeniaList = new List<SrwZlcUrz>();
+
+            if(urzadzeniaList != null)
+            {
+                for(int i = 0; i < urzadzeniaList.Count; i++)
+                {
+                    SrwZlcUrz urzadzenie = new SrwZlcUrz();
+                    urzadzenie.SZU_Id = 0;
+                    urzadzenie.SZU_Pozycja = i + 1;
+                    urzadzenie.SZU_SrUId = urzadzeniaList[i].SrU_Id;
+                    urzadzenie.SZU_SZNId = srwZlcNag.SZN_Id;
+
+                    SrwZlcUrzadzeniaList.Add(urzadzenie);
+                }
+            }
+
+            return true;
+        }
+
         private void wygenerujZlecenie()
         {
             try
@@ -189,6 +220,15 @@ namespace AplikacjaSerwisowa
                         for(int i = 0; i < SrwZlcSkladnikiList.Count; i++)
                         {
                             dbr.SrwZlcSkladniki_InsertRecord(SrwZlcSkladnikiList[i]);
+                        }
+                    }
+
+                    if(SrwZlcUrzadzeniaList != null)
+                    {
+                        DBRepository dbr = new DBRepository();
+                        for(int i = 0; i < SrwZlcUrzadzeniaList.Count; i++)
+                        {
+                            dbr.SrwZlcUrz_InsertRecord(SrwZlcUrzadzeniaList[i]);
                         }
                     }
                 }

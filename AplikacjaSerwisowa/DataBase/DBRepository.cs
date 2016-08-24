@@ -1206,6 +1206,28 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+        public int SrwUrzadzenia_GenerujNoweID(Context kontekst)
+        {
+            int result = OdczytUrzadzen(kontekst);
+            result = result - 1;
+            zapisIdUrzadzeniaDoPamieciUrzadzenia(result, kontekst);
+
+            return result;
+        }
+        private Int32 OdczytUrzadzen(Context kontekst)
+        {
+            ISharedPreferences prefs = Android.Preferences.PreferenceManager.GetDefaultSharedPreferences(kontekst);
+
+            Int32 result = prefs.GetInt("SrU_Id", -1);
+            return result;
+        }
+        private void zapisIdUrzadzeniaDoPamieciUrzadzenia(Int32 SrU_Id, Context kontekst)
+        {
+            ISharedPreferences prefs = Android.Preferences.PreferenceManager.GetDefaultSharedPreferences(kontekst);
+            ISharedPreferencesEditor editor = prefs.Edit();
+            editor.PutInt("SrU_Id", SrU_Id);
+            editor.Apply();
+        }
 
         public List<SrwUrzadzenia> SrwUrzadzenia_GetFilteredRecords(string filtrEditText, string filtr, bool KntFiltr, Int32 KNT_GIDNumer)
         {
@@ -1219,7 +1241,7 @@ namespace AplikacjaSerwisowa
                     zapytanie += " and Sru_Nazwa like '%" + filtrEditText + "%'";
                 }
 
-                if(!KntFiltr)
+                if(!KntFiltr && KNT_GIDNumer != -1)
                 {
                     zapytanie += " and SUW_WlaNumer = " + KNT_GIDNumer;
                 }
@@ -1242,6 +1264,26 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+
+
+        public SrwUrzadzenia SrwUrzadzenia_GetRecord(int sZU_SrUId)
+        {
+            SrwUrzadzenia output = new SrwUrzadzenia();
+            
+            try
+            {
+                var result = db.Query<SrwUrzadzenia>("select * from SrwUrzadzenia where SrU_Id = " + sZU_SrUId);
+
+                if(result.Count == 1)
+                {
+                    output = result[0];
+                }
+            }
+            catch(Exception) { }
+
+            return output;
+        }
+
 
         /*
             *---------------------------------------------------------------------------------
@@ -1370,6 +1412,71 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.SrwUrzRodzaje_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela SrwZlcUrz******************************|
+            *---------------------------------------------------------------------------------
+        */
+        public string stworzSrwZlcUrz()
+        {
+            String output = "";
+            try
+            {
+                try
+                {
+                    db.DropTable<SrwZlcUrz>();
+                }
+                catch(Exception) { }
+
+                db.CreateTable<SrwZlcUrz>();
+
+                output = "Tabela SrwZlcUrz zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzSrwZlcUrz() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+
+        public String SrwZlcUrz_InsertRecord(SrwZlcUrz item)
+        {
+            String output = "";
+            try
+            {
+                db.Insert(item);
+                output = "Wpis dodany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwZlcUrz_InsertRecord() Error: " + exc.Message;
+            }
+
+            return output;
+        }
+
+        public List<SrwZlcUrz> SrwZlcUrz_GetRecords(string szn_ID)
+        {
+            List<SrwZlcUrz> output = null;
+
+            if(szn_ID.Length > 0)
+            {
+                try
+                {
+                    var result = db.Query<SrwZlcUrz>("select * from SrwZlcUrz where SZU_SZNId = " + szn_ID);
+
+                    if(result.Count > 0)
+                    {
+                        output = result;
+                    }
+                }
+                catch(Exception) { }
             }
 
             return output;

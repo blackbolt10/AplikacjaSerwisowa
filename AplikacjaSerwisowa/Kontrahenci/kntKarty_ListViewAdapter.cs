@@ -82,7 +82,7 @@ namespace AplikacjaSerwisowa
             else
             {
                 daneKontrahenta2_LinearLayout.Visibility = ViewStates.Visible;
-                knt_adres_TextView.Text = mKntKartyList[position].Knt_KodP + " " + mKntKartyList[position].Knt_miasto;
+                knt_adres_TextView.Text = mKntKartyList[position].Knt_KodP + "  " + mKntKartyList[position].Knt_miasto;
                 knt_email_TextView.Text = mKntKartyList[position].Knt_email;
             }
 

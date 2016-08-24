@@ -56,6 +56,7 @@ namespace AplikacjaSerwisowa
 
             if(szn != null)
             {
+                ustawObraz(szn.SZN_Stan);
                 dataNumerTextView.Text = szn.SZN_DataWystawienia.Split(' ')[0] + " - " + szn.SZN_Dokument;
                 stanTextView.Text = szn.SZN_Stan;
                 if(szn.SZN_KnANumer != -1)
@@ -107,6 +108,36 @@ namespace AplikacjaSerwisowa
                 }
                 listaZlecenSzczegoly_Activity.knt_GidNumer = szn.SZN_KntNumer.ToString();
                 listaZlecenSzczegoly_Activity.szn_AdWNumer = szn.SZN_KnANumer.ToString();
+            }
+        }
+
+        private void ustawObraz(string sZN_Stan)
+        {
+            switch(sZN_Stan)
+            {
+                case "W realizacji":
+                imageView.SetImageResource(Resource.Drawable.ListaZlecen_do_realizacji);
+                break;
+
+                case "Do realizacji":
+                imageView.SetImageResource(Resource.Drawable.ListaZlecen_do_realizacji);
+                break;
+
+                case "Niezatwierdzone":
+                imageView.SetImageResource(Resource.Drawable.ListaZlecen_do_realizacji);
+                break;
+
+                case "Zatwierdzone":
+                imageView.SetImageResource(Resource.Drawable.ListaZlecen_zamkniete);
+                break;
+
+                case "Odrzucone":
+                imageView.SetImageResource(Resource.Drawable.ListaZlecen_odrzucone);
+                break;
+
+                case "Anulowane":
+                imageView.SetImageResource(Resource.Drawable.ListaZlecen_anulowane);
+                break;
             }
         }
 

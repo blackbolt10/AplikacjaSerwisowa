@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:minWidth="25px"
+    p1:minHeight="25px"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/relativeLayout1"
+    p1:padding="20px">
+    <TextView
+        p1:text="Kod:"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/textView1"
+        p1:layout_marginTop="10px" />
+    <EditText
+        p1:inputType="textPersonName"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_toRightOf="@id/textView2"
+        p1:id="@+id/NoweUrzadzenieKodEditText"
+        p1:layout_alignParentRight="true"
+        p1:layout_marginBottom="5px" />
+    <TextView
+        p1:text="Nazwa:"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_below="@id/NoweUrzadzenieKodEditText"
+        p1:id="@+id/textView2"
+        p1:layout_marginTop="10px"
+        p1:layout_marginRight="5px" />
+    <EditText
+        p1:inputType="textPersonName"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_below="@id/NoweUrzadzenieKodEditText"
+        p1:id="@+id/NoweUrzadzenieNazwaEditText"
+        p1:layout_alignParentRight="true"
+        p1:layout_toRightOf="@id/textView2"
+        p1:layout_marginBottom="5px" />
+    <TextView
+        p1:text="Opis:"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_below="@id/NoweUrzadzenieNazwaEditText"
+        p1:id="@+id/textView3"
+        p1:layout_marginTop="10px" />
+    <EditText
+        p1:inputType="textPersonName"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_toRightOf="@id/textView2"
+        p1:id="@+id/NoweUrzadzenieOpisEditText"
+        p1:layout_below="@id/NoweUrzadzenieNazwaEditText"
+        p1:layout_alignParentRight="true"
+        p1:layout_marginBottom="15px" />
+    <TextView
+        p1:text="Właściciel urządzenia:"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:layout_below="@id/NoweUrzadzenieOpisEditText"
+        p1:id="@+id/textView4"
+        p1:layout_marginBottom="10px"
+        p1:layout_marginTop="10px" />
+    <TextView
+        p1:text="Akronim:"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_below="@id/textView4"
+        p1:id="@+id/textView5"
+        p1:layout_marginTop="10px" />
+    <EditText
+        p1:inputType="textPersonName"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_below="@id/textView4"
+        p1:id="@+id/NoweUrzadzenieAkronimKontrahentaEditText"
+        p1:layout_alignParentRight="true"
+        p1:layout_toRightOf="@id/textView5"
+        p1:layout_marginBottom="5px"
+        p1:layout_alignLeft="@id/NoweUrzadzenieOpisEditText"
+        p1:enabled="false" />
+    <EditText
+        p1:inputType="textPersonName"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_below="@id/NoweUrzadzenieAkronimKontrahentaEditText"
+        p1:id="@+id/NoweUrzadzenieNazwaKontrahentaEditText"
+        p1:layout_alignLeft="@id/NoweUrzadzenieOpisEditText"
+        p1:layout_alignRight="@id/NoweUrzadzenieAkronimKontrahentaEditText"
+        p1:enabled="false"
+        p1:layout_marginBottom="5px" />
+    <TextView
+        p1:text="Nazwa:"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_below="@id/NoweUrzadzenieAkronimKontrahentaEditText"
+        p1:id="@+id/textView6"
+        p1:layout_marginTop="10px" />
+    <Button
+        p1:text="Dodaj"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_below="@id/NoweUrzadzenieNazwaKontrahentaEditText"
+        p1:id="@+id/NoweUrzadzenieDodajButton"
+        p1:layout_alignParentRight="true" />
+    <Button
+        p1:text="Zapisz"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/NoweUrzadzenieZapiszButton"
+        p1:layout_alignParentBottom="true"
+        p1:layout_alignParentRight="true"
+        p1:layout_alignParentLeft="true" />
+</RelativeLayout>

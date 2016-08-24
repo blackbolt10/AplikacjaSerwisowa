@@ -45,6 +45,10 @@ namespace AplikacjaSerwisowa
             {
                 pobierzKntKarty();
             }
+            else if(glowny == "3")
+            {
+                pobierzKntKarty();
+            }
             else
             {
                 pobierzKntAdresy();
@@ -57,6 +61,10 @@ namespace AplikacjaSerwisowa
             {
                 noweZlecenie_Activity.aktualizujKontrahentaGlownego("[" + kntKartyList[e.Position].Knt_Akronim + "]", kntKartyList[e.Position].Knt_nazwa1, kntKartyList[e.Position].Knt_GIDNumer);
             }
+            else if(glowny == "3")
+            {
+                noweUrzadzenie_Activity.aktualizujKontrahenta(kntKartyList[e.Position].Knt_nazwa1, kntKartyList[e.Position].Knt_Akronim, kntKartyList[e.Position].Knt_GIDNumer);
+            }
             else
             {
                 noweZlecenie_Activity.aktualizujKontrahentaDocelowego("[" + kntAdresyList[e.Position].Kna_Akronim + "]", kntAdresyList[e.Position].Kna_nazwa1, kntAdresyList[e.Position].Kna_GIDNumer);
@@ -68,6 +76,10 @@ namespace AplikacjaSerwisowa
         private void FiltrEditText_TextChanged(object sender, TextChangedEventArgs e)
         {
             if(glowny == "1")
+            {
+                pobierzKntKarty();
+            }
+            else if(glowny == "3")
             {
                 pobierzKntKarty();
             }

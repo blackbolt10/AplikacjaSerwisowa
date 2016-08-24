@@ -61,15 +61,31 @@ namespace AplikacjaSerwisowa
             stan_TextView.Text = mSrwZlcNagList[position].SZN_Stan;
             naglowek_TextView.Text = mSrwZlcNagList[position].SZN_DataWystawienia.Split(' ')[0]+" - "+ mSrwZlcNagList[position].SZN_Dokument;
 
-            Random test = new Random();
-            test.Next(0, 1);
-            if(test.Next(0, 1).ToString() == "1")
+            switch(mSrwZlcNagList[position].SZN_Stan)
             {
-                wykonanie_ImageView.SetImageResource(Resource.Drawable.wykonane_ListaZlecen);
-            }
-            else
-            {
-                wykonanie_ImageView.SetImageResource(Resource.Drawable.wykonane_czesciowe_ListaZlecen);
+                case "W realizacji":
+                wykonanie_ImageView.SetImageResource(Resource.Drawable.ListaZlecen_do_realizacji);
+                break;
+
+                case "Do realizacji":
+                    wykonanie_ImageView.SetImageResource(Resource.Drawable.ListaZlecen_do_realizacji);
+                break;
+
+                case "Niezatwierdzone":
+                    wykonanie_ImageView.SetImageResource(Resource.Drawable.ListaZlecen_do_realizacji);
+                break;
+
+                case "Zatwierdzone":
+                    wykonanie_ImageView.SetImageResource(Resource.Drawable.ListaZlecen_zamkniete);
+                break;
+
+                case "Odrzucone":
+                    wykonanie_ImageView.SetImageResource(Resource.Drawable.ListaZlecen_odrzucone);
+                break;
+
+                case "Anulowane":
+                    wykonanie_ImageView.SetImageResource(Resource.Drawable.ListaZlecen_anulowane);
+                break;
             }
 
             return row;

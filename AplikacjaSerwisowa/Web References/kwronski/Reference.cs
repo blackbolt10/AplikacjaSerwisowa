@@ -49,6 +49,8 @@ namespace AplikacjaSerwisowa.kwronski {
         
         private System.Threading.SendOrPostCallback ZwrocListeSrwUrzadzeniaOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ZwrocListeSrwZlcUrzOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ZwrocListeSrwUrzRodzParOperationCompleted;
         
         private System.Threading.SendOrPostCallback ZwrocListeSrwUrzParDefOperationCompleted;
@@ -142,6 +144,9 @@ namespace AplikacjaSerwisowa.kwronski {
         
         /// <remarks/>
         public event ZwrocListeSrwUrzadzeniaCompletedEventHandler ZwrocListeSrwUrzadzeniaCompleted;
+        
+        /// <remarks/>
+        public event ZwrocListeSrwZlcUrzCompletedEventHandler ZwrocListeSrwZlcUrzCompleted;
         
         /// <remarks/>
         public event ZwrocListeSrwUrzRodzParCompletedEventHandler ZwrocListeSrwUrzRodzParCompleted;
@@ -451,6 +456,33 @@ namespace AplikacjaSerwisowa.kwronski {
             if ((this.ZwrocListeSrwUrzadzeniaCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ZwrocListeSrwUrzadzeniaCompleted(this, new ZwrocListeSrwUrzadzeniaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/ZwrocListeSrwZlcUrz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string ZwrocListeSrwZlcUrz() {
+            object[] results = this.Invoke("ZwrocListeSrwZlcUrz", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeSrwZlcUrzAsync() {
+            this.ZwrocListeSrwZlcUrzAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ZwrocListeSrwZlcUrzAsync(object userState) {
+            if ((this.ZwrocListeSrwZlcUrzOperationCompleted == null)) {
+                this.ZwrocListeSrwZlcUrzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZwrocListeSrwZlcUrzOperationCompleted);
+            }
+            this.InvokeAsync("ZwrocListeSrwZlcUrz", new object[0], this.ZwrocListeSrwZlcUrzOperationCompleted, userState);
+        }
+        
+        private void OnZwrocListeSrwZlcUrzOperationCompleted(object arg) {
+            if ((this.ZwrocListeSrwZlcUrzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZwrocListeSrwZlcUrzCompleted(this, new ZwrocListeSrwZlcUrzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1082,6 +1114,32 @@ namespace AplikacjaSerwisowa.kwronski {
         private object[] results;
         
         internal ZwrocListeSrwUrzadzeniaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void ZwrocListeSrwZlcUrzCompletedEventHandler(object sender, ZwrocListeSrwZlcUrzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZwrocListeSrwZlcUrzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZwrocListeSrwZlcUrzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

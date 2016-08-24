@@ -136,6 +136,19 @@ namespace WebApplication
             return JSS.Serialize(SrwUrzadzeniaList);
         }
 
+        [WebMethod(Description = "Pozwala na wygenerowanie SrwZlcUrz")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ZwrocListeSrwZlcUrz()
+        {
+            DataBase dataBaseObject = new DataBase();
+            List<SrwZlcUrz> SrwZlcUrzList = dataBaseObject.wygenerujListeSrwZlcUrz();
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwZlcUrzList);
+        }
+
         [WebMethod(Description = "Pozwala na wygenerowanie SrwUrzRodzPar")]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string ZwrocListeSrwUrzRodzPar()

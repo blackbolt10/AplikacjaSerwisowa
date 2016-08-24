@@ -15,7 +15,7 @@ namespace WebApplication
     {
         private SqlConnection uchwytBD;
         private SqlConnection uchwytBDSerwis;
-        private int liczbaMiesiecyWstecz = -9;
+        private int liczbaMiesiecyWstecz = -4;
 
         public DataBase()
         {
@@ -160,6 +160,49 @@ namespace WebApplication
                 int SUD_Archiwalna = Convert.ToInt32(pomDataTable.Rows[i]["SUD_Archiwalna"].ToString());
 
                 result.Add(new SrwUrzParDef(SUD_Id, SUD_Nazwa, SUD_Format, SUD_Archiwalna));
+            }
+            return result;
+        }
+
+        public List<SrwZlcUrz> wygenerujListeSrwZlcUrz()
+        {
+            DataTable pomDataTable = new DataTable();
+            DateTime data = DateTime.Now.AddMonths(liczbaMiesiecyWstecz);
+            Exception exc = new Exception();
+
+            try
+            {
+                String zapytanieString = @"Select  SZU_Id, SZU_SZNId, SZU_SrUId, SZU_Pozycja from cdn.SrwZlcUrz
+                    join cdn.srwzlcnag SZN on SZN.SZN_Id = SZU_SZNId
+                    where (DATEADD(DAY, SZN.SZN_DataWystawienia,CONVERT(DATETIME,'1800-12-28',120) )>'" + data.Year.ToString() + "-" + data.Month.ToString() + "-01')";
+
+                SqlDataAdapter da = zapytanie(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                return wygenerujListeSrwZlcUrz(pomDataTable);
+            }
+            else
+            {
+                return new List<SrwZlcUrz>();
+            }
+        }
+
+        private List<SrwZlcUrz> wygenerujListeSrwZlcUrz(DataTable pomDataTable)
+        {
+            List<SrwZlcUrz> result = new List<SrwZlcUrz>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                int SZU_Id = Convert.ToInt32(pomDataTable.Rows[i]["SZU_Id"].ToString());
+                int SZU_SZNId = Convert.ToInt32(pomDataTable.Rows[i]["SZU_SZNId"].ToString());
+                int SZU_SrUId = Convert.ToInt32(pomDataTable.Rows[i]["SZU_SrUId"].ToString());
+                int SZU_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["SZU_Pozycja"].ToString());
+
+                result.Add(new SrwZlcUrz(SZU_Id, SZU_SZNId, SZU_SrUId, SZU_Pozycja));
             }
             return result;
         }

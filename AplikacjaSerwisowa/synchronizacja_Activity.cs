@@ -185,6 +185,12 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progressDialog.Progress++);
             String SrwUrzRodzajeString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListeSrwUrzRodzaje();
 
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie"));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie urz¹dzeñ zleceñ serwisowycj."));
+            RunOnUiThread(() => progressDialog.Progress++);
+            String SrwZlcUrzString = new AplikacjaSerwisowa.kwronski.WebService().ZwrocListeSrwZlcUrz();
+
+
 
 
             RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 1/10"));
@@ -194,58 +200,92 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy nag³ówków kontrahentów..."));
             tworzenieBazyKntKarty(kntKartyString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 2/11"));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 2/12"));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy adresów kontrahentów..."));
             tworzenieBazyKntAdresy(kntAdresyString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 3/11"));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 3/12"));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy nag³ówków zleceñ serwisowych..."));
             tworzenieBazySerwisoweZleceniaNaglowki(serwisoweZlecenniaNaglowkiString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 4/11"));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 4/12"));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy czynnosci zleceñ serwisowych..."));
             tworzenieBazySrwZlcCzynnosci(srwZlcCzynnosciString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 5/11"));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 5/12"));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy skladniki zleceñ serwisowych..."));
             tworzenieBazySrwZlcSkladniki(srwZlcSkladnikiString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 6/11"));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 6/12"));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy kart towarowych..."));
             tworzenieBazyTwrKarty(twrKartyString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 7/11"));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 7/12"));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy podpisów..."));
             tworzenieBazySrwZlcPodpisy(podpisyString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 8/11"));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 8/12"));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy urz¹dzeñ..."));
             tworzenieBazySrwUrzadzenia(urzadeniaString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 9/11"));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 9/12"));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy definicji parametrów urz¹dzeñ..."));
             tworzenieBazySrwUrzParDef(SrwUrzParDefString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 10/11"));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 10/12"));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy definicji rodzajów parametrów..."));
             tworzenieBazySrwUrzRodzPar(SrwUrzRodzParString);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 11/11"));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 11/12"));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy definicji rodzajów urz¹dzeñ..."));
             tworzenieBazySrwUrzRodzaje(SrwUrzRodzajeString);
 
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie 11/12"));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy urz¹dzeñ zleceñ serwisowych..."));
+            tworzenieBazySrwZlcUrz(SrwZlcUrzString);
+
             RunOnUiThread(() => messagebox("Pobieranie zakoñczone", "Ukoñczono"));
             progressDialog.Dismiss();
+        }
+
+        private void tworzenieBazySrwZlcUrz(string srwZlcUrzString)
+        {
+            List<SrwZlcUrz> records = JsonConvert.DeserializeObject<List<SrwZlcUrz>>(srwZlcUrzString);
+
+            DBRepository dbr = new DBRepository();
+            String result = dbr.createDB();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();            
+            result = dbr.stworzSrwZlcUrz();
+            //Toast.MakeText(this, result, ToastLength.Short).Show();
+
+            if(records.Count > 0)
+            {
+                wprowadzWpisyDoTabeliySrwZlcUrz(records, dbr);
+            }
+        }
+
+        private void wprowadzWpisyDoTabeliySrwZlcUrz(List<SrwZlcUrz> records, DBRepository dbr)
+        {
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie urz¹dzeñ zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = records.Count);
+
+            for(int i = 0; i < records.Count; i++)
+            {
+                RunOnUiThread(() => progressDialog.Progress++);
+                dbr.SrwZlcUrz_InsertRecord(records[i]);
+            }
         }
 
         private void tworzenieBazySrwUrzRodzPar(string SrwUrzRodzParString)
@@ -273,9 +313,8 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-
-                SrwUrzRodzPar SrwUrzRodzParDefinicja = records[i];
-                dbr.SrwUrzRodzPar_InsertRecord(SrwUrzRodzParDefinicja);
+                
+                dbr.SrwUrzRodzPar_InsertRecord(records[i]);
             }
         }
 
@@ -304,9 +343,8 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-
-                SrwUrzRodzaje SrwUrzRodzajeDefinicja = records[i];
-                dbr.SrwUrzRodzaje_InsertRecord(SrwUrzRodzajeDefinicja);
+                
+                dbr.SrwUrzRodzaje_InsertRecord(records[i]);
             }
         }
 
@@ -335,9 +373,8 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-
-                SrwUrzParDef SrwParametrDefinicja = records[i];
-                dbr.SrwUrzParDef_InsertRecord(SrwParametrDefinicja);
+                
+                dbr.SrwUrzParDef_InsertRecord(records[i]);
             }
         }
 
@@ -366,9 +403,8 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-
-                SrwUrzadzenia SrwUrzadzenie = records[i];
-                dbr.SrwUrzadzenia_InsertRecord(SrwUrzadzenie);
+                
+                dbr.SrwUrzadzenia_InsertRecord(records[i]);
             }
         }
 
@@ -397,9 +433,8 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-
-                KntKartyTable kntKarta = records[i];
-                dbr.kntKarty_InsertRecord(kntKarta);
+                
+                dbr.kntKarty_InsertRecord(records[i]);
             }
         }
 
@@ -426,9 +461,8 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-
-                KntAdresyTable kntAdres = records[i];
-                dbr.kntAdresy_InsertRecord(kntAdres);
+                
+                dbr.kntAdresy_InsertRecord(records[i]);
             }
         }
 
@@ -443,6 +477,20 @@ namespace AplikacjaSerwisowa
             if(records.Count > 0)
             {
                 wprowadzWpisyDoTabeliSrwZlcCzynnosci(records, dbr);
+            }
+        }
+
+        private void wprowadzWpisyDoTabeliSrwZlcCzynnosci(List<SrwZlcCzynnosci> records, DBRepository dbr)
+        {
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie czynnoœci zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = records.Count);
+
+            for(int i = 0; i < records.Count; i++)
+            {
+                RunOnUiThread(() => progressDialog.Progress++);
+
+                dbr.SrwZlcCzynnosci_InsertRecord(records[i]);
             }
         }
 
@@ -469,24 +517,8 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-
-                SrwZlcPodpisTable szp = records[i];
-                dbr.SrwZlcPodpis_InsertRecord(szp);
-            }
-        }
-
-        private void wprowadzWpisyDoTabeliSrwZlcCzynnosci(List<SrwZlcCzynnosci> records, DBRepository dbr)
-        {
-            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie czynnoœci zleceñ serwisowych..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = records.Count);
-
-            for(int i = 0; i < records.Count; i++)
-            {
-                RunOnUiThread(() => progressDialog.Progress++);
-
-                SrwZlcCzynnosci szc = records[i];
-                dbr.SrwZlcCzynnosci_InsertRecord(szc);
+                
+                dbr.SrwZlcPodpis_InsertRecord(records[i]);
             }
         }
 
@@ -513,9 +545,8 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-
-                SrwZlcSkladniki szs = records[i];
-                dbr.SrwZlcSkladniki_InsertRecord(szs);
+                
+                dbr.SrwZlcSkladniki_InsertRecord(records[i]);
             }
         }
 
@@ -542,9 +573,8 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-
-                SrwZlcNag szn = records[i];
-                dbr.SrwZlcNag_InsertRecord(szn);
+                
+                dbr.SrwZlcNag_InsertRecord(records[i]);
             }
         }
         private void tworzenieBazyTwrKarty(String twrKartyString)
@@ -570,9 +600,8 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-
-                TwrKartyTable twrKarta = records[i];
-                dbr.TwrKartyTable_InsertRecord(twrKarta);
+                
+                dbr.TwrKartyTable_InsertRecord(records[i]);
             }
         }
 

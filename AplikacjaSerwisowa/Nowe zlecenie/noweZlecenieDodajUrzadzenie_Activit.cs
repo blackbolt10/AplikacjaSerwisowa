@@ -18,7 +18,6 @@ namespace AplikacjaSerwisowa
     [Activity(Label = "Wybierz")]
     public class noweZlecenieDodajUrzadzenie_Activit : Activity
     {
-        private string czynnosc;
         private EditText filtrEditText;
         private ListView listaUrzadzen;
         private CheckBox wszystkieCheckBox;
@@ -62,7 +61,8 @@ namespace AplikacjaSerwisowa
 
         private void DodajButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Intent noweUrzadzenieActivity = new Intent(this, typeof(noweUrzadzenie_Activity));
+            StartActivityForResult(noweUrzadzenieActivity, 0);
         }
 
         private void WszystkieCheckBox_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
@@ -98,6 +98,21 @@ namespace AplikacjaSerwisowa
             else
             {
                 listaUrzadzen.Adapter = null;
+            }
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            switch(requestCode)
+            {
+                case 0:
+                Boolean result = data.GetBooleanExtra("koniec", false);
+
+                if(result)
+                {
+                    this.Finish();
+                }
+                break;
             }
         }
     }

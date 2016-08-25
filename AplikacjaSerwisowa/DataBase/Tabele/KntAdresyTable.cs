@@ -8,10 +8,10 @@ namespace AplikacjaSerwisowa
     [Table("KntAdresyTable")]
     public class KntAdresyTable
     {
-        [PrimaryKey, AutoIncrement, Column("_Id")]
+        [Column("_Id")]
         public int Id { get; set; }
 
-        [Unique]
+        [PrimaryKey, Unique]
         public Int32 Kna_GIDNumer { get; set; }
 
         public Int32 Kna_GIDTyp { get; set; }

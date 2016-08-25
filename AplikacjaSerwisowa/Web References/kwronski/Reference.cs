@@ -77,6 +77,22 @@ namespace AplikacjaSerwisowa.kwronski {
         
         private System.Threading.SendOrPostCallback GalSrv_SrwZlcSkladnikiPotwierdzenieOperationCompleted;
         
+        private System.Threading.SendOrPostCallback KntKarty_ZapiszDaneUrzadzeniaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback KntKarty_ZwrocNowychOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback KntKarty_ZwrocZmodyfikowanychOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback KntKarty_ZwrocUsunietychOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback KntAdresy_ZapiszDaneUrzadzeniaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback KntAdresy_ZwrocNowychOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback KntAdresy_ZwrocZmodyfikowanychOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback KntAdresy_ZwrocUsunietychOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -186,6 +202,30 @@ namespace AplikacjaSerwisowa.kwronski {
         
         /// <remarks/>
         public event GalSrv_SrwZlcSkladnikiPotwierdzenieCompletedEventHandler GalSrv_SrwZlcSkladnikiPotwierdzenieCompleted;
+        
+        /// <remarks/>
+        public event KntKarty_ZapiszDaneUrzadzeniaCompletedEventHandler KntKarty_ZapiszDaneUrzadzeniaCompleted;
+        
+        /// <remarks/>
+        public event KntKarty_ZwrocNowychCompletedEventHandler KntKarty_ZwrocNowychCompleted;
+        
+        /// <remarks/>
+        public event KntKarty_ZwrocZmodyfikowanychCompletedEventHandler KntKarty_ZwrocZmodyfikowanychCompleted;
+        
+        /// <remarks/>
+        public event KntKarty_ZwrocUsunietychCompletedEventHandler KntKarty_ZwrocUsunietychCompleted;
+        
+        /// <remarks/>
+        public event KntAdresy_ZapiszDaneUrzadzeniaCompletedEventHandler KntAdresy_ZapiszDaneUrzadzeniaCompleted;
+        
+        /// <remarks/>
+        public event KntAdresy_ZwrocNowychCompletedEventHandler KntAdresy_ZwrocNowychCompleted;
+        
+        /// <remarks/>
+        public event KntAdresy_ZwrocZmodyfikowanychCompletedEventHandler KntAdresy_ZwrocZmodyfikowanychCompleted;
+        
+        /// <remarks/>
+        public event KntAdresy_ZwrocUsunietychCompletedEventHandler KntAdresy_ZwrocUsunietychCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/SayHelloToLame", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -849,6 +889,224 @@ namespace AplikacjaSerwisowa.kwronski {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/KntKarty_ZapiszDaneUrzadzenia", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void KntKarty_ZapiszDaneUrzadzenia(string inputJSON) {
+            this.Invoke("KntKarty_ZapiszDaneUrzadzenia", new object[] {
+                        inputJSON});
+        }
+        
+        /// <remarks/>
+        public void KntKarty_ZapiszDaneUrzadzeniaAsync(string inputJSON) {
+            this.KntKarty_ZapiszDaneUrzadzeniaAsync(inputJSON, null);
+        }
+        
+        /// <remarks/>
+        public void KntKarty_ZapiszDaneUrzadzeniaAsync(string inputJSON, object userState) {
+            if ((this.KntKarty_ZapiszDaneUrzadzeniaOperationCompleted == null)) {
+                this.KntKarty_ZapiszDaneUrzadzeniaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnKntKarty_ZapiszDaneUrzadzeniaOperationCompleted);
+            }
+            this.InvokeAsync("KntKarty_ZapiszDaneUrzadzenia", new object[] {
+                        inputJSON}, this.KntKarty_ZapiszDaneUrzadzeniaOperationCompleted, userState);
+        }
+        
+        private void OnKntKarty_ZapiszDaneUrzadzeniaOperationCompleted(object arg) {
+            if ((this.KntKarty_ZapiszDaneUrzadzeniaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.KntKarty_ZapiszDaneUrzadzeniaCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/KntKarty_ZwrocNowych", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string KntKarty_ZwrocNowych() {
+            object[] results = this.Invoke("KntKarty_ZwrocNowych", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void KntKarty_ZwrocNowychAsync() {
+            this.KntKarty_ZwrocNowychAsync(null);
+        }
+        
+        /// <remarks/>
+        public void KntKarty_ZwrocNowychAsync(object userState) {
+            if ((this.KntKarty_ZwrocNowychOperationCompleted == null)) {
+                this.KntKarty_ZwrocNowychOperationCompleted = new System.Threading.SendOrPostCallback(this.OnKntKarty_ZwrocNowychOperationCompleted);
+            }
+            this.InvokeAsync("KntKarty_ZwrocNowych", new object[0], this.KntKarty_ZwrocNowychOperationCompleted, userState);
+        }
+        
+        private void OnKntKarty_ZwrocNowychOperationCompleted(object arg) {
+            if ((this.KntKarty_ZwrocNowychCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.KntKarty_ZwrocNowychCompleted(this, new KntKarty_ZwrocNowychCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/KntKarty_ZwrocZmodyfikowanych", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string KntKarty_ZwrocZmodyfikowanych() {
+            object[] results = this.Invoke("KntKarty_ZwrocZmodyfikowanych", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void KntKarty_ZwrocZmodyfikowanychAsync() {
+            this.KntKarty_ZwrocZmodyfikowanychAsync(null);
+        }
+        
+        /// <remarks/>
+        public void KntKarty_ZwrocZmodyfikowanychAsync(object userState) {
+            if ((this.KntKarty_ZwrocZmodyfikowanychOperationCompleted == null)) {
+                this.KntKarty_ZwrocZmodyfikowanychOperationCompleted = new System.Threading.SendOrPostCallback(this.OnKntKarty_ZwrocZmodyfikowanychOperationCompleted);
+            }
+            this.InvokeAsync("KntKarty_ZwrocZmodyfikowanych", new object[0], this.KntKarty_ZwrocZmodyfikowanychOperationCompleted, userState);
+        }
+        
+        private void OnKntKarty_ZwrocZmodyfikowanychOperationCompleted(object arg) {
+            if ((this.KntKarty_ZwrocZmodyfikowanychCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.KntKarty_ZwrocZmodyfikowanychCompleted(this, new KntKarty_ZwrocZmodyfikowanychCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/KntKarty_ZwrocUsunietych", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string KntKarty_ZwrocUsunietych() {
+            object[] results = this.Invoke("KntKarty_ZwrocUsunietych", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void KntKarty_ZwrocUsunietychAsync() {
+            this.KntKarty_ZwrocUsunietychAsync(null);
+        }
+        
+        /// <remarks/>
+        public void KntKarty_ZwrocUsunietychAsync(object userState) {
+            if ((this.KntKarty_ZwrocUsunietychOperationCompleted == null)) {
+                this.KntKarty_ZwrocUsunietychOperationCompleted = new System.Threading.SendOrPostCallback(this.OnKntKarty_ZwrocUsunietychOperationCompleted);
+            }
+            this.InvokeAsync("KntKarty_ZwrocUsunietych", new object[0], this.KntKarty_ZwrocUsunietychOperationCompleted, userState);
+        }
+        
+        private void OnKntKarty_ZwrocUsunietychOperationCompleted(object arg) {
+            if ((this.KntKarty_ZwrocUsunietychCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.KntKarty_ZwrocUsunietychCompleted(this, new KntKarty_ZwrocUsunietychCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/KntAdresy_ZapiszDaneUrzadzenia", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void KntAdresy_ZapiszDaneUrzadzenia(string inputJSON) {
+            this.Invoke("KntAdresy_ZapiszDaneUrzadzenia", new object[] {
+                        inputJSON});
+        }
+        
+        /// <remarks/>
+        public void KntAdresy_ZapiszDaneUrzadzeniaAsync(string inputJSON) {
+            this.KntAdresy_ZapiszDaneUrzadzeniaAsync(inputJSON, null);
+        }
+        
+        /// <remarks/>
+        public void KntAdresy_ZapiszDaneUrzadzeniaAsync(string inputJSON, object userState) {
+            if ((this.KntAdresy_ZapiszDaneUrzadzeniaOperationCompleted == null)) {
+                this.KntAdresy_ZapiszDaneUrzadzeniaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnKntAdresy_ZapiszDaneUrzadzeniaOperationCompleted);
+            }
+            this.InvokeAsync("KntAdresy_ZapiszDaneUrzadzenia", new object[] {
+                        inputJSON}, this.KntAdresy_ZapiszDaneUrzadzeniaOperationCompleted, userState);
+        }
+        
+        private void OnKntAdresy_ZapiszDaneUrzadzeniaOperationCompleted(object arg) {
+            if ((this.KntAdresy_ZapiszDaneUrzadzeniaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.KntAdresy_ZapiszDaneUrzadzeniaCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/KntAdresy_ZwrocNowych", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string KntAdresy_ZwrocNowych() {
+            object[] results = this.Invoke("KntAdresy_ZwrocNowych", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void KntAdresy_ZwrocNowychAsync() {
+            this.KntAdresy_ZwrocNowychAsync(null);
+        }
+        
+        /// <remarks/>
+        public void KntAdresy_ZwrocNowychAsync(object userState) {
+            if ((this.KntAdresy_ZwrocNowychOperationCompleted == null)) {
+                this.KntAdresy_ZwrocNowychOperationCompleted = new System.Threading.SendOrPostCallback(this.OnKntAdresy_ZwrocNowychOperationCompleted);
+            }
+            this.InvokeAsync("KntAdresy_ZwrocNowych", new object[0], this.KntAdresy_ZwrocNowychOperationCompleted, userState);
+        }
+        
+        private void OnKntAdresy_ZwrocNowychOperationCompleted(object arg) {
+            if ((this.KntAdresy_ZwrocNowychCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.KntAdresy_ZwrocNowychCompleted(this, new KntAdresy_ZwrocNowychCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/KntAdresy_ZwrocZmodyfikowanych", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string KntAdresy_ZwrocZmodyfikowanych() {
+            object[] results = this.Invoke("KntAdresy_ZwrocZmodyfikowanych", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void KntAdresy_ZwrocZmodyfikowanychAsync() {
+            this.KntAdresy_ZwrocZmodyfikowanychAsync(null);
+        }
+        
+        /// <remarks/>
+        public void KntAdresy_ZwrocZmodyfikowanychAsync(object userState) {
+            if ((this.KntAdresy_ZwrocZmodyfikowanychOperationCompleted == null)) {
+                this.KntAdresy_ZwrocZmodyfikowanychOperationCompleted = new System.Threading.SendOrPostCallback(this.OnKntAdresy_ZwrocZmodyfikowanychOperationCompleted);
+            }
+            this.InvokeAsync("KntAdresy_ZwrocZmodyfikowanych", new object[0], this.KntAdresy_ZwrocZmodyfikowanychOperationCompleted, userState);
+        }
+        
+        private void OnKntAdresy_ZwrocZmodyfikowanychOperationCompleted(object arg) {
+            if ((this.KntAdresy_ZwrocZmodyfikowanychCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.KntAdresy_ZwrocZmodyfikowanychCompleted(this, new KntAdresy_ZwrocZmodyfikowanychCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/KntAdresy_ZwrocUsunietych", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string KntAdresy_ZwrocUsunietych() {
+            object[] results = this.Invoke("KntAdresy_ZwrocUsunietych", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void KntAdresy_ZwrocUsunietychAsync() {
+            this.KntAdresy_ZwrocUsunietychAsync(null);
+        }
+        
+        /// <remarks/>
+        public void KntAdresy_ZwrocUsunietychAsync(object userState) {
+            if ((this.KntAdresy_ZwrocUsunietychOperationCompleted == null)) {
+                this.KntAdresy_ZwrocUsunietychOperationCompleted = new System.Threading.SendOrPostCallback(this.OnKntAdresy_ZwrocUsunietychOperationCompleted);
+            }
+            this.InvokeAsync("KntAdresy_ZwrocUsunietych", new object[0], this.KntAdresy_ZwrocUsunietychOperationCompleted, userState);
+        }
+        
+        private void OnKntAdresy_ZwrocUsunietychOperationCompleted(object arg) {
+            if ((this.KntAdresy_ZwrocUsunietychCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.KntAdresy_ZwrocUsunietychCompleted(this, new KntAdresy_ZwrocUsunietychCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -1468,6 +1726,170 @@ namespace AplikacjaSerwisowa.kwronski {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void GalSrv_SrwZlcSkladnikiPotwierdzenieCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void KntKarty_ZapiszDaneUrzadzeniaCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void KntKarty_ZwrocNowychCompletedEventHandler(object sender, KntKarty_ZwrocNowychCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class KntKarty_ZwrocNowychCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal KntKarty_ZwrocNowychCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void KntKarty_ZwrocZmodyfikowanychCompletedEventHandler(object sender, KntKarty_ZwrocZmodyfikowanychCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class KntKarty_ZwrocZmodyfikowanychCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal KntKarty_ZwrocZmodyfikowanychCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void KntKarty_ZwrocUsunietychCompletedEventHandler(object sender, KntKarty_ZwrocUsunietychCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class KntKarty_ZwrocUsunietychCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal KntKarty_ZwrocUsunietychCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void KntAdresy_ZapiszDaneUrzadzeniaCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void KntAdresy_ZwrocNowychCompletedEventHandler(object sender, KntAdresy_ZwrocNowychCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class KntAdresy_ZwrocNowychCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal KntAdresy_ZwrocNowychCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void KntAdresy_ZwrocZmodyfikowanychCompletedEventHandler(object sender, KntAdresy_ZwrocZmodyfikowanychCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class KntAdresy_ZwrocZmodyfikowanychCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal KntAdresy_ZwrocZmodyfikowanychCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void KntAdresy_ZwrocUsunietychCompletedEventHandler(object sender, KntAdresy_ZwrocUsunietychCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class KntAdresy_ZwrocUsunietychCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal KntAdresy_ZwrocUsunietychCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
 }
 
 #pragma warning restore 1591

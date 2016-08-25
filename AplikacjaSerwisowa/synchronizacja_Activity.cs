@@ -25,7 +25,7 @@ namespace AplikacjaSerwisowa
     [Activity(Label = "Synchronizacja", Icon = "@drawable/synchronizacja")]
     public class synchronizacja_Activity : Activity
     {
-        private Button synchronizacja_Button, wyslij_Button;
+        private Button synchronizacja_Button, wyslij_Button, synch2_Button;
         private ProgressDialog progressDialog, progressDialogWysylanie;
         private Thread wysylanieThread;
 
@@ -35,11 +35,15 @@ namespace AplikacjaSerwisowa
             SetContentView(Resource.Layout.synchronizacjaOkno);
 
             synchronizacja_Button = FindViewById<Button>(Resource.Id.synchronizacjaSynchronizacjaButton);
-            synchronizacja_Button.Click += delegate { synchronizacja(); };
+            synchronizacja_Button.Click += delegate
+            { synchronizacja(); };
 
             wyslij_Button = FindViewById<Button>(Resource.Id.SynchronizacjaWyslijDaneButton);
-            wyslij_Button.Click += delegate { synchronizacjaWysylanie(); };
+            wyslij_Button.Click += delegate
+            { synchronizacjaWysylanie(); };
 
+            synch2_Button = FindViewById<Button>(Resource.Id.SynchronizacjaSynch2Button);
+            synch2_Button.Click += Synch2_Button_Click;
             // Create your application here
         }
 
@@ -47,7 +51,7 @@ namespace AplikacjaSerwisowa
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-            if (icon == 0)
+            if(icon == 0)
             {
                 alert.SetIconAttribute(Android.Resource.Attribute.AlertDialogIcon);
             }
@@ -80,18 +84,18 @@ namespace AplikacjaSerwisowa
         {
             DBRepository dbr = new DBRepository();
             List<SrwZlcNag> srwZlcNagList = dbr.SrwZlcNagSynchronizacja(1);
-            if(srwZlcNagList.Count>0)
+            if(srwZlcNagList.Count > 0)
             {
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                
+
                 alert.SetTitle("Informacja");
                 alert.SetMessage("W pamiêci urz¹dzenia znajduj¹ siê nowe nie zsynchronizowane zlecenia serwisowe. Synchronizacja spowoduje ich usuniêcie. Czy chcesz wczeœniej wys³aæ dane?");
-                alert.SetPositiveButton("Tak", (senderAlert, args) => 
+                alert.SetPositiveButton("Tak", (senderAlert, args) =>
                     {
                         wyslijDane();
                         rozpocznijPobieranie();
                     });
-                alert.SetNegativeButton("Nie", (senderAlert, args) => 
+                alert.SetNegativeButton("Nie", (senderAlert, args) =>
                     {
                         rozpocznijPobieranie();
                     });
@@ -313,7 +317,7 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-                
+
                 dbr.SrwUrzRodzPar_InsertRecord(records[i]);
             }
         }
@@ -343,7 +347,7 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-                
+
                 dbr.SrwUrzRodzaje_InsertRecord(records[i]);
             }
         }
@@ -373,7 +377,7 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-                
+
                 dbr.SrwUrzParDef_InsertRecord(records[i]);
             }
         }
@@ -403,7 +407,7 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-                
+
                 dbr.SrwUrzadzenia_InsertRecord(records[i]);
             }
         }
@@ -433,7 +437,7 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-                
+
                 dbr.kntKarty_InsertRecord(records[i]);
             }
         }
@@ -461,7 +465,7 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-                
+
                 dbr.kntAdresy_InsertRecord(records[i]);
             }
         }
@@ -517,7 +521,7 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-                
+
                 dbr.SrwZlcPodpis_InsertRecord(records[i]);
             }
         }
@@ -545,7 +549,7 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-                
+
                 dbr.SrwZlcSkladniki_InsertRecord(records[i]);
             }
         }
@@ -573,7 +577,7 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-                
+
                 dbr.SrwZlcNag_InsertRecord(records[i]);
             }
         }
@@ -600,7 +604,7 @@ namespace AplikacjaSerwisowa
             for(int i = 0; i < records.Count; i++)
             {
                 RunOnUiThread(() => progressDialog.Progress++);
-                
+
                 dbr.TwrKartyTable_InsertRecord(records[i]);
             }
         }
@@ -690,13 +694,13 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progressDialogWysylanie.SetMessage("Oznaczanie wys³anych nag³ówków"));
 
             DBRepository db = new DBRepository();
-            db.SrwZlcNag_OznaczWyslane(wyslaneNagList,3);
+            db.SrwZlcNag_OznaczWyslane(wyslaneNagList, 3);
         }
 
         private List<int> wyslijSrwZlcCzynniki(List<int> wyslaneNagList)
         {
             RunOnUiThread(() => progressDialogWysylanie.SetMessage("Przygotowywanie czynnoœci zleceñ serwisowych."));
-            
+
             DBRepository db = new DBRepository();
             List<int> wyslaneczynnosciList = new List<int>();
 
@@ -776,6 +780,312 @@ namespace AplikacjaSerwisowa
 
             DBRepository db = new DBRepository();
             db.SrwZlcSkladniki_OznaczWyslane(wyslaneSkladnikiList, 3);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void Synch2_Button_Click(object sender, EventArgs e)
+        {
+            ConnectivityManager connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
+            NetworkInfo activeConnection = connectivityManager.ActiveNetworkInfo;
+            bool isOnline = (activeConnection != null) && activeConnection.IsConnected;
+
+            if(isOnline)
+            {
+                startSynch2();
+            }
+            else
+            {
+                Toast.MakeText(this, "Brak dostêpu do internetu", ToastLength.Short).Show();
+            }
+        }
+
+        private void startSynch2()
+        {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.SetTitle("Pobieranie");
+            progressDialog.SetMessage("Proszê czekaæ...");
+            progressDialog.SetProgressStyle(ProgressDialogStyle.Horizontal);
+            progressDialog.SetCancelable(false);
+            progressDialog.Max = 1;
+            progressDialog.Show();
+
+            Thread th = new Thread(() => pobierzDaneWebSerwice());
+            th.Start();
+        }
+
+        private void pobierzDaneWebSerwice()
+        {
+            int licznik = 1;
+            int max = 8;
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie "+licznik+"/"+max));
+            RunOnUiThread(() => progressDialog.SetMessage("Wysy³anie danych kontrahentów z urz¹dzenia..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            List<int> listaKntKarty = wygenerujListeKontrahentow();
+            String jsonOutKntKarty = JsonConvert.SerializeObject(listaKntKarty);
+            new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZapiszDaneUrzadzenia(jsonOutKntKarty);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie zmodyfikowanych kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            String kntKartyZmodyfikowane = new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZwrocZmodyfikowanych();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie nowych kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            String kntKartyNowe = new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZwrocNowych();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie kontrahentów do usuniecia..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            String kntKartyDoUsuniecia = new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZwrocUsunietych();
+
+            licznik = 1;
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy kart kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            KntKarty_StworzBaze();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie zmodyfikowanych kart kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            KntKarty_Zmodyfikowani(kntKartyZmodyfikowane);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie nowych kart kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            KntKarty_Nowi(kntKartyNowe);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Usuwanie zbêdnych kart kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            KntKarty_Usunieci(kntKartyDoUsuniecia);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Wysy³anie adresów kontrahentów z urz¹dzenia..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            List<int> listaKntAdresy = wygenerujListeKontrahentow();
+            String jsonOutKntAdresy = JsonConvert.SerializeObject(listaKntKarty);
+            new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZapiszDaneUrzadzenia(jsonOutKntAdresy);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie zmodyfikowanych adresów kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            String KntAdresyZmodyfikowane = new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZwrocZmodyfikowanych();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie nowych adresów kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            String KntAdresyNowe = new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZwrocNowych();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie adresów kontrahentów do usuniecia..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            String KntAdresyDoUsuniecia = new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZwrocUsunietych();
+
+            licznik = 1;
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy adresów kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            KntAdresy_StworzBaze();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie zmodyfikowanych adresów kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            KntAdresy_Zmodyfikowani(KntAdresyZmodyfikowane);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie nowych adresów kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            KntAdresy_Nowi(KntAdresyNowe);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Usuwanie zbêdnych adresów kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            KntAdresy_Usunieci(KntAdresyDoUsuniecia);
+
+
+
+
+
+
+
+
+
+
+
+
+
+            progressDialog.Dismiss();
+            //tworzenieBazyKntKarty();
+        }
+
+        private void KntAdresy_Usunieci(string kntAdresyDoUsuniecia)
+        {
+            List<int> records = JsonConvert.DeserializeObject<List<int>>(kntAdresyDoUsuniecia);
+
+            DBRepository dbr = new DBRepository();
+
+            if(records.Count > 0)
+            {
+                RunOnUiThread(() => progressDialog.Progress = 0);
+                RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                for(int i = 0; i < records.Count; i++)
+                {
+                    RunOnUiThread(() => progressDialog.Progress++);
+                    dbr.KntAdresy_DeleteRecord(records[i]);
+                }
+            }
+        }
+
+        private void KntAdresy_Nowi(string kntAdresyNowe)
+        {
+            List<KntAdresyTable> records = JsonConvert.DeserializeObject<List<KntAdresyTable>>(kntAdresyNowe);
+
+            DBRepository dbr = new DBRepository();
+
+            if(records.Count > 0)
+            {
+                RunOnUiThread(() => progressDialog.Progress = 0);
+                RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                for(int i = 0; i < records.Count; i++)
+                {
+                    RunOnUiThread(() => progressDialog.Progress++);
+                    dbr.kntAdresy_InsertRecord(records[i]);
+                }
+            }
+        }
+
+        private void KntAdresy_Zmodyfikowani(string kntAdresyZmodyfikowane)
+        {
+            List<KntAdresyTable> records = JsonConvert.DeserializeObject<List<KntAdresyTable>>(kntAdresyZmodyfikowane);
+
+            DBRepository dbr = new DBRepository();
+
+            if(records.Count > 0)
+            {
+                RunOnUiThread(() => progressDialog.Progress = 0);
+                RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                for(int i = 0; i < records.Count; i++)
+                {
+                    RunOnUiThread(() => progressDialog.Progress++);
+                    dbr.KntAdresy_UpdateRecord(records[i]);
+                }
+            }
+        }
+
+        private void KntKarty_Usunieci(string kntKartyDoUsuniecia)
+        {
+            List<int> records = JsonConvert.DeserializeObject<List<int>>(kntKartyDoUsuniecia);
+
+            DBRepository dbr = new DBRepository();
+
+            if(records.Count > 0)
+            {
+                RunOnUiThread(() => progressDialog.Progress = 0);
+                RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                for(int i = 0; i < records.Count; i++)
+                {
+                    RunOnUiThread(() => progressDialog.Progress++);
+                    dbr.kntKarty_DeleteRecord(records[i]);
+                }
+            }
+        }
+
+        private void KntKarty_Nowi(string kntKartyNowe)
+        {
+            List<KntKartyTable> records = JsonConvert.DeserializeObject<List<KntKartyTable>>(kntKartyNowe);
+
+            DBRepository dbr = new DBRepository();
+
+            if(records.Count > 0)
+            {
+                RunOnUiThread(() => progressDialog.Progress = 0);
+                RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                for(int i = 0; i < records.Count; i++)
+                {
+                    RunOnUiThread(() => progressDialog.Progress++);
+                    dbr.kntKarty_InsertRecord(records[i]);
+                }
+            }
+        }
+
+        private void KntKarty_Zmodyfikowani(string kntKartyZmodyfikowane)
+        {
+            List<KntKartyTable> records = JsonConvert.DeserializeObject<List<KntKartyTable>>(kntKartyZmodyfikowane);
+
+            DBRepository dbr = new DBRepository(); 
+
+            if(records.Count > 0)
+            {
+                RunOnUiThread(() => progressDialog.Progress = 0);
+                RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                for(int i = 0; i < records.Count; i++)
+                {
+                    RunOnUiThread(() => progressDialog.Progress++);
+                    dbr.kntKarty_UpdateRecord(records[i]);
+                }
+            }
+        }
+
+        private void KntKarty_StworzBaze()
+        {
+            DBRepository dbr = new DBRepository();
+            dbr.createDB();
+            dbr.stworzKntKartyTabele();
+        }
+
+        private List<int> wygenerujListeKontrahentow()
+        {
+            DBRepository dbr = new DBRepository();
+            return dbr.kntKarty_generujListeZapisanch();
+        }
+
+
+
+        private void KntAdresy_StworzBaze()
+        {
+            DBRepository dbr = new DBRepository();
+            dbr.stworzKntAdresyTabele();
         }
     }
 }

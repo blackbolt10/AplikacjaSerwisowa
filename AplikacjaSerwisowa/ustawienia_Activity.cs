@@ -22,7 +22,7 @@ namespace AplikacjaSerwisowa
     [Activity(Label = "Ustawienia", Icon = "@drawable/ustawienia")]
     public class ustawienia_Activity : Activity
     {
-        private Button synchronizacja_Button, wyslij_Button;
+        private Button synchronizacja_Button, wyslij_Button, synch2_Button;
         private AplikacjaSerwisowa.kwronski.WebService kwronskiService;
         private ProgressDialog progressDialog;
 
@@ -38,6 +38,9 @@ namespace AplikacjaSerwisowa
 
             wyslij_Button = FindViewById<Button>(Resource.Id.SynchronizacjaWyslijDaneButton);
             wyslij_Button.Visibility = ViewStates.Gone;
+
+            synch2_Button = FindViewById<Button>(Resource.Id.SynchronizacjaSynch2Button);
+            synch2_Button.Visibility = ViewStates.Gone;
 
             // Create your application here
 

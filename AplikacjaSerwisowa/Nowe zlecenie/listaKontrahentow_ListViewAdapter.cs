@@ -48,7 +48,6 @@ namespace AplikacjaSerwisowa
                 for(int i = 0;i < kntKartyList.Count;i++)
                 {
                     kntStruktura strukt = new kntStruktura();
-                    strukt.Id = kntKartyList[i].Id;
                     strukt.Nazwa = kntKartyList[i].Knt_nazwa1;
                     strukt.Akronim = kntKartyList[i].Knt_Akronim;
                     strukt.GIDNumer = kntKartyList[i].Knt_GIDNumer;
@@ -65,7 +64,6 @@ namespace AplikacjaSerwisowa
                 for(int i = 0; i < kntAdresyList.Count; i++)
                 {
                     kntStruktura strukt = new kntStruktura();
-                    strukt.Id = kntAdresyList[i].Id;
                     strukt.Nazwa = kntAdresyList[i].Kna_nazwa1;
                     strukt.Akronim = kntAdresyList[i].Kna_Akronim;
                     strukt.GIDNumer = kntAdresyList[i].Kna_GIDNumer;

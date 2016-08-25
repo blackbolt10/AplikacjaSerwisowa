@@ -304,5 +304,123 @@ namespace WebApplication
             DataBase dataBaseObject = new DataBase();
             dataBaseObject.GalSrv_Potwierdz_SrwZlcSkladniki(listaPotwierdzonych);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        [WebMethod(Description = "Zapisuje kontrhanetów z urządzenia")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void KntKarty_ZapiszDaneUrzadzenia(String inputJSON)
+        {
+            DataBase db = new DataBase();
+            db.KntKarty_ZapiszDaneUrzadzenia(inputJSON);
+        }
+
+        [WebMethod(Description = "Zwraca nowych kontrahentow")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string KntKarty_ZwrocNowych()
+        {
+            DataBase db = new DataBase();
+            List<KntKarty> output = db.kntKarty_ZwrocNowych();
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
+        }
+
+        [WebMethod(Description = "Zwraca zmodyfikowanych kontrahentow")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string KntKarty_ZwrocZmodyfikowanych()
+        {
+            DataBase db = new DataBase();
+            List<KntKarty> output = db.kntKarty_ZwrocZmodyfikowanych();
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
+        }
+
+        [WebMethod(Description = "Zwraca kontrahentow do usuniecia")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string KntKarty_ZwrocUsunietych()
+        {
+            DataBase db = new DataBase();
+            List<int> output = db.kntKarty_ZwrocUsunietych();
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
+        }
+
+
+
+
+
+
+
+
+
+
+        [WebMethod(Description = "Zapisuje kontrhanetów z urządzenia")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void KntAdresy_ZapiszDaneUrzadzenia(String inputJSON)
+        {
+            DataBase db = new DataBase();
+            db.KntAdresy_ZapiszDaneUrzadzenia(inputJSON);
+        }
+
+        [WebMethod(Description = "Zwraca nowych kontrahentow")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string KntAdresy_ZwrocNowych()
+        {
+            DataBase db = new DataBase();
+            List<KntAdresy> output = db.KntAdresy_ZwrocNowych();
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
+        }
+
+        [WebMethod(Description = "Zwraca zmodyfikowanych kontrahentow")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string KntAdresy_ZwrocZmodyfikowanych()
+        {
+            DataBase db = new DataBase();
+            List<KntAdresy> output = db.KntAdresy_ZwrocZmodyfikowanych();
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
+        }
+
+        [WebMethod(Description = "Zwraca kontrahentow do usuniecia")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string KntAdresy_ZwrocUsunietych()
+        {
+            DataBase db = new DataBase();
+            List<int> output = db.KntAdresy_ZwrocUsunietych();
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(output);
+        }
     }
 }

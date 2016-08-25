@@ -266,6 +266,86 @@
       <s:element name="GalSrv_SrwZlcSkladnikiPotwierdzenieResponse">
         <s:complexType />
       </s:element>
+      <s:element name="KntKarty_ZapiszDaneUrzadzenia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inputJSON" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KntKarty_ZapiszDaneUrzadzeniaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="KntKarty_ZwrocNowych">
+        <s:complexType />
+      </s:element>
+      <s:element name="KntKarty_ZwrocNowychResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KntKarty_ZwrocNowychResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KntKarty_ZwrocZmodyfikowanych">
+        <s:complexType />
+      </s:element>
+      <s:element name="KntKarty_ZwrocZmodyfikowanychResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KntKarty_ZwrocZmodyfikowanychResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KntKarty_ZwrocUsunietych">
+        <s:complexType />
+      </s:element>
+      <s:element name="KntKarty_ZwrocUsunietychResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KntKarty_ZwrocUsunietychResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KntAdresy_ZapiszDaneUrzadzenia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inputJSON" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KntAdresy_ZapiszDaneUrzadzeniaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="KntAdresy_ZwrocNowych">
+        <s:complexType />
+      </s:element>
+      <s:element name="KntAdresy_ZwrocNowychResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KntAdresy_ZwrocNowychResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KntAdresy_ZwrocZmodyfikowanych">
+        <s:complexType />
+      </s:element>
+      <s:element name="KntAdresy_ZwrocZmodyfikowanychResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KntAdresy_ZwrocZmodyfikowanychResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KntAdresy_ZwrocUsunietych">
+        <s:complexType />
+      </s:element>
+      <s:element name="KntAdresy_ZwrocUsunietychResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KntAdresy_ZwrocUsunietychResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="string" nillable="true" type="s:string" />
     </s:schema>
   </wsdl:types>
@@ -413,6 +493,54 @@
   <wsdl:message name="GalSrv_SrwZlcSkladnikiPotwierdzenieSoapOut">
     <wsdl:part name="parameters" element="tns:GalSrv_SrwZlcSkladnikiPotwierdzenieResponse" />
   </wsdl:message>
+  <wsdl:message name="KntKarty_ZapiszDaneUrzadzeniaSoapIn">
+    <wsdl:part name="parameters" element="tns:KntKarty_ZapiszDaneUrzadzenia" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZapiszDaneUrzadzeniaSoapOut">
+    <wsdl:part name="parameters" element="tns:KntKarty_ZapiszDaneUrzadzeniaResponse" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZwrocNowychSoapIn">
+    <wsdl:part name="parameters" element="tns:KntKarty_ZwrocNowych" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZwrocNowychSoapOut">
+    <wsdl:part name="parameters" element="tns:KntKarty_ZwrocNowychResponse" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZwrocZmodyfikowanychSoapIn">
+    <wsdl:part name="parameters" element="tns:KntKarty_ZwrocZmodyfikowanych" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZwrocZmodyfikowanychSoapOut">
+    <wsdl:part name="parameters" element="tns:KntKarty_ZwrocZmodyfikowanychResponse" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZwrocUsunietychSoapIn">
+    <wsdl:part name="parameters" element="tns:KntKarty_ZwrocUsunietych" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZwrocUsunietychSoapOut">
+    <wsdl:part name="parameters" element="tns:KntKarty_ZwrocUsunietychResponse" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZapiszDaneUrzadzeniaSoapIn">
+    <wsdl:part name="parameters" element="tns:KntAdresy_ZapiszDaneUrzadzenia" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZapiszDaneUrzadzeniaSoapOut">
+    <wsdl:part name="parameters" element="tns:KntAdresy_ZapiszDaneUrzadzeniaResponse" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZwrocNowychSoapIn">
+    <wsdl:part name="parameters" element="tns:KntAdresy_ZwrocNowych" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZwrocNowychSoapOut">
+    <wsdl:part name="parameters" element="tns:KntAdresy_ZwrocNowychResponse" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZwrocZmodyfikowanychSoapIn">
+    <wsdl:part name="parameters" element="tns:KntAdresy_ZwrocZmodyfikowanych" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZwrocZmodyfikowanychSoapOut">
+    <wsdl:part name="parameters" element="tns:KntAdresy_ZwrocZmodyfikowanychResponse" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZwrocUsunietychSoapIn">
+    <wsdl:part name="parameters" element="tns:KntAdresy_ZwrocUsunietych" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZwrocUsunietychSoapOut">
+    <wsdl:part name="parameters" element="tns:KntAdresy_ZwrocUsunietychResponse" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpGetIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -521,6 +649,38 @@
     <wsdl:part name="listaPotwierdzonych" type="s:string" />
   </wsdl:message>
   <wsdl:message name="GalSrv_SrwZlcSkladnikiPotwierdzenieHttpGetOut" />
+  <wsdl:message name="KntKarty_ZapiszDaneUrzadzeniaHttpGetIn">
+    <wsdl:part name="inputJSON" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZapiszDaneUrzadzeniaHttpGetOut" />
+  <wsdl:message name="KntKarty_ZwrocNowychHttpGetIn" />
+  <wsdl:message name="KntKarty_ZwrocNowychHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZwrocZmodyfikowanychHttpGetIn" />
+  <wsdl:message name="KntKarty_ZwrocZmodyfikowanychHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZwrocUsunietychHttpGetIn" />
+  <wsdl:message name="KntKarty_ZwrocUsunietychHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZapiszDaneUrzadzeniaHttpGetIn">
+    <wsdl:part name="inputJSON" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZapiszDaneUrzadzeniaHttpGetOut" />
+  <wsdl:message name="KntAdresy_ZwrocNowychHttpGetIn" />
+  <wsdl:message name="KntAdresy_ZwrocNowychHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZwrocZmodyfikowanychHttpGetIn" />
+  <wsdl:message name="KntAdresy_ZwrocZmodyfikowanychHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZwrocUsunietychHttpGetIn" />
+  <wsdl:message name="KntAdresy_ZwrocUsunietychHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpPostIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -629,6 +789,38 @@
     <wsdl:part name="listaPotwierdzonych" type="s:string" />
   </wsdl:message>
   <wsdl:message name="GalSrv_SrwZlcSkladnikiPotwierdzenieHttpPostOut" />
+  <wsdl:message name="KntKarty_ZapiszDaneUrzadzeniaHttpPostIn">
+    <wsdl:part name="inputJSON" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZapiszDaneUrzadzeniaHttpPostOut" />
+  <wsdl:message name="KntKarty_ZwrocNowychHttpPostIn" />
+  <wsdl:message name="KntKarty_ZwrocNowychHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZwrocZmodyfikowanychHttpPostIn" />
+  <wsdl:message name="KntKarty_ZwrocZmodyfikowanychHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KntKarty_ZwrocUsunietychHttpPostIn" />
+  <wsdl:message name="KntKarty_ZwrocUsunietychHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZapiszDaneUrzadzeniaHttpPostIn">
+    <wsdl:part name="inputJSON" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZapiszDaneUrzadzeniaHttpPostOut" />
+  <wsdl:message name="KntAdresy_ZwrocNowychHttpPostIn" />
+  <wsdl:message name="KntAdresy_ZwrocNowychHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZwrocZmodyfikowanychHttpPostIn" />
+  <wsdl:message name="KntAdresy_ZwrocZmodyfikowanychHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KntAdresy_ZwrocUsunietychHttpPostIn" />
+  <wsdl:message name="KntAdresy_ZwrocUsunietychHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
     <wsdl:operation name="SayHelloToLame">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Hello lame .......!</wsdl:documentation>
@@ -749,6 +941,46 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GalSrv SrwZlcSkladnikiPotwierdzenie</wsdl:documentation>
       <wsdl:input message="tns:GalSrv_SrwZlcSkladnikiPotwierdzenieSoapIn" />
       <wsdl:output message="tns:GalSrv_SrwZlcSkladnikiPotwierdzenieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZapiszDaneUrzadzenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapisuje kontrhanetów z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:KntKarty_ZapiszDaneUrzadzeniaSoapIn" />
+      <wsdl:output message="tns:KntKarty_ZapiszDaneUrzadzeniaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocNowych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca nowych kontrahentow</wsdl:documentation>
+      <wsdl:input message="tns:KntKarty_ZwrocNowychSoapIn" />
+      <wsdl:output message="tns:KntKarty_ZwrocNowychSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocZmodyfikowanych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca zmodyfikowanych kontrahentow</wsdl:documentation>
+      <wsdl:input message="tns:KntKarty_ZwrocZmodyfikowanychSoapIn" />
+      <wsdl:output message="tns:KntKarty_ZwrocZmodyfikowanychSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocUsunietych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca kontrahentow do usuniecia</wsdl:documentation>
+      <wsdl:input message="tns:KntKarty_ZwrocUsunietychSoapIn" />
+      <wsdl:output message="tns:KntKarty_ZwrocUsunietychSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZapiszDaneUrzadzenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapisuje kontrhanetów z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:KntAdresy_ZapiszDaneUrzadzeniaSoapIn" />
+      <wsdl:output message="tns:KntAdresy_ZapiszDaneUrzadzeniaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocNowych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca nowych kontrahentow</wsdl:documentation>
+      <wsdl:input message="tns:KntAdresy_ZwrocNowychSoapIn" />
+      <wsdl:output message="tns:KntAdresy_ZwrocNowychSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocZmodyfikowanych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca zmodyfikowanych kontrahentow</wsdl:documentation>
+      <wsdl:input message="tns:KntAdresy_ZwrocZmodyfikowanychSoapIn" />
+      <wsdl:output message="tns:KntAdresy_ZwrocZmodyfikowanychSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocUsunietych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca kontrahentow do usuniecia</wsdl:documentation>
+      <wsdl:input message="tns:KntAdresy_ZwrocUsunietychSoapIn" />
+      <wsdl:output message="tns:KntAdresy_ZwrocUsunietychSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpGet">
@@ -872,6 +1104,46 @@
       <wsdl:input message="tns:GalSrv_SrwZlcSkladnikiPotwierdzenieHttpGetIn" />
       <wsdl:output message="tns:GalSrv_SrwZlcSkladnikiPotwierdzenieHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZapiszDaneUrzadzenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapisuje kontrhanetów z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:KntKarty_ZapiszDaneUrzadzeniaHttpGetIn" />
+      <wsdl:output message="tns:KntKarty_ZapiszDaneUrzadzeniaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocNowych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca nowych kontrahentow</wsdl:documentation>
+      <wsdl:input message="tns:KntKarty_ZwrocNowychHttpGetIn" />
+      <wsdl:output message="tns:KntKarty_ZwrocNowychHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocZmodyfikowanych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca zmodyfikowanych kontrahentow</wsdl:documentation>
+      <wsdl:input message="tns:KntKarty_ZwrocZmodyfikowanychHttpGetIn" />
+      <wsdl:output message="tns:KntKarty_ZwrocZmodyfikowanychHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocUsunietych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca kontrahentow do usuniecia</wsdl:documentation>
+      <wsdl:input message="tns:KntKarty_ZwrocUsunietychHttpGetIn" />
+      <wsdl:output message="tns:KntKarty_ZwrocUsunietychHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZapiszDaneUrzadzenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapisuje kontrhanetów z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:KntAdresy_ZapiszDaneUrzadzeniaHttpGetIn" />
+      <wsdl:output message="tns:KntAdresy_ZapiszDaneUrzadzeniaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocNowych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca nowych kontrahentow</wsdl:documentation>
+      <wsdl:input message="tns:KntAdresy_ZwrocNowychHttpGetIn" />
+      <wsdl:output message="tns:KntAdresy_ZwrocNowychHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocZmodyfikowanych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca zmodyfikowanych kontrahentow</wsdl:documentation>
+      <wsdl:input message="tns:KntAdresy_ZwrocZmodyfikowanychHttpGetIn" />
+      <wsdl:output message="tns:KntAdresy_ZwrocZmodyfikowanychHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocUsunietych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca kontrahentow do usuniecia</wsdl:documentation>
+      <wsdl:input message="tns:KntAdresy_ZwrocUsunietychHttpGetIn" />
+      <wsdl:output message="tns:KntAdresy_ZwrocUsunietychHttpGetOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpPost">
     <wsdl:operation name="SayHelloToLame">
@@ -993,6 +1265,46 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GalSrv SrwZlcSkladnikiPotwierdzenie</wsdl:documentation>
       <wsdl:input message="tns:GalSrv_SrwZlcSkladnikiPotwierdzenieHttpPostIn" />
       <wsdl:output message="tns:GalSrv_SrwZlcSkladnikiPotwierdzenieHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZapiszDaneUrzadzenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapisuje kontrhanetów z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:KntKarty_ZapiszDaneUrzadzeniaHttpPostIn" />
+      <wsdl:output message="tns:KntKarty_ZapiszDaneUrzadzeniaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocNowych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca nowych kontrahentow</wsdl:documentation>
+      <wsdl:input message="tns:KntKarty_ZwrocNowychHttpPostIn" />
+      <wsdl:output message="tns:KntKarty_ZwrocNowychHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocZmodyfikowanych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca zmodyfikowanych kontrahentow</wsdl:documentation>
+      <wsdl:input message="tns:KntKarty_ZwrocZmodyfikowanychHttpPostIn" />
+      <wsdl:output message="tns:KntKarty_ZwrocZmodyfikowanychHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocUsunietych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca kontrahentow do usuniecia</wsdl:documentation>
+      <wsdl:input message="tns:KntKarty_ZwrocUsunietychHttpPostIn" />
+      <wsdl:output message="tns:KntKarty_ZwrocUsunietychHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZapiszDaneUrzadzenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapisuje kontrhanetów z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:KntAdresy_ZapiszDaneUrzadzeniaHttpPostIn" />
+      <wsdl:output message="tns:KntAdresy_ZapiszDaneUrzadzeniaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocNowych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca nowych kontrahentow</wsdl:documentation>
+      <wsdl:input message="tns:KntAdresy_ZwrocNowychHttpPostIn" />
+      <wsdl:output message="tns:KntAdresy_ZwrocNowychHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocZmodyfikowanych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca zmodyfikowanych kontrahentow</wsdl:documentation>
+      <wsdl:input message="tns:KntAdresy_ZwrocZmodyfikowanychHttpPostIn" />
+      <wsdl:output message="tns:KntAdresy_ZwrocZmodyfikowanychHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocUsunietych">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca kontrahentow do usuniecia</wsdl:documentation>
+      <wsdl:input message="tns:KntAdresy_ZwrocUsunietychHttpPostIn" />
+      <wsdl:output message="tns:KntAdresy_ZwrocUsunietychHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -1206,6 +1518,78 @@
     </wsdl:operation>
     <wsdl:operation name="GalSrv_SrwZlcSkladnikiPotwierdzenie">
       <soap:operation soapAction="galsoftsrv/GalSrv_SrwZlcSkladnikiPotwierdzenie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZapiszDaneUrzadzenia">
+      <soap:operation soapAction="galsoftsrv/KntKarty_ZapiszDaneUrzadzenia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocNowych">
+      <soap:operation soapAction="galsoftsrv/KntKarty_ZwrocNowych" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocZmodyfikowanych">
+      <soap:operation soapAction="galsoftsrv/KntKarty_ZwrocZmodyfikowanych" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocUsunietych">
+      <soap:operation soapAction="galsoftsrv/KntKarty_ZwrocUsunietych" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZapiszDaneUrzadzenia">
+      <soap:operation soapAction="galsoftsrv/KntAdresy_ZapiszDaneUrzadzenia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocNowych">
+      <soap:operation soapAction="galsoftsrv/KntAdresy_ZwrocNowych" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocZmodyfikowanych">
+      <soap:operation soapAction="galsoftsrv/KntAdresy_ZwrocZmodyfikowanych" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocUsunietych">
+      <soap:operation soapAction="galsoftsrv/KntAdresy_ZwrocUsunietych" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1432,6 +1816,78 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZapiszDaneUrzadzenia">
+      <soap12:operation soapAction="galsoftsrv/KntKarty_ZapiszDaneUrzadzenia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocNowych">
+      <soap12:operation soapAction="galsoftsrv/KntKarty_ZwrocNowych" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocZmodyfikowanych">
+      <soap12:operation soapAction="galsoftsrv/KntKarty_ZwrocZmodyfikowanych" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocUsunietych">
+      <soap12:operation soapAction="galsoftsrv/KntKarty_ZwrocUsunietych" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZapiszDaneUrzadzenia">
+      <soap12:operation soapAction="galsoftsrv/KntAdresy_ZapiszDaneUrzadzenia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocNowych">
+      <soap12:operation soapAction="galsoftsrv/KntAdresy_ZwrocNowych" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocZmodyfikowanych">
+      <soap12:operation soapAction="galsoftsrv/KntAdresy_ZwrocZmodyfikowanych" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocUsunietych">
+      <soap12:operation soapAction="galsoftsrv/KntAdresy_ZwrocUsunietych" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpGet" type="tns:WebServiceHttpGet">
     <http:binding verb="GET" />
@@ -1649,6 +2105,74 @@
       </wsdl:input>
       <wsdl:output />
     </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZapiszDaneUrzadzenia">
+      <http:operation location="/KntKarty_ZapiszDaneUrzadzenia" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocNowych">
+      <http:operation location="/KntKarty_ZwrocNowych" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocZmodyfikowanych">
+      <http:operation location="/KntKarty_ZwrocZmodyfikowanych" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocUsunietych">
+      <http:operation location="/KntKarty_ZwrocUsunietych" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZapiszDaneUrzadzenia">
+      <http:operation location="/KntAdresy_ZapiszDaneUrzadzenia" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocNowych">
+      <http:operation location="/KntAdresy_ZwrocNowych" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocZmodyfikowanych">
+      <http:operation location="/KntAdresy_ZwrocZmodyfikowanych" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocUsunietych">
+      <http:operation location="/KntAdresy_ZwrocUsunietych" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpPost" type="tns:WebServiceHttpPost">
     <http:binding verb="POST" />
@@ -1865,6 +2389,74 @@
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
       <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZapiszDaneUrzadzenia">
+      <http:operation location="/KntKarty_ZapiszDaneUrzadzenia" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocNowych">
+      <http:operation location="/KntKarty_ZwrocNowych" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocZmodyfikowanych">
+      <http:operation location="/KntKarty_ZwrocZmodyfikowanych" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntKarty_ZwrocUsunietych">
+      <http:operation location="/KntKarty_ZwrocUsunietych" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZapiszDaneUrzadzenia">
+      <http:operation location="/KntAdresy_ZapiszDaneUrzadzenia" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocNowych">
+      <http:operation location="/KntAdresy_ZwrocNowych" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocZmodyfikowanych">
+      <http:operation location="/KntAdresy_ZwrocZmodyfikowanych" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KntAdresy_ZwrocUsunietych">
+      <http:operation location="/KntAdresy_ZwrocUsunietych" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="WebService">

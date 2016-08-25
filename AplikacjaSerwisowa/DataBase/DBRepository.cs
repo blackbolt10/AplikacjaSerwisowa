@@ -243,12 +243,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                try
-                {
-                    db.DropTable<KntKartyTable>();
-                }
-                catch(Exception) { }
-
                 db.CreateTable<KntKartyTable>();
 
                 output = "Tabela kontrahentow zosta³a stworzona...";
@@ -260,6 +254,37 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+
+        public String kntKarty_UpdateRecord(KntKartyTable kntKarta)
+        {
+            String output = "";
+            try
+            {
+                db.Update(kntKarta);
+                output = "Wpis zaktualizowany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.kntKarty_UpdateRecord() Error: " + exc.Message;
+            }
+            return output;
+        }
+
+        internal String kntKarty_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<KntKartyTable>(recordID);
+                output = "Wpis zaktualizowany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.kntKarty_DeleteRecord() Error: " + exc.Message;
+            }
+            return output;
+        }
+
         public String kntKarty_InsertRecord(KntKartyTable item)
         {
             String output = "";
@@ -359,6 +384,26 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
+        public List<int> kntKarty_generujListeZapisanch()
+        {
+            List<int> output = new List<int>();
+            List<KntKartyTable> kntKartyList = new List<KntKartyTable>();
+
+            try
+            {
+                String zapytanieString = "select * from KntKartyTable";
+                kntKartyList = db.Query<KntKartyTable>(zapytanieString);
+            }
+            catch(Exception) { }
+
+            for(int i =0;i<kntKartyList.Count;i++)
+            {
+                output.Add(kntKartyList[i].Knt_GIDNumer);
+            }
+
+            return output;
+        }
+
         /*
             *---------------------------------------------------------------------------------
             *|*********************************Tabela kontrahentowAdresy*********************|
@@ -370,12 +415,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                try
-                {
-                    db.DropTable<KntAdresyTable>();
-                }
-                catch(Exception) { }
-
                 db.CreateTable<KntAdresyTable>();
 
                 output = "Tabela kontrahentow adresy zosta³a stworzona...";
@@ -385,6 +424,36 @@ namespace AplikacjaSerwisowa
                 output = "DBRepository.stworzKntAdresyTabele() Error: " + exc.Message;
             }
 
+            return output;
+        }
+
+        public String KntAdresy_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<KntAdresyTable>(recordID);
+                output = "Wpis zaktualizowany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.KntAdresy_DeleteRecord() Error: " + exc.Message;
+            }
+            return output;
+        }
+
+        public String KntAdresy_UpdateRecord(KntAdresyTable kntAdres)
+        {
+            String output = "";
+            try
+            {
+                db.Update(kntAdres);
+                output = "Wpis zaktualizowany..";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.KntAdresy_UpdateRecord() Error: " + exc.Message;
+            }
             return output;
         }
 
@@ -1206,6 +1275,7 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
+
         public int SrwUrzadzenia_GenerujNoweID(Context kontekst)
         {
             int result = OdczytUrzadzen(kontekst);

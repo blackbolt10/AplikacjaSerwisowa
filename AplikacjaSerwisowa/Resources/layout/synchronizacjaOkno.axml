@@ -22,5 +22,13 @@
             android:layout_below="@id/synchronizacjaSynchronizacjaButton"
             android:id="@+id/SynchronizacjaWyslijDaneButton"
             android:layout_marginRight="0.0dp" />
+        <Button
+            android:text="Nowa synchronizacja"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/SynchronizacjaWyslijDaneButton"
+            android:id="@+id/SynchronizacjaSynch2Button"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true" />
     </RelativeLayout>
 </ScrollView>

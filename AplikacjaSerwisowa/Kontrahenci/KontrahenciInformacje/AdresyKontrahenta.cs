@@ -43,9 +43,16 @@ namespace AplikacjaSerwisowa
 
             kontrahenciAdresy_ListViewAdapter adapter;
 
-            if(kntAdresyList.Count > 0)
+            if(kntAdresyList != null)
             {
-                adapter = new kontrahenciAdresy_ListViewAdapter(kontekstGlowny, kntAdresyList, mUkrywanieGidNmer);
+                if(kntAdresyList.Count > 0)
+                {
+                    adapter = new kontrahenciAdresy_ListViewAdapter(kontekstGlowny, kntAdresyList, mUkrywanieGidNmer);
+                }
+                else
+                {
+                    adapter = null;
+                }
             }
             else
             {

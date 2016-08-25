@@ -1013,5 +1013,294 @@ namespace WebApplication
             }
             return result;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public void KntKarty_ZapiszDaneUrzadzenia(string inputJSON)
+        {
+            DataTable pomDataTable = new DataTable();
+
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<int> listaInt = ser.Deserialize<List<int>>(inputJSON);
+
+            if(listaInt != null)
+            {
+                try
+                {
+                    String zapytanieString = "delete GAL.kntsync";
+                    SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                    da.Fill(pomDataTable);
+                }
+                catch(Exception) { }
+
+                for(int i =0;i<listaInt.Count;i++)
+                {
+                    try
+                    {
+                        String zapytanieString = "insert into GAL.kntsync values("+listaInt[i]+")";
+                        SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                        da.Fill(pomDataTable);
+                    }
+                    catch(Exception) { }
+                }
+            }
+        }
+
+        public List<KntKarty> kntKarty_ZwrocNowych()
+        {
+            List<KntKarty> output = new List<KntKarty>();
+            DataTable pomDataTable = new DataTable();
+            
+            try
+            {
+                String zapytanieString = "exec [GAL].[KntSyncAdd]";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count>0)
+            {
+                output = wygenerujKntKartyList(pomDataTable);
+            }
+
+            return output;
+        }
+
+        private List<KntKarty> wygenerujKntKartyList(DataTable pomDataTable)
+        {
+            List<KntKarty> result = new List<KntKarty>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                Int32 Knt_GIDNumer = Convert.ToInt32(pomDataTable.Rows[i]["GKnt_GIDNumer"].ToString());
+                String Knt_Akronim = pomDataTable.Rows[i]["GKnt_Akronim"].ToString();
+                String Knt_nazwa1 = pomDataTable.Rows[i]["GKnt_nazwa1"].ToString();
+                String Knt_nazwa2 = pomDataTable.Rows[i]["GKnt_nazwa2"].ToString();
+                String Knt_nazwa3 = pomDataTable.Rows[i]["GKnt_nazwa3"].ToString();
+                String Knt_KodP = pomDataTable.Rows[i]["GKnt_KodP"].ToString();
+                String Knt_miasto = pomDataTable.Rows[i]["GKnt_miasto"].ToString();
+                String Knt_ulica = pomDataTable.Rows[i]["GKnt_ulica"].ToString();
+                String Knt_Adres = pomDataTable.Rows[i]["GKnt_Adres"].ToString();
+                String Knt_nip = pomDataTable.Rows[i]["GKnt_nip"].ToString();
+                String Knt_telefon1 = pomDataTable.Rows[i]["GKnt_telefon1"].ToString();
+                String Knt_telefon2 = pomDataTable.Rows[i]["GKnt_telefon2"].ToString();
+                String Knt_telex = pomDataTable.Rows[i]["GKnt_telex"].ToString();
+                String Knt_fax = pomDataTable.Rows[i]["GKnt_fax"].ToString();
+                String Knt_email = pomDataTable.Rows[i]["GKnt_email"].ToString();
+                String Knt_url = pomDataTable.Rows[i]["GKnt_url"].ToString();
+
+                result.Add(new KntKarty(Knt_GIDNumer, Knt_Akronim, Knt_nazwa1, Knt_nazwa2, Knt_nazwa3, Knt_KodP, Knt_miasto, Knt_ulica, Knt_Adres, Knt_nip, Knt_telefon1, Knt_telefon2, Knt_telex, Knt_fax, Knt_email, Knt_url));
+            }
+            return result;
+        }
+
+        public List<KntKarty> kntKarty_ZwrocZmodyfikowanych()
+        {
+            List<KntKarty> output = new List<KntKarty>();
+            DataTable pomDataTable = new DataTable();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[KntSyncMod]";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                output = wygenerujKntKartyList(pomDataTable);
+            }
+
+            return output;
+        }
+
+        public List<int> kntKarty_ZwrocUsunietych()
+        {
+            List<int> output = new List<int>();
+            DataTable pomDataTable = new DataTable();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[KntSyncDel]";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                output = wygenerujIntList(pomDataTable);
+            }
+
+            return output;
+        }
+
+        private List<int> wygenerujIntList(DataTable pomDataTable)
+        {
+            List<int> result = new List<int>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                result.Add(Convert.ToInt32(pomDataTable.Rows[i]["gkns_id"].ToString()));
+            }
+
+            return result;
+        }
+
+
+
+
+
+
+
+        public void KntAdresy_ZapiszDaneUrzadzenia(string inputJSON)
+        {
+            DataTable pomDataTable = new DataTable();
+
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<int> listaInt = ser.Deserialize<List<int>>(inputJSON);
+
+            if(listaInt != null)
+            {
+                try
+                {
+                    String zapytanieString = "delete GAL.knssync";
+                    SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                    da.Fill(pomDataTable);
+                }
+                catch(Exception) { }
+
+                for(int i = 0; i < listaInt.Count; i++)
+                {
+                    try
+                    {
+                        String zapytanieString = "insert into GAL.knssync values(" + listaInt[i] + ")";
+                        SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                        da.Fill(pomDataTable);
+                    }
+                    catch(Exception) { }
+                }
+            }
+        }
+
+        public List<KntAdresy> KntAdresy_ZwrocNowych()
+        {
+            List<KntAdresy> output = new List<KntAdresy>();
+            DataTable pomDataTable = new DataTable();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[KnaSyncAdd]";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                output = wygenerujKntAdresyList(pomDataTable);
+            }
+
+            return output;
+        }
+
+        private List<KntAdresy> wygenerujKntAdresyList(DataTable pomDataTable)
+        {
+            List<KntAdresy> result = new List<KntAdresy>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                Int32 Kna_GIDNumer = Convert.ToInt32(pomDataTable.Rows[i]["GKna_GIDNumer"].ToString());
+                Int32 Kna_GIDTyp = Convert.ToInt32(pomDataTable.Rows[i]["GKna_GIDTyp"].ToString());
+                Int32 Kna_KntNumer = Convert.ToInt32(pomDataTable.Rows[i]["Gkna_kntnumer"].ToString());
+                String Kna_Akronim = pomDataTable.Rows[i]["GKna_Akronim"].ToString();
+                String Kna_nazwa1 = pomDataTable.Rows[i]["GKna_nazwa1"].ToString();
+                String Kna_nazwa2 = pomDataTable.Rows[i]["GKna_nazwa2"].ToString();
+                String Kna_nazwa3 = pomDataTable.Rows[i]["GKna_nazwa3"].ToString();
+                String Kna_KodP = pomDataTable.Rows[i]["GKna_KodP"].ToString();
+                String Kna_miasto = pomDataTable.Rows[i]["GKna_miasto"].ToString();
+                String Kna_ulica = pomDataTable.Rows[i]["GKna_ulica"].ToString();
+                String Kna_Adres = pomDataTable.Rows[i]["GKna_Adres"].ToString();
+                String Kna_nip = pomDataTable.Rows[i]["GKna_nip"].ToString();
+                String Kna_telefon1 = pomDataTable.Rows[i]["GKna_telefon1"].ToString();
+                String Kna_telefon2 = pomDataTable.Rows[i]["GKna_telefon2"].ToString();
+                String Kna_telex = pomDataTable.Rows[i]["GKna_telex"].ToString();
+                String Kna_fax = pomDataTable.Rows[i]["GKna_fax"].ToString();
+                String Kna_email = pomDataTable.Rows[i]["GKna_email"].ToString();
+
+                result.Add(new KntAdresy(Kna_GIDNumer, Kna_GIDTyp, Kna_KntNumer, Kna_Akronim, Kna_nazwa1, Kna_nazwa2, Kna_nazwa3, Kna_KodP, Kna_miasto, Kna_ulica, Kna_Adres, Kna_nip, Kna_telefon1, Kna_telefon2, Kna_telex, Kna_fax, Kna_email));
+            }
+            return result;
+        }
+
+        internal List<KntAdresy> KntAdresy_ZwrocZmodyfikowanych()
+        {
+            List<KntAdresy> output = new List<KntAdresy>();
+            DataTable pomDataTable = new DataTable();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[KnaSyncMod]";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                output = wygenerujKntAdresyList(pomDataTable);
+            }
+
+            return output;
+        }
+
+        public List<int> KntAdresy_ZwrocUsunietych()
+        {
+            List<int> output = new List<int>();
+            DataTable pomDataTable = new DataTable();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[KnaSyncDel]";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+
+            if(pomDataTable.Rows.Count > 0)
+            {
+                output = wygenerujIntList(pomDataTable);
+            }
+
+            return output;
+        }
     }
 }

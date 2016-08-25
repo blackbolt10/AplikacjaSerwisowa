@@ -8,10 +8,10 @@ namespace AplikacjaSerwisowa
     [Table("KntKartyTable")]
     public class KntKartyTable
     {
-        [PrimaryKey, AutoIncrement, Column("_Id")]
+        [Column("Id")]
         public int Id { get; set; }
 
-        [Unique]
+        [PrimaryKey, Unique]
         public Int32 Knt_GIDNumer { get; set; }
 
         [MaxLength(20), Unique]

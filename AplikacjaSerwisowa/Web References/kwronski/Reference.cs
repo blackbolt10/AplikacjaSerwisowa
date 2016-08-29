@@ -890,9 +890,10 @@ namespace AplikacjaSerwisowa.kwronski {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/KntKarty_ZapiszDaneUrzadzenia", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void KntKarty_ZapiszDaneUrzadzenia(string inputJSON) {
-            this.Invoke("KntKarty_ZapiszDaneUrzadzenia", new object[] {
+        public string KntKarty_ZapiszDaneUrzadzenia(string inputJSON) {
+            object[] results = this.Invoke("KntKarty_ZapiszDaneUrzadzenia", new object[] {
                         inputJSON});
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
@@ -912,7 +913,7 @@ namespace AplikacjaSerwisowa.kwronski {
         private void OnKntKarty_ZapiszDaneUrzadzeniaOperationCompleted(object arg) {
             if ((this.KntKarty_ZapiszDaneUrzadzeniaCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.KntKarty_ZapiszDaneUrzadzeniaCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.KntKarty_ZapiszDaneUrzadzeniaCompleted(this, new KntKarty_ZapiszDaneUrzadzeniaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -999,9 +1000,10 @@ namespace AplikacjaSerwisowa.kwronski {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/KntAdresy_ZapiszDaneUrzadzenia", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void KntAdresy_ZapiszDaneUrzadzenia(string inputJSON) {
-            this.Invoke("KntAdresy_ZapiszDaneUrzadzenia", new object[] {
+        public string KntAdresy_ZapiszDaneUrzadzenia(string inputJSON) {
+            object[] results = this.Invoke("KntAdresy_ZapiszDaneUrzadzenia", new object[] {
                         inputJSON});
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
@@ -1021,7 +1023,7 @@ namespace AplikacjaSerwisowa.kwronski {
         private void OnKntAdresy_ZapiszDaneUrzadzeniaOperationCompleted(object arg) {
             if ((this.KntAdresy_ZapiszDaneUrzadzeniaCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.KntAdresy_ZapiszDaneUrzadzeniaCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.KntAdresy_ZapiszDaneUrzadzeniaCompleted(this, new KntAdresy_ZapiszDaneUrzadzeniaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1729,7 +1731,29 @@ namespace AplikacjaSerwisowa.kwronski {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
-    public delegate void KntKarty_ZapiszDaneUrzadzeniaCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void KntKarty_ZapiszDaneUrzadzeniaCompletedEventHandler(object sender, KntKarty_ZapiszDaneUrzadzeniaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class KntKarty_ZapiszDaneUrzadzeniaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal KntKarty_ZapiszDaneUrzadzeniaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
@@ -1811,7 +1835,29 @@ namespace AplikacjaSerwisowa.kwronski {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
-    public delegate void KntAdresy_ZapiszDaneUrzadzeniaCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void KntAdresy_ZapiszDaneUrzadzeniaCompletedEventHandler(object sender, KntAdresy_ZapiszDaneUrzadzeniaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class KntAdresy_ZapiszDaneUrzadzeniaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal KntAdresy_ZapiszDaneUrzadzeniaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]

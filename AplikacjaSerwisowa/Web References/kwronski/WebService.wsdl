@@ -274,7 +274,11 @@
         </s:complexType>
       </s:element>
       <s:element name="KntKarty_ZapiszDaneUrzadzeniaResponse">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KntKarty_ZapiszDaneUrzadzeniaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="KntKarty_ZwrocNowych">
         <s:complexType />
@@ -314,7 +318,11 @@
         </s:complexType>
       </s:element>
       <s:element name="KntAdresy_ZapiszDaneUrzadzeniaResponse">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KntAdresy_ZapiszDaneUrzadzeniaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="KntAdresy_ZwrocNowych">
         <s:complexType />
@@ -652,7 +660,9 @@
   <wsdl:message name="KntKarty_ZapiszDaneUrzadzeniaHttpGetIn">
     <wsdl:part name="inputJSON" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="KntKarty_ZapiszDaneUrzadzeniaHttpGetOut" />
+  <wsdl:message name="KntKarty_ZapiszDaneUrzadzeniaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="KntKarty_ZwrocNowychHttpGetIn" />
   <wsdl:message name="KntKarty_ZwrocNowychHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
@@ -668,7 +678,9 @@
   <wsdl:message name="KntAdresy_ZapiszDaneUrzadzeniaHttpGetIn">
     <wsdl:part name="inputJSON" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="KntAdresy_ZapiszDaneUrzadzeniaHttpGetOut" />
+  <wsdl:message name="KntAdresy_ZapiszDaneUrzadzeniaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="KntAdresy_ZwrocNowychHttpGetIn" />
   <wsdl:message name="KntAdresy_ZwrocNowychHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
@@ -792,7 +804,9 @@
   <wsdl:message name="KntKarty_ZapiszDaneUrzadzeniaHttpPostIn">
     <wsdl:part name="inputJSON" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="KntKarty_ZapiszDaneUrzadzeniaHttpPostOut" />
+  <wsdl:message name="KntKarty_ZapiszDaneUrzadzeniaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="KntKarty_ZwrocNowychHttpPostIn" />
   <wsdl:message name="KntKarty_ZwrocNowychHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
@@ -808,7 +822,9 @@
   <wsdl:message name="KntAdresy_ZapiszDaneUrzadzeniaHttpPostIn">
     <wsdl:part name="inputJSON" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="KntAdresy_ZapiszDaneUrzadzeniaHttpPostOut" />
+  <wsdl:message name="KntAdresy_ZapiszDaneUrzadzeniaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="KntAdresy_ZwrocNowychHttpPostIn" />
   <wsdl:message name="KntAdresy_ZwrocNowychHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
@@ -2110,7 +2126,9 @@
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
-      <wsdl:output />
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="KntKarty_ZwrocNowych">
       <http:operation location="/KntKarty_ZwrocNowych" />
@@ -2144,7 +2162,9 @@
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
-      <wsdl:output />
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="KntAdresy_ZwrocNowych">
       <http:operation location="/KntAdresy_ZwrocNowych" />
@@ -2395,7 +2415,9 @@
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
-      <wsdl:output />
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="KntKarty_ZwrocNowych">
       <http:operation location="/KntKarty_ZwrocNowych" />
@@ -2429,7 +2451,9 @@
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
-      <wsdl:output />
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="KntAdresy_ZwrocNowych">
       <http:operation location="/KntAdresy_ZwrocNowych" />

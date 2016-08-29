@@ -322,10 +322,15 @@ namespace WebApplication
 
         [WebMethod(Description = "Zapisuje kontrhanetów z urządzenia")]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void KntKarty_ZapiszDaneUrzadzenia(String inputJSON)
+        public String KntKarty_ZapiszDaneUrzadzenia(String inputJSON)
         {
             DataBase db = new DataBase();
             db.KntKarty_ZapiszDaneUrzadzenia(inputJSON);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize("OK");
         }
 
         [WebMethod(Description = "Zwraca nowych kontrahentow")]
@@ -378,10 +383,15 @@ namespace WebApplication
 
         [WebMethod(Description = "Zapisuje kontrhanetów z urządzenia")]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void KntAdresy_ZapiszDaneUrzadzenia(String inputJSON)
+        public String KntAdresy_ZapiszDaneUrzadzenia(String inputJSON)
         {
             DataBase db = new DataBase();
             db.KntAdresy_ZapiszDaneUrzadzenia(inputJSON);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize("OK");
         }
 
         [WebMethod(Description = "Zwraca nowych kontrahentow")]

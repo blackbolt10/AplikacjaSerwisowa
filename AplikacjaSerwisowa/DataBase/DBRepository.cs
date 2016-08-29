@@ -442,6 +442,29 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
+        internal List<int> KntAdresy_generujListeZapisanch()
+        {
+            List<int> output = new List<int>();
+            List<KntAdresyTable> kntAdresyList = new List<KntAdresyTable>();
+
+            try
+            {
+                String zapytanieString = "select Kna_GIDNumer from KntAdresyTable";
+                kntAdresyList = db.Query<KntAdresyTable>(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                String blad = "DBRepository.KntAdresy_generujListeZapisanch() Error: " + exc.Message;
+            }
+
+            for(int i = 0; i < kntAdresyList.Count; i++)
+            {
+                output.Add(kntAdresyList[i].Kna_GIDNumer);
+            }
+
+            return output;
+        }
+
         public String KntAdresy_UpdateRecord(KntAdresyTable kntAdres)
         {
             String output = "";
@@ -676,17 +699,18 @@ namespace AplikacjaSerwisowa
             List<SrwZlcNag> output = new List<SrwZlcNag>();
             try
             {
-                List<int> kntKarty = kntKarty_GetFiltredGidNumers(filtr);
-                String kntKartyString = generujListeGuidNumer(kntKarty);
-
-                List<int> kntAdresy = kntAdresy_GetFiltredGidNumers(filtr);
-                String kntAdresyString = generujListeGuidNumer(kntKarty);
 
                 String zapParam = "";
 
                 if(filtr != "")
                 {
-                   zapParam = " where SZN_Dokument like '%"+filtr+ "%' or SZN_DataWystawienia like '%" + filtr + "%' or SZN_KntNumer in "+kntKartyString+ " or SZN_KnANumer in "+kntAdresyString;
+                    List<int> kntKarty = kntKarty_GetFiltredGidNumers(filtr);
+                    String kntKartyString = generujListeGuidNumer(kntKarty);
+
+                    List<int> kntAdresy = kntAdresy_GetFiltredGidNumers(filtr);
+                    String kntAdresyString = generujListeGuidNumer(kntKarty);
+
+                    zapParam = " where SZN_Dokument like '%"+filtr+ "%' or SZN_DataWystawienia like '%" + filtr + "%' or SZN_KntNumer in "+kntKartyString+ " or SZN_KnANumer in "+kntAdresyString;
                 }
 
                 List<SrwZlcNag> result = db.Query<SrwZlcNag>("select * from SrwZlcNag "+ zapParam + " order by SZN_DataWystawienia desc, SZN_Id asc");
@@ -696,7 +720,10 @@ namespace AplikacjaSerwisowa
                     output = result;
                 }
             }
-            catch(Exception) { }
+            catch(Exception exc)
+            {
+                string test = exc.Message;
+            }
 
             return output;
         }
@@ -1470,7 +1497,7 @@ namespace AplikacjaSerwisowa
 
             return output;
         }
-        
+
         public String SrwUrzRodzaje_InsertRecord(SrwUrzRodzaje item)
         {
             String output = "";

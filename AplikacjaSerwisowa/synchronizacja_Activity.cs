@@ -831,108 +831,103 @@ namespace AplikacjaSerwisowa
         private void pobierzDaneWebSerwice()
         {
             int licznik = 1;
-            int max = 8;
+            int max = 16;
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy kart kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            KntKarty_StworzBaze();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy adresów kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            KntAdresy_StworzBaze();
+
             RunOnUiThread(() => progressDialog.SetTitle("Pobieranie "+licznik+"/"+max));
             RunOnUiThread(() => progressDialog.SetMessage("Wysy³anie danych kontrahentów z urz¹dzenia..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.Max = 1);
             List<int> listaKntKarty = wygenerujListeKontrahentow();
             String jsonOutKntKarty = JsonConvert.SerializeObject(listaKntKarty);
-            new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZapiszDaneUrzadzenia(jsonOutKntKarty);
+            String resulKntKarty =  new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZapiszDaneUrzadzenia(jsonOutKntKarty);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
             RunOnUiThread(() => progressDialog.SetMessage("Pobieranie zmodyfikowanych kontrahentów..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             String kntKartyZmodyfikowane = new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZwrocZmodyfikowanych();
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
             RunOnUiThread(() => progressDialog.SetMessage("Pobieranie nowych kontrahentów..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             String kntKartyNowe = new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZwrocNowych();
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
             RunOnUiThread(() => progressDialog.SetMessage("Pobieranie kontrahentów do usuniecia..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             String kntKartyDoUsuniecia = new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZwrocUsunietych();
 
-            licznik = 1;
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy kart kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-            KntKarty_StworzBaze();
-
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie zmodyfikowanych kart kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            KntKarty_Zmodyfikowani(kntKartyZmodyfikowane);
-
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie nowych kart kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            KntKarty_Nowi(kntKartyNowe);
-
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Usuwanie zbêdnych kart kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            KntKarty_Usunieci(kntKartyDoUsuniecia);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
             RunOnUiThread(() => progressDialog.SetMessage("Wysy³anie adresów kontrahentów z urz¹dzenia..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
-            List<int> listaKntAdresy = wygenerujListeKontrahentow();
-            String jsonOutKntAdresy = JsonConvert.SerializeObject(listaKntKarty);
-            new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZapiszDaneUrzadzenia(jsonOutKntAdresy);
+            List<int> listaKntAdresy = wygenerujListeAdresow();
+            String jsonOutKntAdresy = JsonConvert.SerializeObject(listaKntAdresy);
+            String resulKntAdresy = new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZapiszDaneUrzadzenia(jsonOutKntAdresy);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
             RunOnUiThread(() => progressDialog.SetMessage("Pobieranie zmodyfikowanych adresów kontrahentów..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.Max = 1);
             String KntAdresyZmodyfikowane = new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZwrocZmodyfikowanych();
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
             RunOnUiThread(() => progressDialog.SetMessage("Pobieranie nowych adresów kontrahentów..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.Max = 1);
             String KntAdresyNowe = new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZwrocNowych();
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
             RunOnUiThread(() => progressDialog.SetMessage("Pobieranie adresów kontrahentów do usuniecia..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.Max = 1);
             String KntAdresyDoUsuniecia = new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZwrocUsunietych();
 
-            licznik = 1;
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy adresów kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-            KntAdresy_StworzBaze();
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
+
+
+            licznik = 1;
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie zmodyfikowanych kart kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            KntKarty_Zmodyfikowani(kntKartyZmodyfikowane);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie nowych kart kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            KntKarty_Nowi(kntKartyNowe);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Usuwanie zbêdnych kart kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            KntKarty_Usunieci(kntKartyDoUsuniecia);
+
+
+            
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
             RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie zmodyfikowanych adresów kontrahentów..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             KntAdresy_Zmodyfikowani(KntAdresyZmodyfikowane);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
             RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie nowych adresów kontrahentów..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             KntAdresy_Nowi(KntAdresyNowe);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik + "/" + max));
+            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
             RunOnUiThread(() => progressDialog.SetMessage("Usuwanie zbêdnych adresów kontrahentów..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             KntAdresy_Usunieci(KntAdresyDoUsuniecia);
@@ -950,7 +945,6 @@ namespace AplikacjaSerwisowa
 
 
             progressDialog.Dismiss();
-            //tworzenieBazyKntKarty();
         }
 
         private void KntAdresy_Usunieci(string kntAdresyDoUsuniecia)
@@ -1086,6 +1080,11 @@ namespace AplikacjaSerwisowa
         {
             DBRepository dbr = new DBRepository();
             dbr.stworzKntAdresyTabele();
+        }
+        private List<int> wygenerujListeAdresow()
+        {
+            DBRepository dbr = new DBRepository();
+            return dbr.KntAdresy_generujListeZapisanch();
         }
     }
 }

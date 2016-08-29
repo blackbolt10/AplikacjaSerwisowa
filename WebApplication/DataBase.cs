@@ -1192,7 +1192,7 @@ namespace WebApplication
             {
                 try
                 {
-                    String zapytanieString = "delete GAL.knssync";
+                    String zapytanieString = "delete GAL.knasync";
                     SqlDataAdapter da = zapytanieSerwis(zapytanieString);
                     da.Fill(pomDataTable);
                 }
@@ -1202,7 +1202,7 @@ namespace WebApplication
                 {
                     try
                     {
-                        String zapytanieString = "insert into GAL.knssync values(" + listaInt[i] + ")";
+                        String zapytanieString = "insert into GAL.knasync values(" + listaInt[i] + ")";
                         SqlDataAdapter da = zapytanieSerwis(zapytanieString);
                         da.Fill(pomDataTable);
                     }
@@ -1297,10 +1297,21 @@ namespace WebApplication
 
             if(pomDataTable.Rows.Count > 0)
             {
-                output = wygenerujIntList(pomDataTable);
+                output = wygenerujIntListeUsunietych(pomDataTable);
             }
 
             return output;
+        }
+        private List<int> wygenerujIntListeUsunietych(DataTable pomDataTable)
+        {
+            List<int> result = new List<int>();
+
+            for(int i = 0; i < pomDataTable.Rows.Count; i++)
+            {
+                result.Add(Convert.ToInt32(pomDataTable.Rows[i]["gkna_id"].ToString()));
+            }
+
+            return result;
         }
     }
 }

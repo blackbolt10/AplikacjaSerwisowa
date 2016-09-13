@@ -458,17 +458,17 @@ namespace AplikacjaSerwisowaKomp
 
             DokumentZlcRemNagInfo.Opis = "lama";
 
-            DokumentZlcRemNagInfo.KntTyp = 32;
-            DokumentZlcRemNagInfo.KntNumer = 805;
+            DokumentZlcRemNagInfo.KntTyp = 896;
+            DokumentZlcRemNagInfo.KntNumer = 15327;
 
             DokumentZlcRemNagInfo.KnATyp = 864;
-            DokumentZlcRemNagInfo.KnANumer = 1041;
+            DokumentZlcRemNagInfo.KnANumer = 15328;
 
-            DokumentZlcRemNagInfo.KnDTyp = 32;
-            DokumentZlcRemNagInfo.KnDNumer = 805;
+            DokumentZlcRemNagInfo.KnDTyp = 896;
+            DokumentZlcRemNagInfo.KnDNumer = 15327;
 
-            DokumentZlcRemNagInfo.KnPTyp = 32;
-            DokumentZlcRemNagInfo.KnPNumer = 805;
+            DokumentZlcRemNagInfo.KnPTyp = 896;
+            DokumentZlcRemNagInfo.KnPNumer = 15327;
 
 
             int wynik = cdn_api.cdn_api.XLNoweZlecenieSerwis(Sesja,ref IDDok, DokumentZlcRemNagInfo);
@@ -494,8 +494,10 @@ namespace AplikacjaSerwisowaKomp
 
         private void dodajPozycjeButton_Click(object sender, EventArgs e)
         {
-            dodajCzynnosc();
-            dodajSkladnik();
+
+            MessageBox.Show("Brak implementacji");
+            //dodajCzynnosc();
+            //dodajSkladnik();
         }
 
         private void dodajSkladnik()

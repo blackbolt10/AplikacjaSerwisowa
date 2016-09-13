@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase\DBRepository.cs" />
+    <Compile Include="DataBase\Tabele\SrwUrzWlasc.cs" />
     <Compile Include="DataBase\Tabele\SrwZlcUrz.cs" />
     <Compile Include="DataBase\Tabele\SrwUrzadzenia.cs" />
     <Compile Include="DataBase\Tabele\SrwUrzRodzaje.cs" />
@@ -106,7 +107,6 @@
     <Compile Include="Lista zlecen\Zakladki\podpisListaZlecen.cs" />
     <Compile Include="Lista zlecen\Zakladki\skladnikiListaZlecen.cs" />
     <Compile Include="Lista zlecen\Zakladki\urzadzeniaListaZlecen.cs" />
-    <Compile Include="Magazyn\kartyTowarowTable.cs" />
     <Compile Include="Magazyn\kartyTowarow_ListViewAdapter.cs" />
     <Compile Include="Magazyn\magazyn_Activity.cs" />
     <Compile Include="MainActivity.cs" />

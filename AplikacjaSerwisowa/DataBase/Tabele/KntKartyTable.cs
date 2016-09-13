@@ -11,7 +11,7 @@ namespace AplikacjaSerwisowa
         [Column("Id")]
         public int Id { get; set; }
 
-        [PrimaryKey, Unique]
+        [PrimaryKey]
         public Int32 Knt_GIDNumer { get; set; }
         
         public String Knt_Akronim { get; set; }
@@ -43,5 +43,9 @@ namespace AplikacjaSerwisowa
         public String Knt_email { get; set; }
         
         public String Knt_url { get; set; }
+
+        public Int32 Knt_Archiwalny { get; set; }
+
+        public Int32 Knt_ToDo { get; set; }
     }
 }

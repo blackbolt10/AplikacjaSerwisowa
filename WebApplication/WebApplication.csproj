@@ -88,6 +88,7 @@
     <Compile Include="Struktury\Operatorzy.cs" />
     <Compile Include="Struktury\KntAdresy.cs" />
     <Compile Include="Struktury\KntKarty.cs" />
+    <Compile Include="Struktury\SrwUrzWlasc.cs" />
     <Compile Include="Struktury\SrwZlcUrz.cs" />
     <Compile Include="Struktury\SrwUrzParDef.cs" />
     <Compile Include="Struktury\SrwUrzRodzPar.cs" />

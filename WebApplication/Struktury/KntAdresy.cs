@@ -24,8 +24,9 @@ namespace WebApplication
         public String Kna_telex { get; set; }
         public String Kna_fax { get; set; }
         public String Kna_email { get; set; }
+        public Int32 Kna_ToDo { get; set; }
 
-        public KntAdresy(Int32 _Kna_GIDNumer, Int32 _Kna_GIDTyp, Int32 _Kna_KntNumer, String _Kna_Akronim, String _Kna_nazwa1, String _Kna_nazwa2, String _Kna_nazwa3, String _Kna_KodP, String _Kna_miasto, String _Kna_ulica, String _Kna_Adres, String _Kna_nip, String _Kna_telefon1, String _Kna_telefon2, String _Kna_telex, String _Kna_fax, String _Kna_email)
+    public KntAdresy(Int32 _Kna_GIDNumer, Int32 _Kna_GIDTyp, Int32 _Kna_KntNumer, String _Kna_Akronim, String _Kna_nazwa1, String _Kna_nazwa2, String _Kna_nazwa3, String _Kna_KodP, String _Kna_miasto, String _Kna_ulica, String _Kna_Adres, String _Kna_nip, String _Kna_telefon1, String _Kna_telefon2, String _Kna_telex, String _Kna_fax, String _Kna_email, Int32 _Kna_ToDo)
         {
             Kna_GIDNumer = _Kna_GIDNumer;
             Kna_GIDTyp = _Kna_GIDTyp;
@@ -44,6 +45,7 @@ namespace WebApplication
             Kna_telex = _Kna_telex;
             Kna_fax = _Kna_fax;
             Kna_email = _Kna_email;
+            Kna_ToDo = _Kna_ToDo;
         }
         public KntAdresy() { }
     }

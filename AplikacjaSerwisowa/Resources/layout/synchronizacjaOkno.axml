@@ -30,5 +30,13 @@
             android:id="@+id/SynchronizacjaSynch2Button"
             android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true" />
+        <Button
+            android:text="Format"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/SynchronizacjaSynch2Button"
+            android:id="@+id/FormatSynch2Button"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 </ScrollView>

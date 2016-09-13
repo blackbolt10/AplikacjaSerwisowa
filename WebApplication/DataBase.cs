@@ -15,7 +15,7 @@ namespace WebApplication
     {
         private SqlConnection uchwytBD;
         private SqlConnection uchwytBDSerwis;
-        private int liczbaMiesiecyWstecz = -4;
+        private int liczbaMiesiecyWstecz = 3;
 
         public DataBase()
         {
@@ -89,6 +89,18 @@ namespace WebApplication
             return wynik;
         }
 
+        private void RaportBleduSerwis(String funkcja, String blad, String param1="", String param2 = "")
+        {
+            DataTable pomDataTable = new DataTable();
+            try
+            {
+                String zapytanieString = "insert into GAL.Ustawienia VALUES('" + funkcja + "', '" + blad + "', '" + param1+"', '"+param2+"')";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomDataTable);
+            }
+            catch(Exception) { }
+        }
+
         public List<SrwZlcPodpisTable> wygenerujListeSrwZlcPodpis()
         {
             List<SrwZlcPodpisTable> result = new List<SrwZlcPodpisTable>();
@@ -158,8 +170,9 @@ namespace WebApplication
                 String SUD_Nazwa = pomDataTable.Rows[i]["SUD_Nazwa"].ToString();
                 String SUD_Format = pomDataTable.Rows[i]["SUD_Format"].ToString();
                 int SUD_Archiwalna = Convert.ToInt32(pomDataTable.Rows[i]["SUD_Archiwalna"].ToString());
+                Int32 SUD_ToDo = -11111;
 
-                result.Add(new SrwUrzParDef(SUD_Id, SUD_Nazwa, SUD_Format, SUD_Archiwalna));
+                result.Add(new SrwUrzParDef(SUD_Id, SUD_Nazwa, SUD_Format, SUD_Archiwalna, SUD_ToDo));
             }
             return result;
         }
@@ -201,8 +214,9 @@ namespace WebApplication
                 int SZU_SZNId = Convert.ToInt32(pomDataTable.Rows[i]["SZU_SZNId"].ToString());
                 int SZU_SrUId = Convert.ToInt32(pomDataTable.Rows[i]["SZU_SrUId"].ToString());
                 int SZU_Pozycja = Convert.ToInt32(pomDataTable.Rows[i]["SZU_Pozycja"].ToString());
+                int SZU_ToDo = -1111;
 
-                result.Add(new SrwZlcUrz(SZU_Id, SZU_SZNId, SZU_SrUId, SZU_Pozycja));
+                result.Add(new SrwZlcUrz(SZU_Id, SZU_SZNId, SZU_SrUId, SZU_Pozycja, SZU_ToDo));
             }
             return result;
         }
@@ -238,8 +252,9 @@ namespace WebApplication
                 int SUR_Id = Convert.ToInt32(pomDataTable.Rows[i]["SUR_Id"].ToString());
                 String SUR_Kod = pomDataTable.Rows[i]["SUR_Kod"].ToString();
                 String SUR_Nazwa = pomDataTable.Rows[i]["SUR_Nazwa"].ToString();
+                int SUR_ToDo = -111;
 
-                result.Add(new SrwUrzRodzaje(SUR_Id, SUR_Kod, SUR_Nazwa));
+                result.Add(new SrwUrzRodzaje(SUR_Id, SUR_Kod, SUR_Nazwa, SUR_ToDo));
             }
             return result;
         }
@@ -276,8 +291,9 @@ namespace WebApplication
                 int SRP_SURId = Convert.ToInt32(pomDataTable.Rows[i]["SRP_SURId"].ToString());
                 int SRP_SUDId = Convert.ToInt32(pomDataTable.Rows[i]["SRP_SUDId"].ToString());
                 int SRP_Lp = Convert.ToInt32(pomDataTable.Rows[i]["SRP_Lp"].ToString());
+                int SRP_ToDo = -111;
 
-                result.Add(new SrwUrzRodzPar(SRP_Id, SRP_SURId, SRP_SUDId, SRP_Lp));
+                result.Add(new SrwUrzRodzPar(SRP_Id, SRP_SURId, SRP_SUDId, SRP_Lp, SRP_ToDo));
             }
             return result;
         }
@@ -317,9 +333,9 @@ namespace WebApplication
                 String Sru_Nazwa = pomDataTable.Rows[i]["Sru_Nazwa"].ToString();
                 String SrU_Opis = pomDataTable.Rows[i]["SrU_Opis"].ToString();
                 int SrU_Archiwalne = Convert.ToInt32(pomDataTable.Rows[i]["SrU_Archiwalne"].ToString());
-                int SUW_WlaNumer = Convert.ToInt32(pomDataTable.Rows[i]["SUW_WlaNumer"].ToString());
+                Int32 SrU_ToDo = -1111;
 
-                result.Add(new SrwUrzadzenia(SrU_Id, SrU_SURId, Sru_Kod, Sru_Nazwa, SrU_Opis, SrU_Archiwalne, SUW_WlaNumer));
+                result.Add(new SrwUrzadzenia(SrU_Id, SrU_SURId, Sru_Kod, Sru_Nazwa, SrU_Opis, SrU_Archiwalne, SrU_ToDo));
             }
             return result;
         }
@@ -401,8 +417,9 @@ namespace WebApplication
                 String SZN_Stan = pomDataTable.Rows[i]["Stan"].ToString();
                 String SZN_Status = pomDataTable.Rows[i]["Status"].ToString();
                 String SZN_Opis = pomDataTable.Rows[i]["SZN_Opis"].ToString();
+                int SZN_ToDo = -111;
 
-                result.Add(new SrwZlcNag(SZN_Id, SZN_Synchronizacja, SZN_KntTyp, SZN_KntNumer, SZN_KnATyp, SZN_KnANumer, SZN_Dokument, SZN_DataWystawienia, SZN_DataRozpoczecia, SZN_Stan, SZN_Status, SZN_Opis));
+                result.Add(new SrwZlcNag(SZN_Id, SZN_Synchronizacja, SZN_KntTyp, SZN_KntNumer, SZN_KnATyp, SZN_KnANumer, SZN_Dokument, SZN_DataWystawienia, SZN_DataRozpoczecia, SZN_Stan, SZN_Status, SZN_Opis, SZN_ToDo));
             }
             return result;
         }
@@ -448,8 +465,9 @@ namespace WebApplication
                 String SZC_TwrNazwa = pomDataTable.Rows[i]["SZC_TwrNazwa"].ToString();
                 Double SZC_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["SZC_Ilosc"].ToString());
                 String SZC_Opis = pomDataTable.Rows[i]["SZC_Opis"].ToString();
+                Int32 SZC_ToDo = -1111;
 
-                result.Add(new SrwZlcCzynnosci(SZC_Id, SZC_SZNId, SZC_SZUId, SZC_Synchronizacja, SZC_Pozycja, SZC_TwrTyp, SZC_TwrNumer, SZC_TwrNazwa, SZC_Ilosc, SZC_Opis));
+                result.Add(new SrwZlcCzynnosci(SZC_Id, SZC_SZNId, SZC_SZUId, SZC_Synchronizacja, SZC_Pozycja, SZC_TwrTyp, SZC_TwrNumer, SZC_TwrNazwa, SZC_Ilosc, SZC_Opis, SZC_ToDo));
             }
             return result;
         }
@@ -479,6 +497,7 @@ namespace WebApplication
             }
             return result;
         }
+
         private List<SrwZlcSkladniki> wygenerujListeSrwZlcSkladniki(DataTable pomDataTable)
         {
             List<SrwZlcSkladniki> result = new List<SrwZlcSkladniki>();
@@ -494,8 +513,9 @@ namespace WebApplication
                 String SZS_TwrNazwa = pomDataTable.Rows[i]["SZS_TwrNazwa"].ToString();
                 Double SZS_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["SZS_Ilosc"].ToString());
                 String SZS_Opis= pomDataTable.Rows[i]["SZS_Opis"].ToString();
+                Int32 SZS_ToDo = -1111;
 
-                result.Add(new SrwZlcSkladniki(SZS_Id, SZS_sznId, SZS_Synchronizacja, SZS_Pozycja, SZS_Ilosc, SZS_TwrNumer, SZS_TwrTyp, SZS_TwrNazwa, SZS_Opis));
+                result.Add(new SrwZlcSkladniki(SZS_Id, SZS_sznId, SZS_Synchronizacja, SZS_Pozycja, SZS_Ilosc, SZS_TwrNumer, SZS_TwrTyp, SZS_TwrNazwa, SZS_Opis, SZS_ToDo));
             }
             return result;
         }
@@ -583,8 +603,10 @@ namespace WebApplication
                 String Knt_fax = pomDataTable.Rows[i]["Knt_fax"].ToString();
                 String Knt_email = pomDataTable.Rows[i]["Knt_email"].ToString();
                 String Knt_url = pomDataTable.Rows[i]["Knt_url"].ToString();
+                Int32 Knt_Archiwalny = -111111;
+                Int32 Knt_ToDo = -1111111;
 
-                result.Add(new KntKarty(Knt_GIDNumer, Knt_Akronim, Knt_nazwa1, Knt_nazwa2, Knt_nazwa3, Knt_KodP, Knt_miasto, Knt_ulica, Knt_Adres, Knt_nip, Knt_telefon1, Knt_telefon2, Knt_telex, Knt_fax, Knt_email, Knt_url));
+                result.Add(new KntKarty(Knt_GIDNumer, Knt_Akronim, Knt_nazwa1, Knt_nazwa2, Knt_nazwa3, Knt_KodP, Knt_miasto, Knt_ulica, Knt_Adres, Knt_nip, Knt_telefon1, Knt_telefon2, Knt_telex, Knt_fax, Knt_email, Knt_url, Knt_Archiwalny, Knt_ToDo));
             }
             return result;
         }
@@ -635,8 +657,9 @@ namespace WebApplication
                 String Kna_telex = pomDataTable.Rows[i]["Kna_telex"].ToString();
                 String Kna_fax = pomDataTable.Rows[i]["Kna_fax"].ToString();
                 String Kna_email = pomDataTable.Rows[i]["Kna_email"].ToString();
+                Int32 Kna_ToDo = -1111;
 
-                result.Add(new KntAdresy(Kna_GIDNumer, Kna_GIDTyp, Kna_KntNumer, Kna_Akronim, Kna_nazwa1, Kna_nazwa2, Kna_nazwa3, Kna_KodP, Kna_miasto, Kna_ulica, Kna_Adres, Kna_nip, Kna_telefon1, Kna_telefon2, Kna_telex, Kna_fax, Kna_email));
+                result.Add(new KntAdresy(Kna_GIDNumer, Kna_GIDTyp, Kna_KntNumer, Kna_Akronim, Kna_nazwa1, Kna_nazwa2, Kna_nazwa3, Kna_KodP, Kna_miasto, Kna_ulica, Kna_Adres, Kna_nip, Kna_telefon1, Kna_telefon2, Kna_telex, Kna_fax, Kna_email, Kna_ToDo));
             }
             return result;
         }
@@ -676,9 +699,10 @@ namespace WebApplication
                 String Twr_Nazwa = pomDataTable.Rows[i]["Twr_Nazwa"].ToString();
                 String Twr_Nazwa1 = pomDataTable.Rows[i]["Twr_Nazwa1"].ToString();
                 String Twr_Jm = pomDataTable.Rows[i]["Twr_Jm"].ToString();
+                Int32 Twr_ToDo = -1000;
 
 
-                result.Add(new TwrKartyTable(Twr_GIDTyp, Twr_GIDNumer, Twr_Kod, Twr_Typ, Twr_Nazwa, Twr_Nazwa1, Twr_Jm));
+                result.Add(new TwrKartyTable(Twr_GIDTyp, Twr_GIDNumer, Twr_Kod, Twr_Typ, Twr_Nazwa, Twr_Nazwa1, Twr_Jm, Twr_ToDo));
             }
             return result;
         }
@@ -834,8 +858,9 @@ namespace WebApplication
                 String GZN_Stan = pomDataTable.Rows[i]["GZN_Stan"].ToString();
                 String GZN_Status = pomDataTable.Rows[i]["GZN_Status"].ToString();
                 String GZN_Opis = pomDataTable.Rows[i]["GZN_Opis"].ToString();
+                Int32 GZN_ToDo = -1111;
 
-                result.Add(new SrwZlcNag(GZN_Id, GZN_Synchronizacja,GZN_KntTyp,GZN_KntNumer,GZN_KnATyp,GZN_KnANumer,Dokument,GZN_DataWystawienia,GZN_DataRozpoczecia,GZN_Stan,GZN_Status,GZN_Opis));
+                result.Add(new SrwZlcNag(GZN_Id, GZN_Synchronizacja,GZN_KntTyp,GZN_KntNumer,GZN_KnATyp,GZN_KnANumer,Dokument,GZN_DataWystawienia,GZN_DataRozpoczecia,GZN_Stan,GZN_Status,GZN_Opis, GZN_ToDo));
             }
             return result;
         }
@@ -908,8 +933,9 @@ namespace WebApplication
                 String GZC_TwrNazwa = pomDataTable.Rows[i]["GZC_TwrNazwa"].ToString();
                 Double GZC_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["GZC_Ilosc"].ToString());
                 String GZC_Opis = pomDataTable.Rows[i]["GZC_Opis"].ToString();
+                Int32 GZC_ToDo = -1111;
 
-                result.Add(new SrwZlcCzynnosci(GZC_GZCId, GZC_GZNId, GZC_GZUId,GZC_Synchronizacja, GZC_Pozycja,GZC_TwrTyp,GZC_TwrNumer,GZC_TwrNazwa,GZC_Ilosc,GZC_Opis));
+                result.Add(new SrwZlcCzynnosci(GZC_GZCId, GZC_GZNId, GZC_GZUId,GZC_Synchronizacja, GZC_Pozycja,GZC_TwrTyp,GZC_TwrNumer,GZC_TwrNazwa,GZC_Ilosc,GZC_Opis, GZC_ToDo));
             }
             return result;
         }
@@ -980,8 +1006,9 @@ namespace WebApplication
                 String GZS_TwrNazwa = pomDataTable.Rows[i]["GZS_TwrNazwa"].ToString();
                 Double GZS_Ilosc = Convert.ToDouble(pomDataTable.Rows[i]["GZS_Ilosc"].ToString());
                 String GZS_Opis = pomDataTable.Rows[i]["GZS_Opis"].ToString();
+                Int32 GZS_ToDo = -1111;
 
-                result.Add(new SrwZlcSkladniki(GZS_Id,GZS_GZSId,GZS_Synchronizacja,GZS_Pozycja,GZS_Ilosc,GZS_TwrNumer,GZS_TwrTyp,GZS_TwrNazwa,GZS_Opis));
+                result.Add(new SrwZlcSkladniki(GZS_Id,GZS_GZSId,GZS_Synchronizacja,GZS_Pozycja,GZS_Ilosc,GZS_TwrNumer,GZS_TwrTyp,GZS_TwrNazwa,GZS_Opis, GZS_ToDo));
             }
             return result;
         }
@@ -1115,8 +1142,10 @@ namespace WebApplication
                 String Knt_fax = pomDataTable.Rows[i]["GKnt_fax"].ToString();
                 String Knt_email = pomDataTable.Rows[i]["GKnt_email"].ToString();
                 String Knt_url = pomDataTable.Rows[i]["GKnt_url"].ToString();
+                Int32 Knt_Archiwalny = Convert.ToInt32(pomDataTable.Rows[i]["GKnt_Archiwalny"].ToString());
+                Int32 Knt_ToDo = Convert.ToInt32(pomDataTable.Rows[i]["GKnt_ToDo"].ToString());
 
-                result.Add(new KntKarty(Knt_GIDNumer, Knt_Akronim, Knt_nazwa1, Knt_nazwa2, Knt_nazwa3, Knt_KodP, Knt_miasto, Knt_ulica, Knt_Adres, Knt_nip, Knt_telefon1, Knt_telefon2, Knt_telex, Knt_fax, Knt_email, Knt_url));
+                result.Add(new KntKarty(Knt_GIDNumer, Knt_Akronim, Knt_nazwa1, Knt_nazwa2, Knt_nazwa3, Knt_KodP, Knt_miasto, Knt_ulica, Knt_Adres, Knt_nip, Knt_telefon1, Knt_telefon2, Knt_telex, Knt_fax, Knt_email, Knt_url, Knt_Archiwalny, Knt_ToDo));
             }
             return result;
         }
@@ -1255,8 +1284,9 @@ namespace WebApplication
                 String Kna_telex = pomDataTable.Rows[i]["GKna_telex"].ToString();
                 String Kna_fax = pomDataTable.Rows[i]["GKna_fax"].ToString();
                 String Kna_email = pomDataTable.Rows[i]["GKna_email"].ToString();
+                Int32 Kna_ToDo = -11111;
 
-                result.Add(new KntAdresy(Kna_GIDNumer, Kna_GIDTyp, Kna_KntNumer, Kna_Akronim, Kna_nazwa1, Kna_nazwa2, Kna_nazwa3, Kna_KodP, Kna_miasto, Kna_ulica, Kna_Adres, Kna_nip, Kna_telefon1, Kna_telefon2, Kna_telex, Kna_fax, Kna_email));
+                result.Add(new KntAdresy(Kna_GIDNumer, Kna_GIDTyp, Kna_KntNumer, Kna_Akronim, Kna_nazwa1, Kna_nazwa2, Kna_nazwa3, Kna_KodP, Kna_miasto, Kna_ulica, Kna_Adres, Kna_nip, Kna_telefon1, Kna_telefon2, Kna_telex, Kna_fax, Kna_email, Kna_ToDo));
             }
             return result;
         }
@@ -1312,6 +1342,926 @@ namespace WebApplication
             }
 
             return result;
+        }
+
+
+
+
+
+
+
+
+
+
+        public void Zapisz_Dane_Kontrahentow(int idOperatora, string kntKartyString, string kntAdresyString)
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<Int32> kntKartyList = ser.Deserialize<List<Int32>>(kntKartyString);
+            List<Int32> KntAdresyList = ser.Deserialize<List<Int32>>(kntAdresyString);
+
+            wyczyscTabeleAndroidID(idOperatora);
+
+            KntKarty_ZapiszListe(idOperatora, kntKartyList);
+            KntAdresy_ZapiszListe(idOperatora, KntAdresyList);
+        }
+
+        public void Zapisz_Dane_Towary(int idOperatora, string twrKartyString)
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<Int32> TwrKartyList = ser.Deserialize<List<Int32>>(twrKartyString);
+
+            TwrKarty_ZapiszListe(idOperatora, TwrKartyList);
+        }
+
+        public void Zapisz_Dane_Zlecenia(int idOperatora, string srwZlcNagString, string srwZlcCzynnosciString, string srwZlcSkladnikiString, string SrwZlcUrzString)
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<Int32> SrwZlcNagList = ser.Deserialize<List<Int32>>(srwZlcNagString);
+            List<Int32> SrwZlcCzynnosciList = ser.Deserialize<List<Int32>>(srwZlcCzynnosciString);
+            List<Int32> SrwZlcSkladnikiList = ser.Deserialize<List<Int32>>(srwZlcSkladnikiString);
+            List<Int32> SrwZlcUrzList = ser.Deserialize<List<Int32>>(SrwZlcUrzString);
+
+            SrwZlcCzynnosci_ZapiszListe(idOperatora, SrwZlcCzynnosciList);
+            SrwZlcSkladniki_ZapiszListe(idOperatora, SrwZlcSkladnikiList);
+            SrwZlcUrz_ZapiszListe(idOperatora, SrwZlcUrzList);
+            SrwZlcNag_ZapiszListe(idOperatora, SrwZlcNagList);
+        }
+
+        public void Zapisz_Dane_Urzadzenia(int idOperatora,string SrwUrzadzeniaString, string SrwUrzWlascString, string SrwUrzParDefString, string SrwUrzRodzajeString, string SrwUrzRodzParString)
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<Int32> SrwUrzWlascList = ser.Deserialize<List<Int32>>(SrwUrzWlascString);
+            List<Int32> SrwUrzadzeniaList = ser.Deserialize<List<Int32>>(SrwUrzadzeniaString);
+            List<Int32> SrwUrzParDefList = ser.Deserialize<List<Int32>>(SrwUrzParDefString);
+            List<Int32> SrwUrzRodzajeList = ser.Deserialize<List<Int32>>(SrwUrzRodzajeString);
+            List<Int32> SrwUrzRodzParList = ser.Deserialize<List<Int32>>(SrwUrzRodzParString);
+
+            SrwUrzWlasc_ZapiszListe(idOperatora, SrwUrzWlascList);
+            SrwUrzadzenia_ZapiszListe(idOperatora, SrwUrzadzeniaList);
+            SrwUrzParDef_ZapiszListe(idOperatora, SrwUrzParDefList);
+            SrwUrzRodzaje_ZapiszListe(idOperatora, SrwUrzRodzajeList);
+            SrwUrzRodzPar_ZapiszListe(idOperatora, SrwUrzRodzParList);
+        }
+
+        private void wyczyscTabeleAndroidID(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            try
+            {
+                String zapytanieString = "delete gal.androidid where AID_OpeId="+idOperatora;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                String blad = exc.Message;
+            }
+        }
+
+        private void KntKarty_ZapiszListe(Int32 idOperatora, List<int> kntKartyList)
+        {
+            for( int i=0;i<kntKartyList.Count;i++)
+            {
+                // 10 - typ KntKarty
+                AndroidID_InsertRecord(idOperatora, 10, kntKartyList[i]);
+            }
+        }
+
+        private void KntAdresy_ZapiszListe(Int32 idOperatora, List<int> KntAdresyList)
+        {
+            for(int i = 0; i < KntAdresyList.Count; i++)
+            {
+                // 11 - typ KntAdresy
+                AndroidID_InsertRecord(idOperatora, 11, KntAdresyList[i]);
+            }
+        }
+
+        private void SrwUrzWlasc_ZapiszListe(Int32 idOperatora, List<int> SrwUrzWlascList)
+        {
+            for(int i = 0; i < SrwUrzWlascList.Count; i++)
+            {
+                // 14 - typ TwrKarty
+                AndroidID_InsertRecord(idOperatora, 14, SrwUrzWlascList[i]);
+            }
+        }
+
+        private void TwrKarty_ZapiszListe(Int32 idOperatora, List<int> TwrKartyList)
+        {
+            for(int i = 0; i < TwrKartyList.Count; i++)
+            {
+                // 15 - typ TwrKarty
+                AndroidID_InsertRecord(idOperatora, 15, TwrKartyList[i]);
+            }
+        }
+
+        private void SrwUrzadzenia_ZapiszListe(Int32 idOperatora, List<int> SrwUrzadzeniaList)
+        {
+            for(int i = 0; i < SrwUrzadzeniaList.Count; i++)
+            {
+                // 16 - typ SrwUrzadzenia
+                AndroidID_InsertRecord(idOperatora, 16, SrwUrzadzeniaList[i]);
+            }
+        }
+
+        private void SrwUrzParDef_ZapiszListe(Int32 idOperatora, List<int> SrwUrzParDefList)
+        {
+            for(int i = 0; i < SrwUrzParDefList.Count; i++)
+            {
+                // 17 - typ SrwUrzParDef
+                AndroidID_InsertRecord(idOperatora, 17, SrwUrzParDefList[i]);
+            }
+        }
+
+        private void SrwUrzRodzaje_ZapiszListe(Int32 idOperatora, List<int> SrwUrzRodzajeList)
+        {
+            for(int i = 0; i < SrwUrzRodzajeList.Count; i++)
+            {
+                // 18 - typ SrwUrzRodzaje
+                AndroidID_InsertRecord(idOperatora, 18, SrwUrzRodzajeList[i]);
+            }
+        }
+        
+        private void SrwUrzRodzPar_ZapiszListe(Int32 idOperatora, List<int> SrwUrzRodzParRodzajeList)
+        {
+            for(int i = 0; i < SrwUrzRodzParRodzajeList.Count; i++)
+            {
+                // 19 - typ SrwUrzRodzPar
+                AndroidID_InsertRecord(idOperatora, 19, SrwUrzRodzParRodzajeList[i]);
+            }
+        }
+
+        private void SrwZlcCzynnosci_ZapiszListe(Int32 idOperatora, List<int> SrwZlcCzynnosciList)
+        {
+            for(int i = 0; i < SrwZlcCzynnosciList.Count; i++)
+            {
+                // 21 - typ SrwZlcCzynnosci
+                AndroidID_InsertRecord(idOperatora, 21, SrwZlcCzynnosciList[i]);
+            }
+        }
+
+        private void SrwZlcSkladniki_ZapiszListe(Int32 idOperatora, List<int> SrwZlcSkladnikiList)
+        {
+            for(int i = 0; i < SrwZlcSkladnikiList.Count; i++)
+            {
+                // 22 - typ SrwZlcSkladniki
+                AndroidID_InsertRecord(idOperatora, 22, SrwZlcSkladnikiList[i]);
+            }
+        }
+
+        private void SrwZlcUrz_ZapiszListe(int idOperatora, List<int> srwZlcUrzList)
+        {
+            for(int i = 0; i < srwZlcUrzList.Count; i++)
+            {
+                // 23 - typ srwZlcUrzList
+                AndroidID_InsertRecord(idOperatora, 23, srwZlcUrzList[i]);
+            }
+        }
+
+        private void SrwZlcNag_ZapiszListe(Int32 idOperatora, List<int> SrwZlcNagList)
+        {
+            for(int i = 0; i < SrwZlcNagList.Count; i++)
+            {
+                // 20 - typ SrwZlcNag
+                AndroidID_InsertRecord(idOperatora, 20, SrwZlcNagList[i]);
+            }
+        }
+
+        private void AndroidID_InsertRecord(int idOperatora, int typ, int wartosc)
+        {
+            DataTable pomdatatable = new DataTable();
+
+            try
+            {
+                String zapytanieString = "INSERT INTO gal.AndroidID VALUES (" + idOperatora + ", " + typ + ", " + wartosc + ")";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("AndroidID_InsertRecord", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+        }
+
+
+        public List<KntKarty> WS_KntKartyWygenerujListe(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            List<KntKarty> kntKartyList = new List<KntKarty>();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[SyncKontrahenci] "+idOperatora;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_KntKartyWygenerujListe", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+
+            kntKartyList = WS_KntKartyWygenerujListe(pomdatatable);
+
+            return kntKartyList;
+        }
+
+        private List<KntKarty> WS_KntKartyWygenerujListe(DataTable pomdatatable)
+        {
+            List<KntKarty> kntKartyList = new List<KntKarty>();
+
+            for(int i=0;i<pomdatatable.Rows.Count;i++)
+            {
+                KntKarty kntKarta = new KntKarty();
+
+                kntKarta.Knt_GIDNumer = Convert.ToInt32(pomdatatable.Rows[i]["GKnt_GidNumer"].ToString());
+                kntKarta.Knt_Akronim = pomdatatable.Rows[i]["GKnt_Akronim"].ToString();
+                kntKarta.Knt_nazwa1 = pomdatatable.Rows[i]["GKnt_Nazwa1"].ToString();
+                kntKarta.Knt_nazwa2 = pomdatatable.Rows[i]["GKnt_Nazwa2"].ToString();
+                kntKarta.Knt_nazwa3 = pomdatatable.Rows[i]["GKnt_Nazwa3"].ToString();
+                kntKarta.Knt_KodP = pomdatatable.Rows[i]["GKnt_KodP"].ToString();
+                kntKarta.Knt_miasto = pomdatatable.Rows[i]["GKnt_Miasto"].ToString();
+                kntKarta.Knt_ulica = pomdatatable.Rows[i]["GKnt_Ulica"].ToString();
+                kntKarta.Knt_Adres = pomdatatable.Rows[i]["GKnt_Adres"].ToString();
+                kntKarta.Knt_nip = pomdatatable.Rows[i]["GKnt_Nip"].ToString();
+                kntKarta.Knt_telefon1 = pomdatatable.Rows[i]["GKnt_Telefon1"].ToString();
+                kntKarta.Knt_telefon2 = pomdatatable.Rows[i]["GKnt_Telefon2"].ToString();
+                kntKarta.Knt_telex = pomdatatable.Rows[i]["GKnt_Telex"].ToString();
+                kntKarta.Knt_fax = pomdatatable.Rows[i]["GKnt_Fax"].ToString();
+                kntKarta.Knt_email = pomdatatable.Rows[i]["GKnt_Email"].ToString();
+                kntKarta.Knt_url = pomdatatable.Rows[i]["GKnt_Url"].ToString();
+                kntKarta.Knt_Archiwalny = Convert.ToInt32(pomdatatable.Rows[i]["GKnt_Archiwalny"].ToString());
+                kntKarta.Knt_ToDo = Convert.ToInt32(pomdatatable.Rows[i]["GKnt_ToDo"].ToString());
+
+                kntKartyList.Add(kntKarta);
+            }
+
+            return kntKartyList;
+        }
+
+        public void WS_KntKartyPotwierdz(Int32 idOperatora, String kntGidNumerList)
+        {
+            try
+            {
+                DataTable pomdatatable = new DataTable();
+                String zapytanieString = "update gal.kartykontrahenci set gknt_todo=0 where gknt_opeid=" + idOperatora + " and gknt_gidnumer in (" + kntGidNumerList + ")";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_KntKartyPotwierdz", exc.Message, "IdOperatora=" + idOperatora.ToString(), kntGidNumerList);
+            }
+        }
+
+        public List<KntAdresy> WS_KntAdresyWygenerujListe(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            List<KntAdresy> kntAdresyList = new List<KntAdresy>();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[SyncAdresy] " + idOperatora;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_KntAdresyWygenerujListe", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+
+            kntAdresyList = WS_KntAdresyWygenerujListe(pomdatatable);
+
+            return kntAdresyList;
+        }
+
+        private List<KntAdresy> WS_KntAdresyWygenerujListe(DataTable pomdatatable)
+        {
+            List<KntAdresy> kntAdresyList = new List<KntAdresy>();
+
+            for(int i = 0; i < pomdatatable.Rows.Count; i++)
+            {
+                KntAdresy kntAdres = new KntAdresy();
+
+                kntAdres.Kna_GIDNumer = Convert.ToInt32(pomdatatable.Rows[i]["GknA_GIDNumer"].ToString());
+                kntAdres.Kna_GIDTyp = Convert.ToInt32(pomdatatable.Rows[i]["GknA_GIDTyp"].ToString());
+                kntAdres.Kna_KntNumer = Convert.ToInt32(pomdatatable.Rows[i]["GknA_kntnumer"].ToString());
+                kntAdres.Kna_Adres = pomdatatable.Rows[i]["GKnA_Akronim"].ToString();
+                kntAdres.Kna_Akronim = pomdatatable.Rows[i]["GknA_Akronim"].ToString();
+                kntAdres.Kna_nazwa1 = pomdatatable.Rows[i]["GKnA_Nazwa1"].ToString();
+                kntAdres.Kna_nazwa2 = pomdatatable.Rows[i]["GKnA_Nazwa2"].ToString();
+                kntAdres.Kna_nazwa3 = pomdatatable.Rows[i]["GKnA_Nazwa3"].ToString();
+                kntAdres.Kna_KodP = pomdatatable.Rows[i]["GknA_KodP"].ToString();
+                kntAdres.Kna_miasto = pomdatatable.Rows[i]["GKnA_Miasto"].ToString();
+                kntAdres.Kna_ulica = pomdatatable.Rows[i]["GKnA_Ulica"].ToString();
+                kntAdres.Kna_Adres = pomdatatable.Rows[i]["GKnA_Adres"].ToString();
+                kntAdres.Kna_nip = pomdatatable.Rows[i]["GKnA_Nip"].ToString();
+                kntAdres.Kna_telefon1 = pomdatatable.Rows[i]["GKnA_Telefon1"].ToString();
+                kntAdres.Kna_telefon2 = pomdatatable.Rows[i]["GKnA_Telefon2"].ToString();
+                kntAdres.Kna_telex = pomdatatable.Rows[i]["GKnA_Telex"].ToString();
+                kntAdres.Kna_fax = pomdatatable.Rows[i]["GKnA_Fax"].ToString();
+                kntAdres.Kna_email = pomdatatable.Rows[i]["GKnA_Email"].ToString();
+                kntAdres.Kna_ToDo = Convert.ToInt32(pomdatatable.Rows[i]["GKnA_ToDo"].ToString());
+
+                kntAdresyList.Add(kntAdres);
+            }
+
+            return kntAdresyList;
+        }
+
+        public void WS_KntAdresyPotwierdz(int idOperatora, string kntGidNumerList)
+        {
+            try
+            {
+                DataTable pomdatatable = new DataTable();
+                String zapytanieString = "update gal.KartyAdresy set GKnA_ToDo = 0 where GKnA_OpeId = " + idOperatora + " and GKnA_GIDNumer in (" + kntGidNumerList + ")";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_KntAdresyPotwierdz", exc.Message, "IdOperatora=" + idOperatora.ToString(), kntGidNumerList);
+            }
+        }
+
+        public List<TwrKartyTable> WS_TwrKartyWygenerujListe(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            List<TwrKartyTable> kntAdresyList = new List<TwrKartyTable>();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[SyncTowary] " + idOperatora;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_TwrKartyWygenerujListe", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+
+            kntAdresyList = WS_TwrKartyWygenerujListe(pomdatatable);
+
+            return kntAdresyList;
+        }
+
+        private List<TwrKartyTable> WS_TwrKartyWygenerujListe(DataTable pomdatatable)
+        {
+            List<TwrKartyTable> TwrKartyList = new List<TwrKartyTable>();
+
+            for(int i = 0; i < pomdatatable.Rows.Count; i++)
+            {
+                TwrKartyTable TwrKarta = new TwrKartyTable();
+
+                TwrKarta.Twr_GIDNumer = Convert.ToInt32(pomdatatable.Rows[i]["GTwr_GIDnumer"].ToString());
+                TwrKarta.Twr_GIDTyp = Convert.ToInt32(pomdatatable.Rows[i]["GTwr_GIDTyp"].ToString());
+                TwrKarta.Twr_Kod =pomdatatable.Rows[i]["GTwr_Kod"].ToString();
+                TwrKarta.Twr_Typ = Convert.ToInt32(pomdatatable.Rows[i]["GTwr_Typ"].ToString());
+                TwrKarta.Twr_Nazwa = pomdatatable.Rows[i]["GTwr_Nazwa"].ToString();
+                TwrKarta.Twr_Nazwa1 = pomdatatable.Rows[i]["GTwr_Nazwa1"].ToString();
+                TwrKarta.Twr_Jm = pomdatatable.Rows[i]["GTwr_Jm"].ToString();
+                TwrKarta.Twr_ToDo = Convert.ToInt32(pomdatatable.Rows[i]["GTwr_ToDo"].ToString());
+                
+                TwrKartyList.Add(TwrKarta);
+            }
+
+            return TwrKartyList;
+        }
+
+        public void WS_TwrKartyPotwierdz(int idOperatora, string Twr_GIDNumerList)
+        {
+            try
+            {
+                DataTable pomdatatable = new DataTable();
+                String zapytanieString = "update gal.KartyTowary set GTwr_ToDo = 0 where GTwr_OpeId = " + idOperatora + " and GTwr_GIDnumer in (" + Twr_GIDNumerList + ")";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_TwrKartyPotwierdz", exc.Message, "IdOperatora=" + idOperatora.ToString(), Twr_GIDNumerList);
+            }
+        }
+
+
+        public List<SrwZlcNag> WS_SrwZlcNagWygenerujListe(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            List<SrwZlcNag> SrwZlcNagList = new List<SrwZlcNag>();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[SyncZleceniaNag] " + idOperatora+", "+liczbaMiesiecyWstecz;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwZlcNagWygenerujListe", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+
+            SrwZlcNagList = WS_SrwZlcNagWygenerujListe(pomdatatable);
+
+            return SrwZlcNagList;
+        }
+
+        private List<SrwZlcNag> WS_SrwZlcNagWygenerujListe(DataTable pomdatatable)
+        {
+            List<SrwZlcNag> TwrKartyList = new List<SrwZlcNag>();
+
+            for(int i = 0; i < pomdatatable.Rows.Count; i++)
+            {
+                SrwZlcNag SrwZlcNaglowek = new SrwZlcNag();
+
+                SrwZlcNaglowek.SZN_Dokument = pomdatatable.Rows[i]["GSZN_Dokument"].ToString();
+                SrwZlcNaglowek.SZN_Id = Convert.ToInt32(pomdatatable.Rows[i]["GSZN_Id"].ToString());
+                SrwZlcNaglowek.SZN_KntTyp = Convert.ToInt32(pomdatatable.Rows[i]["GSZN_KntTyp"].ToString());
+                SrwZlcNaglowek.SZN_KntNumer = Convert.ToInt32(pomdatatable.Rows[i]["GSZN_KntNumer"].ToString());
+                SrwZlcNaglowek.SZN_KnATyp = Convert.ToInt32(pomdatatable.Rows[i]["GSZN_KnATyp"].ToString());
+                SrwZlcNaglowek.SZN_KnANumer = Convert.ToInt32(pomdatatable.Rows[i]["GSZN_KnANumer"].ToString());
+                SrwZlcNaglowek.SZN_DataWystawienia = pomdatatable.Rows[i]["GSZN_DataWystawienia"].ToString();
+                SrwZlcNaglowek.SZN_DataRozpoczecia = pomdatatable.Rows[i]["GSZN_DataRozpoczecia"].ToString();
+                SrwZlcNaglowek.SZN_Stan = pomdatatable.Rows[i]["GSZN_Stan"].ToString();
+                SrwZlcNaglowek.SZN_Status = pomdatatable.Rows[i]["GSZN_Status"].ToString();
+                SrwZlcNaglowek.SZN_Opis = pomdatatable.Rows[i]["GSZN_Opis"].ToString();
+                SrwZlcNaglowek.SZN_ToDo = Convert.ToInt32(pomdatatable.Rows[i]["GSZN_ToDo"].ToString());
+
+                TwrKartyList.Add(SrwZlcNaglowek);
+            }
+
+            return TwrKartyList;
+        }
+
+        public void WS_SrwZlcNagPotwierdz(int idOperatora, string SZN_IDList)
+        {
+            try
+            {
+                DataTable pomdatatable = new DataTable();
+                String zapytanieString = "update gal.ZleceniaNag set GSZN_ToDo = 0 where GSZN_OpeId = " + idOperatora + " and GSZN_Id in (" + SZN_IDList + ")";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwZlcNagPotwierdz", exc.Message, "IdOperatora=" + idOperatora.ToString(), SZN_IDList);
+            }
+        }
+
+        public List<SrwZlcCzynnosci> WS_SrwZlcCzynnosciWygenerujListe(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            List<SrwZlcCzynnosci> SrwZlcCzynnosciList = new List<SrwZlcCzynnosci>();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[SyncZleceniaCzynnosci] " + idOperatora;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwZlcCzynnosciWygenerujListe", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+
+            SrwZlcCzynnosciList = WS_SrwZlcCzynnosciWygenerujListe(pomdatatable);
+
+            return SrwZlcCzynnosciList;
+        }
+
+        private List<SrwZlcCzynnosci> WS_SrwZlcCzynnosciWygenerujListe(DataTable pomdatatable)
+        {
+            List<SrwZlcCzynnosci> SrwZlcCzynnosciList = new List<SrwZlcCzynnosci>();
+            
+            for(int i = 0; i < pomdatatable.Rows.Count; i++)
+            {
+                SrwZlcCzynnosci SrwZlcCzynnosc = new SrwZlcCzynnosci();
+
+                SrwZlcCzynnosc.SZC_Id = Convert.ToInt32(pomdatatable.Rows[i]["GSZC_Id"].ToString());
+                SrwZlcCzynnosc.SZC_SZNId = Convert.ToInt32(pomdatatable.Rows[i]["GSZC_SZNId"].ToString());
+                SrwZlcCzynnosc.SZC_SZUId = Convert.ToInt32(pomdatatable.Rows[i]["GSZC_SZUid"].ToString());
+                SrwZlcCzynnosc.SZC_Synchronizacja = 0;
+                SrwZlcCzynnosc.SZC_Pozycja = Convert.ToInt32(pomdatatable.Rows[i]["GSZC_Pozycja"].ToString());
+                SrwZlcCzynnosc.SZC_TwrTyp = Convert.ToInt32(pomdatatable.Rows[i]["GSZC_TwrTyp"].ToString());
+                SrwZlcCzynnosc.SZC_TwrNumer = Convert.ToInt32(pomdatatable.Rows[i]["GSZC_TwrNumer"].ToString());
+                SrwZlcCzynnosc.SZC_TwrNazwa = pomdatatable.Rows[i]["GSZC_TwrNazwa"].ToString();
+                SrwZlcCzynnosc.SZC_Ilosc = Convert.ToDouble(pomdatatable.Rows[i]["GSZC_Ilosc"].ToString());
+                SrwZlcCzynnosc.SZC_Opis = pomdatatable.Rows[i]["GSZC_Opis"].ToString();
+                SrwZlcCzynnosc.SZC_ToDo = Convert.ToInt32(pomdatatable.Rows[i]["GSZC_ToDo"].ToString());
+
+                SrwZlcCzynnosciList.Add(SrwZlcCzynnosc);
+            }
+
+            return SrwZlcCzynnosciList;
+        }
+
+        public void WS_SrwZlcCzynnosciPotwierdz(int idOperatora, string SZC_IdList)
+        {
+            try
+            {
+                DataTable pomdatatable = new DataTable();
+                String zapytanieString = "update gal.ZleceniaCzynnosci set GSZC_ToDo = 0 where GSZC_OpeId = " + idOperatora + " and GSZC_Id in (" + SZC_IdList + ")";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwZlcCzynnosciPotwierdz", exc.Message, "IdOperatora=" + idOperatora.ToString(), SZC_IdList);
+            }
+        }
+
+        public List<SrwZlcSkladniki> WS_SrwZlcSkladnikiWygenerujListe(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            List<SrwZlcSkladniki> SrwZlcSkladnikiList = new List<SrwZlcSkladniki>();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[SyncZleceniaSkladniki] " + idOperatora;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwZlcSkladnikiWygenerujListe", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+
+            SrwZlcSkladnikiList = WS_SrwZlcSkladnikiWygenerujListe(pomdatatable);
+
+            return SrwZlcSkladnikiList;
+        }
+
+        private List<SrwZlcSkladniki> WS_SrwZlcSkladnikiWygenerujListe(DataTable pomdatatable)
+        {
+            List<SrwZlcSkladniki> SrwZlcSkladnikiList = new List<SrwZlcSkladniki>();
+
+            for(int i = 0; i < pomdatatable.Rows.Count; i++)
+            {
+                SrwZlcSkladniki SrwZlcSkladnik = new SrwZlcSkladniki();
+
+                SrwZlcSkladnik.SZS_Id = Convert.ToInt32(pomdatatable.Rows[i]["GSZS_Id"].ToString());
+                SrwZlcSkladnik.SZS_SZNId = Convert.ToInt32(pomdatatable.Rows[i]["GSZS_SZNId"].ToString());
+                SrwZlcSkladnik.SZS_Synchronizacja = 0;
+                SrwZlcSkladnik.SZS_Pozycja = Convert.ToInt32(pomdatatable.Rows[i]["GSZS_Pozycja"].ToString());
+                SrwZlcSkladnik.SZS_TwrTyp = Convert.ToInt32(pomdatatable.Rows[i]["GSZS_TwrTyp"].ToString());
+                SrwZlcSkladnik.SZS_TwrNumer = Convert.ToInt32(pomdatatable.Rows[i]["GSZS_TwrNumer"].ToString());
+                SrwZlcSkladnik.SZS_TwrNazwa = pomdatatable.Rows[i]["GSZS_TwrNazwa"].ToString();
+                SrwZlcSkladnik.SZS_Ilosc = Convert.ToDouble(pomdatatable.Rows[i]["GSZS_Ilosc"].ToString());
+                SrwZlcSkladnik.SZS_Opis = pomdatatable.Rows[i]["GSZS_Opis"].ToString();
+                SrwZlcSkladnik.SZS_ToDo = Convert.ToInt32(pomdatatable.Rows[i]["GSZS_ToDo"].ToString());
+
+                SrwZlcSkladnikiList.Add(SrwZlcSkladnik);
+            }
+
+            return SrwZlcSkladnikiList;
+        }
+
+        public void WS_SrwZlcSkladnikiPotwierdz(int idOperatora, string SZS_IdList)
+        {
+            try
+            {
+                DataTable pomdatatable = new DataTable();
+                String zapytanieString = "update gal.ZleceniaSkladniki set GSZS_ToDo = 0 where GSZS_OpeId = " + idOperatora + " and GSZS_Id in (" + SZS_IdList + ")";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwZlcSkladnikiPotwierdz", exc.Message, "IdOperatora=" + idOperatora.ToString(), SZS_IdList);
+            }
+        }
+
+        public List<SrwUrzadzenia> WS_SrwUrzadzeniaWygenerujListe(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            List<SrwUrzadzenia> SrwUrzadzeniaList = new List<SrwUrzadzenia>();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[SyncUrzadzenia] " + idOperatora;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwUrzadzeniaWygenerujListe", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+
+            SrwUrzadzeniaList = WS_SrwUrzadzeniaWygenerujListe(pomdatatable);
+
+            return SrwUrzadzeniaList;
+        }
+
+        private List<SrwUrzadzenia> WS_SrwUrzadzeniaWygenerujListe(DataTable pomdatatable)
+        {
+            List<SrwUrzadzenia> SrwUrzadzeniaList = new List<SrwUrzadzenia>();
+
+            for(int i = 0; i < pomdatatable.Rows.Count; i++)
+            {
+                SrwUrzadzenia SrwUrzadzenie = new SrwUrzadzenia();
+
+                SrwUrzadzenie.SrU_Id = Convert.ToInt32(pomdatatable.Rows[i]["GSrU_Id"].ToString());
+                SrwUrzadzenie.SrU_SURId = Convert.ToInt32(pomdatatable.Rows[i]["GSrU_SURId"].ToString());
+                SrwUrzadzenie.SrU_Kod = pomdatatable.Rows[i]["GSrU_Kod"].ToString();
+                SrwUrzadzenie.Sru_Nazwa = pomdatatable.Rows[i]["GSrU_Nazwa"].ToString();
+                SrwUrzadzenie.SrU_Opis = pomdatatable.Rows[i]["GSrU_Opis"].ToString();
+                SrwUrzadzenie.SrU_Archiwalne = Convert.ToInt32(pomdatatable.Rows[i]["GSrU_Archiwalne"].ToString());
+                SrwUrzadzenie.SrU_ToDo = Convert.ToInt32(pomdatatable.Rows[i]["GSrU_ToDo"].ToString());
+
+                SrwUrzadzeniaList.Add(SrwUrzadzenie);
+            }
+
+            return SrwUrzadzeniaList;
+        }
+
+        public void WS_SrwUrzadzeniaPotwierdz(int idOperatora, string GSrU_IdList)
+        {
+            try
+            {
+                DataTable pomdatatable = new DataTable();
+                String zapytanieString = "update gal.KartyUrzadzenia set GSrU_ToDo = 0 where GSrU_OpeId = " + idOperatora + " and GSrU_Id in (" + GSrU_IdList + ")";
+                RaportBleduSerwis("WS_SrwUrzadzeniaPotwierdz", zapytanieString);
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwUrzadzeniaPotwierdz", exc.Message, "IdOperatora=" + idOperatora.ToString(), GSrU_IdList);
+            }
+        }
+
+        public List<SrwUrzWlasc> WS_SrwUrzWlascWygenerujListe(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            List<SrwUrzWlasc> SrwUrzadzeniaList = new List<SrwUrzWlasc>();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[SyncUrzadzeniaWla] " + idOperatora;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwUrzWlascWygenerujListe", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+
+            SrwUrzadzeniaList = WS_SrwUrzWlascWygenerujListe(pomdatatable);
+
+            return SrwUrzadzeniaList;
+        }
+
+        private List<SrwUrzWlasc> WS_SrwUrzWlascWygenerujListe(DataTable pomdatatable)
+        {
+            List<SrwUrzWlasc> SrwUrzWlascList = new List<SrwUrzWlasc>();
+
+            for(int i = 0; i < pomdatatable.Rows.Count; i++)
+            {
+                SrwUrzWlasc SrwUrzWlasciciel = new SrwUrzWlasc();
+
+                SrwUrzWlasciciel.SUW_SrUId = Convert.ToInt32(pomdatatable.Rows[i]["GSUW_SruId"].ToString());
+                SrwUrzWlasciciel.SUW_WlaNumer = Convert.ToInt32(pomdatatable.Rows[i]["GSUW_WlaNumer"].ToString());
+                SrwUrzWlasciciel.SUW_ToDo = Convert.ToInt32(pomdatatable.Rows[i]["GSUW_ToDo"].ToString());
+
+                SrwUrzWlascList.Add(SrwUrzWlasciciel);
+            }
+
+            return SrwUrzWlascList;
+        }
+
+        public void WS_SrwUrzWlascPotwierdz(int idOperatora, string GSUW_SruIdList)
+        {
+            try
+            {
+                DataTable pomdatatable = new DataTable();
+                String zapytanieString = "update gal.KartyUrzadzeniaWla set GSUW_ToDo = 0 where GSUW_OpeId = " + idOperatora + " and GSUW_SruId in (" + GSUW_SruIdList + ")";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwUrzWlascPotwierdz", exc.Message, "IdOperatora=" + idOperatora.ToString(), GSUW_SruIdList);
+            }
+        }
+        
+        public List<SrwUrzParDef> WS_SrwUrzParDefWygenerujListe(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            List<SrwUrzParDef> SrwUrzParDefList = new List<SrwUrzParDef>();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[SyncUrzadzeniaParDef] " + idOperatora;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwUrzParDefWygenerujListe", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+
+            SrwUrzParDefList = WS_SrwUrzParDefWygenerujListe(pomdatatable);
+
+            return SrwUrzParDefList;
+        }
+
+        private List<SrwUrzParDef> WS_SrwUrzParDefWygenerujListe(DataTable pomdatatable)
+        {
+            List<SrwUrzParDef> SrwUrzParDefList = new List<SrwUrzParDef>();
+
+            for(int i = 0; i < pomdatatable.Rows.Count; i++)
+            {
+                SrwUrzParDef SrwUrzParDefinicja = new SrwUrzParDef();
+
+                SrwUrzParDefinicja.SUD_Id = Convert.ToInt32(pomdatatable.Rows[i]["GSUD_Id"].ToString());
+                SrwUrzParDefinicja.SUD_Archiwalna = Convert.ToInt32(pomdatatable.Rows[i]["GSUD_Archiwalna"].ToString());
+                SrwUrzParDefinicja.SUD_Nazwa = pomdatatable.Rows[i]["GSUD_Nazwa"].ToString();
+                SrwUrzParDefinicja.SUD_Format = pomdatatable.Rows[i]["GSUD_Format"].ToString();
+                SrwUrzParDefinicja.SUD_ToDo = Convert.ToInt32(pomdatatable.Rows[i]["GSUD_ToDo"].ToString());
+
+                SrwUrzParDefList.Add(SrwUrzParDefinicja);
+            }
+
+            return SrwUrzParDefList;
+        }
+
+        public void WS_SrwUrzParDefPotwierdz(int idOperatora, string SUD_IdList)
+        {
+            try
+            {
+                DataTable pomdatatable = new DataTable();
+                String zapytanieString = "update gal.KartyUrzadzeniaParDef set GSUD_ToDo = 0 where GSUD_OpeId = " + idOperatora + " and GSUD_Id in (" + SUD_IdList + ")";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwUrzParDefPotwierdz", exc.Message, "IdOperatora=" + idOperatora.ToString(), SUD_IdList);
+            }
+        }
+
+        public List<SrwUrzRodzaje> WS_SrwUrzRodzajeWygenerujListe(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            List<SrwUrzRodzaje> SrwUrzRodzajeList = new List<SrwUrzRodzaje>();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[SyncUrzadzeniaRodzaje] " + idOperatora;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwUrzRodzajeWygenerujListe", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+
+            SrwUrzRodzajeList = WS_SrwUrzRodzajeWygenerujListe(pomdatatable);
+
+            return SrwUrzRodzajeList;
+        }
+
+        private List<SrwUrzRodzaje> WS_SrwUrzRodzajeWygenerujListe(DataTable pomdatatable)
+        {
+            List<SrwUrzRodzaje> SrwUrzRodzajeList = new List<SrwUrzRodzaje>();
+
+            for(int i = 0; i < pomdatatable.Rows.Count; i++)
+            {
+                SrwUrzRodzaje SrwUrzRodzaj = new SrwUrzRodzaje();
+
+                SrwUrzRodzaj.SUR_Id = Convert.ToInt32(pomdatatable.Rows[i]["GSUR_Id"].ToString());
+                SrwUrzRodzaj.SUR_Kod = pomdatatable.Rows[i]["GSUR_Kod"].ToString();
+                SrwUrzRodzaj.SUR_Nazwa = pomdatatable.Rows[i]["GSUR_Nazwa"].ToString();
+                SrwUrzRodzaj.SUR_ToDo = Convert.ToInt32(pomdatatable.Rows[i]["GSUR_ToDo"].ToString());
+
+                SrwUrzRodzajeList.Add(SrwUrzRodzaj);
+            }
+
+            return SrwUrzRodzajeList;
+        }
+
+        public void WS_SrwUrzRodzajePotwierdz(int idOperatora, string SUR_IdList)
+        {
+            try
+            {
+                DataTable pomdatatable = new DataTable();
+                String zapytanieString = "update gal.KartyUrzadzeniaRodzaje set GSUR_ToDo = 0 where GSUR_OpeId = " + idOperatora + " and GSUR_Id in (" + SUR_IdList + ")";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwUrzRodzajePotwierdz", exc.Message, "IdOperatora=" + idOperatora.ToString(), SUR_IdList);
+            }
+        }
+
+        public List<SrwUrzRodzPar> WS_SrwUrzRodzParWygenerujListe(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            List<SrwUrzRodzPar> SrwUrzRodzParList = new List<SrwUrzRodzPar>();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[SyncUrzadzeniaRodzPar] " + idOperatora;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwUrzRodzParWygenerujListe", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+
+            SrwUrzRodzParList = WS_SrwUrzRodzParWygenerujListe(pomdatatable);
+
+            return SrwUrzRodzParList;
+        }
+
+        private List<SrwUrzRodzPar> WS_SrwUrzRodzParWygenerujListe(DataTable pomdatatable)
+        {
+            List<SrwUrzRodzPar> SrwUrzRodzParList = new List<SrwUrzRodzPar>();
+
+            for(int i = 0; i < pomdatatable.Rows.Count; i++)
+            {
+                SrwUrzRodzPar SrwUrzRodzParametr = new SrwUrzRodzPar();
+
+                SrwUrzRodzParametr.SRP_Id = Convert.ToInt32(pomdatatable.Rows[i]["GSRP_Id"].ToString());
+                SrwUrzRodzParametr.SRP_SURId = Convert.ToInt32(pomdatatable.Rows[i]["GSRP_SURId"].ToString());
+                SrwUrzRodzParametr.SRP_SUDId = Convert.ToInt32(pomdatatable.Rows[i]["GSRP_SUDId"].ToString());
+                SrwUrzRodzParametr.SRP_Lp = Convert.ToInt32(pomdatatable.Rows[i]["GSRP_Lp"].ToString());
+                SrwUrzRodzParametr.SRP_ToDo = Convert.ToInt32(pomdatatable.Rows[i]["GSRP_ToDo"].ToString());
+
+                SrwUrzRodzParList.Add(SrwUrzRodzParametr);
+            }
+
+            return SrwUrzRodzParList;
+        }
+
+        public void WS_SrwUrzRodzParPotwierdz(int idOperatora, string SGSRP_IdList)
+        {
+            try
+            {
+                DataTable pomdatatable = new DataTable();
+                String zapytanieString = "update gal.KartyUrzadzeniaRodzPar set GSRP_ToDo = 0 where GSRP_OpeId = " + idOperatora + " and GSRP_Id in (" + SGSRP_IdList + ")";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwUrzRodzParPotwierdz", exc.Message, "IdOperatora=" + idOperatora.ToString(), SGSRP_IdList);
+            }
+        }
+
+        public List<SrwZlcUrz> WS_SrwZlcUrzWygenerujListe(int idOperatora)
+        {
+            DataTable pomdatatable = new DataTable();
+            List<SrwZlcUrz> SrwZlcUrzList = new List<SrwZlcUrz>();
+
+            try
+            {
+                String zapytanieString = "exec [GAL].[SyncZleceniaUrzadzenia] " + idOperatora;
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwZlcUrzWygenerujListe", exc.Message, "IdOperatora=" + idOperatora.ToString());
+            }
+
+            SrwZlcUrzList = WS_SrwZlcUrzWygenerujListe(pomdatatable);
+
+            return SrwZlcUrzList;
+        }
+
+        private List<SrwZlcUrz> WS_SrwZlcUrzWygenerujListe(DataTable pomdatatable)
+        {
+            List<SrwZlcUrz> SrwZlcUrzList = new List<SrwZlcUrz>();
+
+            for(int i = 0; i < pomdatatable.Rows.Count; i++)
+            {
+                SrwZlcUrz SrwZlcUrzadzenie = new SrwZlcUrz();
+
+                SrwZlcUrzadzenie.SZU_Id = Convert.ToInt32(pomdatatable.Rows[i]["GSZU_Id"].ToString());
+                SrwZlcUrzadzenie.SZU_SZNId = Convert.ToInt32(pomdatatable.Rows[i]["GSZU_SZNId"].ToString());
+                SrwZlcUrzadzenie.SZU_SrUId = Convert.ToInt32(pomdatatable.Rows[i]["GSZU_SrUId"].ToString());
+                SrwZlcUrzadzenie.SZU_Pozycja = Convert.ToInt32(pomdatatable.Rows[i]["GSZU_Pozycja"].ToString());
+                SrwZlcUrzadzenie.SZU_ToDo = Convert.ToInt32(pomdatatable.Rows[i]["GSZU_ToDo"].ToString());
+
+                SrwZlcUrzList.Add(SrwZlcUrzadzenie);
+            }
+
+            return SrwZlcUrzList;
+        }
+
+        public void WS_SrwZlcUrzPotwierdz(int idOperatora, string SZU_IdList)
+        {
+            try
+            {
+                DataTable pomdatatable = new DataTable();
+                String zapytanieString = "update gal.ZleceniaUrzadzenia set GSZU_ToDo = 0 where GSZU_OpeId = " + idOperatora + " and GSZU_Id in (" + SZU_IdList + ")";
+                SqlDataAdapter da = zapytanieSerwis(zapytanieString);
+                da.Fill(pomdatatable);
+            }
+            catch(Exception exc)
+            {
+                RaportBleduSerwis("WS_SrwZlcUrzPotwierdz", exc.Message, "IdOperatora=" + idOperatora.ToString(), SZU_IdList);
+            }
         }
     }
 }

@@ -37,14 +37,14 @@ namespace AplikacjaSerwisowa
             {
                 String dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
                 SQLiteConnection db = new SQLiteConnection(dbPath);
-                var table = db.Table<kartyTowarowTable>();
+                var table = db.Table<TwrKartyTable>();
                 
                 foreach (var item in table)
                 {
-                    twr_gidnumer_List.Add(item.TWR_GIDNumer.ToString());
-                    twr_kod_List.Add(item.TWR_Kod);
-                    twr_nazwa_List.Add(item.TWR_Nazwa);
-                    twr_typ_List.Add(item.TWR_Typ.ToString());
+                    twr_gidnumer_List.Add(item.Twr_GIDNumer.ToString());
+                    twr_kod_List.Add(item.Twr_Kod);
+                    twr_nazwa_List.Add(item.Twr_Nazwa);
+                    twr_typ_List.Add(item.Twr_Typ.ToString());
                 }
             }
             catch (Exception exc)

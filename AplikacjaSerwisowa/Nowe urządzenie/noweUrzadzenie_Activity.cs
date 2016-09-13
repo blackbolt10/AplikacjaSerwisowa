@@ -69,7 +69,7 @@ namespace AplikacjaSerwisowa
                 urzadzenie.Sru_Kod = kodEditText.Text;
                 urzadzenie.Sru_Nazwa = nazwaEditText.Text;
                 urzadzenie.SrU_Opis = opisEditText.Text;
-                urzadzenie.SUW_WlaNumer = KNT_GIDNumer;
+                //urzadzenie.SUW_WlaNumer = KNT_GIDNumer;
 
                 dbr.SrwUrzadzenia_InsertRecord(urzadzenie);
 

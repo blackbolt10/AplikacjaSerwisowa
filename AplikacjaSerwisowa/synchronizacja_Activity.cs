@@ -25,8 +25,9 @@ namespace AplikacjaSerwisowa
     [Activity(Label = "Synchronizacja", Icon = "@drawable/synchronizacja")]
     public class synchronizacja_Activity : Activity
     {
-        private Button synchronizacja_Button, wyslij_Button, synch2_Button;
+        private Button synchronizacja_Button, wyslij_Button, synch2_Button, format_Button;
         private ProgressDialog progressDialog, progressDialogWysylanie;
+        private Dialog dialog;
         private Thread wysylanieThread;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -44,7 +45,16 @@ namespace AplikacjaSerwisowa
 
             synch2_Button = FindViewById<Button>(Resource.Id.SynchronizacjaSynch2Button);
             synch2_Button.Click += Synch2_Button_Click;
+
+            format_Button = FindViewById<Button>(Resource.Id.FormatSynch2Button);
+            format_Button.Click += Format_Button_Click;
             // Create your application here
+        }
+
+        private void Format_Button_Click(object sender, EventArgs e)
+        {
+            DBRepository dbr = new DBRepository(this);
+            dbr.dropAllTables();
         }
 
         private void messagebox(String tekst, String tytul = "", Int32 icon = 1)
@@ -60,8 +70,8 @@ namespace AplikacjaSerwisowa
             alert.SetMessage(tekst);
             alert.SetPositiveButton("OK", (senderAlert, args) => { });
 
-            Dialog dialog = alert.Create();
-            dialog.Show();
+            RunOnUiThread(() => dialog = alert.Create());
+            RunOnUiThread(() => dialog.Show());
         }
 
         private void synchronizacja()
@@ -82,7 +92,7 @@ namespace AplikacjaSerwisowa
 
         private void sprawdzNoweZlecenia()
         {
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             List<SrwZlcNag> srwZlcNagList = dbr.SrwZlcNagSynchronizacja(1);
             if(srwZlcNagList.Count > 0)
             {
@@ -267,7 +277,7 @@ namespace AplikacjaSerwisowa
         {
             List<SrwZlcUrz> records = JsonConvert.DeserializeObject<List<SrwZlcUrz>>(srwZlcUrzString);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             String result = dbr.createDB();
             //Toast.MakeText(this, result, ToastLength.Short).Show();            
             result = dbr.stworzSrwZlcUrz();
@@ -296,7 +306,7 @@ namespace AplikacjaSerwisowa
         {
             List<SrwUrzRodzPar> records = JsonConvert.DeserializeObject<List<SrwUrzRodzPar>>(SrwUrzRodzParString);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             String result = dbr.createDB();
             //Toast.MakeText(this, result, ToastLength.Short).Show();            
             result = dbr.stworzSrwUrzRodzPar();
@@ -326,7 +336,7 @@ namespace AplikacjaSerwisowa
         {
             List<SrwUrzRodzaje> records = JsonConvert.DeserializeObject<List<SrwUrzRodzaje>>(SrwUrzRodzajeString);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             String result = dbr.createDB();
             //Toast.MakeText(this, result, ToastLength.Short).Show();            
             result = dbr.stworzSrwUrzRodzaje();
@@ -356,7 +366,7 @@ namespace AplikacjaSerwisowa
         {
             List<SrwUrzParDef> records = JsonConvert.DeserializeObject<List<SrwUrzParDef>>(srwUrzParDefString);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             String result = dbr.createDB();
             //Toast.MakeText(this, result, ToastLength.Short).Show();            
             result = dbr.stworzSrwUrzParDef();
@@ -386,7 +396,7 @@ namespace AplikacjaSerwisowa
         {
             List<SrwUrzadzenia> records = JsonConvert.DeserializeObject<List<SrwUrzadzenia>>(urzadeniaString);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             String result = dbr.createDB();
             //Toast.MakeText(this, result, ToastLength.Short).Show();            
             result = dbr.stworzSrwUrzadzenia();
@@ -416,7 +426,7 @@ namespace AplikacjaSerwisowa
         {
             List<KntKartyTable> records = JsonConvert.DeserializeObject<List<KntKartyTable>>(kntKartyString);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             String result = dbr.createDB();
             //Toast.MakeText(this, result, ToastLength.Short).Show();            
             result = dbr.stworzKntKartyTabele();
@@ -446,7 +456,7 @@ namespace AplikacjaSerwisowa
         {
             List<KntAdresyTable> records = JsonConvert.DeserializeObject<List<KntAdresyTable>>(kntAdresyString);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             String result = dbr.stworzKntAdresyTabele();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
@@ -474,7 +484,7 @@ namespace AplikacjaSerwisowa
         {
             List<SrwZlcCzynnosci> records = JsonConvert.DeserializeObject<List<SrwZlcCzynnosci>>(srwZlcCzynnosciString);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             String result = dbr.stworzSrwZlcCzynnosci();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
@@ -502,7 +512,7 @@ namespace AplikacjaSerwisowa
         {
             List<SrwZlcPodpisTable> records = JsonConvert.DeserializeObject<List<SrwZlcPodpisTable>>(podpisyString);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             String result = dbr.stworzSrwZlcPodpisTable();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
@@ -530,7 +540,7 @@ namespace AplikacjaSerwisowa
         {
             List<SrwZlcSkladniki> records = JsonConvert.DeserializeObject<List<SrwZlcSkladniki>>(srwZlcCzynnosciString);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             String result = dbr.stworzSrwZlcSkladniki();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
@@ -558,7 +568,7 @@ namespace AplikacjaSerwisowa
         {
             List<SrwZlcNag> records = JsonConvert.DeserializeObject<List<SrwZlcNag>>(serwisoweZlecenniaNaglowkiString);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             String result = dbr.stworzSrwZlcNag();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
@@ -585,7 +595,7 @@ namespace AplikacjaSerwisowa
         {
             List<TwrKartyTable> records = JsonConvert.DeserializeObject<List<TwrKartyTable>>(twrKartyString);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             String result = dbr.stworzTwrKartyTable();
             //Toast.MakeText(this, result, ToastLength.Short).Show();
 
@@ -659,7 +669,7 @@ namespace AplikacjaSerwisowa
             RunOnUiThread(() => progressDialogWysylanie.SetMessage("Przygotowywanie danych zleceñ nag³ówkowych."));
 
             List<int> wyslaneNagList = new List<int>();
-            DBRepository db = new DBRepository();
+            DBRepository db = new DBRepository(this);
 
             List<SrwZlcNag> srwZlcNagList = db.SrwZlcNagSynchronizacja(1);
 
@@ -693,7 +703,7 @@ namespace AplikacjaSerwisowa
         {
             RunOnUiThread(() => progressDialogWysylanie.SetMessage("Oznaczanie wys³anych nag³ówków"));
 
-            DBRepository db = new DBRepository();
+            DBRepository db = new DBRepository(this);
             db.SrwZlcNag_OznaczWyslane(wyslaneNagList, 3);
         }
 
@@ -701,7 +711,7 @@ namespace AplikacjaSerwisowa
         {
             RunOnUiThread(() => progressDialogWysylanie.SetMessage("Przygotowywanie czynnoœci zleceñ serwisowych."));
 
-            DBRepository db = new DBRepository();
+            DBRepository db = new DBRepository(this);
             List<int> wyslaneczynnosciList = new List<int>();
 
             List<SrwZlcCzynnosci> srwZlcCzynnosciList = db.SrwZlcCzynnosciSynchronizacja(1);
@@ -736,7 +746,7 @@ namespace AplikacjaSerwisowa
         {
             RunOnUiThread(() => progressDialogWysylanie.SetMessage("Oznaczanie wys³anych czynnoœci"));
 
-            DBRepository db = new DBRepository();
+            DBRepository db = new DBRepository(this);
             db.SrwZlcCzynnosci_OznaczWyslane(wyslaneCzynnosciList, 3);
         }
 
@@ -744,7 +754,7 @@ namespace AplikacjaSerwisowa
         {
             RunOnUiThread(() => progressDialogWysylanie.SetMessage("Przygotowywanie sk³adników zleceñ serwisowych."));
 
-            DBRepository db = new DBRepository();
+            DBRepository db = new DBRepository(this);
             List<int> wyslaneSkladnikiList = new List<int>();
 
             List<SrwZlcSkladniki> srwZlcSkladnikiList = db.SrwZlcSkladnikiSynchronizacja(1);
@@ -778,7 +788,7 @@ namespace AplikacjaSerwisowa
         {
             RunOnUiThread(() => progressDialogWysylanie.SetMessage("Oznaczanie wys³anych sk³adników"));
 
-            DBRepository db = new DBRepository();
+            DBRepository db = new DBRepository(this);
             db.SrwZlcSkladniki_OznaczWyslane(wyslaneSkladnikiList, 3);
         }
 
@@ -830,727 +840,1350 @@ namespace AplikacjaSerwisowa
 
         private void pobierzDaneWebSerwice()
         {
+            int idOperatora = 0;
+            int max = 12;
+
+            tworzenieTabel(idOperatora, max);
+
+            wysylanieDanych(idOperatora, max);
+
+            pobierz_Kontrahentow(idOperatora);
+
+            pobierz_Towary(idOperatora);
+
+            pobierz_Zlecenia(idOperatora);
+
+            pobierz_Urzadzenia(idOperatora);            
+
+            progressDialog.Dismiss();
+        }
+
+        private void pobierz_Urzadzenia(int idOperatora)
+        {
             int licznik = 1;
-            int max = 16;
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
+            int max = 10;
+
+            RunOnUiThread(() => progressDialog.SetTitle("Urzadzenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie kart urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            String resultSrwUrzadzeniaNew = "";
+            try
+            { 
+            resultSrwUrzadzeniaNew = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwUrzadzeniaLista(idOperatora);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d pobierania danych z serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Urzadzenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie kart urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            SrwUrzadzenia_Synchronizacja(idOperatora, resultSrwUrzadzeniaNew);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Urzadzenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie w³aœcicieli urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            String resultSrwUrzWlascNew = "";
+            try
+            {
+                resultSrwUrzWlascNew = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwUrzWlascLista(idOperatora);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d pobierania danych z serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Urzadzenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie w³aœcicieli urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            SrwUrzWlasc_Synchronizacja(idOperatora, resultSrwUrzWlascNew);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Urzadzenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie definicji parametrów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            String resultSrwUrzParDefNew = "";
+            try
+            {
+                resultSrwUrzParDefNew = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwUrzParDefLista(idOperatora);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d pobierania danych z serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Urzadzenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie definicji parametrów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            SrwUrzParDef_Synchronizacja(idOperatora, resultSrwUrzParDefNew);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Urzadzenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie rodzajów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            String resultSrwUrzRodzajeNew = "";
+            try
+            {
+                resultSrwUrzRodzajeNew = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwUrzRodzajeLista(idOperatora);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d pobierania danych z serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Urzadzenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie rodzajów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            SrwUrzRodzaje_Synchronizacja(idOperatora, resultSrwUrzRodzajeNew);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Urzadzenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie rodzajów parametrów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            String resultSrwUrzRodzParNew = "";
+            try
+            {
+                resultSrwUrzRodzParNew = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwUrzRodzParLista(idOperatora);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d pobierania danych z serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Urzadzenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie rodzajów parametrów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            SrwUrzRodzPar_Synchronizacja(idOperatora, resultSrwUrzRodzParNew);
+        }
+
+        private void pobierz_Zlecenia(int idOperatora)
+        {
+            int licznik = 1;
+            int max = 4;
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zlecenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie nag³ówków zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            String resultSrwZlcNagNew = "";
+            try
+            {
+                resultSrwZlcNagNew = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwZlcNagLista(idOperatora);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d pobierania danych z serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zlecenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie nag³ówków zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            SrwZlcNag_Synchronizacja(idOperatora, resultSrwZlcNagNew);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zlecenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie czynnoœci zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            String resultSrwZlcCzynnosciNew = "";
+            try
+            {
+                resultSrwZlcCzynnosciNew = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwZlcCzynnosciLista(idOperatora);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d pobierania danych z serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zlecenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie czynnoœci zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            SrwZlcCzynnosci_Synchronizacja(idOperatora, resultSrwZlcCzynnosciNew);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zlecenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie sk³adników zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            String resultSrwZlcSkladnikiNew = "";
+            try
+            {
+                resultSrwZlcSkladnikiNew = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwZlcSkladnikiLista(idOperatora);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d pobierania danych z serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zlecenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie sk³adników zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            SrwZlcSkladniki_Synchronizacja(idOperatora, resultSrwZlcSkladnikiNew);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zlecenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie urz¹dzeñ zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            String resultSrwZlcUrzNew = "";
+            try
+            {
+                resultSrwZlcUrzNew = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwZlcUrzLista(idOperatora);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d pobierania danych z serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Zlecenia " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie urz¹dzeñ zleceñ serwisowycj..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            SrwZlcUrz_Synchronizacja(idOperatora, resultSrwZlcUrzNew);
+        }
+
+        private void pobierz_Towary(int idOperatora)
+        {
+            RunOnUiThread(() => progressDialog.SetTitle("Towary 1/2"));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie kart towarowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            String resultTwrKartyNew = "";
+            try
+            {
+                resultTwrKartyNew = new AplikacjaSerwisowa.kwronski.WebService().WS_TwrKartyLista(idOperatora);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d pobierania danych z serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Towary 2/2"));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie kart towarowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            TwrKarty_Synchronizacja(idOperatora, resultTwrKartyNew);
+        }
+
+        private void pobierz_Kontrahentow(int idOperatora)
+        {
+            int licznik = 1;
+            int max = 4;
+
+            RunOnUiThread(() => progressDialog.SetTitle("Kontrahenci " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie kart kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            String resultKntKartyNew = "";
+            try
+            {
+                resultKntKartyNew = new AplikacjaSerwisowa.kwronski.WebService().WS_KntKartyLista(idOperatora);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d pobierania danych z serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Kontrahenci " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie kart kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            KntKarty_Synchronizacja(idOperatora, resultKntKartyNew);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Kontrahenci " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie adresów kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            String resultKntAdresyNew = "";
+            try
+            {
+                resultKntAdresyNew = new AplikacjaSerwisowa.kwronski.WebService().WS_KntAdresyLista(idOperatora);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d pobierania danych z serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Kontrahenci " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie adresów kontrahentów..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            KntAdresy_Synchronizacja(idOperatora, resultKntAdresyNew);
+        }
+
+        private void tworzenieTabel(int idOperatora, int max)
+        {
+            int licznik = 1;
+
+            RunOnUiThread(() => progressDialog.SetTitle("Tworzenie " + licznik++ + "/" + max));
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy kart kontrahentów..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.Max = 1);
             KntKarty_StworzBaze();
 
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetTitle("Tworzenie " + licznik++ + "/" + max));
             RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy adresów kontrahentów..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.Max = 1);
             KntAdresy_StworzBaze();
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie "+licznik+"/"+max));
+            RunOnUiThread(() => progressDialog.SetTitle("Tworzenie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy kart towarowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            TwrKarty_StworzBaze();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Tworzenie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy nag³ówków zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            SrwZlcNag_StworzBaze();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Tworzenie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy czynnoœci zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            SrwZlcCzynnosci_StworzBaze();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Tworzenie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy skladników zleceñ serwisowych..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            SrwZlcSkladniki_StworzBaze();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Tworzenie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy urz¹dzeñ zleceñ skladników..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            SrwZlcUrz_StworzBaze();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Tworzenie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy kart urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            SrwUrzadzenia_StworzBaze();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Tworzenie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy w³aœcicieli urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            SrwUrzWlasc_StworzBaze();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Tworzenie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy definicji parametrów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            SrwUrzParDef_StworzBaze();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Tworzenie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy rodzajów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            SrwUrzRodzaje_StworzBaze();
+
+            RunOnUiThread(() => progressDialog.SetTitle("Tworzenie " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Tworzenie bazy rodzajów parametrów urz¹dzeñ..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+            SrwUrzRodzPar_StworzBaze();
+        }
+
+        private void wysylanieDanych(Int32 idOperatora, Int32 max)
+        {
+            Int32 licznik = 1;
+
+            RunOnUiThread(() => progressDialog.SetTitle("Przygotowywanie danych " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Przygotowywanie danych o kontrahentach..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            List<int> listaKntKarty = wygenerujListeKontrahentow();
+            String jsonOutKntKarty = JsonConvert.SerializeObject(listaKntKarty);
+
+            List<int> listaKntAdresy = wygenerujListeAdresow();
+            String jsonOutKntAdresy = JsonConvert.SerializeObject(listaKntAdresy);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Przygotowywanie danych " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Przygotowywanie danych o towarach..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            List<int> listaTwrKarty = wygenerujListeTwrKarty();
+            String jsonOutTwrKarty = JsonConvert.SerializeObject(listaTwrKarty);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Przygotowywanie danych " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Przygotowywanie danych o zleceniach..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            List<int> listaSrwZlcNag = wygenerujListeSrwZlcNag();
+            String jsonOutSrwZlcNag = JsonConvert.SerializeObject(listaSrwZlcNag);
+
+            List<int> listaSrwZlcCzynnosci = wygenerujListeSrwZlcCzynnosci();
+            String jsonOutSrwZlcCzynnosci = JsonConvert.SerializeObject(listaSrwZlcCzynnosci);
+
+            List<int> listaSrwZlcSkladniki = wygenerujListeSrwZlcSkladniki();
+            String jsonOutSrwZlcSkladniki = JsonConvert.SerializeObject(listaSrwZlcSkladniki);
+
+            List<int> listaSrwZlcUrz = wygenerujListeSrwZlcUrz();
+            String jsonOutSrwZlcUrz = JsonConvert.SerializeObject(listaSrwZlcUrz);
+
+            RunOnUiThread(() => progressDialog.SetTitle("Przygotowywanie danych " + licznik++ + "/" + max));
+            RunOnUiThread(() => progressDialog.SetMessage("Przygotowywanie danych o urz¹dzeniach..."));
+            RunOnUiThread(() => progressDialog.Progress = 0);
+            RunOnUiThread(() => progressDialog.Max = 1);
+
+            List<int> listaSrwUrzadzenia = wygenerujListeSrwUrzadzenia();
+            String jsonOutSrwUrzadzenia = JsonConvert.SerializeObject(listaSrwUrzadzenia);
+
+            List<int> listaSrwUrzWlasc = wygenerujListeSrwUrzWlasc();
+            String jsonOutSrwUrzWlasc = JsonConvert.SerializeObject(listaSrwUrzWlasc);
+
+            List<int> listaSrwUrzParDef = wygenerujListeSrwUrzParDef();
+            String jsonOutSrwUrzParDef = JsonConvert.SerializeObject(listaSrwUrzParDef);
+
+            List<int> listaSrwUrzRodzaje = wygenerujListeSrwUrzRodzaje();
+            String jsonOutSrwUrzRodzaje = JsonConvert.SerializeObject(listaSrwUrzRodzaje);
+
+            List<int> listaSrwUrzRodzPar = wygenerujListeSrwUrzRodzPar();
+            String jsonOutSrwUrzRodzPar = JsonConvert.SerializeObject(listaSrwUrzRodzPar);
+
+            licznik = 1;
+
+            RunOnUiThread(() => progressDialog.SetTitle("Wysy³anie danych " + licznik++ + "/4"));
             RunOnUiThread(() => progressDialog.SetMessage("Wysy³anie danych kontrahentów z urz¹dzenia..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.Max = 1);
-            List<int> listaKntKarty = wygenerujListeKontrahentow();
-            String jsonOutKntKarty = JsonConvert.SerializeObject(listaKntKarty);
-            String resulKntKarty =  new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZapiszDaneUrzadzenia(jsonOutKntKarty);
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie zmodyfikowanych kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            String kntKartyZmodyfikowane = new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZwrocZmodyfikowanych();
+            String resulWysylaniaKontrahentow = "";
+            try
+            {
+                resulWysylaniaKontrahentow = new AplikacjaSerwisowa.kwronski.WebService().Aplikacja_Zapisz_Kontrahentow(idOperatora, jsonOutKntKarty, jsonOutKntAdresy);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d wysy³ania danych do serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie nowych kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            String kntKartyNowe = new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZwrocNowych();
-
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie kontrahentów do usuniecia..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            String kntKartyDoUsuniecia = new AplikacjaSerwisowa.kwronski.WebService().KntKarty_ZwrocUsunietych();
-
-
-
-            
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Wysy³anie adresów kontrahentów z urz¹dzenia..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            List<int> listaKntAdresy = wygenerujListeAdresow();
-            String jsonOutKntAdresy = JsonConvert.SerializeObject(listaKntAdresy);
-            String resulKntAdresy = new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZapiszDaneUrzadzenia(jsonOutKntAdresy);
-
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie zmodyfikowanych adresów kontrahentów..."));
+            RunOnUiThread(() => progressDialog.SetTitle("Wysy³anie danych " + licznik++ + "/4"));
+            RunOnUiThread(() => progressDialog.SetMessage("Wysy³anie danych towarów z urz¹dzenia..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.Max = 1);
-            String KntAdresyZmodyfikowane = new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZwrocZmodyfikowanych();
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie nowych adresów kontrahentów..."));
+            String resulWysylaniaTwrKarty = "";
+            try
+            {
+                resulWysylaniaTwrKarty = new AplikacjaSerwisowa.kwronski.WebService().Aplikacja_Zapisz_Towary(idOperatora, jsonOutTwrKarty);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d wysy³ania danych do serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Wysy³anie danych " + licznik++ + "/4"));
+            RunOnUiThread(() => progressDialog.SetMessage("Wysy³anie danych zleceñ z urz¹dzenia..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.Max = 1);
-            String KntAdresyNowe = new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZwrocNowych();
 
-            RunOnUiThread(() => progressDialog.SetTitle("Pobieranie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie adresów kontrahentów do usuniecia..."));
+            String resulWysylaniaSrwNagSkladCzynn = "";
+            try
+            {
+                resulWysylaniaSrwNagSkladCzynn = new AplikacjaSerwisowa.kwronski.WebService().Aplikacja_Zapisz_Zlecenia(idOperatora, jsonOutSrwZlcNag, jsonOutSrwZlcCzynnosci, jsonOutSrwZlcSkladniki, jsonOutSrwZlcUrz);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d wysy³ania danych do serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
+
+            RunOnUiThread(() => progressDialog.SetTitle("Wysy³anie danych " + licznik++ + "/4"));
+            RunOnUiThread(() => progressDialog.SetMessage("Wysy³anie danych urz¹dzeñ..."));
             RunOnUiThread(() => progressDialog.Progress = 0);
             RunOnUiThread(() => progressDialog.Max = 1);
-            String KntAdresyDoUsuniecia = new AplikacjaSerwisowa.kwronski.WebService().KntAdresy_ZwrocUsunietych();
 
-
-
-
-            licznik = 1;
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie zmodyfikowanych kart kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            KntKarty_Zmodyfikowani(kntKartyZmodyfikowane);
-
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie nowych kart kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            KntKarty_Nowi(kntKartyNowe);
-
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Usuwanie zbêdnych kart kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            KntKarty_Usunieci(kntKartyDoUsuniecia);
-
-
-            
-
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie zmodyfikowanych adresów kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            KntAdresy_Zmodyfikowani(KntAdresyZmodyfikowane);
-
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Zapisywanie nowych adresów kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            KntAdresy_Nowi(KntAdresyNowe);
-
-            RunOnUiThread(() => progressDialog.SetTitle("Zapisywanie " + licznik++ + "/" + max));
-            RunOnUiThread(() => progressDialog.SetMessage("Usuwanie zbêdnych adresów kontrahentów..."));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            KntAdresy_Usunieci(KntAdresyDoUsuniecia);
-
-
-
-
-
-
-
-
-
-
-
-
-
-            progressDialog.Dismiss();
+            String resulWysylaniaUrzadzen = "";
+            try
+            {
+                resulWysylaniaUrzadzen = new AplikacjaSerwisowa.kwronski.WebService().Aplikacja_Zapisz_Urzadzenia(idOperatora, jsonOutSrwUrzadzenia, jsonOutSrwUrzWlasc, jsonOutSrwUrzParDef, jsonOutSrwUrzRodzaje, jsonOutSrwUrzRodzPar);
+            }
+            catch(Exception exc)
+            {
+                messagebox("Wyst¹pi³ b³¹d wysy³ania danych do serwisu.\n" + exc.Message, "B³¹d", 0);
+            }
         }
 
-        private void KntAdresy_Usunieci(string kntAdresyDoUsuniecia)
+        private void KntKarty_Synchronizacja(Int32 idOperatora, string resulKntKartyNew)
         {
-            List<int> records = JsonConvert.DeserializeObject<List<int>>(kntAdresyDoUsuniecia);
+            List<KntKartyTable> records = JsonConvert.DeserializeObject<List<KntKartyTable>>(resulKntKartyNew);
 
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
 
-            if(records.Count > 0)
+            if(records != null)
             {
-                RunOnUiThread(() => progressDialog.Progress = 0);
-                RunOnUiThread(() => progressDialog.Max = records.Count);
-
-                for(int i = 0; i < records.Count; i++)
+                if(records.Count > 0)
                 {
-                    RunOnUiThread(() => progressDialog.Progress++);
-                    dbr.KntAdresy_DeleteRecord(records[i]);
+                    RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                    Int32 coIleRaport = 500;
+                    Int32 liczbaRaportow = ((int)records.Count / coIleRaport) + 1;
+                    Int32 licznik = 0;
+
+                    for(int i = 1; i <= liczbaRaportow; i++)
+                    {
+                        Int32 max = 500 * i;
+                        String kntKartyListZapisanych = "-1";
+
+                        while(licznik < records.Count && licznik <= max)
+                        {
+                            switch(records[licznik].Knt_ToDo)
+                            {
+                                case 1:
+                                if(dbr.kntKarty_InsertRecord(records[licznik]))
+                                {
+                                    kntKartyListZapisanych += ", " + records[licznik].Knt_GIDNumer;
+                                }
+                                break;
+
+                                case 2:
+                                if(dbr.kntKarty_UpdateRecord(records[licznik]))
+                                {
+                                    kntKartyListZapisanych += ", " + records[licznik].Knt_GIDNumer;
+                                }
+                                break;
+
+                                case 3:
+                                if(dbr.kntKarty_DeleteRecord(records[licznik].Knt_GIDNumer))
+                                {
+                                    kntKartyListZapisanych += ", " + records[licznik].Knt_GIDNumer;
+                                }
+                                break;
+                            }
+                            licznik++;
+                            RunOnUiThread(() => progressDialog.Progress++);
+                        }
+
+                        KntKarty_RaportZapisanych(idOperatora, kntKartyListZapisanych);
+                    }
                 }
             }
         }
 
-        private void KntAdresy_Nowi(string kntAdresyNowe)
+        private void KntKarty_RaportZapisanych(Int32 idOperatora, String kntKartyListZapisanych)
         {
-            List<KntAdresyTable> records = JsonConvert.DeserializeObject<List<KntAdresyTable>>(kntAdresyNowe);
+            String kntKartyDoUsuniecia = new AplikacjaSerwisowa.kwronski.WebService().WS_KntKartyPotwierdz(idOperatora, kntKartyListZapisanych);
+        }
 
-            DBRepository dbr = new DBRepository();
+        private void KntAdresy_Synchronizacja(int idOperatora, string resulKntAdresyNew)
+        {
+            List<KntAdresyTable> records = JsonConvert.DeserializeObject<List<KntAdresyTable>>(resulKntAdresyNew);
 
-            if(records.Count > 0)
+            DBRepository dbr = new DBRepository(this);
+
+            if(records != null)
             {
-                RunOnUiThread(() => progressDialog.Progress = 0);
-                RunOnUiThread(() => progressDialog.Max = records.Count);
-
-                for(int i = 0; i < records.Count; i++)
+                if(records.Count > 0)
                 {
-                    RunOnUiThread(() => progressDialog.Progress++);
-                    dbr.kntAdresy_InsertRecord(records[i]);
+                    RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                    Int32 coIleRaport = 500;
+                    Int32 liczbaRaportow = ((int)records.Count / coIleRaport) + 1;
+                    Int32 licznik = 0;
+
+                    for(int i = 1; i <= liczbaRaportow; i++)
+                    {
+                        Int32 max = 500 * i;
+                        String kntAdresyListZapisanych = "-1";
+
+                        while(licznik < records.Count && licznik <= max)
+                        {
+                            switch(records[licznik].Kna_ToDo)
+                            {
+                                case 1:
+                                if(dbr.kntAdresy_InsertRecord(records[licznik]))
+                                {
+                                    kntAdresyListZapisanych += ", " + records[licznik].Kna_GIDNumer;
+                                }
+                                break;
+
+                                case 2:
+                                if(dbr.kntAdresy_UpdateRecord(records[licznik]))
+                                {
+                                    kntAdresyListZapisanych += ", " + records[licznik].Kna_GIDNumer;
+                                }
+                                break;
+
+                                case 3:
+                                if(dbr.kntAdresy_DeleteRecord(records[licznik].Kna_GIDNumer))
+                                {
+                                    kntAdresyListZapisanych += ", " + records[licznik].Kna_GIDNumer;
+                                }
+                                break;
+                            }
+                            licznik++;
+                            RunOnUiThread(() => progressDialog.Progress++);
+                        }
+
+                        KntAdresy_RaportZapisanych(idOperatora, kntAdresyListZapisanych);
+                    }
                 }
             }
         }
 
-        private void KntAdresy_Zmodyfikowani(string kntAdresyZmodyfikowane)
+        private void KntAdresy_RaportZapisanych(Int32 idOperatora, String kntAdresyListZapisanych)
         {
-            List<KntAdresyTable> records = JsonConvert.DeserializeObject<List<KntAdresyTable>>(kntAdresyZmodyfikowane);
+            String result = new AplikacjaSerwisowa.kwronski.WebService().WS_KntAdresyPotwierdz(idOperatora, kntAdresyListZapisanych);
+        }
 
-            DBRepository dbr = new DBRepository();
+        private void TwrKarty_Synchronizacja(int idOperatora, string resulTwrKartyNew)
+        {
+            List<TwrKartyTable> records = JsonConvert.DeserializeObject<List<TwrKartyTable>>(resulTwrKartyNew);
 
-            if(records.Count > 0)
+            DBRepository dbr = new DBRepository(this);
+
+            if(records != null)
             {
-                RunOnUiThread(() => progressDialog.Progress = 0);
-                RunOnUiThread(() => progressDialog.Max = records.Count);
-
-                for(int i = 0; i < records.Count; i++)
+                if(records.Count > 0)
                 {
-                    RunOnUiThread(() => progressDialog.Progress++);
-                    dbr.KntAdresy_UpdateRecord(records[i]);
+                    RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                    Int32 coIleRaport = 500;
+                    Int32 liczbaRaportow = ((int)records.Count / coIleRaport) + 1;
+                    Int32 licznik = 0;
+
+                    for(int i = 1; i <= liczbaRaportow; i++)
+                    {
+                        Int32 max = 500 * i;
+                        String TwrKartyListZapisanych = "-1";
+
+                        while(licznik < records.Count && licznik <= max)
+                        {
+                            switch(records[licznik].Twr_ToDo)
+                            {
+                                case 1:
+                                if(dbr.TwrKartyTable_InsertRecord(records[licznik]))
+                                {
+                                    TwrKartyListZapisanych += ", " + records[licznik].Twr_GIDNumer;
+                                }
+                                break;
+
+                                case 2:
+                                if(dbr.TwrKartyTable_UpdateRecord(records[licznik]))
+                                {
+                                    TwrKartyListZapisanych += ", " + records[licznik].Twr_GIDNumer;
+                                }
+                                break;
+
+                                case 3:
+                                if(dbr.TwrKartyTable_DeleteRecord(records[licznik].Twr_GIDNumer))
+                                {
+                                    TwrKartyListZapisanych += ", " + records[licznik].Twr_GIDNumer;
+                                }
+                                break;
+                            }
+                            licznik++;
+                            RunOnUiThread(() => progressDialog.Progress++);
+                        }
+
+                        TwrKarty_RaportZapisanych(idOperatora, TwrKartyListZapisanych);
+                    }
                 }
             }
         }
 
-        private void KntKarty_Usunieci(string kntKartyDoUsuniecia)
+        private void TwrKarty_RaportZapisanych(int idOperatora, string twrKartyListZapisanych)
         {
-            List<int> records = JsonConvert.DeserializeObject<List<int>>(kntKartyDoUsuniecia);
+            String result = new AplikacjaSerwisowa.kwronski.WebService().WS_TwrKartyPotwierdz(idOperatora, twrKartyListZapisanych);
+        }
 
-            DBRepository dbr = new DBRepository();
+        private void SrwZlcNag_Synchronizacja(int idOperatora, string resultSrwZlcNagNew)
+        {
+            List<SrwZlcNag> records = JsonConvert.DeserializeObject<List<SrwZlcNag>>(resultSrwZlcNagNew);
 
-            if(records.Count > 0)
+            DBRepository dbr = new DBRepository(this);
+
+            if(records != null)
             {
-                RunOnUiThread(() => progressDialog.Progress = 0);
-                RunOnUiThread(() => progressDialog.Max = records.Count);
-
-                for(int i = 0; i < records.Count; i++)
+                if(records.Count > 0)
                 {
-                    RunOnUiThread(() => progressDialog.Progress++);
-                    dbr.kntKarty_DeleteRecord(records[i]);
+                    RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                    Int32 coIleRaport = 500;
+                    Int32 liczbaRaportow = ((int)records.Count / coIleRaport) + 1;
+                    Int32 licznik = 0;
+
+                    for(int i = 1; i <= liczbaRaportow; i++)
+                    {
+                        Int32 max = 500 * i;
+                        String SrwZlcNagListZapisanych = "-1";
+
+                        while(licznik < records.Count && licznik <= max)
+                        {
+                            switch(records[licznik].SZN_ToDo)
+                            {
+                                case 1:
+                                if(dbr.SrwZlcNag_InsertRecord(records[licznik]))
+                                {
+                                    SrwZlcNagListZapisanych += ", " + records[licznik].SZN_Id;
+                                }
+                                break;
+
+                                case 2:
+                                if(dbr.SrwZlcNag_UpdateRecord(records[licznik]))
+                                {
+                                    SrwZlcNagListZapisanych += ", " + records[licznik].SZN_Id;
+                                }
+                                break;
+
+                                case 3:
+                                if(dbr.SrwZlcNag_DeleteRecord(records[licznik].SZN_Id))
+                                {
+                                    SrwZlcNagListZapisanych += ", " + records[licznik].SZN_Id;
+                                }
+                                break;
+                            }
+                            licznik++;
+                            RunOnUiThread(() => progressDialog.Progress++);
+                        }
+
+                        SrwZlcNag_RaportZapisanych(idOperatora, SrwZlcNagListZapisanych);
+                    }
                 }
             }
         }
 
-        private void KntKarty_Nowi(string kntKartyNowe)
+        private void SrwZlcNag_RaportZapisanych(int idOperatora, string srwZlcNagListZapisanych)
         {
-            List<KntKartyTable> records = JsonConvert.DeserializeObject<List<KntKartyTable>>(kntKartyNowe);
+            String result = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwZlcNagPotwierdz(idOperatora, srwZlcNagListZapisanych);
+        }
 
-            DBRepository dbr = new DBRepository();
+        private void SrwZlcCzynnosci_Synchronizacja(int idOperatora, string resultSrwZlcCzynnosciNew)
+        {
+            List<SrwZlcCzynnosci> records = JsonConvert.DeserializeObject<List<SrwZlcCzynnosci>>(resultSrwZlcCzynnosciNew);
 
-            if(records.Count > 0)
+            DBRepository dbr = new DBRepository(this);
+
+            if(records != null)
             {
-                RunOnUiThread(() => progressDialog.Progress = 0);
-                RunOnUiThread(() => progressDialog.Max = records.Count);
-
-                for(int i = 0; i < records.Count; i++)
+                if(records.Count > 0)
                 {
-                    RunOnUiThread(() => progressDialog.Progress++);
-                    dbr.kntKarty_InsertRecord(records[i]);
+                    RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                    Int32 coIleRaport = 500;
+                    Int32 liczbaRaportow = ((int)records.Count / coIleRaport) + 1;
+                    Int32 licznik = 0;
+
+                    for(int i = 1; i <= liczbaRaportow; i++)
+                    {
+                        Int32 max = 500 * i;
+                        String SrwZlcCzynnosciListZapisanych = "-1";
+
+                        while(licznik < records.Count && licznik <= max)
+                        {
+                            switch(records[licznik].SZC_ToDo)
+                            {
+                                case 1:
+                                if(dbr.SrwZlcCzynnosci_InsertRecord(records[licznik]))
+                                {
+                                    SrwZlcCzynnosciListZapisanych += ", " + records[licznik].SZC_Id;
+                                }
+                                break;
+
+                                case 2:
+                                if(dbr.SrwZlcCzynnosci_UpdateRecord(records[licznik]))
+                                {
+                                    SrwZlcCzynnosciListZapisanych += ", " + records[licznik].SZC_Id;
+                                }
+                                break;
+
+                                case 3:
+                                if(dbr.SrwZlcCzynnosci_DeleteRecord(records[licznik].SZC_Id))
+                                {
+                                    SrwZlcCzynnosciListZapisanych += ", " + records[licznik].SZC_Id;
+                                }
+                                break;
+                            }
+                            licznik++;
+                            RunOnUiThread(() => progressDialog.Progress++);
+                        }
+
+                        SrwZlcCzynnosci_RaportZapisanych(idOperatora, SrwZlcCzynnosciListZapisanych);
+                    }
                 }
             }
         }
 
-        private void KntKarty_Zmodyfikowani(string kntKartyZmodyfikowane)
+        private void SrwZlcCzynnosci_RaportZapisanych(int idOperatora, string srwZlcCzynnosciListZapisanych)
         {
-            List<KntKartyTable> records = JsonConvert.DeserializeObject<List<KntKartyTable>>(kntKartyZmodyfikowane);
+            String result = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwZlcCzynnosciPotwierdz(idOperatora, srwZlcCzynnosciListZapisanych);
+        }
 
-            DBRepository dbr = new DBRepository(); 
+        private void SrwZlcSkladniki_Synchronizacja(int idOperatora, string resultSrwZlcSkladnikiNew)
+        {
+            List<SrwZlcSkladniki> records = JsonConvert.DeserializeObject<List<SrwZlcSkladniki>>(resultSrwZlcSkladnikiNew);
 
-            if(records.Count > 0)
+            DBRepository dbr = new DBRepository(this);
+
+            if(records != null)
             {
-                RunOnUiThread(() => progressDialog.Progress = 0);
-                RunOnUiThread(() => progressDialog.Max = records.Count);
-
-                for(int i = 0; i < records.Count; i++)
+                if(records.Count > 0)
                 {
-                    RunOnUiThread(() => progressDialog.Progress++);
-                    dbr.kntKarty_UpdateRecord(records[i]);
+                    RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                    Int32 coIleRaport = 500;
+                    Int32 liczbaRaportow = ((int)records.Count / coIleRaport) + 1;
+                    Int32 licznik = 0;
+
+                    for(int i = 1; i <= liczbaRaportow; i++)
+                    {
+                        Int32 max = 500 * i;
+                        String SrwZlcSkladnikiListZapisanych = "-1";
+
+                        while(licznik < records.Count && licznik <= max)
+                        {
+                            switch(records[licznik].SZS_ToDo)
+                            {
+                                case 1:
+                                if(dbr.SrwZlcSkladniki_InsertRecord(records[licznik]))
+                                {
+                                    SrwZlcSkladnikiListZapisanych += ", " + records[licznik].SZS_Id;
+                                }
+                                break;
+
+                                case 2:
+                                if(dbr.SrwZlcSkladniki_UpdateRecord(records[licznik]))
+                                {
+                                    SrwZlcSkladnikiListZapisanych += ", " + records[licznik].SZS_Id;
+                                }
+                                break;
+
+                                case 3:
+                                if(dbr.SrwZlcSkladniki_DeleteRecord(records[licznik].SZS_Id))
+                                {
+                                    SrwZlcSkladnikiListZapisanych += ", " + records[licznik].SZS_Id;
+                                }
+                                break;
+                            }
+                            licznik++;
+                            RunOnUiThread(() => progressDialog.Progress++);
+                        }
+
+                        SrwZlcSkladniki_RaportZapisanych(idOperatora, SrwZlcSkladnikiListZapisanych);
+                    }
                 }
             }
+        }
+
+        private void SrwZlcSkladniki_RaportZapisanych(int idOperatora, string srwZlcSkladnikiListZapisanych)
+        {
+            String result = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwZlcSkladnikiPotwierdz(idOperatora, srwZlcSkladnikiListZapisanych);
+        }
+
+        private void SrwZlcUrz_Synchronizacja(int idOperatora, string resultSrwZlcUrzNew)
+        {
+            List<SrwZlcUrz> records = JsonConvert.DeserializeObject<List<SrwZlcUrz>>(resultSrwZlcUrzNew);
+
+            DBRepository dbr = new DBRepository(this);
+
+            if(records != null)
+            {
+                if(records.Count > 0)
+                {
+                    RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                    Int32 coIleRaport = 500;
+                    Int32 liczbaRaportow = ((int)records.Count / coIleRaport) + 1;
+                    Int32 licznik = 0;
+
+                    for(int i = 1; i <= liczbaRaportow; i++)
+                    {
+                        Int32 max = 500 * i;
+                        String SrwZlcUrzListZapisanych = "-1";
+
+                        while(licznik < records.Count && licznik <= max)
+                        {
+                            switch(records[licznik].SZU_ToDo)
+                            {
+                                case 1:
+                                if(dbr.SrwZlcUrz_InsertRecord(records[licznik]))
+                                {
+                                    SrwZlcUrzListZapisanych += ", " + records[licznik].SZU_Id;
+                                }
+                                break;
+
+                                case 2:
+                                if(dbr.SrwZlcUrz_UpdateRecord(records[licznik]))
+                                {
+                                    SrwZlcUrzListZapisanych += ", " + records[licznik].SZU_Id;
+                                }
+                                break;
+
+                                case 3:
+                                if(dbr.SrwZlcUrz_DeleteRecord(records[licznik].SZU_Id))
+                                {
+                                    SrwZlcUrzListZapisanych += ", " + records[licznik].SZU_Id;
+                                }
+                                break;
+                            }
+                            licznik++;
+                            RunOnUiThread(() => progressDialog.Progress++);
+                        }
+
+                        SrwZlcUrz_RaportZapisanych(idOperatora, SrwZlcUrzListZapisanych);
+                    }
+                }
+            }
+        }
+
+        private void SrwZlcUrz_RaportZapisanych(int idOperatora, string srwZlcUrzListZapisanych)
+        {
+            String result = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwZlcUrzPotwierdz(idOperatora, srwZlcUrzListZapisanych);
+        }
+
+        private void SrwUrzadzenia_Synchronizacja(int idOperatora, string resultSrwUrzadzeniaNew)
+        {
+            List<SrwUrzadzenia> records = JsonConvert.DeserializeObject<List<SrwUrzadzenia>>(resultSrwUrzadzeniaNew);
+
+            DBRepository dbr = new DBRepository(this);
+
+            if(records != null)
+            {
+                if(records.Count > 0)
+                {
+                    RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                    Int32 coIleRaport = 500;
+                    Int32 liczbaRaportow = ((int)records.Count / coIleRaport) + 1;
+                    Int32 licznik = 0;
+
+                    for(int i = 1; i <= liczbaRaportow; i++)
+                    {
+                        Int32 max = 500 * i;
+                        String SrwUrzadzeniaListZapisanych = "-1";
+
+                        while(licznik < records.Count && licznik <= max)
+                        {
+                            switch(records[licznik].SrU_ToDo)
+                            {
+                                case 1:
+                                if(dbr.SrwUrzadzenia_InsertRecord(records[licznik]))
+                                {
+                                    SrwUrzadzeniaListZapisanych += ", " + records[licznik].SrU_Id;
+                                }
+                                break;
+
+                                case 2:
+                                if(dbr.SrwUrzadzenia_UpdateRecord(records[licznik]))
+                                {
+                                    SrwUrzadzeniaListZapisanych += ", " + records[licznik].SrU_Id;
+                                }
+                                break;
+
+                                case 3:
+                                if(dbr.SrwUrzadzenia_DeleteRecord(records[licznik].SrU_Id))
+                                {
+                                    SrwUrzadzeniaListZapisanych += ", " + records[licznik].SrU_Id;
+                                }
+                                break;
+                            }
+                            licznik++;
+                            RunOnUiThread(() => progressDialog.Progress++);
+                        }
+
+                        SrwUrzadzenia_RaportZapisanych(idOperatora, SrwUrzadzeniaListZapisanych);
+                    }
+                }
+            }
+        }
+
+        private void SrwUrzadzenia_RaportZapisanych(int idOperatora, string SrwUrzadzeniaListZapisanych)
+        {
+            String result = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwUrzadzeniaPotwierdz(idOperatora, SrwUrzadzeniaListZapisanych);
+        }
+
+        private void SrwUrzWlasc_Synchronizacja(int idOperatora, string resultSrwUrzWlascNew)
+        {
+            List<SrwUrzWlasc> records = JsonConvert.DeserializeObject<List<SrwUrzWlasc>>(resultSrwUrzWlascNew);
+
+            DBRepository dbr = new DBRepository(this);
+
+            if(records != null)
+            {
+                if(records.Count > 0)
+                {
+                    RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                    Int32 coIleRaport = 500;
+                    Int32 liczbaRaportow = ((int)records.Count / coIleRaport) + 1;
+                    Int32 licznik = 0;
+
+                    for(int i = 1; i <= liczbaRaportow; i++)
+                    {
+                        Int32 max = 500 * i;
+                        String SrwUrzWlascListZapisanych = "-1";
+
+                        while(licznik < records.Count && licznik <= max)
+                        {
+                            switch(records[licznik].SUW_ToDo)
+                            {
+                                case 1:
+                                if(dbr.SrwUrzWlasc_InsertRecord(records[licznik]))
+                                {
+                                    SrwUrzWlascListZapisanych += ", " + records[licznik].SUW_SrUId;
+                                }
+                                break;
+
+                                case 2:
+                                if(dbr.SrwUrzWlasc_UpdateRecord(records[licznik]))
+                                {
+                                    SrwUrzWlascListZapisanych += ", " + records[licznik].SUW_SrUId;
+                                }
+                                break;
+
+                                case 3:
+                                if(dbr.SrwUrzWlasc_DeleteRecord(records[licznik].ID))
+                                {
+                                    SrwUrzWlascListZapisanych += ", " + records[licznik].SUW_SrUId;
+                                }
+                                break;
+                            }
+                            licznik++;
+                            RunOnUiThread(() => progressDialog.Progress++);
+                        }
+
+                        SrwUrzWlasc_RaportZapisanych(idOperatora, SrwUrzWlascListZapisanych);
+                    }
+                }
+            }
+        }
+
+        private void SrwUrzWlasc_RaportZapisanych(int idOperatora, string SrwUrzWlascListZapisanych)
+        {
+            String result = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwUrzWlascPotwierdz(idOperatora, SrwUrzWlascListZapisanych);
+        }
+
+        private void SrwUrzParDef_Synchronizacja(int idOperatora, string resultSrwUrzParDefNew)
+        {
+            List<SrwUrzParDef> records = JsonConvert.DeserializeObject<List<SrwUrzParDef>>(resultSrwUrzParDefNew);
+
+            DBRepository dbr = new DBRepository(this);
+
+            if(records != null)
+            {
+                if(records.Count > 0)
+                {
+                    RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                    Int32 coIleRaport = 500;
+                    Int32 liczbaRaportow = ((int)records.Count / coIleRaport) + 1;
+                    Int32 licznik = 0;
+
+                    for(int i = 1; i <= liczbaRaportow; i++)
+                    {
+                        Int32 max = 500 * i;
+                        String SrwUrzParDefListZapisanych = "-1";
+
+                        while(licznik < records.Count && licznik <= max)
+                        {
+                            switch(records[licznik].SUD_ToDo)
+                            {
+                                case 1:
+                                if(dbr.SrwUrzParDef_InsertRecord(records[licznik]))
+                                {
+                                    SrwUrzParDefListZapisanych += ", " + records[licznik].SUD_Id;
+                                }
+                                break;
+
+                                case 2:
+                                if(dbr.SrwUrzParDef_UpdateRecord(records[licznik]))
+                                {
+                                    SrwUrzParDefListZapisanych += ", " + records[licznik].SUD_Id;
+                                }
+                                break;
+
+                                case 3:
+                                if(dbr.SrwUrzParDef_DeleteRecord(records[licznik].SUD_Id))
+                                {
+                                    SrwUrzParDefListZapisanych += ", " + records[licznik].SUD_Id;
+                                }
+                                break;
+                            }
+                            licznik++;
+                            RunOnUiThread(() => progressDialog.Progress++);
+                        }
+
+                        SrwUrzParDef_RaportZapisanych(idOperatora, SrwUrzParDefListZapisanych);
+                    }
+                }
+            }
+        }
+
+        private void SrwUrzParDef_RaportZapisanych(int idOperatora, string SrwUrzParDefListZapisanych)
+        {
+            String result = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwUrzParDefPotwierdz(idOperatora, SrwUrzParDefListZapisanych);
+        }
+        
+        private void SrwUrzRodzaje_Synchronizacja(int idOperatora, string resultSrwUrzRodzajeNew)
+        {
+            List<SrwUrzRodzaje> records = JsonConvert.DeserializeObject<List<SrwUrzRodzaje>>(resultSrwUrzRodzajeNew);
+
+            DBRepository dbr = new DBRepository(this);
+
+            if(records != null)
+            {
+                if(records.Count > 0)
+                {
+                    RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                    Int32 coIleRaport = 500;
+                    Int32 liczbaRaportow = ((int)records.Count / coIleRaport) + 1;
+                    Int32 licznik = 0;
+
+                    for(int i = 1; i <= liczbaRaportow; i++)
+                    {
+                        Int32 max = 500 * i;
+                        String SrwUrzRodzajeListZapisanych = "-1";
+
+                        while(licznik < records.Count && licznik <= max)
+                        {
+                            switch(records[licznik].SUR_ToDo)
+                            {
+                                case 1:
+                                if(dbr.SrwUrzRodzaje_InsertRecord(records[licznik]))
+                                {
+                                    SrwUrzRodzajeListZapisanych += ", " + records[licznik].SUR_Id;
+                                }
+                                break;
+
+                                case 2:
+                                if(dbr.SrwUrzRodzaje_UpdateRecord(records[licznik]))
+                                {
+                                    SrwUrzRodzajeListZapisanych += ", " + records[licznik].SUR_Id;
+                                }
+                                break;
+
+                                case 3:
+                                if(dbr.SrwUrzRodzaje_DeleteRecord(records[licznik].SUR_Id))
+                                {
+                                    SrwUrzRodzajeListZapisanych += ", " + records[licznik].SUR_Id;
+                                }
+                                break;
+                            }
+                            licznik++;
+                            RunOnUiThread(() => progressDialog.Progress++);
+                        }
+
+                        SrwUrzRodzaje_RaportZapisanych(idOperatora, SrwUrzRodzajeListZapisanych);
+                    }
+                }
+            }
+        }
+
+        private void SrwUrzRodzaje_RaportZapisanych(int idOperatora, string SrwUrzRodzajeListZapisanych)
+        {
+            String result = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwUrzRodzajePotwierdz(idOperatora, SrwUrzRodzajeListZapisanych);
+        }
+        
+        private void SrwUrzRodzPar_Synchronizacja(int idOperatora, string resultSrwUrzRodzParNew)
+        {
+            List<SrwUrzRodzPar> records = JsonConvert.DeserializeObject<List<SrwUrzRodzPar>>(resultSrwUrzRodzParNew);
+
+            DBRepository dbr = new DBRepository(this);
+
+            if(records != null)
+            {
+                if(records.Count > 0)
+                {
+                    RunOnUiThread(() => progressDialog.Max = records.Count);
+
+                    Int32 coIleRaport = 500;
+                    Int32 liczbaRaportow = ((int)records.Count / coIleRaport) + 1;
+                    Int32 licznik = 0;
+
+                    for(int i = 1; i <= liczbaRaportow; i++)
+                    {
+                        Int32 max = 500 * i;
+                        String SrwUrzRodzParListZapisanych = "-1";
+
+                        while(licznik < records.Count && licznik <= max)
+                        {
+                            switch(records[licznik].SRP_ToDo)
+                            {
+                                case 1:
+                                if(dbr.SrwUrzRodzPar_InsertRecord(records[licznik]))
+                                {
+                                    SrwUrzRodzParListZapisanych += ", " + records[licznik].SRP_Id;
+                                }
+                                break;
+
+                                case 2:
+                                if(dbr.SrwUrzRodzPar_UpdateRecord(records[licznik]))
+                                {
+                                    SrwUrzRodzParListZapisanych += ", " + records[licznik].SRP_Id;
+                                }
+                                break;
+
+                                case 3:
+                                if(dbr.SrwUrzRodzPar_DeleteRecord(records[licznik].SRP_Id))
+                                {
+                                    SrwUrzRodzParListZapisanych += ", " + records[licznik].SRP_Id;
+                                }
+                                break;
+                            }
+                            licznik++;
+                            RunOnUiThread(() => progressDialog.Progress++);
+                        }
+
+                        SrwUrzRodzPar_RaportZapisanych(idOperatora, SrwUrzRodzParListZapisanych);
+                    }
+                }
+            }
+        }
+
+        private void SrwUrzRodzPar_RaportZapisanych(int idOperatora, string SrwUrzRodzParListZapisanych)
+        {
+            String result = new AplikacjaSerwisowa.kwronski.WebService().WS_SrwUrzRodzParPotwierdz(idOperatora, SrwUrzRodzParListZapisanych);
         }
 
         private void KntKarty_StworzBaze()
         {
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             dbr.createDB();
             dbr.stworzKntKartyTabele();
         }
 
         private List<int> wygenerujListeKontrahentow()
         {
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             return dbr.kntKarty_generujListeZapisanch();
         }
 
-
-
         private void KntAdresy_StworzBaze()
         {
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             dbr.stworzKntAdresyTabele();
         }
         private List<int> wygenerujListeAdresow()
         {
-            DBRepository dbr = new DBRepository();
+            DBRepository dbr = new DBRepository(this);
             return dbr.KntAdresy_generujListeZapisanch();
+        }
+
+        private void TwrKarty_StworzBaze()
+        {
+            DBRepository dbr = new DBRepository(this);
+            dbr.stworzTwrKartyTable();
+        }
+        private List<int> wygenerujListeTwrKarty()
+        {
+            DBRepository dbr = new DBRepository(this);
+            return dbr.TwrKarty_generujListeZapisanch();
+        }
+
+        private void SrwZlcNag_StworzBaze()
+        {
+            DBRepository dbr = new DBRepository(this);
+            dbr.stworzSrwZlcNag();
+        }
+
+        private List<int> wygenerujListeSrwZlcNag()
+        {
+            DBRepository dbr = new DBRepository(this);
+            return dbr.SrwZlcNag_generujListeZapisanch();
+        }
+
+        private void SrwZlcCzynnosci_StworzBaze()
+        {
+            DBRepository dbr = new DBRepository(this);
+            dbr.stworzSrwZlcCzynnosci();
+        }
+        private List<int> wygenerujListeSrwZlcCzynnosci()
+        {
+            DBRepository dbr = new DBRepository(this);
+            return dbr.SrwZlcCzynnosci_generujListeZapisanch();
+        }
+
+        private void SrwZlcSkladniki_StworzBaze()
+        {
+            DBRepository dbr = new DBRepository(this);
+            dbr.stworzSrwZlcSkladniki();
+        }
+        private List<int> wygenerujListeSrwZlcSkladniki()
+        {
+            DBRepository dbr = new DBRepository(this);
+            return dbr.SrwZlcSkladniki_generujListeZapisanch();
+        }
+
+        private void SrwZlcUrz_StworzBaze()
+        {
+            DBRepository dbr = new DBRepository(this);
+            dbr.stworzSrwZlcUrz();
+        }
+        private List<int> wygenerujListeSrwZlcUrz()
+        {
+            DBRepository dbr = new DBRepository(this);
+            return dbr.SrwZlcSUrz_generujListeZapisanch();
+        }
+
+        private void SrwUrzadzenia_StworzBaze()
+        {
+            DBRepository dbr = new DBRepository(this);
+            dbr.stworzSrwUrzadzenia();
+        }
+        private List<int> wygenerujListeSrwUrzadzenia()
+        {
+            DBRepository dbr = new DBRepository(this);
+            return dbr.SrwUrzadzenia_generujListeZapisanch();
+        }
+
+        private void SrwUrzWlasc_StworzBaze()
+        {
+            DBRepository dbr = new DBRepository(this);
+            dbr.stworzSrwUrzWlasc();
+        }
+        private List<int> wygenerujListeSrwUrzWlasc()
+        {
+            DBRepository dbr = new DBRepository(this);
+            return dbr.SrwUrzWlasc_generujListeZapisanch();
+        }
+
+        private void SrwUrzParDef_StworzBaze()
+        {
+            DBRepository dbr = new DBRepository(this);
+            dbr.stworzSrwUrzParDef();
+        }
+        private List<int> wygenerujListeSrwUrzParDef()
+        {
+            DBRepository dbr = new DBRepository(this);
+            return dbr.SrwUrzParDef_generujListeZapisanch();
+        }
+
+        private void SrwUrzRodzaje_StworzBaze()
+        {
+            DBRepository dbr = new DBRepository(this);
+            dbr.stworzSrwUrzRodzaje();
+        }
+        private List<int> wygenerujListeSrwUrzRodzaje()
+        {
+            DBRepository dbr = new DBRepository(this);
+            return dbr.SrwUrzRodzaje_generujListeZapisanch();
+        }
+
+        private void SrwUrzRodzPar_StworzBaze()
+        {
+            DBRepository dbr = new DBRepository(this);
+            dbr.stworzSrwUrzRodzPar();
+        }
+        private List<int> wygenerujListeSrwUrzRodzPar()
+        {
+            DBRepository dbr = new DBRepository(this);
+            return dbr.SrwUrzRodzPar_generujListeZapisanch();
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Mo¿e siê przydaæ ?
-/*
- * private void synchronizacjaGalsoft()
-        {
-            AplikacjaSerwisowa.kwronski.WebService new AplikacjaSerwisowa.kwronski.WebService() = new AplikacjaSerwisowa.kwronski.WebService();
-            String teasfgsgsagsa = new AplikacjaSerwisowa.kwronski.WebService().HelloWorld("lama");
-
-
-            //string url = @"http://91.196.8.98/AplikacjaSerwisowa/WebService.asmx/test";
-            //string url = @"http://91.196.9.105/WebService.asmx?op=test";
-
-            /* HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-             req.Host = "91.196.8.98"; 
-             HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-
-             StreamReader reader = new StreamReader(resp.GetResponseStream());
-             String test = reader.ReadToEnd();
-             */
-
-// HttpClient client = new HttpClient();
-// client.MaxResponseContentBufferSize = 2500000;
-//String test = client.GetStringAsync(url);
-
-/* HttpWebRequest request;
- request = (HttpWebRequest)WebRequest.Create(url);
- request.ContentType = "text/xml; charset=utf-8";
- GetResponse(request);*/
-
-//string url = @"http://91.196.9.105/WebService.asmx/test";
-//string url = @"http://91.196.8.98/AplikacjaSerwisowa/WebService.asmx/test";
-
-/*HttpWebRequest req = WebRequest.Create(url) as HttpWebRequest;
-XmlDocument xmlDoc = new XmlDocument();
-string testsdgsdgsdg = "";
-
-            using(HttpWebResponse resp = req.GetResponse() as HttpWebResponse)
-            {
-                xmlDoc.Load(resp.GetResponseStream());
-                testsdgsdgsdg = xmlDoc.InnerText;
-            }
-
-            //testeasdgsadgha(url);
-        }
-*/
-/*
-
-        private void zapisDanychDoPamieciUrzadzenia()
-        {
-            var prefs = Application.Context.GetSharedPreferences(ApplicationInfo.LoadLabel(PackageManager), FileCreationMode.Private);
-            var prefEditor = prefs.Edit();
-            prefEditor.PutString("adresSerwera", adresSerwera.Text);
-            prefEditor.PutString("instancjaSerwera", instancjaSerwer.Text);
-            prefEditor.PutString("loginSerwera", loginSerwer.Text);
-            prefEditor.PutString("hasloSerwera", hasloSerwer.Text);
-            prefEditor.Commit();
-
-            Toast.MakeText(this, "Zapisano!", ToastLength.Short).Show();
-        }
-        private void Odczyt()
-        {
-            var prefs = Application.Context.GetSharedPreferences(ApplicationInfo.LoadLabel(PackageManager), FileCreationMode.Private);
-
-            adresSerwera.Text = prefs.GetString("adresSerwera", "");
-            instancjaSerwer.Text = prefs.GetString("instancjaSerwera", "");
-            loginSerwer.Text = prefs.GetString("loginSerwera", "");
-            hasloSerwer.Text = prefs.GetString("hasloSerwera", "");
-        }
-*/
-
-
-/*
-    String documentsPath = "/sdcard/Download";
-
-    String nazwaPlikuKartyTowarow = "karty_towarowe.xml";
-    String nazwaKntKarty = "knt_karty.xml";
-    String nazwaKntAdresy= "kna_adresy.xml";
-
-    private Boolean pobierzXML(String nazwaPlikuXML)
-        {
-            //Toast.MakeText(this, "Pobieranie pliku "+ nazwaPlikuXML, ToastLength.Short).Show();
-
-            RunOnUiThread(() => progressDialog.SetMessage("Pobieranie pliku "+nazwaPlikuXML));
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = 1);
-
-            String server = adresSerwera.Text;
-            String userName = loginSerwer.Text;
-            String password = hasloSerwer.Text;
-
-            var filePath = Path.GetFullPath(documentsPath + "/" + nazwaPlikuXML);
-
-            System.IO.FileStream plikXML;
-            try
-            {
-                System.IO.File.Delete(documentsPath + "/" + nazwaPlikuXML);
-            }
-            catch(Exception) { }
-
-            try
-            {
-                plikXML = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite,FileShare.ReadWrite);
-                FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new System.Uri(server + "/" + nazwaPlikuXML));
-                reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
-                reqFTP.UseBinary = true;
-                reqFTP.Credentials = new NetworkCredential(userName, password);
-                FtpWebResponse response = (FtpWebResponse)reqFTP.GetResponse();
-                Stream ftpStream = response.GetResponseStream();
-
-                long cl = response.ContentLength;
-                int bufferSize = 2048;
-                byte[] buffer = new byte[bufferSize];
-                int readCount = ftpStream.Read(buffer, 0, bufferSize);
-
-                while (readCount > 0)
-                {
-                    plikXML.Write(buffer, 0, readCount);
-                    readCount = ftpStream.Read(buffer, 0, bufferSize);
-                }
-
-                ftpStream.Flush();
-                ftpStream.Close();
-                response.Close();
-                plikXML.Close();
-                //Toast.MakeText(this, "Zamykanie pliku "+ nazwaPlikuXML, ToastLength.Short).Show();
-
-                return true;
-            }
-            catch (Exception exc)
-            {
-                messagebox("Wyst¹pi³ b³¹d funkcji pobierzXML(" + nazwaPlikuXML + ") :" + exc.Message, "B³¹d", 0);
-                System.IO.File.Delete(documentsPath + "/" + nazwaPlikuXML);
-                return false;
-            }
-
-        }
-
- private void odczytajXML(String nazwaPlikuXML)
-        {
-            RunOnUiThread(() => progressDialog.SetMessage("Odczytywanie pliku " + nazwaPlikuXML));
-
-            var filePath = Path.GetFullPath(documentsPath + "/" + nazwaPlikuXML);
-            const Int32 BufferSize = 128; ;
-            String plikXMLString = "";
-            try
-            {
-
-                using (FileStream fileStream = File.OpenRead(filePath))
-                {
-                    using (StreamReader streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
-                    {
-                        String line;
-
-                        while ((line = streamReader.ReadLine()) != null)
-                        {
-                            plikXMLString = plikXMLString + line;
-                        }
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                messagebox("Wyst¹pi³ b³¹d funkcji odczytajXML(" + nazwaPlikuXML + ") :" + exc.Message,"B³¹d",0);
-            }
-
-            if(nazwaPlikuXML == nazwaPlikuKartyTowarow)
-            {
-                wczytajPlikKartyTowarow(plikXMLString);
-            }
-            else if(nazwaPlikuXML == nazwaKntKarty)
-            {
-                wczytajPlikKntKarty(plikXMLString);
-            }
-            else if(nazwaPlikuXML == nazwaKntAdresy)
-            {
-                wczytajPlikKnaAdresy(plikXMLString);
-            }
-            else
-            {
-                messagebox("Nie uda³o siê odczytaæ pliku XML. Nie rozpoznana nazwa pliku", "B³¹d", 0);
-            }            
-        }
-
-        private void wczytajPlikKartyTowarow(String plikXMLString)
-        {
-            List<String> twrKodList = new List<String>();
-            List<String> twrGidNumerList = new List<String>();
-            List<String> twrTypList = new List<String>();
-            List<String> twrnazwaList = new List<String>();
-
-            try
-            {
-                XmlDocument xml = new XmlDocument();
-                xml.LoadXml(plikXMLString);
-                XmlNodeList xnList = xml.SelectNodes("/root/towary/towar");
-                foreach(XmlNode xn in xnList)
-                {
-                    string twrKod = xn["twr_kod"].InnerText;
-                    string twrGidNumer = xn["twr_gidnumer"].InnerText;
-                    string twrTyp = xn["twr_typ"].InnerText;
-                    string twrNawa = xn["twr_nazwa"].InnerText;
-
-                    twrKodList.Add(twrKod);
-                    twrGidNumerList.Add(twrGidNumer);
-                    twrTypList.Add(twrTyp);
-                    twrnazwaList.Add(twrNawa);
-                }
-            }
-            catch(Exception exc)
-            {
-                messagebox("Wyst¹pi³ b³¹d podczas odczytu xml: " + exc.Message);
-            }            
-
-            if(twrKodList.Count > 0 && twrGidNumerList.Count > 0 && twrTypList.Count > 0 && twrnazwaList.Count > 0)
-            {
-                zapiszKartyTowaroweWBazie(twrKodList, twrGidNumerList, twrTypList, twrnazwaList);
-            }
-        }
-
-        private void zapiszKartyTowaroweWBazie(List<string> twrKodList, List<String> twrGidNumerList, List<String> twrTypList, List<String> twrnazwaList)
-        {
-            DBRepository dbr = new DBRepository();
-            String result = dbr.createDB();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();            
-            result = dbr.stworzKartyTowarowTabele();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();
-
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = twrGidNumerList.Count);
-
-            for (int i = 0; i < twrKodList.Count; i++)
-            {
-                RunOnUiThread(() => progressDialog.Progress++);
-
-                kartyTowarowTable kartaTowarowa = new kartyTowarowTable();
-                kartaTowarowa.TWR_GIDNumer = Convert.ToInt32(twrGidNumerList[i]);
-                kartaTowarowa.TWR_Kod = twrKodList[i];
-                kartaTowarowa.TWR_Nazwa = twrnazwaList[i];
-                kartaTowarowa.TWR_Typ = Convert.ToInt32(twrTypList[i]);
-
-                result = dbr.kartyTowarow_InsertRecord(kartaTowarowa);
-               // Toast.MakeText(this, i + ": " + result, ToastLength.Short).Show();
-            }
-        }
-
-        private void wczytajPlikKntKarty(String plikXMLString)
-        {
-            List<string> knt_gidnumer_List = new List<string>();
-            List<string> knt_akronim_List = new List<string>();
-            List<string> knt_nazwa1_List = new List<string>();
-            List<string> knt_nazwa2_List = new List<string>();
-            List<string> knt_nazwa3_List = new List<string>();
-            List<string> knt_kodp_List = new List<string>();
-            List<string> knt_miasto_List = new List<string>();
-            List<string> knt_ulica_List = new List<string>();
-            List<string> knt_adresy_List = new List<string>();
-            List<string> knt_nip_List = new List<string>();
-            List<string> knt_telefon1_List = new List<string>();
-            List<string> knt_telefon2_List = new List<string>();
-            List<string> knt_telex_List = new List<string>();
-            List<string> knt_fax_List = new List<string>();
-            List<string> knt_email_List = new List<string>();
-            List<string> knt_url_List = new List<string>();
-            
-            try
-            {
-                XmlDocument xml = new XmlDocument();
-                xml.LoadXml(plikXMLString);
-                XmlNodeList xnList = xml.SelectNodes("/root/kntkarty/karta");
-                foreach(XmlNode xn in xnList)
-                {
-                    knt_gidnumer_List.Add(xn["knt_gidnumer"].InnerText);
-                    knt_akronim_List.Add(xn["knt_akronim"].InnerText);
-                    knt_nazwa1_List.Add(xn["knt_nazwa1"].InnerText);
-                    knt_nazwa2_List.Add(xn["knt_nazwa2"].InnerText);
-                    knt_nazwa3_List.Add(xn["knt_nazwa3"].InnerText);
-                    knt_kodp_List.Add(xn["knt_kodp"].InnerText);
-                    knt_miasto_List.Add(xn["knt_miasto"].InnerText);
-                    knt_ulica_List.Add(xn["knt_ulica"].InnerText);
-                    knt_adresy_List.Add(xn["knt_adresy"].InnerText);
-                    knt_nip_List.Add(xn["knt_nip"].InnerText);
-                    knt_telefon1_List.Add(xn["knt_telefon1"].InnerText);
-                    knt_telefon2_List.Add(xn["knt_telefon2"].InnerText);
-                    knt_telex_List.Add(xn["knt_telex"].InnerText);
-                    knt_fax_List.Add(xn["knt_fax"].InnerText);
-                    knt_email_List.Add(xn["knt_email"].InnerText);
-                    knt_url_List.Add(xn["knt_url"].InnerText);                    
-                }
-            }
-
-            catch(Exception exc)
-            {
-                messagebox("Wyst¹pi³ b³¹d funkcji synchronizacja_Activity.wczytajPlikKntKarty(): " + exc.Message,"B³¹d",0);
-            }
-
-            if(knt_gidnumer_List.Count > 0)
-            {
-                zapiszKntKartyWBazie(knt_gidnumer_List, knt_akronim_List, knt_nazwa1_List, knt_nazwa2_List, knt_nazwa3_List, knt_kodp_List, knt_miasto_List, knt_ulica_List, knt_adresy_List, knt_nip_List, knt_telefon1_List, knt_telefon2_List, knt_telex_List, knt_fax_List, knt_email_List, knt_url_List);
-            }
-        }
-        private void zapiszKntKartyWBazie(List<string> knt_gidnumer_List, List<string> knt_akronim_List, List<string> knt_nazwa1_List, List<string> knt_nazwa2_List, List<string> knt_nazwa3_List, List<string> knt_kodp_List, List<string> knt_miasto_List, List<string> knt_ulica_List, List<string> knt_adresy_List, List<string> knt_nip_List, List<string> knt_telefon1_List, List<string> knt_telefon2_List, List<string> knt_telex_List, List<string> knt_fax_List, List<string> knt_email_List, List<string> knt_url_List)
-        {
-            DBRepository dbr = new DBRepository();
-            String result = dbr.createDB();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();            
-            result = dbr.stworzKntKartyTabele();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();
-
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = knt_gidnumer_List.Count);
-
-            for(int i = 0; i < knt_gidnumer_List.Count; i++)
-            {
-                RunOnUiThread(() => progressDialog.Progress++);
-
-                KntKartyTable kntKarta = new KntKartyTable();
-                kntKarta.Knt_GIDNumer = Convert.ToInt32(knt_gidnumer_List[i]);
-                kntKarta.Knt_Akronim = knt_akronim_List[i];
-                kntKarta.Knt_nazwa1 = knt_nazwa1_List[i];
-                kntKarta.Knt_nazwa2 = knt_nazwa2_List[i];
-                kntKarta.Knt_nazwa3 = knt_nazwa3_List[i];
-                kntKarta.Knt_KodP = knt_kodp_List[i];
-                kntKarta.Knt_miasto = knt_miasto_List[i];
-                kntKarta.Knt_ulica = knt_ulica_List[i];
-                kntKarta.Knt_Adres = knt_adresy_List[i];
-                kntKarta.Knt_nip = knt_nip_List[i];
-                kntKarta.Knt_telefon1 = knt_telefon1_List[i];
-                kntKarta.Knt_telefon2 = knt_telefon2_List[i];
-                kntKarta.Knt_telex = knt_telex_List[i];
-                kntKarta.Knt_fax = knt_fax_List[i];
-                kntKarta.Knt_email = knt_email_List[i];
-                kntKarta.Knt_url = knt_url_List[i];
-
-                result = dbr.kntKarty_InsertRecord(kntKarta);
-                // Toast.MakeText(this, i + ": " + result, ToastLength.Short).Show();
-            }
-        }
-        private void wczytajPlikKnaAdresy(String plikXMLString)
-        {
-            List<string> knt_gidnumer_List = new List<string>();
-            List<string> knt_kntNumer_List = new List<string>();
-            List<string> knt_akronim_List = new List<string>();
-            List<string> knt_nazwa1_List = new List<string>();
-            List<string> knt_nazwa2_List = new List<string>();
-            List<string> knt_nazwa3_List = new List<string>();
-            List<string> knt_kodp_List = new List<string>();
-            List<string> knt_miasto_List = new List<string>();
-            List<string> knt_ulica_List = new List<string>();
-            List<string> knt_adresy_List = new List<string>();
-            List<string> knt_nip_List = new List<string>();
-            List<string> knt_telefon1_List = new List<string>();
-            List<string> knt_telefon2_List = new List<string>();
-            List<string> knt_telex_List = new List<string>();
-            List<string> knt_fax_List = new List<string>();
-            List<string> knt_email_List = new List<string>();
-
-            try
-            {
-                XmlDocument xml = new XmlDocument();
-                xml.LoadXml(plikXMLString);
-                XmlNodeList xnList = xml.SelectNodes("/root/knaadresy/karta");
-                foreach(XmlNode xn in xnList)
-                {
-                    knt_gidnumer_List.Add(xn["kna_gidnumer"].InnerText);
-                    knt_kntNumer_List.Add(xn["kna_kntnumer"].InnerText);
-                    knt_akronim_List.Add(xn["kna_akronim"].InnerText);
-                    knt_nazwa1_List.Add(xn["kna_nazwa1"].InnerText);
-                    knt_nazwa2_List.Add(xn["kna_nazwa2"].InnerText);
-                    knt_nazwa3_List.Add(xn["kna_nazwa3"].InnerText);
-                    knt_kodp_List.Add(xn["kna_kodp"].InnerText);
-                    knt_miasto_List.Add(xn["kna_miasto"].InnerText);
-                    knt_ulica_List.Add(xn["kna_ulica"].InnerText);
-                    knt_adresy_List.Add(xn["kna_adresy"].InnerText);
-                    knt_nip_List.Add(xn["kna_nip"].InnerText);
-                    knt_telefon1_List.Add(xn["kna_telefon1"].InnerText);
-                    knt_telefon2_List.Add(xn["kna_telefon2"].InnerText);
-                    knt_telex_List.Add(xn["kna_telex"].InnerText);
-                    knt_fax_List.Add(xn["kna_fax"].InnerText);
-                    knt_email_List.Add(xn["kna_email"].InnerText);
-                }
-            }
-
-            catch(Exception exc)
-            {
-                messagebox("Wyst¹pi³ b³¹d funkcji synchronizacja_Activity.wczytajPlikKntKarty(): " + exc.Message, "B³¹d", 0);
-            }
-
-            if(knt_gidnumer_List.Count > 0)
-            {
-                zapiszKntAdresyWBazie(knt_gidnumer_List, knt_kntNumer_List, knt_akronim_List, knt_nazwa1_List, knt_nazwa2_List, knt_nazwa3_List, knt_kodp_List, knt_miasto_List, knt_ulica_List, knt_adresy_List, knt_nip_List, knt_telefon1_List, knt_telefon2_List, knt_telex_List, knt_fax_List, knt_email_List);
-            }
-        }
-
-        private void zapiszKntAdresyWBazie(List<string> kna_gidnumer_List, List<string> kna_kntNumer_List, List<string> kna_akronim_List, List<string> kna_nazwa1_List, List<string> kna_nazwa2_List, List<string> kna_nazwa3_List, List<string> kna_kodp_List, List<string> kna_miasto_List, List<string> kna_ulica_List, List<string> kna_adresy_List, List<string> kna_nip_List, List<string> kna_telefon1_List, List<string> kna_telefon2_List, List<string> kna_telex_List, List<string> kna_fax_List, List<string> kna_email_List)
-        {
-            DBRepository dbr = new DBRepository();
-            String result = dbr.createDB();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();            
-            result = dbr.stworzKntAdresyTabele();
-            //Toast.MakeText(this, result, ToastLength.Short).Show();
-
-            RunOnUiThread(() => progressDialog.Progress = 0);
-            RunOnUiThread(() => progressDialog.Max = kna_gidnumer_List.Count);
-
-            for(int i = 0; i < kna_gidnumer_List.Count; i++)
-            {
-                RunOnUiThread(() => progressDialog.Progress++);
-
-                KntAdresyTable kntAdres = new KntAdresyTable();
-                kntAdres.Kna_GIDNumer = Convert.ToInt32(kna_gidnumer_List[i]);
-                kntAdres.Kna_KntNumer = Convert.ToInt32(kna_kntNumer_List[i]);                kntAdres.Kna_Akronim = kna_akronim_List[i];
-                kntAdres.Kna_nazwa1 = kna_nazwa1_List[i];
-                kntAdres.Kna_nazwa2 = kna_nazwa2_List[i];
-                kntAdres.Kna_nazwa3 = kna_nazwa3_List[i];
-                kntAdres.Kna_KodP = kna_kodp_List[i];
-                kntAdres.Kna_miasto = kna_miasto_List[i];
-                kntAdres.Kna_ulica = kna_ulica_List[i];
-                kntAdres.Kna_Adres = kna_adresy_List[i];
-                kntAdres.Kna_nip = kna_nip_List[i];
-                kntAdres.Kna_telefon1 = kna_telefon1_List[i];
-                kntAdres.Kna_telefon2 = kna_telefon2_List[i];
-                kntAdres.Kna_telex = kna_telex_List[i];
-                kntAdres.Kna_fax = kna_fax_List[i];
-                kntAdres.Kna_email = kna_email_List[i];
-
-                result = dbr.kntAdresy_InsertRecord(kntAdres);
-                // Toast.MakeText(this, i + ": " + result, ToastLength.Short).Show();
-            }
-        }
-     
-     
-     */

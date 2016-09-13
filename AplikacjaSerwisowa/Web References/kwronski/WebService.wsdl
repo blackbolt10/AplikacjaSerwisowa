@@ -354,6 +354,422 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="Aplikacja_Zapisz_Kontrahentow">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="kntKartyString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="kntAdresyString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Aplikacja_Zapisz_KontrahentowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Aplikacja_Zapisz_KontrahentowResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Aplikacja_Zapisz_Towary">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TwrKartyString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Aplikacja_Zapisz_TowaryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Aplikacja_Zapisz_TowaryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Aplikacja_Zapisz_Zlecenia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="SrwZlcNagString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="srwZlcCzynnosciString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SrwZlcSkladnikiString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SrwZlcUrzString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Aplikacja_Zapisz_ZleceniaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Aplikacja_Zapisz_ZleceniaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Aplikacja_Zapisz_Urzadzenia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="SrwUrzadzeniaString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SrwUrzWlascString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SrwUrzParDefString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SrwUrzRodzajeString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SrwUrzRodzParString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Aplikacja_Zapisz_UrzadzeniaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Aplikacja_Zapisz_UrzadzeniaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_KntKartyLista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_KntKartyListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_KntKartyListaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_KntKartyPotwierdz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_KntKartyPotwierdzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_KntKartyPotwierdzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_KntAdresyLista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_KntAdresyListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_KntAdresyListaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_KntAdresyPotwierdz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_KntAdresyPotwierdzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_KntAdresyPotwierdzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_TwrKartyLista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_TwrKartyListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_TwrKartyListaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_TwrKartyPotwierdz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_TwrKartyPotwierdzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_TwrKartyPotwierdzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcNagLista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcNagListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwZlcNagListaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcNagPotwierdz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcNagPotwierdzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwZlcNagPotwierdzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcCzynnosciLista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcCzynnosciListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwZlcCzynnosciListaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcCzynnosciPotwierdz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcCzynnosciPotwierdzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwZlcCzynnosciPotwierdzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcSkladnikiLista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcSkladnikiListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwZlcSkladnikiListaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcSkladnikiPotwierdz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcSkladnikiPotwierdzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwZlcSkladnikiPotwierdzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzadzeniaLista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzadzeniaListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwUrzadzeniaListaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzadzeniaPotwierdz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzadzeniaPotwierdzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwUrzadzeniaPotwierdzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzWlascLista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzWlascListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwUrzWlascListaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzWlascPotwierdz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzWlascPotwierdzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwUrzWlascPotwierdzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzParDefLista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzParDefListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwUrzParDefListaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzParDefPotwierdz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzParDefPotwierdzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwUrzParDefPotwierdzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzRodzajeLista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzRodzajeListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwUrzRodzajeListaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzRodzajePotwierdz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzRodzajePotwierdzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwUrzRodzajePotwierdzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzRodzParLista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzRodzParListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwUrzRodzParListaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzRodzParPotwierdz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwUrzRodzParPotwierdzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwUrzRodzParPotwierdzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcUrzLista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcUrzListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwZlcUrzListaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcUrzPotwierdz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idOperatora" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS_SrwZlcUrzPotwierdzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS_SrwZlcUrzPotwierdzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="string" nillable="true" type="s:string" />
     </s:schema>
   </wsdl:types>
@@ -549,6 +965,174 @@
   <wsdl:message name="KntAdresy_ZwrocUsunietychSoapOut">
     <wsdl:part name="parameters" element="tns:KntAdresy_ZwrocUsunietychResponse" />
   </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_KontrahentowSoapIn">
+    <wsdl:part name="parameters" element="tns:Aplikacja_Zapisz_Kontrahentow" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_KontrahentowSoapOut">
+    <wsdl:part name="parameters" element="tns:Aplikacja_Zapisz_KontrahentowResponse" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_TowarySoapIn">
+    <wsdl:part name="parameters" element="tns:Aplikacja_Zapisz_Towary" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_TowarySoapOut">
+    <wsdl:part name="parameters" element="tns:Aplikacja_Zapisz_TowaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_ZleceniaSoapIn">
+    <wsdl:part name="parameters" element="tns:Aplikacja_Zapisz_Zlecenia" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_ZleceniaSoapOut">
+    <wsdl:part name="parameters" element="tns:Aplikacja_Zapisz_ZleceniaResponse" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_UrzadzeniaSoapIn">
+    <wsdl:part name="parameters" element="tns:Aplikacja_Zapisz_Urzadzenia" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_UrzadzeniaSoapOut">
+    <wsdl:part name="parameters" element="tns:Aplikacja_Zapisz_UrzadzeniaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntKartyListaSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_KntKartyLista" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntKartyListaSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_KntKartyListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntKartyPotwierdzSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_KntKartyPotwierdz" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntKartyPotwierdzSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_KntKartyPotwierdzResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntAdresyListaSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_KntAdresyLista" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntAdresyListaSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_KntAdresyListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntAdresyPotwierdzSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_KntAdresyPotwierdz" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntAdresyPotwierdzSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_KntAdresyPotwierdzResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_TwrKartyListaSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_TwrKartyLista" />
+  </wsdl:message>
+  <wsdl:message name="WS_TwrKartyListaSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_TwrKartyListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_TwrKartyPotwierdzSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_TwrKartyPotwierdz" />
+  </wsdl:message>
+  <wsdl:message name="WS_TwrKartyPotwierdzSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_TwrKartyPotwierdzResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcNagListaSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcNagLista" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcNagListaSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcNagListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcNagPotwierdzSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcNagPotwierdz" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcNagPotwierdzSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcNagPotwierdzResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcCzynnosciListaSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcCzynnosciLista" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcCzynnosciListaSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcCzynnosciListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcCzynnosciPotwierdzSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcCzynnosciPotwierdz" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcCzynnosciPotwierdzSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcCzynnosciPotwierdzResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcSkladnikiListaSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcSkladnikiLista" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcSkladnikiListaSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcSkladnikiListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcSkladnikiPotwierdzSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcSkladnikiPotwierdz" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcSkladnikiPotwierdzSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcSkladnikiPotwierdzResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzadzeniaListaSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzadzeniaLista" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzadzeniaListaSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzadzeniaListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzadzeniaPotwierdzSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzadzeniaPotwierdz" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzadzeniaPotwierdzSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzadzeniaPotwierdzResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzWlascListaSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzWlascLista" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzWlascListaSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzWlascListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzWlascPotwierdzSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzWlascPotwierdz" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzWlascPotwierdzSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzWlascPotwierdzResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzParDefListaSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzParDefLista" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzParDefListaSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzParDefListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzParDefPotwierdzSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzParDefPotwierdz" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzParDefPotwierdzSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzParDefPotwierdzResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzajeListaSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzRodzajeLista" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzajeListaSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzRodzajeListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzajePotwierdzSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzRodzajePotwierdz" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzajePotwierdzSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzRodzajePotwierdzResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzParListaSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzRodzParLista" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzParListaSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzRodzParListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzParPotwierdzSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzRodzParPotwierdz" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzParPotwierdzSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwUrzRodzParPotwierdzResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcUrzListaSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcUrzLista" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcUrzListaSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcUrzListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcUrzPotwierdzSoapIn">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcUrzPotwierdz" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcUrzPotwierdzSoapOut">
+    <wsdl:part name="parameters" element="tns:WS_SrwZlcUrzPotwierdzResponse" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpGetIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -693,6 +1277,198 @@
   <wsdl:message name="KntAdresy_ZwrocUsunietychHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_KontrahentowHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="kntKartyString" type="s:string" />
+    <wsdl:part name="kntAdresyString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_KontrahentowHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_TowaryHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="TwrKartyString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_TowaryHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_ZleceniaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="SrwZlcNagString" type="s:string" />
+    <wsdl:part name="srwZlcCzynnosciString" type="s:string" />
+    <wsdl:part name="SrwZlcSkladnikiString" type="s:string" />
+    <wsdl:part name="SrwZlcUrzString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_ZleceniaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_UrzadzeniaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="SrwUrzadzeniaString" type="s:string" />
+    <wsdl:part name="SrwUrzWlascString" type="s:string" />
+    <wsdl:part name="SrwUrzParDefString" type="s:string" />
+    <wsdl:part name="SrwUrzRodzajeString" type="s:string" />
+    <wsdl:part name="SrwUrzRodzParString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_UrzadzeniaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntKartyListaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntKartyListaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntKartyPotwierdzHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntKartyPotwierdzHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntAdresyListaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntAdresyListaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntAdresyPotwierdzHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntAdresyPotwierdzHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_TwrKartyListaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_TwrKartyListaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_TwrKartyPotwierdzHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_TwrKartyPotwierdzHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcNagListaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcNagListaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcNagPotwierdzHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcNagPotwierdzHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcCzynnosciListaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcCzynnosciListaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcCzynnosciPotwierdzHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcCzynnosciPotwierdzHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcSkladnikiListaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcSkladnikiListaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcSkladnikiPotwierdzHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcSkladnikiPotwierdzHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzadzeniaListaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzadzeniaListaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzadzeniaPotwierdzHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzadzeniaPotwierdzHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzWlascListaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzWlascListaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzWlascPotwierdzHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzWlascPotwierdzHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzParDefListaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzParDefListaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzParDefPotwierdzHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzParDefPotwierdzHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzajeListaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzajeListaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzajePotwierdzHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzajePotwierdzHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzParListaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzParListaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzParPotwierdzHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzParPotwierdzHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcUrzListaHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcUrzListaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcUrzPotwierdzHttpGetIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcUrzPotwierdzHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:message name="SayHelloToLameHttpPostIn">
     <wsdl:part name="test" type="s:string" />
   </wsdl:message>
@@ -835,6 +1611,198 @@
   </wsdl:message>
   <wsdl:message name="KntAdresy_ZwrocUsunietychHttpPostIn" />
   <wsdl:message name="KntAdresy_ZwrocUsunietychHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_KontrahentowHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="kntKartyString" type="s:string" />
+    <wsdl:part name="kntAdresyString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_KontrahentowHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_TowaryHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="TwrKartyString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_TowaryHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_ZleceniaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="SrwZlcNagString" type="s:string" />
+    <wsdl:part name="srwZlcCzynnosciString" type="s:string" />
+    <wsdl:part name="SrwZlcSkladnikiString" type="s:string" />
+    <wsdl:part name="SrwZlcUrzString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_ZleceniaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_UrzadzeniaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="SrwUrzadzeniaString" type="s:string" />
+    <wsdl:part name="SrwUrzWlascString" type="s:string" />
+    <wsdl:part name="SrwUrzParDefString" type="s:string" />
+    <wsdl:part name="SrwUrzRodzajeString" type="s:string" />
+    <wsdl:part name="SrwUrzRodzParString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Aplikacja_Zapisz_UrzadzeniaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntKartyListaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntKartyListaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntKartyPotwierdzHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntKartyPotwierdzHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntAdresyListaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntAdresyListaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntAdresyPotwierdzHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_KntAdresyPotwierdzHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_TwrKartyListaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_TwrKartyListaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_TwrKartyPotwierdzHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_TwrKartyPotwierdzHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcNagListaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcNagListaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcNagPotwierdzHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcNagPotwierdzHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcCzynnosciListaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcCzynnosciListaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcCzynnosciPotwierdzHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcCzynnosciPotwierdzHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcSkladnikiListaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcSkladnikiListaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcSkladnikiPotwierdzHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcSkladnikiPotwierdzHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzadzeniaListaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzadzeniaListaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzadzeniaPotwierdzHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzadzeniaPotwierdzHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzWlascListaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzWlascListaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzWlascPotwierdzHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzWlascPotwierdzHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzParDefListaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzParDefListaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzParDefPotwierdzHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzParDefPotwierdzHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzajeListaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzajeListaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzajePotwierdzHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzajePotwierdzHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzParListaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzParListaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzParPotwierdzHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwUrzRodzParPotwierdzHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcUrzListaHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcUrzListaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcUrzPotwierdzHttpPostIn">
+    <wsdl:part name="idOperatora" type="s:string" />
+    <wsdl:part name="jsonInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WS_SrwZlcUrzPotwierdzHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
@@ -998,6 +1966,146 @@
       <wsdl:input message="tns:KntAdresy_ZwrocUsunietychSoapIn" />
       <wsdl:output message="tns:KntAdresy_ZwrocUsunietychSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Kontrahentow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapis danych z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:Aplikacja_Zapisz_KontrahentowSoapIn" />
+      <wsdl:output message="tns:Aplikacja_Zapisz_KontrahentowSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Towary">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapis danych z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:Aplikacja_Zapisz_TowarySoapIn" />
+      <wsdl:output message="tns:Aplikacja_Zapisz_TowarySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Zlecenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapis danych z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:Aplikacja_Zapisz_ZleceniaSoapIn" />
+      <wsdl:output message="tns:Aplikacja_Zapisz_ZleceniaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Urzadzenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapis danych z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:Aplikacja_Zapisz_UrzadzeniaSoapIn" />
+      <wsdl:output message="tns:Aplikacja_Zapisz_UrzadzeniaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 KntKarty</wsdl:documentation>
+      <wsdl:input message="tns:WS_KntKartyListaSoapIn" />
+      <wsdl:output message="tns:WS_KntKartyListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 KntKarty potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_KntKartyPotwierdzSoapIn" />
+      <wsdl:output message="tns:WS_KntKartyPotwierdzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 KntAdresy</wsdl:documentation>
+      <wsdl:input message="tns:WS_KntAdresyListaSoapIn" />
+      <wsdl:output message="tns:WS_KntAdresyListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 KntAdresy potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_KntAdresyPotwierdzSoapIn" />
+      <wsdl:output message="tns:WS_KntAdresyPotwierdzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 TwrKarty</wsdl:documentation>
+      <wsdl:input message="tns:WS_TwrKartyListaSoapIn" />
+      <wsdl:output message="tns:WS_TwrKartyListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 TwrKarty potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_TwrKartyPotwierdzSoapIn" />
+      <wsdl:output message="tns:WS_TwrKartyPotwierdzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcNag</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcNagListaSoapIn" />
+      <wsdl:output message="tns:WS_SrwZlcNagListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcNag potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcNagPotwierdzSoapIn" />
+      <wsdl:output message="tns:WS_SrwZlcNagPotwierdzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcCzynnosci</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcCzynnosciListaSoapIn" />
+      <wsdl:output message="tns:WS_SrwZlcCzynnosciListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcCzynnosci potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcCzynnosciPotwierdzSoapIn" />
+      <wsdl:output message="tns:WS_SrwZlcCzynnosciPotwierdzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcSkladniki</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcSkladnikiListaSoapIn" />
+      <wsdl:output message="tns:WS_SrwZlcSkladnikiListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcSkladniki potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcSkladnikiPotwierdzSoapIn" />
+      <wsdl:output message="tns:WS_SrwZlcSkladnikiPotwierdzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzadzenia</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzadzeniaListaSoapIn" />
+      <wsdl:output message="tns:WS_SrwUrzadzeniaListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzadzenia potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzadzeniaPotwierdzSoapIn" />
+      <wsdl:output message="tns:WS_SrwUrzadzeniaPotwierdzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzWlasc</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzWlascListaSoapIn" />
+      <wsdl:output message="tns:WS_SrwUrzWlascListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzWlasc potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzWlascPotwierdzSoapIn" />
+      <wsdl:output message="tns:WS_SrwUrzWlascPotwierdzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzParDef</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzParDefListaSoapIn" />
+      <wsdl:output message="tns:WS_SrwUrzParDefListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzParDef potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzParDefPotwierdzSoapIn" />
+      <wsdl:output message="tns:WS_SrwUrzParDefPotwierdzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajeLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzRodzaje</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzRodzajeListaSoapIn" />
+      <wsdl:output message="tns:WS_SrwUrzRodzajeListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajePotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzRodzaje potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzRodzajePotwierdzSoapIn" />
+      <wsdl:output message="tns:WS_SrwUrzRodzajePotwierdzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzRodzPar</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzRodzParListaSoapIn" />
+      <wsdl:output message="tns:WS_SrwUrzRodzParListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzRodzPar potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzRodzParPotwierdzSoapIn" />
+      <wsdl:output message="tns:WS_SrwUrzRodzParPotwierdzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcUrz</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcUrzListaSoapIn" />
+      <wsdl:output message="tns:WS_SrwZlcUrzListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcUrz potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcUrzPotwierdzSoapIn" />
+      <wsdl:output message="tns:WS_SrwZlcUrzPotwierdzSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpGet">
     <wsdl:operation name="SayHelloToLame">
@@ -1160,6 +2268,146 @@
       <wsdl:input message="tns:KntAdresy_ZwrocUsunietychHttpGetIn" />
       <wsdl:output message="tns:KntAdresy_ZwrocUsunietychHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Kontrahentow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapis danych z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:Aplikacja_Zapisz_KontrahentowHttpGetIn" />
+      <wsdl:output message="tns:Aplikacja_Zapisz_KontrahentowHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Towary">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapis danych z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:Aplikacja_Zapisz_TowaryHttpGetIn" />
+      <wsdl:output message="tns:Aplikacja_Zapisz_TowaryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Zlecenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapis danych z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:Aplikacja_Zapisz_ZleceniaHttpGetIn" />
+      <wsdl:output message="tns:Aplikacja_Zapisz_ZleceniaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Urzadzenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapis danych z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:Aplikacja_Zapisz_UrzadzeniaHttpGetIn" />
+      <wsdl:output message="tns:Aplikacja_Zapisz_UrzadzeniaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 KntKarty</wsdl:documentation>
+      <wsdl:input message="tns:WS_KntKartyListaHttpGetIn" />
+      <wsdl:output message="tns:WS_KntKartyListaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 KntKarty potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_KntKartyPotwierdzHttpGetIn" />
+      <wsdl:output message="tns:WS_KntKartyPotwierdzHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 KntAdresy</wsdl:documentation>
+      <wsdl:input message="tns:WS_KntAdresyListaHttpGetIn" />
+      <wsdl:output message="tns:WS_KntAdresyListaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 KntAdresy potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_KntAdresyPotwierdzHttpGetIn" />
+      <wsdl:output message="tns:WS_KntAdresyPotwierdzHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 TwrKarty</wsdl:documentation>
+      <wsdl:input message="tns:WS_TwrKartyListaHttpGetIn" />
+      <wsdl:output message="tns:WS_TwrKartyListaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 TwrKarty potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_TwrKartyPotwierdzHttpGetIn" />
+      <wsdl:output message="tns:WS_TwrKartyPotwierdzHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcNag</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcNagListaHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwZlcNagListaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcNag potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcNagPotwierdzHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwZlcNagPotwierdzHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcCzynnosci</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcCzynnosciListaHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwZlcCzynnosciListaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcCzynnosci potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcCzynnosciPotwierdzHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwZlcCzynnosciPotwierdzHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcSkladniki</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcSkladnikiListaHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwZlcSkladnikiListaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcSkladniki potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcSkladnikiPotwierdzHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwZlcSkladnikiPotwierdzHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzadzenia</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzadzeniaListaHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwUrzadzeniaListaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzadzenia potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzadzeniaPotwierdzHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwUrzadzeniaPotwierdzHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzWlasc</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzWlascListaHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwUrzWlascListaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzWlasc potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzWlascPotwierdzHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwUrzWlascPotwierdzHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzParDef</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzParDefListaHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwUrzParDefListaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzParDef potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzParDefPotwierdzHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwUrzParDefPotwierdzHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajeLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzRodzaje</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzRodzajeListaHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwUrzRodzajeListaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajePotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzRodzaje potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzRodzajePotwierdzHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwUrzRodzajePotwierdzHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzRodzPar</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzRodzParListaHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwUrzRodzParListaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzRodzPar potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzRodzParPotwierdzHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwUrzRodzParPotwierdzHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcUrz</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcUrzListaHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwZlcUrzListaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcUrz potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcUrzPotwierdzHttpGetIn" />
+      <wsdl:output message="tns:WS_SrwZlcUrzPotwierdzHttpGetOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WebServiceHttpPost">
     <wsdl:operation name="SayHelloToLame">
@@ -1321,6 +2569,146 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zwraca kontrahentow do usuniecia</wsdl:documentation>
       <wsdl:input message="tns:KntAdresy_ZwrocUsunietychHttpPostIn" />
       <wsdl:output message="tns:KntAdresy_ZwrocUsunietychHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Kontrahentow">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapis danych z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:Aplikacja_Zapisz_KontrahentowHttpPostIn" />
+      <wsdl:output message="tns:Aplikacja_Zapisz_KontrahentowHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Towary">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapis danych z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:Aplikacja_Zapisz_TowaryHttpPostIn" />
+      <wsdl:output message="tns:Aplikacja_Zapisz_TowaryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Zlecenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapis danych z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:Aplikacja_Zapisz_ZleceniaHttpPostIn" />
+      <wsdl:output message="tns:Aplikacja_Zapisz_ZleceniaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Urzadzenia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Zapis danych z urządzenia</wsdl:documentation>
+      <wsdl:input message="tns:Aplikacja_Zapisz_UrzadzeniaHttpPostIn" />
+      <wsdl:output message="tns:Aplikacja_Zapisz_UrzadzeniaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 KntKarty</wsdl:documentation>
+      <wsdl:input message="tns:WS_KntKartyListaHttpPostIn" />
+      <wsdl:output message="tns:WS_KntKartyListaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 KntKarty potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_KntKartyPotwierdzHttpPostIn" />
+      <wsdl:output message="tns:WS_KntKartyPotwierdzHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 KntAdresy</wsdl:documentation>
+      <wsdl:input message="tns:WS_KntAdresyListaHttpPostIn" />
+      <wsdl:output message="tns:WS_KntAdresyListaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 KntAdresy potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_KntAdresyPotwierdzHttpPostIn" />
+      <wsdl:output message="tns:WS_KntAdresyPotwierdzHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 TwrKarty</wsdl:documentation>
+      <wsdl:input message="tns:WS_TwrKartyListaHttpPostIn" />
+      <wsdl:output message="tns:WS_TwrKartyListaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 TwrKarty potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_TwrKartyPotwierdzHttpPostIn" />
+      <wsdl:output message="tns:WS_TwrKartyPotwierdzHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcNag</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcNagListaHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwZlcNagListaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcNag potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcNagPotwierdzHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwZlcNagPotwierdzHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcCzynnosci</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcCzynnosciListaHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwZlcCzynnosciListaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcCzynnosci potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcCzynnosciPotwierdzHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwZlcCzynnosciPotwierdzHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcSkladniki</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcSkladnikiListaHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwZlcSkladnikiListaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcSkladniki potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcSkladnikiPotwierdzHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwZlcSkladnikiPotwierdzHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzadzenia</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzadzeniaListaHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwUrzadzeniaListaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzadzenia potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzadzeniaPotwierdzHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwUrzadzeniaPotwierdzHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzWlasc</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzWlascListaHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwUrzWlascListaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzWlasc potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzWlascPotwierdzHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwUrzWlascPotwierdzHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzParDef</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzParDefListaHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwUrzParDefListaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzParDef potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzParDefPotwierdzHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwUrzParDefPotwierdzHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajeLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzRodzaje</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzRodzajeListaHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwUrzRodzajeListaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajePotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzRodzaje potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzRodzajePotwierdzHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwUrzRodzajePotwierdzHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzRodzPar</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzRodzParListaHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwUrzRodzParListaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwUrzRodzPar potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwUrzRodzParPotwierdzHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwUrzRodzParPotwierdzHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzLista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcUrz</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcUrzListaHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwZlcUrzListaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzPotwierdz">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synchronizacja cz.2 SrwZlcUrz potwierdz liste</wsdl:documentation>
+      <wsdl:input message="tns:WS_SrwZlcUrzPotwierdzHttpPostIn" />
+      <wsdl:output message="tns:WS_SrwZlcUrzPotwierdzHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -1606,6 +2994,258 @@
     </wsdl:operation>
     <wsdl:operation name="KntAdresy_ZwrocUsunietych">
       <soap:operation soapAction="galsoftsrv/KntAdresy_ZwrocUsunietych" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Kontrahentow">
+      <soap:operation soapAction="galsoftsrv/Aplikacja_Zapisz_Kontrahentow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Towary">
+      <soap:operation soapAction="galsoftsrv/Aplikacja_Zapisz_Towary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Zlecenia">
+      <soap:operation soapAction="galsoftsrv/Aplikacja_Zapisz_Zlecenia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Urzadzenia">
+      <soap:operation soapAction="galsoftsrv/Aplikacja_Zapisz_Urzadzenia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyLista">
+      <soap:operation soapAction="galsoftsrv/WS_KntKartyLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyPotwierdz">
+      <soap:operation soapAction="galsoftsrv/WS_KntKartyPotwierdz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyLista">
+      <soap:operation soapAction="galsoftsrv/WS_KntAdresyLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyPotwierdz">
+      <soap:operation soapAction="galsoftsrv/WS_KntAdresyPotwierdz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyLista">
+      <soap:operation soapAction="galsoftsrv/WS_TwrKartyLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyPotwierdz">
+      <soap:operation soapAction="galsoftsrv/WS_TwrKartyPotwierdz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagLista">
+      <soap:operation soapAction="galsoftsrv/WS_SrwZlcNagLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagPotwierdz">
+      <soap:operation soapAction="galsoftsrv/WS_SrwZlcNagPotwierdz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciLista">
+      <soap:operation soapAction="galsoftsrv/WS_SrwZlcCzynnosciLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciPotwierdz">
+      <soap:operation soapAction="galsoftsrv/WS_SrwZlcCzynnosciPotwierdz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiLista">
+      <soap:operation soapAction="galsoftsrv/WS_SrwZlcSkladnikiLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiPotwierdz">
+      <soap:operation soapAction="galsoftsrv/WS_SrwZlcSkladnikiPotwierdz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaLista">
+      <soap:operation soapAction="galsoftsrv/WS_SrwUrzadzeniaLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaPotwierdz">
+      <soap:operation soapAction="galsoftsrv/WS_SrwUrzadzeniaPotwierdz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascLista">
+      <soap:operation soapAction="galsoftsrv/WS_SrwUrzWlascLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascPotwierdz">
+      <soap:operation soapAction="galsoftsrv/WS_SrwUrzWlascPotwierdz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefLista">
+      <soap:operation soapAction="galsoftsrv/WS_SrwUrzParDefLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefPotwierdz">
+      <soap:operation soapAction="galsoftsrv/WS_SrwUrzParDefPotwierdz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajeLista">
+      <soap:operation soapAction="galsoftsrv/WS_SrwUrzRodzajeLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajePotwierdz">
+      <soap:operation soapAction="galsoftsrv/WS_SrwUrzRodzajePotwierdz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParLista">
+      <soap:operation soapAction="galsoftsrv/WS_SrwUrzRodzParLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParPotwierdz">
+      <soap:operation soapAction="galsoftsrv/WS_SrwUrzRodzParPotwierdz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzLista">
+      <soap:operation soapAction="galsoftsrv/WS_SrwZlcUrzLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzPotwierdz">
+      <soap:operation soapAction="galsoftsrv/WS_SrwZlcUrzPotwierdz" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1904,6 +3544,258 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Kontrahentow">
+      <soap12:operation soapAction="galsoftsrv/Aplikacja_Zapisz_Kontrahentow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Towary">
+      <soap12:operation soapAction="galsoftsrv/Aplikacja_Zapisz_Towary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Zlecenia">
+      <soap12:operation soapAction="galsoftsrv/Aplikacja_Zapisz_Zlecenia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Urzadzenia">
+      <soap12:operation soapAction="galsoftsrv/Aplikacja_Zapisz_Urzadzenia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyLista">
+      <soap12:operation soapAction="galsoftsrv/WS_KntKartyLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyPotwierdz">
+      <soap12:operation soapAction="galsoftsrv/WS_KntKartyPotwierdz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyLista">
+      <soap12:operation soapAction="galsoftsrv/WS_KntAdresyLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyPotwierdz">
+      <soap12:operation soapAction="galsoftsrv/WS_KntAdresyPotwierdz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyLista">
+      <soap12:operation soapAction="galsoftsrv/WS_TwrKartyLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyPotwierdz">
+      <soap12:operation soapAction="galsoftsrv/WS_TwrKartyPotwierdz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagLista">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwZlcNagLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagPotwierdz">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwZlcNagPotwierdz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciLista">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwZlcCzynnosciLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciPotwierdz">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwZlcCzynnosciPotwierdz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiLista">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwZlcSkladnikiLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiPotwierdz">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwZlcSkladnikiPotwierdz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaLista">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwUrzadzeniaLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaPotwierdz">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwUrzadzeniaPotwierdz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascLista">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwUrzWlascLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascPotwierdz">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwUrzWlascPotwierdz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefLista">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwUrzParDefLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefPotwierdz">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwUrzParDefPotwierdz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajeLista">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwUrzRodzajeLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajePotwierdz">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwUrzRodzajePotwierdz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParLista">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwUrzRodzParLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParPotwierdz">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwUrzRodzParPotwierdz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzLista">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwZlcUrzLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzPotwierdz">
+      <soap12:operation soapAction="galsoftsrv/WS_SrwZlcUrzPotwierdz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpGet" type="tns:WebServiceHttpGet">
     <http:binding verb="GET" />
@@ -2193,6 +4085,258 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Kontrahentow">
+      <http:operation location="/Aplikacja_Zapisz_Kontrahentow" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Towary">
+      <http:operation location="/Aplikacja_Zapisz_Towary" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Zlecenia">
+      <http:operation location="/Aplikacja_Zapisz_Zlecenia" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Urzadzenia">
+      <http:operation location="/Aplikacja_Zapisz_Urzadzenia" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyLista">
+      <http:operation location="/WS_KntKartyLista" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyPotwierdz">
+      <http:operation location="/WS_KntKartyPotwierdz" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyLista">
+      <http:operation location="/WS_KntAdresyLista" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyPotwierdz">
+      <http:operation location="/WS_KntAdresyPotwierdz" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyLista">
+      <http:operation location="/WS_TwrKartyLista" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyPotwierdz">
+      <http:operation location="/WS_TwrKartyPotwierdz" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagLista">
+      <http:operation location="/WS_SrwZlcNagLista" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagPotwierdz">
+      <http:operation location="/WS_SrwZlcNagPotwierdz" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciLista">
+      <http:operation location="/WS_SrwZlcCzynnosciLista" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciPotwierdz">
+      <http:operation location="/WS_SrwZlcCzynnosciPotwierdz" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiLista">
+      <http:operation location="/WS_SrwZlcSkladnikiLista" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiPotwierdz">
+      <http:operation location="/WS_SrwZlcSkladnikiPotwierdz" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaLista">
+      <http:operation location="/WS_SrwUrzadzeniaLista" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaPotwierdz">
+      <http:operation location="/WS_SrwUrzadzeniaPotwierdz" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascLista">
+      <http:operation location="/WS_SrwUrzWlascLista" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascPotwierdz">
+      <http:operation location="/WS_SrwUrzWlascPotwierdz" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefLista">
+      <http:operation location="/WS_SrwUrzParDefLista" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefPotwierdz">
+      <http:operation location="/WS_SrwUrzParDefPotwierdz" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajeLista">
+      <http:operation location="/WS_SrwUrzRodzajeLista" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajePotwierdz">
+      <http:operation location="/WS_SrwUrzRodzajePotwierdz" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParLista">
+      <http:operation location="/WS_SrwUrzRodzParLista" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParPotwierdz">
+      <http:operation location="/WS_SrwUrzRodzParPotwierdz" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzLista">
+      <http:operation location="/WS_SrwZlcUrzLista" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzPotwierdz">
+      <http:operation location="/WS_SrwZlcUrzPotwierdz" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceHttpPost" type="tns:WebServiceHttpPost">
     <http:binding verb="POST" />
@@ -2475,6 +4619,258 @@
     </wsdl:operation>
     <wsdl:operation name="KntAdresy_ZwrocUsunietych">
       <http:operation location="/KntAdresy_ZwrocUsunietych" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Kontrahentow">
+      <http:operation location="/Aplikacja_Zapisz_Kontrahentow" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Towary">
+      <http:operation location="/Aplikacja_Zapisz_Towary" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Zlecenia">
+      <http:operation location="/Aplikacja_Zapisz_Zlecenia" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Aplikacja_Zapisz_Urzadzenia">
+      <http:operation location="/Aplikacja_Zapisz_Urzadzenia" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyLista">
+      <http:operation location="/WS_KntKartyLista" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntKartyPotwierdz">
+      <http:operation location="/WS_KntKartyPotwierdz" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyLista">
+      <http:operation location="/WS_KntAdresyLista" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_KntAdresyPotwierdz">
+      <http:operation location="/WS_KntAdresyPotwierdz" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyLista">
+      <http:operation location="/WS_TwrKartyLista" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_TwrKartyPotwierdz">
+      <http:operation location="/WS_TwrKartyPotwierdz" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagLista">
+      <http:operation location="/WS_SrwZlcNagLista" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcNagPotwierdz">
+      <http:operation location="/WS_SrwZlcNagPotwierdz" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciLista">
+      <http:operation location="/WS_SrwZlcCzynnosciLista" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcCzynnosciPotwierdz">
+      <http:operation location="/WS_SrwZlcCzynnosciPotwierdz" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiLista">
+      <http:operation location="/WS_SrwZlcSkladnikiLista" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcSkladnikiPotwierdz">
+      <http:operation location="/WS_SrwZlcSkladnikiPotwierdz" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaLista">
+      <http:operation location="/WS_SrwUrzadzeniaLista" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzadzeniaPotwierdz">
+      <http:operation location="/WS_SrwUrzadzeniaPotwierdz" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascLista">
+      <http:operation location="/WS_SrwUrzWlascLista" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzWlascPotwierdz">
+      <http:operation location="/WS_SrwUrzWlascPotwierdz" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefLista">
+      <http:operation location="/WS_SrwUrzParDefLista" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzParDefPotwierdz">
+      <http:operation location="/WS_SrwUrzParDefPotwierdz" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajeLista">
+      <http:operation location="/WS_SrwUrzRodzajeLista" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzajePotwierdz">
+      <http:operation location="/WS_SrwUrzRodzajePotwierdz" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParLista">
+      <http:operation location="/WS_SrwUrzRodzParLista" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwUrzRodzParPotwierdz">
+      <http:operation location="/WS_SrwUrzRodzParPotwierdz" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzLista">
+      <http:operation location="/WS_SrwZlcUrzLista" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS_SrwZlcUrzPotwierdz">
+      <http:operation location="/WS_SrwZlcUrzPotwierdz" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

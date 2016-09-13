@@ -432,5 +432,345 @@ namespace WebApplication
 
             return JSS.Serialize(output);
         }
+
+
+
+        [WebMethod(Description = "Zapis danych z urządzenia")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string Aplikacja_Zapisz_Kontrahentow(Int32 idOperatora, String kntKartyString, String kntAdresyString)
+        {
+            DataBase db = new DataBase();
+            db.Zapisz_Dane_Kontrahentow(idOperatora, kntKartyString, kntAdresyString);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+        [WebMethod(Description = "Zapis danych z urządzenia")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string Aplikacja_Zapisz_Towary(Int32 idOperatora, String TwrKartyString)
+        {
+            DataBase db = new DataBase();
+            db.Zapisz_Dane_Towary(idOperatora, TwrKartyString);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+        [WebMethod(Description = "Zapis danych z urządzenia")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string Aplikacja_Zapisz_Zlecenia(Int32 idOperatora, String SrwZlcNagString, String srwZlcCzynnosciString, String SrwZlcSkladnikiString, string SrwZlcUrzString)
+        {
+            DataBase db = new DataBase();
+            db.Zapisz_Dane_Zlecenia(idOperatora, SrwZlcNagString, srwZlcCzynnosciString, SrwZlcSkladnikiString, SrwZlcUrzString);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+        [WebMethod(Description = "Zapis danych z urządzenia")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string Aplikacja_Zapisz_Urzadzenia(Int32 idOperatora, String SrwUrzadzeniaString, String SrwUrzWlascString, String SrwUrzParDefString, string SrwUrzRodzajeString, string SrwUrzRodzParString)
+        {
+            DataBase db = new DataBase();
+            db.Zapisz_Dane_Urzadzenia(idOperatora, SrwUrzadzeniaString, SrwUrzWlascString, SrwUrzParDefString, SrwUrzRodzajeString, SrwUrzRodzParString);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 KntKarty")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_KntKartyLista(Int32 idOperatora)
+        {
+            DataBase db = new DataBase();
+            List<KntKarty> kntKartyList =  db.WS_KntKartyWygenerujListe(idOperatora);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(kntKartyList);
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 KntKarty potwierdz liste")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_KntKartyPotwierdz(Int32 idOperatora, String jsonInput)
+        {
+            DataBase db = new DataBase();
+            db.WS_KntKartyPotwierdz(idOperatora, jsonInput);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 KntAdresy")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_KntAdresyLista(Int32 idOperatora)
+        {
+            DataBase db = new DataBase();
+            List<KntAdresy> kntAdresyList = db.WS_KntAdresyWygenerujListe(idOperatora);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(kntAdresyList);
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 KntAdresy potwierdz liste")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_KntAdresyPotwierdz(Int32 idOperatora, String jsonInput)
+        {
+            DataBase db = new DataBase();
+            db.WS_KntAdresyPotwierdz(idOperatora, jsonInput);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 TwrKarty")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_TwrKartyLista(Int32 idOperatora)
+        {
+            DataBase db = new DataBase();
+            List<TwrKartyTable> TwrKartyList = db.WS_TwrKartyWygenerujListe(idOperatora);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(TwrKartyList);
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 TwrKarty potwierdz liste")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_TwrKartyPotwierdz(Int32 idOperatora, String jsonInput)
+        {
+            DataBase db = new DataBase();
+            db.WS_TwrKartyPotwierdz(idOperatora, jsonInput);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwZlcNag")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwZlcNagLista(Int32 idOperatora)
+        {
+            DataBase db = new DataBase();
+            List<SrwZlcNag> SrwZlcNagList = db.WS_SrwZlcNagWygenerujListe(idOperatora);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwZlcNagList);
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwZlcNag potwierdz liste")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwZlcNagPotwierdz(Int32 idOperatora, String jsonInput)
+        {
+            DataBase db = new DataBase();
+            db.WS_SrwZlcNagPotwierdz(idOperatora, jsonInput);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwZlcCzynnosci")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwZlcCzynnosciLista(Int32 idOperatora)
+        {
+            DataBase db = new DataBase();
+            List<SrwZlcCzynnosci> SrwZlcCzynnosciList = db.WS_SrwZlcCzynnosciWygenerujListe(idOperatora);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwZlcCzynnosciList);
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwZlcCzynnosci potwierdz liste")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwZlcCzynnosciPotwierdz(Int32 idOperatora, String jsonInput)
+        {
+            DataBase db = new DataBase();
+            db.WS_SrwZlcCzynnosciPotwierdz(idOperatora, jsonInput);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwZlcSkladniki")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwZlcSkladnikiLista(Int32 idOperatora)
+        {
+            DataBase db = new DataBase();
+            List<SrwZlcSkladniki> SrwZlcSkladnikiList = db.WS_SrwZlcSkladnikiWygenerujListe(idOperatora);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwZlcSkladnikiList);
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwZlcSkladniki potwierdz liste")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwZlcSkladnikiPotwierdz(Int32 idOperatora, String jsonInput)
+        {
+            DataBase db = new DataBase();
+            db.WS_SrwZlcSkladnikiPotwierdz(idOperatora, jsonInput);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwUrzadzenia")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwUrzadzeniaLista(Int32 idOperatora)
+        {
+            DataBase db = new DataBase();
+            List<SrwUrzadzenia> SrwUrzadzeniaList = db.WS_SrwUrzadzeniaWygenerujListe(idOperatora);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwUrzadzeniaList);
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwUrzadzenia potwierdz liste")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwUrzadzeniaPotwierdz(Int32 idOperatora, String jsonInput)
+        {
+            DataBase db = new DataBase();
+            db.WS_SrwUrzadzeniaPotwierdz(idOperatora, jsonInput);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwUrzWlasc")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwUrzWlascLista(Int32 idOperatora)
+        {
+            DataBase db = new DataBase();
+            List<SrwUrzWlasc> SrwUrzWlascList = db.WS_SrwUrzWlascWygenerujListe(idOperatora);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwUrzWlascList);
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwUrzWlasc potwierdz liste")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwUrzWlascPotwierdz(Int32 idOperatora, String jsonInput)
+        {
+            DataBase db = new DataBase();
+            db.WS_SrwUrzWlascPotwierdz(idOperatora, jsonInput);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwUrzParDef")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwUrzParDefLista(Int32 idOperatora)
+        {
+            DataBase db = new DataBase();
+            List<SrwUrzParDef> SrwUrzParDefList = db.WS_SrwUrzParDefWygenerujListe(idOperatora);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwUrzParDefList);
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwUrzParDef potwierdz liste")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwUrzParDefPotwierdz(Int32 idOperatora, String jsonInput)
+        {
+            DataBase db = new DataBase();
+            db.WS_SrwUrzParDefPotwierdz(idOperatora, jsonInput);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+
+
+
+        
+        [WebMethod(Description = "Synchronizacja cz.2 SrwUrzRodzaje")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwUrzRodzajeLista(Int32 idOperatora)
+        {
+            DataBase db = new DataBase();
+            List<SrwUrzRodzaje> SrwUrzRodzajeList = db.WS_SrwUrzRodzajeWygenerujListe(idOperatora);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwUrzRodzajeList);
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwUrzRodzaje potwierdz liste")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwUrzRodzajePotwierdz(Int32 idOperatora, String jsonInput)
+        {
+            DataBase db = new DataBase();
+            db.WS_SrwUrzRodzajePotwierdz(idOperatora, jsonInput);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+        
+        [WebMethod(Description = "Synchronizacja cz.2 SrwUrzRodzPar")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwUrzRodzParLista(Int32 idOperatora)
+        {
+            DataBase db = new DataBase();
+            List<SrwUrzRodzPar> SrwUrzRodzParList = db.WS_SrwUrzRodzParWygenerujListe(idOperatora);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwUrzRodzParList);
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwUrzRodzPar potwierdz liste")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwUrzRodzParPotwierdz(Int32 idOperatora, String jsonInput)
+        {
+            DataBase db = new DataBase();
+            db.WS_SrwUrzRodzParPotwierdz(idOperatora, jsonInput);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
+        
+        [WebMethod(Description = "Synchronizacja cz.2 SrwZlcUrz")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwZlcUrzLista(Int32 idOperatora)
+        {
+            DataBase db = new DataBase();
+            List<SrwZlcUrz> SrwZlcUrzList = db.WS_SrwZlcUrzWygenerujListe(idOperatora);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            JSS.MaxJsonLength = 50000000;
+
+            return JSS.Serialize(SrwZlcUrzList);
+        }
+
+        [WebMethod(Description = "Synchronizacja cz.2 SrwZlcUrz potwierdz liste")]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string WS_SrwZlcUrzPotwierdz(Int32 idOperatora, String jsonInput)
+        {
+            DataBase db = new DataBase();
+            db.WS_SrwZlcUrzPotwierdz(idOperatora, jsonInput);
+
+            JavaScriptSerializer JSS = new JavaScriptSerializer();
+            return JSS.Serialize("OK");
+        }
     }
 }

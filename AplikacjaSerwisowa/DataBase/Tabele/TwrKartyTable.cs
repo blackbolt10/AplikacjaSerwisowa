@@ -8,15 +8,14 @@ namespace AplikacjaSerwisowa
     [Table("TwrKartyTable")]
     public class TwrKartyTable
     {
-        [PrimaryKey, AutoIncrement, Column("_Id")]
+        [Column("_Id")]
         public int Id { get; set; }
 
-        public Int32 Twr_GIDTyp { get; set; }
-
-        [Unique]
+        [PrimaryKey, Unique]
         public Int32 Twr_GIDNumer { get; set; }
 
-        [Unique]
+        public Int32 Twr_GIDTyp { get; set; }
+        
         public String Twr_Kod { get; set; }
 
         public Int32 Twr_Typ { get; set; }
@@ -29,6 +28,9 @@ namespace AplikacjaSerwisowa
 
         public String Twr_Jm { get; set; }
 
+        public Int32 Twr_ToDo { get; set; }
+
         public Boolean zaznaczone { get; set; }
+
     }
 }

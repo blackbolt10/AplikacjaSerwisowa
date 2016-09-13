@@ -77,11 +77,14 @@ namespace AplikacjaSerwisowa
             switch(requestCode)
             {
                 case 0:
-                    Boolean result = data.GetBooleanExtra("koniec", false);
-
-                    if(result)
+                    if(data != null)
                     {
-                        this.Activity.Finish();
+                        Boolean result = data.GetBooleanExtra("koniec", false);
+
+                        if(result)
+                        {
+                            this.Activity.Finish();
+                        }
                     }
                 break;
             }

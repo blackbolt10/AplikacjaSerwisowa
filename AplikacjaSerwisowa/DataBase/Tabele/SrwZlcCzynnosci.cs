@@ -8,7 +8,9 @@ namespace AplikacjaSerwisowa
     [Table("SrwZlcCzynnosci")]
     public class SrwZlcCzynnosci
     {
+        [Column("_Id")]
         public Int32 ID { get; set; }
+        [PrimaryKey, Unique]
         public Int32 SZC_Id { get; set; }
         public Int32 SZC_SZNId { get; set; }
         public Int32 SZC_SZUId { get; set; }
@@ -19,8 +21,9 @@ namespace AplikacjaSerwisowa
         public String SZC_TwrNazwa { get; set; }
         public Double SZC_Ilosc { get; set; }
         public String SZC_Opis { get; set; }
+        public Int32 SZC_ToDo { get; set; }
 
-        public SrwZlcCzynnosci(Int32 _SZC_Id, Int32 _SZC_SZNId, Int32 _SZC_SZUId, Int32 _SZC_Synchronizacja, Int32 _SZC_Pozycja, Int32 _SZC_TwrTyp, Int32 _SZC_TwrNumer, String _SZC_TwrNazwa, Double _SZC_Ilosc, String _SZC_Opis)
+        public SrwZlcCzynnosci(Int32 _SZC_Id, Int32 _SZC_SZNId, Int32 _SZC_SZUId, Int32 _SZC_Synchronizacja, Int32 _SZC_Pozycja, Int32 _SZC_TwrTyp, Int32 _SZC_TwrNumer, String _SZC_TwrNazwa, Double _SZC_Ilosc, String _SZC_Opis, Int32 _SZC_ToDo)
         {
             this.SZC_Id = _SZC_Id;
             this.SZC_SZNId = _SZC_SZNId;
@@ -32,6 +35,7 @@ namespace AplikacjaSerwisowa
             this.SZC_TwrNazwa = _SZC_TwrNazwa;
             this.SZC_Ilosc = _SZC_Ilosc;
             this.SZC_Opis = _SZC_Opis;
+            this.SZC_ToDo = _SZC_ToDo;
         }
 
         public SrwZlcCzynnosci()

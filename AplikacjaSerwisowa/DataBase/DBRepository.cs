@@ -19,11 +19,31 @@ namespace AplikacjaSerwisowa
     {
         private String dbPath;
         private SQLiteConnection db;
+        private Context kontekst;
+        private Dialog dialog;
 
-        public DBRepository()
+        public DBRepository(Context _kontekst=null, Dialog _dialog =null)
         {
-            dbPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
-            db = new SQLiteConnection(dbPath);
+            this.dbPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ormdemo.db3");
+            this.db = new SQLiteConnection(dbPath);
+            this.kontekst = _kontekst;
+            this.dialog = _dialog;
+        }
+
+        private void RaportBledu(String funkcja, String blad)
+        {
+            if(kontekst != null)
+            {
+                AlertDialog.Builder alert = new AlertDialog.Builder(kontekst);
+                alert.SetIconAttribute(Android.Resource.Attribute.AlertDialogIcon);
+
+                alert.SetTitle("Wyst¹pi³ b³¹d");
+                alert.SetMessage("Wyst¹pi³ b³¹d funkcji \"" + funkcja + "\":\n" + blad);
+                alert.SetPositiveButton("OK", (senderAlert, args) => { });
+
+                Dialog dialog = alert.Create();
+                dialog.Show();
+            }
         }
 
         public string createDB()
@@ -40,6 +60,7 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.createDB() Error: " + exc.Message;
+                RaportBledu("createDB", exc.Message);
             }
 
             return output;
@@ -54,7 +75,11 @@ namespace AplikacjaSerwisowa
                 {
                     db.DropTable<OperatorzyTable>();
                 }
-                catch (Exception) { }
+                catch (Exception exc)
+                {
+                    string blad = exc.Message;
+                    RaportBledu("OperatorzyTable_CreateTable - droptable", exc.Message);
+                }
 
                 db.CreateTable<OperatorzyTable>();
 
@@ -63,8 +88,121 @@ namespace AplikacjaSerwisowa
             catch (Exception exc)
             {
                 output = "DBRepository.CreateTable() Error: " + exc.Message;
+                RaportBledu("OperatorzyTable_CreateTable", exc.Message);
             }
 
+            return output;
+        }
+
+        public string dropAllTables()
+        {
+            String output = "";
+            try
+            {
+                db.DropTable<KntKartyTable>();
+            }
+            catch(Exception exc)
+            {
+                output += "KntKartyTable.Error=" + exc.Message + "\n";
+            }
+
+            try
+            {
+                db.DropTable<KntAdresyTable>();
+            }
+            catch(Exception exc)
+            {
+                output += "KntAdresyTable.Error=" + exc.Message + "\n";
+            }
+            try
+            {
+                db.DropTable<TwrKartyTable>();
+            }
+            catch(Exception exc)
+            {
+                output += "TwrKartyTable.Error=" + exc.Message + "\n";
+            }
+
+            try
+            {
+                db.DropTable<SrwZlcNag>();
+            }
+            catch(Exception exc)
+            {
+                output += "SrwZlcNag.Error=" + exc.Message + "\n";
+            }
+
+            try
+            {
+                    db.DropTable<SrwZlcCzynnosci>();
+            }
+            catch(Exception exc)
+            {
+                output += "SrwZlcCzynnosci.Error=" + exc.Message + "\n";
+            }
+
+            try
+            {
+                db.DropTable<SrwZlcSkladniki>();
+            }
+            catch(Exception exc)
+            {
+                output += "SrwZlcSkladniki.Error=" + exc.Message + "\n";
+            }
+
+            try
+            {
+                db.DropTable<SrwZlcUrz>();
+            }
+            catch(Exception exc)
+            {
+                output += "SrwZlcUrz.Error=" + exc.Message + "\n";
+            }
+
+            try
+            {
+                db.DropTable<SrwUrzadzenia>();
+            }
+            catch(Exception exc)
+            {
+                output += "SrwUrzadzenia.Error=" + exc.Message + "\n";
+            }
+
+            try
+            {
+                db.DropTable<SrwUrzWlasc>();
+            }
+            catch(Exception exc)
+            {
+                output += "SrwUrzWlasc.Error=" + exc.Message + "\n";
+            }
+
+            try
+            {
+                db.DropTable<SrwUrzParDef>();
+            }
+            catch(Exception exc)
+            {
+                output += "SrwUrzParDef.Error=" + exc.Message + "\n";
+            }
+
+            try
+            {
+                db.DropTable<SrwUrzRodzaje>();
+            }
+            catch(Exception exc)
+            {
+                output += "SrwUrzRodzaje.Error=" + exc.Message + "\n";
+            }
+
+            try
+            {
+                db.DropTable<SrwUrzRodzPar>();
+            }
+            catch(Exception exc)
+            {
+                output += "SrwUrzRodzPar.Error=" + exc.Message + "\n";
+            }
             return output;
         }
 
@@ -73,12 +211,13 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {        
-                db.Insert(item);
+                db.InsertOrReplace(item);
                 output = "Record added..";
             }
             catch (Exception exc)
             {
                 output = "DBRepository.InsertRecord() Error: " + exc.Message;
+                RaportBledu("OperatorzyTable_InsertRecord", exc.Message);
             }
 
             return output;
@@ -100,14 +239,10 @@ namespace AplikacjaSerwisowa
             catch (Exception exc)
             {
                 output += "DBRepository.GetAllRecords() Error: " + exc.Message;
+                RaportBledu("OperatorzyTable_GetAllRecords", exc.Message);
             }
 
             return output;
-        }
-
-        internal bool sprawdzNoweZlecenia()
-        {
-            throw new NotImplementedException();
         }
 
         public String Login(String akronim, String haslo)
@@ -138,95 +273,12 @@ namespace AplikacjaSerwisowa
                 catch (Exception exc)
                 {
                     output = "DBRepository.Login() Error: " + exc.Message;
+                    RaportBledu("Login", exc.Message);
                 }
             }
             else
             {
                 output = "Akronim nie mo¿e byæ pusty";
-            }
-
-            return output;
-        }
-
-        /*
-            *---------------------------------------------------------------------------------
-            *|*********************************Tabela towarów********************************|
-            *---------------------------------------------------------------------------------
-        */
-        public string stworzKartyTowarowTabele()
-        {
-            String output = "";
-            try
-            {
-                try
-                {
-                    db.DropTable<kartyTowarowTable>();
-                }
-                catch (Exception) { }
-
-                db.CreateTable<kartyTowarowTable>();
-
-                output = "Tabela towarów zosta³a stworzona...";
-            }
-            catch (Exception exc)
-            {
-                output = "DBRepository.stworzTabeleTowarow() Error: " + exc.Message;
-            }
-
-            return output;
-        }
-        public String kartyTowarow_InsertRecord(kartyTowarowTable item)
-        {
-            String output = "";
-            try
-            {
-                db.Insert(item);
-                output = "Wpis dodany..";
-            }
-            catch (Exception exc)
-            {
-                output = "DBRepository.kartyTowarow_InsertRecord() Error: " + exc.Message;
-            }
-
-            return output;
-        }
-
-        public KntAdresyTable sprawdzLiczbeAdresow(Int32 KNT_GIDNumer)
-        {
-            KntAdresyTable KNTAdres = null;
-
-            try
-            {
-                List<KntAdresyTable> result = kntAdresy_GetFilteredRecords("", KNT_GIDNumer.ToString());
-                if(result != null)
-                {
-                    if(result.Count == 1)
-                    {
-                        KNTAdres = result[0];
-                    }
-                }
-            }
-            catch(Exception) {}
-
-            return KNTAdres;
-        }
-
-        public String kartyTowarow_GetAllRecords()
-        {
-            String output = "";
-
-            try
-            {
-                var table = db.Table<kartyTowarowTable>();
-
-                foreach (var item in table)
-                {
-                    output += item.Id + ": GIDNum:" + item.TWR_GIDNumer + ", T:" + item.TWR_Typ + ", K:" + item.TWR_Kod + ", N:" + item.TWR_Nazwa + "\n";
-                }
-            }
-            catch (Exception exc)
-            {
-                output += "DBRepository.kartyTowarow_GetAllRecords() Error: " + exc.Message;
             }
 
             return output;
@@ -250,58 +302,61 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.stworzKntKartyTabele() Error: " + exc.Message;
+                RaportBledu("stworzKntKartyTabele", exc.Message);
             }
 
             return output;
         }
 
-        public String kntKarty_UpdateRecord(KntKartyTable kntKarta)
+        public Boolean kntKarty_UpdateRecord(KntKartyTable kntKarta)
         {
             String output = "";
             try
             {
                 db.Update(kntKarta);
-                output = "Wpis zaktualizowany..";
             }
             catch(Exception exc)
             {
                 output = "DBRepository.kntKarty_UpdateRecord() Error: " + exc.Message;
+                RaportBledu("kntKarty_UpdateRecord", exc.Message);
+                return false;
             }
-            return output;
+            return true;
         }
 
-        internal String kntKarty_DeleteRecord(int recordID)
+        internal Boolean kntKarty_DeleteRecord(int recordID)
         {
             String output = "";
             try
             {
                 db.Delete<KntKartyTable>(recordID);
-                output = "Wpis zaktualizowany..";
             }
             catch(Exception exc)
             {
                 output = "DBRepository.kntKarty_DeleteRecord() Error: " + exc.Message;
+                RaportBledu("kntKarty_DeleteRecord", exc.Message);
+                return false;
             }
-            return output;
+            return true;
         }
 
-        public String kntKarty_InsertRecord(KntKartyTable item)
+        public Boolean kntKarty_InsertRecord(KntKartyTable item)
         {
             String output = "";
             try
             {
-                db.Insert(item);
-                output = "Wpis dodany..";
+                db.InsertOrReplace(item);
             }
             catch(Exception exc)
             {
                 output = "DBRepository.kntKarty_InsertRecord() Error: " + exc.Message;
+                RaportBledu("kntKarty_InsertRecord", exc.Message);
+                return false;
             }
-
-            return output;
+            return true;
         }
         public String kntKarty_GetAllRecords()
-        {
+        { 
             String output = "";
 
             try
@@ -316,6 +371,7 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output += "DBRepository.kntKarty_GetAllRecords() Error: " + exc.Message;
+                RaportBledu("kntKarty_GetAllRecords", exc.Message);
             }
 
             return output;
@@ -338,7 +394,11 @@ namespace AplikacjaSerwisowa
                         output = result[0];
                     }
                 }
-                catch(Exception) {}
+                catch(Exception exc)
+                {
+                    string blad = exc.Message;
+                    RaportBledu("kntKarty_GetRecord", exc.Message);
+                }
             }
 
             return output;
@@ -360,7 +420,11 @@ namespace AplikacjaSerwisowa
                     }
                 }
             }
-            catch(Exception) {}
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("kntKarty_GetFiltredGidNumers", exc.Message);
+            }
 
             return kntKartyList;
         }
@@ -379,7 +443,11 @@ namespace AplikacjaSerwisowa
 
                 output = db.Query<KntKartyTable>(zapytanie);
             }
-            catch(Exception) {}
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("kntKarty_GetFilteredRecords", exc.Message);
+            }
 
             return output;
         }
@@ -391,10 +459,14 @@ namespace AplikacjaSerwisowa
 
             try
             {
-                String zapytanieString = "select * from KntKartyTable";
+                String zapytanieString = "select Knt_GIDNumer from KntKartyTable";
                 kntKartyList = db.Query<KntKartyTable>(zapytanieString);
             }
-            catch(Exception) { }
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("kntKarty_generujListeZapisanch", exc.Message);
+            }
 
             for(int i =0;i<kntKartyList.Count;i++)
             {
@@ -422,23 +494,9 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.stworzKntAdresyTabele() Error: " + exc.Message;
+                RaportBledu("stworzKntAdresyTabele", exc.Message);
             }
 
-            return output;
-        }
-
-        public String KntAdresy_DeleteRecord(int recordID)
-        {
-            String output = "";
-            try
-            {
-                db.Delete<KntAdresyTable>(recordID);
-                output = "Wpis zaktualizowany..";
-            }
-            catch(Exception exc)
-            {
-                output = "DBRepository.KntAdresy_DeleteRecord() Error: " + exc.Message;
-            }
             return output;
         }
 
@@ -455,6 +513,7 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 String blad = "DBRepository.KntAdresy_generujListeZapisanch() Error: " + exc.Message;
+                RaportBledu("KntAdresy_generujListeZapisanch", exc.Message);
             }
 
             for(int i = 0; i < kntAdresyList.Count; i++)
@@ -465,36 +524,54 @@ namespace AplikacjaSerwisowa
             return output;
         }
 
-        public String KntAdresy_UpdateRecord(KntAdresyTable kntAdres)
+        public Boolean kntAdresy_UpdateRecord(KntAdresyTable kntAdres)
         {
             String output = "";
             try
             {
                 db.Update(kntAdres);
-                output = "Wpis zaktualizowany..";
+                return true;
             }
             catch(Exception exc)
             {
                 output = "DBRepository.KntAdresy_UpdateRecord() Error: " + exc.Message;
+                RaportBledu("kntAdresy_UpdateRecord", exc.Message);
+                return false;
             }
-            return output;
         }
 
-        public String kntAdresy_InsertRecord(KntAdresyTable item)
+        public Boolean kntAdresy_InsertRecord(KntAdresyTable item)
         {
             String output = "";
             try
             {
-                db.Insert(item);
-                output = "Wpis dodany..";
+                db.InsertOrReplace(item);
+                return true;
             }
             catch(Exception exc)
             {
                 output = "DBRepository.kntAdresy_InsertRecord() Error: " + exc.Message;
+                RaportBledu("kntAdresy_InsertRecord", exc.Message);
+                return false;
             }
-
-            return output;
         }
+
+        public Boolean kntAdresy_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<KntAdresyTable>(recordID);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.KntAdresy_DeleteRecord() Error: " + exc.Message;
+                RaportBledu("kntAdresy_DeleteRecord", exc.Message);
+                return false;
+            }
+        }
+
         public String kntAdresy_GetAllRecords()
         {
             String output = "";
@@ -511,6 +588,7 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output += "DBRepository.kntAdresy_GetAllRecords() Error: " + exc.Message;
+                RaportBledu("kntAdresy_GetAllRecords", exc.Message);
             }
 
             return output;
@@ -533,8 +611,10 @@ namespace AplikacjaSerwisowa
                         output = result[0];
                     }
                 }
-                catch(Exception)
+                catch(Exception exc)
                 {
+                    string blad = exc.Message;
+                    RaportBledu("kntAdresy_GetRecord", exc.Message);
                 }
             }
 
@@ -556,10 +636,38 @@ namespace AplikacjaSerwisowa
                         output = result;
                     }
                 }
-                catch(Exception) {}
+                catch(Exception exc)
+                {
+                    string blad = exc.Message;
+                    RaportBledu("kntAdresy_GetRecords", exc.Message);
+                }
             }
 
             return output;
+        }
+
+        public KntAdresyTable sprawdzLiczbeAdresow(Int32 KNT_GIDNumer)
+        {
+            KntAdresyTable KNTAdres = null;
+
+            try
+            {
+                List<KntAdresyTable> result = kntAdresy_GetFilteredRecords("", KNT_GIDNumer.ToString());
+                if(result != null)
+                {
+                    if(result.Count == 1)
+                    {
+                        KNTAdres = result[0];
+                    }
+                }
+            }
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("sprawdzLiczbeAdresow", exc.Message);
+            }
+
+            return KNTAdres;
         }
 
         public List<KntAdresyTable> kntAdresy_GetFilteredRecords(String filtr, String knt_GidNumer)
@@ -582,8 +690,10 @@ namespace AplikacjaSerwisowa
                     output.Add(result[i]);
                 }
             }
-            catch(Exception)
+            catch(Exception exc)
             {
+                string blad = exc.Message;
+                RaportBledu("kntAdresy_GetFilteredRecords", exc.Message);
             }
 
             return output;
@@ -605,7 +715,11 @@ namespace AplikacjaSerwisowa
                     kntAdresyList.Add(item.Kna_GIDNumer);
                 }
             }
-            catch(Exception) {}
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("kntAdresy_GetFiltredGidNumers", exc.Message);
+            }
 
             return kntAdresyList;
         }
@@ -621,12 +735,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                try
-                {
-                    db.DropTable<SrwZlcNag>();
-                }
-                catch(Exception) { }
-
                 db.CreateTable<SrwZlcNag>();
 
                 output = "Tabela SrwZlcNag zosta³a stworzona...";
@@ -634,26 +742,59 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.stworzSrwZlcNag() Error: " + exc.Message;
+                RaportBledu("stworzSrwZlcNag", exc.Message);
             }
 
             return output;
         }
-        public String SrwZlcNag_InsertRecord(SrwZlcNag item)
+        public Boolean SrwZlcNag_InsertRecord(SrwZlcNag item)
         {
             String output = "";
             try
             {
-                db.Insert(item);
-                output = "Wpis dodany..";
+                db.InsertOrReplace(item);
+                return true;
             }
             catch(Exception exc)
             {
                 output = "DBRepository.SrwZlcNag_InsertRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcNag_InsertRecord", exc.Message);
+                return false;
             }
-
-            return output;
         }
-        
+
+        public Boolean SrwZlcNag_UpdateRecord(SrwZlcNag TwrKarta)
+        {
+            String output = "";
+            try
+            {
+                db.Update(TwrKarta);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwZlcNag_UpdateRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcNag_UpdateRecord", exc.Message);
+                return false;
+            }
+        }
+
+        public Boolean SrwZlcNag_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<SrwZlcNag>(recordID);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwZlcNag_DeleteRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcNag_DeleteRecord", exc.Message);
+                return false;
+            }
+        }
+
         public void SrwZlcNag_OznaczWyslane(List<int> wyslaneNagList, int wslaneParam)
         {
             for(int i = 0; i < wyslaneNagList.Count; i++)
@@ -686,8 +827,10 @@ namespace AplikacjaSerwisowa
                         output = result[0];
                     }
                 }
-                catch(Exception)
+                catch(Exception exc)
                 {
+                    string blad = exc.Message;
+                    RaportBledu("SrwZlcNag_GetRecordGetRecord", exc.Message);
                 }
             }
 
@@ -723,6 +866,7 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 string test = exc.Message;
+                RaportBledu("pobierzListeSrwZlcNag", exc.Message);
             }
 
             return output;
@@ -747,9 +891,12 @@ namespace AplikacjaSerwisowa
             {
                 srwZlcNagList = db.Query<SrwZlcNag>("select * from SrwZlcNag where  SZN_Synchronizacja = " + synchParam.ToString());
             }
-            catch(Exception)
+            catch(Exception exc)
             {
+                string blad = exc.Message;
+                RaportBledu("SrwZlcNagSynchronizacja", exc.Message);
             }
+
             return srwZlcNagList;
         }
 
@@ -761,6 +908,31 @@ namespace AplikacjaSerwisowa
             
             return result;
         }
+
+        public List<int> SrwZlcNag_generujListeZapisanch()
+        {
+            List<int> output = new List<int>();
+            List<SrwZlcNag> SrwZlcNagList = new List<SrwZlcNag>();
+
+            try
+            {
+                String zapytanieString = "select SZN_Id from SrwZlcNag";
+                SrwZlcNagList = db.Query<SrwZlcNag>(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                String blad = "DBRepository.SrwZlcNag_generujListeZapisanch() Error: " + exc.Message;
+                RaportBledu("SrwZlcNag_generujListeZapisanch", exc.Message);
+            }
+
+            for(int i = 0; i < SrwZlcNagList.Count; i++)
+            {
+                output.Add(SrwZlcNagList[i].SZN_Id);
+            }
+
+            return output;
+        }
+
         private void zapisDanychDoPamieciUrzadzenia(Int32 SZN_ID, Context kontekst)
         {
             ISharedPreferences prefs = Android.Preferences.PreferenceManager.GetDefaultSharedPreferences(kontekst);
@@ -787,12 +959,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                try
-                {
-                    db.DropTable<SrwZlcCzynnosci>();
-                }
-                catch(Exception) { }
-
                 db.CreateTable<SrwZlcCzynnosci>();
 
                 output = "Tabela SrwZlcCzynnosci zosta³a stworzona...";
@@ -800,25 +966,58 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.stworzSrwZlcCynnosciTable() Error: " + exc.Message;
+                RaportBledu("stworzSrwZlcCzynnosci", exc.Message);
             }
 
             return output;
         }
 
-        public String SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosci item)
+        public Boolean SrwZlcCzynnosci_InsertRecord(SrwZlcCzynnosci item)
         {
             String output = "";
             try
             {
-                db.Insert(item);
-                output = "Wpis dodany..";
+                db.InsertOrReplace(item);
+                return true;
             }
             catch(Exception exc)
             {
                 output = "DBRepository.SrwZlcCynnosci_InsertRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcCzynnosci_InsertRecord", exc.Message);
+                return false;
             }
+        }
 
-            return output;
+        public Boolean SrwZlcCzynnosci_UpdateRecord(SrwZlcCzynnosci SrwZlcCzynnosc)
+        {
+            String output = "";
+            try
+            {
+                db.Update(SrwZlcCzynnosc);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwZlcCzynnosci_UpdateRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcCzynnosci_UpdateRecord", exc.Message);
+                return false;
+            }
+        }
+
+        public Boolean SrwZlcCzynnosci_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<SrwZlcCzynnosci>(recordID);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwZlcCzynnosci_DeleteRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcCzynnosci_DeleteRecord", exc.Message);
+                return false;
+            }
         }
 
         public List<SrwZlcCzynnosci> SrwZlcCzynnosci_GetRecords(String szn_ID)
@@ -853,8 +1052,10 @@ namespace AplikacjaSerwisowa
                         }
                     }
                 }
-                catch(Exception)
+                catch(Exception exc)
                 {
+                    string blad = exc.Message;
+                    RaportBledu("SrwZlcCzynnosci_GetRecords", exc.Message);
                 }
             }
 
@@ -881,8 +1082,33 @@ namespace AplikacjaSerwisowa
                     output.Add(result[i]);
                 }
             }
-            catch(Exception)
+            catch(Exception exc)
             {
+                string blad = exc.Message;
+                RaportBledu("SrwZlcCzynnosci_GetFilteredRecords", exc.Message);
+            }
+
+            return output;
+        }
+        public List<int> SrwZlcCzynnosci_generujListeZapisanch()
+        {
+            List<int> output = new List<int>();
+            List<SrwZlcCzynnosci> SrwZlcCzynnosciList = new List<SrwZlcCzynnosci>();
+
+            try
+            {
+                String zapytanieString = "select SZC_Id from SrwZlcCzynnosci";
+                SrwZlcCzynnosciList = db.Query<SrwZlcCzynnosci>(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                String blad = "DBRepository.SrwZlcCzynnosci_generujListeZapisanch() Error: " + exc.Message;
+                RaportBledu("SrwZlcCzynnosci_generujListeZapisanch", exc.Message);
+            }
+
+            for(int i = 0; i < SrwZlcCzynnosciList.Count; i++)
+            {
+                output.Add(SrwZlcCzynnosciList[i].SZC_Id);
             }
 
             return output;
@@ -896,8 +1122,11 @@ namespace AplikacjaSerwisowa
             {
                 srwZlcCzynnosciList = db.Query<SrwZlcCzynnosci>("select * from SrwZlcCzynnosci where SZC_Synchronizacja = " + synchParam.ToString());
             }
-            catch(Exception)
-            {}
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("SrwZlcCzynnosciSynchronizacja", exc.Message);
+            }
 
             return srwZlcCzynnosciList;
         }
@@ -928,12 +1157,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                try
-                {
-                    db.DropTable<SrwZlcSkladniki>();
-                }
-                catch(Exception) { }
-
                 db.CreateTable<SrwZlcSkladniki>();
 
                 output = "Tabela SrwZlcSkladniki zosta³a stworzona...";
@@ -941,24 +1164,57 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.stworzSrwZlcSkladniki() Error: " + exc.Message;
+                RaportBledu("stworzSrwZlcSkladniki", exc.Message);
             }
 
             return output;
         }
-        public String SrwZlcSkladniki_InsertRecord(SrwZlcSkladniki item)
+        public Boolean SrwZlcSkladniki_InsertRecord(SrwZlcSkladniki item)
         {
             String output = "";
             try
             {
-                db.Insert(item);
-                output = "Wpis dodany..";
+                db.InsertOrReplace(item);
+                return true;
             }
             catch(Exception exc)
             {
                 output = "DBRepository.SrwZlcSkladniki_InsertRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcSkladniki_InsertRecord", exc.Message);
+                return false;
             }
+        }
 
-            return output;
+        public Boolean SrwZlcSkladniki_UpdateRecord(SrwZlcSkladniki SrwZlcSkladnik)
+        {
+            String output = "";
+            try
+            {
+                db.Update(SrwZlcSkladnik);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwZlcSkladniki_UpdateRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcSkladniki_UpdateRecord", exc.Message);
+                return false;
+            }
+        }
+
+        public Boolean SrwZlcSkladniki_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<SrwZlcSkladniki>(recordID);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwZlcSkladniki_DeleteRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcSkladniki_DeleteRecord", exc.Message);
+                return false;
+            }
         }
 
         public List<SrwZlcSkladniki> SrwZlcSkladniki_GetRecords(String szn_ID)
@@ -992,8 +1248,10 @@ namespace AplikacjaSerwisowa
                         }
                     }
                 }
-                catch(Exception)
+                catch(Exception exc)
                 {
+                    string blad = exc.Message;
+                    RaportBledu("SrwZlcSkladniki_GetRecords", exc.Message);
                 }
             }
 
@@ -1020,8 +1278,34 @@ namespace AplikacjaSerwisowa
                     output.Add(result[i]);
                 }
             }
-            catch(Exception)
+            catch(Exception exc)
             {
+                string blad = exc.Message;
+                RaportBledu("SrwZlcSkladniki_GetFilteredRecords", exc.Message);
+            }
+
+            return output;
+        }
+
+        public List<int> SrwZlcSkladniki_generujListeZapisanch()
+        {
+            List<int> output = new List<int>();
+            List<SrwZlcSkladniki> SrwZlcSkladnikiList = new List<SrwZlcSkladniki>();
+
+            try
+            {
+                String zapytanieString = "select SZS_Id from SrwZlcSkladniki";
+                SrwZlcSkladnikiList = db.Query<SrwZlcSkladniki>(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                String blad = "DBRepository.SrwZlcSkladniki_generujListeZapisanch() Error: " + exc.Message;
+                RaportBledu("SrwZlcSkladniki_generujListeZapisanch", exc.Message);
+            }
+
+            for(int i = 0; i < SrwZlcSkladnikiList.Count; i++)
+            {
+                output.Add(SrwZlcSkladnikiList[i].SZS_Id);
             }
 
             return output;
@@ -1035,8 +1319,11 @@ namespace AplikacjaSerwisowa
             {
                 srwZlcSkladnikiList = db.Query<SrwZlcSkladniki>("select * from SrwZlcSkladniki where SZS_Synchronizacja = " + synchParam.ToString());
             }
-            catch(Exception)
-            { }
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("SrwZlcSkladnikiSynchronizacja", exc.Message);
+            }
 
             return srwZlcSkladnikiList;
         }
@@ -1067,12 +1354,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                try
-                {
-                    db.DropTable<TwrKartyTable>();
-                }
-                catch(Exception) { }
-
                 db.CreateTable<TwrKartyTable>();
 
                 output = "Tabela TwrKartyTable zosta³a stworzona...";
@@ -1080,26 +1361,86 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.stworzTwrKartyTable() Error: " + exc.Message;
+                RaportBledu("stworzTwrKartyTable", exc.Message);
             }
 
             return output;
         }
 
-        public String TwrKartyTable_InsertRecord(TwrKartyTable item)
+        public Boolean TwrKartyTable_InsertRecord(TwrKartyTable item)
         {
             String output = "";
             try
             {
-                db.Insert(item);
-                output = "Wpis dodany..";
+                db.InsertOrReplace(item);
+                return true;
             }
             catch(Exception exc)
             {
                 output = "DBRepository.TwrKartyTable_InsertRecord() Error: " + exc.Message;
+                RaportBledu("TwrKartyTable_InsertRecord", exc.Message);
+                return false;
+            }
+        }
+
+        public List<int> TwrKarty_generujListeZapisanch()
+        {
+
+            List<int> output = new List<int>();
+            List<TwrKartyTable> twrKartyList = new List<TwrKartyTable>();
+
+            try
+            {
+                String zapytanieString = "select * from TwrKartyTable";
+                var table = db.Table<TwrKartyTable>();
+                twrKartyList = db.Query<TwrKartyTable>(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("TwrKarty_generujListeZapisanch", exc.Message);
+            }
+
+            for(int i = 0; i < twrKartyList.Count; i++)
+            {
+                output.Add(twrKartyList[i].Twr_GIDNumer);
             }
 
             return output;
         }
+
+        public Boolean TwrKartyTable_UpdateRecord(TwrKartyTable TwrKarta)
+        {
+            String output = "";
+            try
+            {
+                db.Update(TwrKarta);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.TwrKartyTable_UpdateRecord() Error: " + exc.Message;
+                RaportBledu("TwrKartyTable_UpdateRecord", exc.Message);
+                return false;
+            }
+        }
+
+        public Boolean TwrKartyTable_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<TwrKartyTable>(recordID);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.TwrKartyTable_DeleteRecord() Error: " + exc.Message;
+                RaportBledu("TwrKartyTable_DeleteRecord", exc.Message);
+                return false;
+            }
+        }
+
         public List<TwrKartyTable> TwrKartyTable_GetFilteredRecords(String filtrEditText, String filtr, Boolean czynnosci)
         {
             List<TwrKartyTable> output = new List<TwrKartyTable>();
@@ -1134,8 +1475,10 @@ namespace AplikacjaSerwisowa
                     output.Add(result[i]);
                 }
             }
-            catch(Exception)
-            {
+            catch(Exception exc)
+            { 
+                string blad = exc.Message;
+                RaportBledu("TwrKartyTable_GetFilteredRecords", exc.Message);
             }
 
             return output;
@@ -1157,8 +1500,10 @@ namespace AplikacjaSerwisowa
                     output = result[0];
                 }
             }
-            catch(Exception)
+            catch(Exception exc)
             {
+                string blad = exc.Message;
+                RaportBledu("TwrKartyTable_GetRecord", exc.Message);
             }
             return output;
         }
@@ -1178,7 +1523,11 @@ namespace AplikacjaSerwisowa
                 {
                     db.DropTable<SrwZlcPodpisTable>();
                 }
-                catch(Exception) { }
+                catch(Exception exc)
+                {
+                    string blad = exc.Message;
+                    RaportBledu("stworzSrwZlcPodpisTable-drop", exc.Message);
+                }
 
                 db.CreateTable<SrwZlcPodpisTable>();
 
@@ -1187,6 +1536,7 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.stworzSrwZlcPodpisTable() Error: " + exc.Message;
+                RaportBledu("stworzSrwZlcPodpisTable", exc.Message);
             }
 
             return output;
@@ -1197,12 +1547,13 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                db.Insert(item);
+                db.InsertOrReplace(item);
                 output = "Wpis dodany..";
             }
             catch(Exception exc)
             {
                 output = "DBRepository.SrwZlcPodpis_InsertRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcPodpis_InsertRecord", exc.Message);
             }
 
             return output;
@@ -1221,8 +1572,11 @@ namespace AplikacjaSerwisowa
                     output = result[0];
                 }
             }
-            catch(Exception)
-            {}
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("SrwZlcPodpis_GetRecord", exc.Message);
+            }
 
             return output;
         }
@@ -1240,7 +1594,11 @@ namespace AplikacjaSerwisowa
                     byteArray = wygenerujByteArray(result[0].Podpis);
                 }
             }
-            catch(Exception) {}
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("pobierzPodpis", exc.Message);
+            }
 
             return byteArray;
         }
@@ -1269,12 +1627,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                try
-                {
-                    db.DropTable<SrwUrzadzenia>();
-                }
-                catch(Exception) { }
-
                 db.CreateTable<SrwUrzadzenia>();
 
                 output = "Tabela SrwUrzadzenia zosta³a stworzona...";
@@ -1282,25 +1634,58 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.stworzSrwUrzadzenia() Error: " + exc.Message;
+                RaportBledu("stworzSrwUrzadzenia", exc.Message);
             }
 
             return output;
         }
 
-        public String SrwUrzadzenia_InsertRecord(SrwUrzadzenia item)
+        public Boolean SrwUrzadzenia_InsertRecord(SrwUrzadzenia item)
         {
             String output = "";
             try
             {
-                db.Insert(item);
-                output = "Wpis dodany..";
+                db.InsertOrReplace(item);
+                return true;
             }
             catch(Exception exc)
             {
                 output = "DBRepository.SrwUrzadzenia_InsertRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzadzenia_InsertRecord", exc.Message);
+                return false;
             }
+        }
 
-            return output;
+        public Boolean SrwUrzadzenia_UpdateRecord(SrwUrzadzenia SrwZlcCzynnosc)
+        {
+            String output = "";
+            try
+            {
+                db.Update(SrwZlcCzynnosc);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzadzenia_UpdateRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzadzenia_UpdateRecord", exc.Message);
+                return false;
+            }
+        }
+
+        public Boolean SrwUrzadzenia_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<SrwUrzadzenia>(recordID);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzadzenia_DeleteRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzadzenia_DeleteRecord", exc.Message);
+                return false;
+            }
         }
 
         public int SrwUrzadzenia_GenerujNoweID(Context kontekst)
@@ -1355,8 +1740,10 @@ namespace AplikacjaSerwisowa
                     output.Add(result[i]);
                 }
             }
-            catch(Exception)
+            catch(Exception exc)
             {
+                string blad = exc.Message;
+                RaportBledu("SrwUrzadzenia_GetFilteredRecords", exc.Message);
             }
 
             return output;
@@ -1376,7 +1763,11 @@ namespace AplikacjaSerwisowa
                     output = result[0];
                 }
             }
-            catch(Exception) { }
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("SrwUrzadzenia_GetRecord", exc.Message);
+            }
 
             return output;
         }
@@ -1392,12 +1783,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                try
-                {
-                    db.DropTable<SrwUrzParDef>();
-                }
-                catch(Exception) { }
-
                 db.CreateTable<SrwUrzParDef>();
 
                 output = "Tabela SrwUrzParDef zosta³a stworzona...";
@@ -1405,27 +1790,84 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.stworzSrwUrzParDef() Error: " + exc.Message;
+                RaportBledu("stworzSrwUrzParDef", exc.Message);
             }
 
             return output;
         }
 
-        public String SrwUrzParDef_InsertRecord(SrwUrzParDef item)
+        public List<int> SrwUrzParDef_generujListeZapisanch()
+        {
+            List<int> output = new List<int>();
+            List<SrwUrzParDef> SrwUrzParDefList = new List<SrwUrzParDef>();
+
+            try
+            {
+                String zapytanieString = "select * from SrwUrzParDef";
+                SrwUrzParDefList = db.Query<SrwUrzParDef>(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("SrwUrzParDef_generujListeZapisanch", exc.Message);
+            }
+
+            for(int i = 0; i < SrwUrzParDefList.Count; i++)
+            {
+                output.Add(SrwUrzParDefList[i].SUD_Id);
+            }
+
+            return output;
+        }
+
+        public Boolean SrwUrzParDef_InsertRecord(SrwUrzParDef item)
         {
             String output = "";
             try
             {
-                db.Insert(item);
-                output = "Wpis dodany..";
+                db.InsertOrReplace(item);
+                return true;
             }
             catch(Exception exc)
             {
                 output = "DBRepository.SrwUrzParDef_InsertRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzParDef_InsertRecord", exc.Message);
+                return false;
             }
-
-            return output;
         }
-        
+
+        public Boolean SrwUrzParDef_UpdateRecord(SrwUrzParDef SrwUrzParDefinicja)
+        {
+            String output = "";
+            try
+            {
+                db.Update(SrwUrzParDefinicja);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzParDef_UpdateRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzParDef_UpdateRecord", exc.Message);
+                return false;
+            }
+        }
+
+        public Boolean SrwUrzParDef_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<SrwUrzParDef>(recordID);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzParDef_DeleteRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzParDef_DeleteRecord", exc.Message);
+                return false;
+            }
+        }
+
         /*
             *---------------------------------------------------------------------------------
             *|*********************************Tabela SrwUrzRodzPar**************************|
@@ -1436,12 +1878,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                try
-                {
-                    db.DropTable<SrwUrzRodzPar>();
-                }
-                catch(Exception) { }
-
                 db.CreateTable<SrwUrzRodzPar>();
 
                 output = "Tabela SrwUrzRodzPar zosta³a stworzona...";
@@ -1449,26 +1885,61 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.stworzSrwUrzRodzPar() Error: " + exc.Message;
+                RaportBledu("stworzSrwUrzRodzPar", exc.Message);
             }
 
             return output;
         }
 
-        public String SrwUrzRodzPar_InsertRecord(SrwUrzRodzPar item)
+        public Boolean SrwUrzRodzPar_InsertRecord(SrwUrzRodzPar item)
         {
             String output = "";
             try
             {
-                db.Insert(item);
-                output = "Wpis dodany..";
+                db.InsertOrReplace(item);
+                return true;
             }
             catch(Exception exc)
             {
                 output = "DBRepository.SrwUrzRodzPar_InsertRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzRodzPar_InsertRecord", exc.Message);
+                return false;
             }
-
-            return output;
         }
+
+        public Boolean SrwUrzRodzPar_UpdateRecord(SrwUrzRodzPar SrwUrzRodzParametry)
+        {
+            String output = "";
+            try
+            {
+                db.Update(SrwUrzRodzParametry);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzRodzPar_UpdateRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzRodzPar_UpdateRecord", exc.Message);
+                return false;
+            }
+        }
+
+        public Boolean SrwUrzRodzPar_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<SrwUrzRodzPar>(recordID);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzRodzPar_DeleteRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzRodzPar_DeleteRecord", exc.Message);
+                return false;
+            }
+        }
+
+
 
         /*
             *---------------------------------------------------------------------------------
@@ -1480,12 +1951,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                try
-                {
-                    db.DropTable<SrwUrzRodzaje>();
-                }
-                catch(Exception) { }
-
                 db.CreateTable<SrwUrzRodzaje>();
 
                 output = "Tabela SrwUrzRodzaje zosta³a stworzona...";
@@ -1493,25 +1958,82 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.stworzSrwUrzRodzaje() Error: " + exc.Message;
+                RaportBledu("stworzSrwUrzRodzaje", exc.Message);
             }
 
             return output;
         }
 
-        public String SrwUrzRodzaje_InsertRecord(SrwUrzRodzaje item)
+        public List<int> SrwUrzRodzaje_generujListeZapisanch()
+        {
+            List<int> output = new List<int>();
+            List<SrwUrzRodzaje> SrwUrzRodzajeList = new List<SrwUrzRodzaje>();
+
+            try
+            {
+                String zapytanieString = "select * from SrwUrzRodzaje";
+                SrwUrzRodzajeList = db.Query<SrwUrzRodzaje>(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("SrwUrzRodzaje_generujListeZapisanch", exc.Message);
+            }
+
+            for(int i = 0; i < SrwUrzRodzajeList.Count; i++)
+            {
+                output.Add(SrwUrzRodzajeList[i].SUR_Id);
+            }
+
+            return output;
+        }
+
+        public Boolean SrwUrzRodzaje_InsertRecord(SrwUrzRodzaje item)
         {
             String output = "";
             try
             {
-                db.Insert(item);
-                output = "Wpis dodany..";
+                db.InsertOrReplace(item);
+                return true;
             }
             catch(Exception exc)
             {
                 output = "DBRepository.SrwUrzRodzaje_InsertRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzRodzaje_InsertRecord", exc.Message);
+                return false;
             }
+        }
 
-            return output;
+        public Boolean SrwUrzRodzaje_UpdateRecord(SrwUrzRodzaje SrwUrzRodzaj)
+        {
+            String output = "";
+            try
+            {
+                db.Update(SrwUrzRodzaj);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzRodzaje_UpdateRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzRodzaje_UpdateRecord", exc.Message);
+                return false;
+            }
+        }
+
+        public Boolean SrwUrzRodzaje_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<SrwUrzRodzaje>(recordID);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzRodzaje_DeleteRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzRodzaje_DeleteRecord", exc.Message);
+                return false;
+            }
         }
 
         /*
@@ -1524,12 +2046,6 @@ namespace AplikacjaSerwisowa
             String output = "";
             try
             {
-                try
-                {
-                    db.DropTable<SrwZlcUrz>();
-                }
-                catch(Exception) { }
-
                 db.CreateTable<SrwZlcUrz>();
 
                 output = "Tabela SrwZlcUrz zosta³a stworzona...";
@@ -1537,25 +2053,82 @@ namespace AplikacjaSerwisowa
             catch(Exception exc)
             {
                 output = "DBRepository.stworzSrwZlcUrz() Error: " + exc.Message;
+                RaportBledu("stworzSrwZlcUrz", exc.Message);
             }
 
             return output;
         }
 
-        public String SrwZlcUrz_InsertRecord(SrwZlcUrz item)
+        public List<int> SrwUrzadzenia_generujListeZapisanch()
+        {
+            List<int> output = new List<int>();
+            List<SrwUrzadzenia> SrwUrzadzeniaList = new List<SrwUrzadzenia>();
+
+            try
+            {
+                String zapytanieString = "select SrU_Id from SrwUrzadzenia";
+                SrwUrzadzeniaList = db.Query<SrwUrzadzenia>(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                String blad = "DBRepository.SrwUrzadzenia_generujListeZapisanch() Error: " + exc.Message;
+                RaportBledu("SrwUrzadzenia_generujListeZapisanch", exc.Message);
+            }
+
+            for(int i = 0; i < SrwUrzadzeniaList.Count; i++)
+            {
+                output.Add(SrwUrzadzeniaList[i].SrU_Id);
+            }
+
+            return output;
+        }
+
+        public Boolean SrwZlcUrz_InsertRecord(SrwZlcUrz item)
         {
             String output = "";
             try
             {
-                db.Insert(item);
-                output = "Wpis dodany..";
+                db.InsertOrReplace(item);
+                return true;
             }
             catch(Exception exc)
             {
                 output = "DBRepository.SrwZlcUrz_InsertRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcUrz_InsertRecord", exc.Message);
+                return false;
             }
+        }
 
-            return output;
+        public Boolean SrwZlcUrz_UpdateRecord(SrwZlcUrz SrwZlcUrzParametry)
+        {
+            String output = "";
+            try
+            {
+                db.Update(SrwZlcUrzParametry);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwZlcUrz_UpdateRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcUrz_UpdateRecord", exc.Message);
+                return false;
+            }
+        }
+
+        public Boolean SrwZlcUrz_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<SrwZlcUrz>(recordID);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwZlcUrz_DeleteRecord() Error: " + exc.Message;
+                RaportBledu("SrwZlcUrz_DeleteRecord", exc.Message);
+                return false;
+            }
         }
 
         public List<SrwZlcUrz> SrwZlcUrz_GetRecords(string szn_ID)
@@ -1573,7 +2146,154 @@ namespace AplikacjaSerwisowa
                         output = result;
                     }
                 }
-                catch(Exception) { }
+                catch(Exception exc)
+                {
+                    string blad = exc.Message;
+                    RaportBledu("SrwZlcUrz_GetRecords", exc.Message);
+                }
+            }
+
+            return output;
+        }
+
+        public List<int> SrwZlcSUrz_generujListeZapisanch()
+        {
+            List<int> output = new List<int>();
+            List<SrwZlcUrz> SrwZlcUrzList = new List<SrwZlcUrz>();
+
+            try
+            {
+                String zapytanieString = "select SZU_Id from SrwZlcUrz";
+                SrwZlcUrzList = db.Query<SrwZlcUrz>(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                String blad = "DBRepository.SrwZlcSUrz_generujListeZapisanch() Error: " + exc.Message;
+                RaportBledu("SrwZlcSUrz_generujListeZapisanch", exc.Message);
+            }
+
+            for(int i = 0; i < SrwZlcUrzList.Count; i++)
+            {
+                output.Add(SrwZlcUrzList[i].SZU_Id);
+            }
+
+            return output;
+        }
+
+        /*
+            *---------------------------------------------------------------------------------
+            *|*********************************Tabela SrwZlcUrz******************************|
+            *---------------------------------------------------------------------------------
+        */
+        public string stworzSrwUrzWlasc()
+        {
+            String output = "";
+            try
+            {
+                db.CreateTable<SrwUrzWlasc>();
+
+                output = "Tabela SrwUrzWlasc zosta³a stworzona...";
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.stworzSrwUrzWlasc() Error: " + exc.Message;
+                RaportBledu("stworzSrwUrzWlasc", exc.Message);
+            }
+
+            return output;
+        }
+
+        public List<int> SrwUrzWlasc_generujListeZapisanch()
+        {
+            List<int> output = new List<int>();
+            List<SrwUrzWlasc> SrwUrzWlascList = new List<SrwUrzWlasc>();
+
+            try
+            {
+                String zapytanieString = "select SUW_SrUId from SrwUrzWlasc";
+                SrwUrzWlascList = db.Query<SrwUrzWlasc>(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("SrwUrzWlasc_generujListeZapisanch", exc.Message);
+            }
+
+            for(int i = 0; i < SrwUrzWlascList.Count; i++)
+            {
+                output.Add(SrwUrzWlascList[i].SUW_SrUId);
+            }
+
+            return output;
+        }
+
+        public Boolean SrwUrzWlasc_InsertRecord(SrwUrzWlasc item)
+        {
+            String output = "";
+            try
+            {
+                db.InsertOrReplace(item);
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzWlasc_InsertRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzWlasc_InsertRecord", exc.Message);
+                return false;
+            }
+            return true;
+        }
+
+        public Boolean SrwUrzWlasc_UpdateRecord(SrwUrzWlasc SrwUrzWlasciciel)
+        {
+            String output = "";
+            try
+            {
+                db.Update(SrwUrzWlasciciel);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzWlasc_UpdateRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzWlasc_UpdateRecord", exc.Message);
+                return false;
+            }
+        }
+
+        public Boolean SrwUrzWlasc_DeleteRecord(int recordID)
+        {
+            String output = "";
+            try
+            {
+                db.Delete<SrwUrzWlasc>(recordID);
+                return true;
+            }
+            catch(Exception exc)
+            {
+                output = "DBRepository.SrwUrzWlasc_DeleteRecord() Error: " + exc.Message;
+                RaportBledu("SrwUrzWlasc_DeleteRecord", exc.Message);
+                return false;
+            }
+        }
+
+        public List<int> SrwUrzRodzPar_generujListeZapisanch()
+        {
+            List<int> output = new List<int>();
+            List<SrwUrzRodzPar> SrwUrzRodzParList = new List<SrwUrzRodzPar>();
+
+            try
+            {
+                String zapytanieString = "select * from SrwUrzRodzPar";
+                SrwUrzRodzParList = db.Query<SrwUrzRodzPar>(zapytanieString);
+            }
+            catch(Exception exc)
+            {
+                string blad = exc.Message;
+                RaportBledu("SrwUrzRodzPar_generujListeZapisanch", exc.Message);
+            }
+
+            for(int i = 0; i < SrwUrzRodzParList.Count; i++)
+            {
+                output.Add(SrwUrzRodzParList[i].SRP_Id);
             }
 
             return output;

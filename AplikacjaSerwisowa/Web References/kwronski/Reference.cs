@@ -93,6 +93,62 @@ namespace AplikacjaSerwisowa.kwronski {
         
         private System.Threading.SendOrPostCallback KntAdresy_ZwrocUsunietychOperationCompleted;
         
+        private System.Threading.SendOrPostCallback Aplikacja_Zapisz_KontrahentowOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback Aplikacja_Zapisz_TowaryOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback Aplikacja_Zapisz_ZleceniaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback Aplikacja_Zapisz_UrzadzeniaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_KntKartyListaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_KntKartyPotwierdzOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_KntAdresyListaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_KntAdresyPotwierdzOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_TwrKartyListaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_TwrKartyPotwierdzOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwZlcNagListaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwZlcNagPotwierdzOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwZlcCzynnosciListaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwZlcCzynnosciPotwierdzOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwZlcSkladnikiListaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwZlcSkladnikiPotwierdzOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwUrzadzeniaListaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwUrzadzeniaPotwierdzOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwUrzWlascListaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwUrzWlascPotwierdzOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwUrzParDefListaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwUrzParDefPotwierdzOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwUrzRodzajeListaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwUrzRodzajePotwierdzOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwUrzRodzParListaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwUrzRodzParPotwierdzOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwZlcUrzListaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WS_SrwZlcUrzPotwierdzOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -226,6 +282,90 @@ namespace AplikacjaSerwisowa.kwronski {
         
         /// <remarks/>
         public event KntAdresy_ZwrocUsunietychCompletedEventHandler KntAdresy_ZwrocUsunietychCompleted;
+        
+        /// <remarks/>
+        public event Aplikacja_Zapisz_KontrahentowCompletedEventHandler Aplikacja_Zapisz_KontrahentowCompleted;
+        
+        /// <remarks/>
+        public event Aplikacja_Zapisz_TowaryCompletedEventHandler Aplikacja_Zapisz_TowaryCompleted;
+        
+        /// <remarks/>
+        public event Aplikacja_Zapisz_ZleceniaCompletedEventHandler Aplikacja_Zapisz_ZleceniaCompleted;
+        
+        /// <remarks/>
+        public event Aplikacja_Zapisz_UrzadzeniaCompletedEventHandler Aplikacja_Zapisz_UrzadzeniaCompleted;
+        
+        /// <remarks/>
+        public event WS_KntKartyListaCompletedEventHandler WS_KntKartyListaCompleted;
+        
+        /// <remarks/>
+        public event WS_KntKartyPotwierdzCompletedEventHandler WS_KntKartyPotwierdzCompleted;
+        
+        /// <remarks/>
+        public event WS_KntAdresyListaCompletedEventHandler WS_KntAdresyListaCompleted;
+        
+        /// <remarks/>
+        public event WS_KntAdresyPotwierdzCompletedEventHandler WS_KntAdresyPotwierdzCompleted;
+        
+        /// <remarks/>
+        public event WS_TwrKartyListaCompletedEventHandler WS_TwrKartyListaCompleted;
+        
+        /// <remarks/>
+        public event WS_TwrKartyPotwierdzCompletedEventHandler WS_TwrKartyPotwierdzCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwZlcNagListaCompletedEventHandler WS_SrwZlcNagListaCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwZlcNagPotwierdzCompletedEventHandler WS_SrwZlcNagPotwierdzCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwZlcCzynnosciListaCompletedEventHandler WS_SrwZlcCzynnosciListaCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwZlcCzynnosciPotwierdzCompletedEventHandler WS_SrwZlcCzynnosciPotwierdzCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwZlcSkladnikiListaCompletedEventHandler WS_SrwZlcSkladnikiListaCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwZlcSkladnikiPotwierdzCompletedEventHandler WS_SrwZlcSkladnikiPotwierdzCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwUrzadzeniaListaCompletedEventHandler WS_SrwUrzadzeniaListaCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwUrzadzeniaPotwierdzCompletedEventHandler WS_SrwUrzadzeniaPotwierdzCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwUrzWlascListaCompletedEventHandler WS_SrwUrzWlascListaCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwUrzWlascPotwierdzCompletedEventHandler WS_SrwUrzWlascPotwierdzCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwUrzParDefListaCompletedEventHandler WS_SrwUrzParDefListaCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwUrzParDefPotwierdzCompletedEventHandler WS_SrwUrzParDefPotwierdzCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwUrzRodzajeListaCompletedEventHandler WS_SrwUrzRodzajeListaCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwUrzRodzajePotwierdzCompletedEventHandler WS_SrwUrzRodzajePotwierdzCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwUrzRodzParListaCompletedEventHandler WS_SrwUrzRodzParListaCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwUrzRodzParPotwierdzCompletedEventHandler WS_SrwUrzRodzParPotwierdzCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwZlcUrzListaCompletedEventHandler WS_SrwZlcUrzListaCompleted;
+        
+        /// <remarks/>
+        public event WS_SrwZlcUrzPotwierdzCompletedEventHandler WS_SrwZlcUrzPotwierdzCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/SayHelloToLame", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -1109,6 +1249,866 @@ namespace AplikacjaSerwisowa.kwronski {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/Aplikacja_Zapisz_Kontrahentow", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string Aplikacja_Zapisz_Kontrahentow(int idOperatora, string kntKartyString, string kntAdresyString) {
+            object[] results = this.Invoke("Aplikacja_Zapisz_Kontrahentow", new object[] {
+                        idOperatora,
+                        kntKartyString,
+                        kntAdresyString});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void Aplikacja_Zapisz_KontrahentowAsync(int idOperatora, string kntKartyString, string kntAdresyString) {
+            this.Aplikacja_Zapisz_KontrahentowAsync(idOperatora, kntKartyString, kntAdresyString, null);
+        }
+        
+        /// <remarks/>
+        public void Aplikacja_Zapisz_KontrahentowAsync(int idOperatora, string kntKartyString, string kntAdresyString, object userState) {
+            if ((this.Aplikacja_Zapisz_KontrahentowOperationCompleted == null)) {
+                this.Aplikacja_Zapisz_KontrahentowOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAplikacja_Zapisz_KontrahentowOperationCompleted);
+            }
+            this.InvokeAsync("Aplikacja_Zapisz_Kontrahentow", new object[] {
+                        idOperatora,
+                        kntKartyString,
+                        kntAdresyString}, this.Aplikacja_Zapisz_KontrahentowOperationCompleted, userState);
+        }
+        
+        private void OnAplikacja_Zapisz_KontrahentowOperationCompleted(object arg) {
+            if ((this.Aplikacja_Zapisz_KontrahentowCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.Aplikacja_Zapisz_KontrahentowCompleted(this, new Aplikacja_Zapisz_KontrahentowCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/Aplikacja_Zapisz_Towary", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string Aplikacja_Zapisz_Towary(int idOperatora, string TwrKartyString) {
+            object[] results = this.Invoke("Aplikacja_Zapisz_Towary", new object[] {
+                        idOperatora,
+                        TwrKartyString});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void Aplikacja_Zapisz_TowaryAsync(int idOperatora, string TwrKartyString) {
+            this.Aplikacja_Zapisz_TowaryAsync(idOperatora, TwrKartyString, null);
+        }
+        
+        /// <remarks/>
+        public void Aplikacja_Zapisz_TowaryAsync(int idOperatora, string TwrKartyString, object userState) {
+            if ((this.Aplikacja_Zapisz_TowaryOperationCompleted == null)) {
+                this.Aplikacja_Zapisz_TowaryOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAplikacja_Zapisz_TowaryOperationCompleted);
+            }
+            this.InvokeAsync("Aplikacja_Zapisz_Towary", new object[] {
+                        idOperatora,
+                        TwrKartyString}, this.Aplikacja_Zapisz_TowaryOperationCompleted, userState);
+        }
+        
+        private void OnAplikacja_Zapisz_TowaryOperationCompleted(object arg) {
+            if ((this.Aplikacja_Zapisz_TowaryCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.Aplikacja_Zapisz_TowaryCompleted(this, new Aplikacja_Zapisz_TowaryCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/Aplikacja_Zapisz_Zlecenia", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string Aplikacja_Zapisz_Zlecenia(int idOperatora, string SrwZlcNagString, string srwZlcCzynnosciString, string SrwZlcSkladnikiString, string SrwZlcUrzString) {
+            object[] results = this.Invoke("Aplikacja_Zapisz_Zlecenia", new object[] {
+                        idOperatora,
+                        SrwZlcNagString,
+                        srwZlcCzynnosciString,
+                        SrwZlcSkladnikiString,
+                        SrwZlcUrzString});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void Aplikacja_Zapisz_ZleceniaAsync(int idOperatora, string SrwZlcNagString, string srwZlcCzynnosciString, string SrwZlcSkladnikiString, string SrwZlcUrzString) {
+            this.Aplikacja_Zapisz_ZleceniaAsync(idOperatora, SrwZlcNagString, srwZlcCzynnosciString, SrwZlcSkladnikiString, SrwZlcUrzString, null);
+        }
+        
+        /// <remarks/>
+        public void Aplikacja_Zapisz_ZleceniaAsync(int idOperatora, string SrwZlcNagString, string srwZlcCzynnosciString, string SrwZlcSkladnikiString, string SrwZlcUrzString, object userState) {
+            if ((this.Aplikacja_Zapisz_ZleceniaOperationCompleted == null)) {
+                this.Aplikacja_Zapisz_ZleceniaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAplikacja_Zapisz_ZleceniaOperationCompleted);
+            }
+            this.InvokeAsync("Aplikacja_Zapisz_Zlecenia", new object[] {
+                        idOperatora,
+                        SrwZlcNagString,
+                        srwZlcCzynnosciString,
+                        SrwZlcSkladnikiString,
+                        SrwZlcUrzString}, this.Aplikacja_Zapisz_ZleceniaOperationCompleted, userState);
+        }
+        
+        private void OnAplikacja_Zapisz_ZleceniaOperationCompleted(object arg) {
+            if ((this.Aplikacja_Zapisz_ZleceniaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.Aplikacja_Zapisz_ZleceniaCompleted(this, new Aplikacja_Zapisz_ZleceniaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/Aplikacja_Zapisz_Urzadzenia", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string Aplikacja_Zapisz_Urzadzenia(int idOperatora, string SrwUrzadzeniaString, string SrwUrzWlascString, string SrwUrzParDefString, string SrwUrzRodzajeString, string SrwUrzRodzParString) {
+            object[] results = this.Invoke("Aplikacja_Zapisz_Urzadzenia", new object[] {
+                        idOperatora,
+                        SrwUrzadzeniaString,
+                        SrwUrzWlascString,
+                        SrwUrzParDefString,
+                        SrwUrzRodzajeString,
+                        SrwUrzRodzParString});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void Aplikacja_Zapisz_UrzadzeniaAsync(int idOperatora, string SrwUrzadzeniaString, string SrwUrzWlascString, string SrwUrzParDefString, string SrwUrzRodzajeString, string SrwUrzRodzParString) {
+            this.Aplikacja_Zapisz_UrzadzeniaAsync(idOperatora, SrwUrzadzeniaString, SrwUrzWlascString, SrwUrzParDefString, SrwUrzRodzajeString, SrwUrzRodzParString, null);
+        }
+        
+        /// <remarks/>
+        public void Aplikacja_Zapisz_UrzadzeniaAsync(int idOperatora, string SrwUrzadzeniaString, string SrwUrzWlascString, string SrwUrzParDefString, string SrwUrzRodzajeString, string SrwUrzRodzParString, object userState) {
+            if ((this.Aplikacja_Zapisz_UrzadzeniaOperationCompleted == null)) {
+                this.Aplikacja_Zapisz_UrzadzeniaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAplikacja_Zapisz_UrzadzeniaOperationCompleted);
+            }
+            this.InvokeAsync("Aplikacja_Zapisz_Urzadzenia", new object[] {
+                        idOperatora,
+                        SrwUrzadzeniaString,
+                        SrwUrzWlascString,
+                        SrwUrzParDefString,
+                        SrwUrzRodzajeString,
+                        SrwUrzRodzParString}, this.Aplikacja_Zapisz_UrzadzeniaOperationCompleted, userState);
+        }
+        
+        private void OnAplikacja_Zapisz_UrzadzeniaOperationCompleted(object arg) {
+            if ((this.Aplikacja_Zapisz_UrzadzeniaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.Aplikacja_Zapisz_UrzadzeniaCompleted(this, new Aplikacja_Zapisz_UrzadzeniaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_KntKartyLista", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_KntKartyLista(int idOperatora) {
+            object[] results = this.Invoke("WS_KntKartyLista", new object[] {
+                        idOperatora});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_KntKartyListaAsync(int idOperatora) {
+            this.WS_KntKartyListaAsync(idOperatora, null);
+        }
+        
+        /// <remarks/>
+        public void WS_KntKartyListaAsync(int idOperatora, object userState) {
+            if ((this.WS_KntKartyListaOperationCompleted == null)) {
+                this.WS_KntKartyListaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_KntKartyListaOperationCompleted);
+            }
+            this.InvokeAsync("WS_KntKartyLista", new object[] {
+                        idOperatora}, this.WS_KntKartyListaOperationCompleted, userState);
+        }
+        
+        private void OnWS_KntKartyListaOperationCompleted(object arg) {
+            if ((this.WS_KntKartyListaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_KntKartyListaCompleted(this, new WS_KntKartyListaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_KntKartyPotwierdz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_KntKartyPotwierdz(int idOperatora, string jsonInput) {
+            object[] results = this.Invoke("WS_KntKartyPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_KntKartyPotwierdzAsync(int idOperatora, string jsonInput) {
+            this.WS_KntKartyPotwierdzAsync(idOperatora, jsonInput, null);
+        }
+        
+        /// <remarks/>
+        public void WS_KntKartyPotwierdzAsync(int idOperatora, string jsonInput, object userState) {
+            if ((this.WS_KntKartyPotwierdzOperationCompleted == null)) {
+                this.WS_KntKartyPotwierdzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_KntKartyPotwierdzOperationCompleted);
+            }
+            this.InvokeAsync("WS_KntKartyPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput}, this.WS_KntKartyPotwierdzOperationCompleted, userState);
+        }
+        
+        private void OnWS_KntKartyPotwierdzOperationCompleted(object arg) {
+            if ((this.WS_KntKartyPotwierdzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_KntKartyPotwierdzCompleted(this, new WS_KntKartyPotwierdzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_KntAdresyLista", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_KntAdresyLista(int idOperatora) {
+            object[] results = this.Invoke("WS_KntAdresyLista", new object[] {
+                        idOperatora});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_KntAdresyListaAsync(int idOperatora) {
+            this.WS_KntAdresyListaAsync(idOperatora, null);
+        }
+        
+        /// <remarks/>
+        public void WS_KntAdresyListaAsync(int idOperatora, object userState) {
+            if ((this.WS_KntAdresyListaOperationCompleted == null)) {
+                this.WS_KntAdresyListaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_KntAdresyListaOperationCompleted);
+            }
+            this.InvokeAsync("WS_KntAdresyLista", new object[] {
+                        idOperatora}, this.WS_KntAdresyListaOperationCompleted, userState);
+        }
+        
+        private void OnWS_KntAdresyListaOperationCompleted(object arg) {
+            if ((this.WS_KntAdresyListaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_KntAdresyListaCompleted(this, new WS_KntAdresyListaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_KntAdresyPotwierdz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_KntAdresyPotwierdz(int idOperatora, string jsonInput) {
+            object[] results = this.Invoke("WS_KntAdresyPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_KntAdresyPotwierdzAsync(int idOperatora, string jsonInput) {
+            this.WS_KntAdresyPotwierdzAsync(idOperatora, jsonInput, null);
+        }
+        
+        /// <remarks/>
+        public void WS_KntAdresyPotwierdzAsync(int idOperatora, string jsonInput, object userState) {
+            if ((this.WS_KntAdresyPotwierdzOperationCompleted == null)) {
+                this.WS_KntAdresyPotwierdzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_KntAdresyPotwierdzOperationCompleted);
+            }
+            this.InvokeAsync("WS_KntAdresyPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput}, this.WS_KntAdresyPotwierdzOperationCompleted, userState);
+        }
+        
+        private void OnWS_KntAdresyPotwierdzOperationCompleted(object arg) {
+            if ((this.WS_KntAdresyPotwierdzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_KntAdresyPotwierdzCompleted(this, new WS_KntAdresyPotwierdzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_TwrKartyLista", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_TwrKartyLista(int idOperatora) {
+            object[] results = this.Invoke("WS_TwrKartyLista", new object[] {
+                        idOperatora});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_TwrKartyListaAsync(int idOperatora) {
+            this.WS_TwrKartyListaAsync(idOperatora, null);
+        }
+        
+        /// <remarks/>
+        public void WS_TwrKartyListaAsync(int idOperatora, object userState) {
+            if ((this.WS_TwrKartyListaOperationCompleted == null)) {
+                this.WS_TwrKartyListaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_TwrKartyListaOperationCompleted);
+            }
+            this.InvokeAsync("WS_TwrKartyLista", new object[] {
+                        idOperatora}, this.WS_TwrKartyListaOperationCompleted, userState);
+        }
+        
+        private void OnWS_TwrKartyListaOperationCompleted(object arg) {
+            if ((this.WS_TwrKartyListaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_TwrKartyListaCompleted(this, new WS_TwrKartyListaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_TwrKartyPotwierdz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_TwrKartyPotwierdz(int idOperatora, string jsonInput) {
+            object[] results = this.Invoke("WS_TwrKartyPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_TwrKartyPotwierdzAsync(int idOperatora, string jsonInput) {
+            this.WS_TwrKartyPotwierdzAsync(idOperatora, jsonInput, null);
+        }
+        
+        /// <remarks/>
+        public void WS_TwrKartyPotwierdzAsync(int idOperatora, string jsonInput, object userState) {
+            if ((this.WS_TwrKartyPotwierdzOperationCompleted == null)) {
+                this.WS_TwrKartyPotwierdzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_TwrKartyPotwierdzOperationCompleted);
+            }
+            this.InvokeAsync("WS_TwrKartyPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput}, this.WS_TwrKartyPotwierdzOperationCompleted, userState);
+        }
+        
+        private void OnWS_TwrKartyPotwierdzOperationCompleted(object arg) {
+            if ((this.WS_TwrKartyPotwierdzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_TwrKartyPotwierdzCompleted(this, new WS_TwrKartyPotwierdzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwZlcNagLista", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwZlcNagLista(int idOperatora) {
+            object[] results = this.Invoke("WS_SrwZlcNagLista", new object[] {
+                        idOperatora});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcNagListaAsync(int idOperatora) {
+            this.WS_SrwZlcNagListaAsync(idOperatora, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcNagListaAsync(int idOperatora, object userState) {
+            if ((this.WS_SrwZlcNagListaOperationCompleted == null)) {
+                this.WS_SrwZlcNagListaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwZlcNagListaOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwZlcNagLista", new object[] {
+                        idOperatora}, this.WS_SrwZlcNagListaOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwZlcNagListaOperationCompleted(object arg) {
+            if ((this.WS_SrwZlcNagListaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwZlcNagListaCompleted(this, new WS_SrwZlcNagListaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwZlcNagPotwierdz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwZlcNagPotwierdz(int idOperatora, string jsonInput) {
+            object[] results = this.Invoke("WS_SrwZlcNagPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcNagPotwierdzAsync(int idOperatora, string jsonInput) {
+            this.WS_SrwZlcNagPotwierdzAsync(idOperatora, jsonInput, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcNagPotwierdzAsync(int idOperatora, string jsonInput, object userState) {
+            if ((this.WS_SrwZlcNagPotwierdzOperationCompleted == null)) {
+                this.WS_SrwZlcNagPotwierdzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwZlcNagPotwierdzOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwZlcNagPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput}, this.WS_SrwZlcNagPotwierdzOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwZlcNagPotwierdzOperationCompleted(object arg) {
+            if ((this.WS_SrwZlcNagPotwierdzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwZlcNagPotwierdzCompleted(this, new WS_SrwZlcNagPotwierdzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwZlcCzynnosciLista", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwZlcCzynnosciLista(int idOperatora) {
+            object[] results = this.Invoke("WS_SrwZlcCzynnosciLista", new object[] {
+                        idOperatora});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcCzynnosciListaAsync(int idOperatora) {
+            this.WS_SrwZlcCzynnosciListaAsync(idOperatora, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcCzynnosciListaAsync(int idOperatora, object userState) {
+            if ((this.WS_SrwZlcCzynnosciListaOperationCompleted == null)) {
+                this.WS_SrwZlcCzynnosciListaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwZlcCzynnosciListaOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwZlcCzynnosciLista", new object[] {
+                        idOperatora}, this.WS_SrwZlcCzynnosciListaOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwZlcCzynnosciListaOperationCompleted(object arg) {
+            if ((this.WS_SrwZlcCzynnosciListaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwZlcCzynnosciListaCompleted(this, new WS_SrwZlcCzynnosciListaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwZlcCzynnosciPotwierdz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwZlcCzynnosciPotwierdz(int idOperatora, string jsonInput) {
+            object[] results = this.Invoke("WS_SrwZlcCzynnosciPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcCzynnosciPotwierdzAsync(int idOperatora, string jsonInput) {
+            this.WS_SrwZlcCzynnosciPotwierdzAsync(idOperatora, jsonInput, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcCzynnosciPotwierdzAsync(int idOperatora, string jsonInput, object userState) {
+            if ((this.WS_SrwZlcCzynnosciPotwierdzOperationCompleted == null)) {
+                this.WS_SrwZlcCzynnosciPotwierdzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwZlcCzynnosciPotwierdzOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwZlcCzynnosciPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput}, this.WS_SrwZlcCzynnosciPotwierdzOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwZlcCzynnosciPotwierdzOperationCompleted(object arg) {
+            if ((this.WS_SrwZlcCzynnosciPotwierdzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwZlcCzynnosciPotwierdzCompleted(this, new WS_SrwZlcCzynnosciPotwierdzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwZlcSkladnikiLista", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwZlcSkladnikiLista(int idOperatora) {
+            object[] results = this.Invoke("WS_SrwZlcSkladnikiLista", new object[] {
+                        idOperatora});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcSkladnikiListaAsync(int idOperatora) {
+            this.WS_SrwZlcSkladnikiListaAsync(idOperatora, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcSkladnikiListaAsync(int idOperatora, object userState) {
+            if ((this.WS_SrwZlcSkladnikiListaOperationCompleted == null)) {
+                this.WS_SrwZlcSkladnikiListaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwZlcSkladnikiListaOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwZlcSkladnikiLista", new object[] {
+                        idOperatora}, this.WS_SrwZlcSkladnikiListaOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwZlcSkladnikiListaOperationCompleted(object arg) {
+            if ((this.WS_SrwZlcSkladnikiListaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwZlcSkladnikiListaCompleted(this, new WS_SrwZlcSkladnikiListaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwZlcSkladnikiPotwierdz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwZlcSkladnikiPotwierdz(int idOperatora, string jsonInput) {
+            object[] results = this.Invoke("WS_SrwZlcSkladnikiPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcSkladnikiPotwierdzAsync(int idOperatora, string jsonInput) {
+            this.WS_SrwZlcSkladnikiPotwierdzAsync(idOperatora, jsonInput, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcSkladnikiPotwierdzAsync(int idOperatora, string jsonInput, object userState) {
+            if ((this.WS_SrwZlcSkladnikiPotwierdzOperationCompleted == null)) {
+                this.WS_SrwZlcSkladnikiPotwierdzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwZlcSkladnikiPotwierdzOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwZlcSkladnikiPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput}, this.WS_SrwZlcSkladnikiPotwierdzOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwZlcSkladnikiPotwierdzOperationCompleted(object arg) {
+            if ((this.WS_SrwZlcSkladnikiPotwierdzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwZlcSkladnikiPotwierdzCompleted(this, new WS_SrwZlcSkladnikiPotwierdzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwUrzadzeniaLista", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwUrzadzeniaLista(int idOperatora) {
+            object[] results = this.Invoke("WS_SrwUrzadzeniaLista", new object[] {
+                        idOperatora});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzadzeniaListaAsync(int idOperatora) {
+            this.WS_SrwUrzadzeniaListaAsync(idOperatora, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzadzeniaListaAsync(int idOperatora, object userState) {
+            if ((this.WS_SrwUrzadzeniaListaOperationCompleted == null)) {
+                this.WS_SrwUrzadzeniaListaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwUrzadzeniaListaOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwUrzadzeniaLista", new object[] {
+                        idOperatora}, this.WS_SrwUrzadzeniaListaOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwUrzadzeniaListaOperationCompleted(object arg) {
+            if ((this.WS_SrwUrzadzeniaListaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwUrzadzeniaListaCompleted(this, new WS_SrwUrzadzeniaListaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwUrzadzeniaPotwierdz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwUrzadzeniaPotwierdz(int idOperatora, string jsonInput) {
+            object[] results = this.Invoke("WS_SrwUrzadzeniaPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzadzeniaPotwierdzAsync(int idOperatora, string jsonInput) {
+            this.WS_SrwUrzadzeniaPotwierdzAsync(idOperatora, jsonInput, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzadzeniaPotwierdzAsync(int idOperatora, string jsonInput, object userState) {
+            if ((this.WS_SrwUrzadzeniaPotwierdzOperationCompleted == null)) {
+                this.WS_SrwUrzadzeniaPotwierdzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwUrzadzeniaPotwierdzOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwUrzadzeniaPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput}, this.WS_SrwUrzadzeniaPotwierdzOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwUrzadzeniaPotwierdzOperationCompleted(object arg) {
+            if ((this.WS_SrwUrzadzeniaPotwierdzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwUrzadzeniaPotwierdzCompleted(this, new WS_SrwUrzadzeniaPotwierdzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwUrzWlascLista", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwUrzWlascLista(int idOperatora) {
+            object[] results = this.Invoke("WS_SrwUrzWlascLista", new object[] {
+                        idOperatora});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzWlascListaAsync(int idOperatora) {
+            this.WS_SrwUrzWlascListaAsync(idOperatora, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzWlascListaAsync(int idOperatora, object userState) {
+            if ((this.WS_SrwUrzWlascListaOperationCompleted == null)) {
+                this.WS_SrwUrzWlascListaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwUrzWlascListaOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwUrzWlascLista", new object[] {
+                        idOperatora}, this.WS_SrwUrzWlascListaOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwUrzWlascListaOperationCompleted(object arg) {
+            if ((this.WS_SrwUrzWlascListaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwUrzWlascListaCompleted(this, new WS_SrwUrzWlascListaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwUrzWlascPotwierdz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwUrzWlascPotwierdz(int idOperatora, string jsonInput) {
+            object[] results = this.Invoke("WS_SrwUrzWlascPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzWlascPotwierdzAsync(int idOperatora, string jsonInput) {
+            this.WS_SrwUrzWlascPotwierdzAsync(idOperatora, jsonInput, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzWlascPotwierdzAsync(int idOperatora, string jsonInput, object userState) {
+            if ((this.WS_SrwUrzWlascPotwierdzOperationCompleted == null)) {
+                this.WS_SrwUrzWlascPotwierdzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwUrzWlascPotwierdzOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwUrzWlascPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput}, this.WS_SrwUrzWlascPotwierdzOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwUrzWlascPotwierdzOperationCompleted(object arg) {
+            if ((this.WS_SrwUrzWlascPotwierdzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwUrzWlascPotwierdzCompleted(this, new WS_SrwUrzWlascPotwierdzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwUrzParDefLista", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwUrzParDefLista(int idOperatora) {
+            object[] results = this.Invoke("WS_SrwUrzParDefLista", new object[] {
+                        idOperatora});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzParDefListaAsync(int idOperatora) {
+            this.WS_SrwUrzParDefListaAsync(idOperatora, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzParDefListaAsync(int idOperatora, object userState) {
+            if ((this.WS_SrwUrzParDefListaOperationCompleted == null)) {
+                this.WS_SrwUrzParDefListaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwUrzParDefListaOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwUrzParDefLista", new object[] {
+                        idOperatora}, this.WS_SrwUrzParDefListaOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwUrzParDefListaOperationCompleted(object arg) {
+            if ((this.WS_SrwUrzParDefListaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwUrzParDefListaCompleted(this, new WS_SrwUrzParDefListaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwUrzParDefPotwierdz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwUrzParDefPotwierdz(int idOperatora, string jsonInput) {
+            object[] results = this.Invoke("WS_SrwUrzParDefPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzParDefPotwierdzAsync(int idOperatora, string jsonInput) {
+            this.WS_SrwUrzParDefPotwierdzAsync(idOperatora, jsonInput, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzParDefPotwierdzAsync(int idOperatora, string jsonInput, object userState) {
+            if ((this.WS_SrwUrzParDefPotwierdzOperationCompleted == null)) {
+                this.WS_SrwUrzParDefPotwierdzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwUrzParDefPotwierdzOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwUrzParDefPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput}, this.WS_SrwUrzParDefPotwierdzOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwUrzParDefPotwierdzOperationCompleted(object arg) {
+            if ((this.WS_SrwUrzParDefPotwierdzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwUrzParDefPotwierdzCompleted(this, new WS_SrwUrzParDefPotwierdzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwUrzRodzajeLista", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwUrzRodzajeLista(int idOperatora) {
+            object[] results = this.Invoke("WS_SrwUrzRodzajeLista", new object[] {
+                        idOperatora});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzRodzajeListaAsync(int idOperatora) {
+            this.WS_SrwUrzRodzajeListaAsync(idOperatora, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzRodzajeListaAsync(int idOperatora, object userState) {
+            if ((this.WS_SrwUrzRodzajeListaOperationCompleted == null)) {
+                this.WS_SrwUrzRodzajeListaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwUrzRodzajeListaOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwUrzRodzajeLista", new object[] {
+                        idOperatora}, this.WS_SrwUrzRodzajeListaOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwUrzRodzajeListaOperationCompleted(object arg) {
+            if ((this.WS_SrwUrzRodzajeListaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwUrzRodzajeListaCompleted(this, new WS_SrwUrzRodzajeListaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwUrzRodzajePotwierdz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwUrzRodzajePotwierdz(int idOperatora, string jsonInput) {
+            object[] results = this.Invoke("WS_SrwUrzRodzajePotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzRodzajePotwierdzAsync(int idOperatora, string jsonInput) {
+            this.WS_SrwUrzRodzajePotwierdzAsync(idOperatora, jsonInput, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzRodzajePotwierdzAsync(int idOperatora, string jsonInput, object userState) {
+            if ((this.WS_SrwUrzRodzajePotwierdzOperationCompleted == null)) {
+                this.WS_SrwUrzRodzajePotwierdzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwUrzRodzajePotwierdzOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwUrzRodzajePotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput}, this.WS_SrwUrzRodzajePotwierdzOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwUrzRodzajePotwierdzOperationCompleted(object arg) {
+            if ((this.WS_SrwUrzRodzajePotwierdzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwUrzRodzajePotwierdzCompleted(this, new WS_SrwUrzRodzajePotwierdzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwUrzRodzParLista", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwUrzRodzParLista(int idOperatora) {
+            object[] results = this.Invoke("WS_SrwUrzRodzParLista", new object[] {
+                        idOperatora});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzRodzParListaAsync(int idOperatora) {
+            this.WS_SrwUrzRodzParListaAsync(idOperatora, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzRodzParListaAsync(int idOperatora, object userState) {
+            if ((this.WS_SrwUrzRodzParListaOperationCompleted == null)) {
+                this.WS_SrwUrzRodzParListaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwUrzRodzParListaOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwUrzRodzParLista", new object[] {
+                        idOperatora}, this.WS_SrwUrzRodzParListaOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwUrzRodzParListaOperationCompleted(object arg) {
+            if ((this.WS_SrwUrzRodzParListaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwUrzRodzParListaCompleted(this, new WS_SrwUrzRodzParListaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwUrzRodzParPotwierdz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwUrzRodzParPotwierdz(int idOperatora, string jsonInput) {
+            object[] results = this.Invoke("WS_SrwUrzRodzParPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzRodzParPotwierdzAsync(int idOperatora, string jsonInput) {
+            this.WS_SrwUrzRodzParPotwierdzAsync(idOperatora, jsonInput, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwUrzRodzParPotwierdzAsync(int idOperatora, string jsonInput, object userState) {
+            if ((this.WS_SrwUrzRodzParPotwierdzOperationCompleted == null)) {
+                this.WS_SrwUrzRodzParPotwierdzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwUrzRodzParPotwierdzOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwUrzRodzParPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput}, this.WS_SrwUrzRodzParPotwierdzOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwUrzRodzParPotwierdzOperationCompleted(object arg) {
+            if ((this.WS_SrwUrzRodzParPotwierdzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwUrzRodzParPotwierdzCompleted(this, new WS_SrwUrzRodzParPotwierdzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwZlcUrzLista", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwZlcUrzLista(int idOperatora) {
+            object[] results = this.Invoke("WS_SrwZlcUrzLista", new object[] {
+                        idOperatora});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcUrzListaAsync(int idOperatora) {
+            this.WS_SrwZlcUrzListaAsync(idOperatora, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcUrzListaAsync(int idOperatora, object userState) {
+            if ((this.WS_SrwZlcUrzListaOperationCompleted == null)) {
+                this.WS_SrwZlcUrzListaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwZlcUrzListaOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwZlcUrzLista", new object[] {
+                        idOperatora}, this.WS_SrwZlcUrzListaOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwZlcUrzListaOperationCompleted(object arg) {
+            if ((this.WS_SrwZlcUrzListaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwZlcUrzListaCompleted(this, new WS_SrwZlcUrzListaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("galsoftsrv/WS_SrwZlcUrzPotwierdz", RequestNamespace="galsoftsrv", ResponseNamespace="galsoftsrv", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WS_SrwZlcUrzPotwierdz(int idOperatora, string jsonInput) {
+            object[] results = this.Invoke("WS_SrwZlcUrzPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcUrzPotwierdzAsync(int idOperatora, string jsonInput) {
+            this.WS_SrwZlcUrzPotwierdzAsync(idOperatora, jsonInput, null);
+        }
+        
+        /// <remarks/>
+        public void WS_SrwZlcUrzPotwierdzAsync(int idOperatora, string jsonInput, object userState) {
+            if ((this.WS_SrwZlcUrzPotwierdzOperationCompleted == null)) {
+                this.WS_SrwZlcUrzPotwierdzOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWS_SrwZlcUrzPotwierdzOperationCompleted);
+            }
+            this.InvokeAsync("WS_SrwZlcUrzPotwierdz", new object[] {
+                        idOperatora,
+                        jsonInput}, this.WS_SrwZlcUrzPotwierdzOperationCompleted, userState);
+        }
+        
+        private void OnWS_SrwZlcUrzPotwierdzOperationCompleted(object arg) {
+            if ((this.WS_SrwZlcUrzPotwierdzCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WS_SrwZlcUrzPotwierdzCompleted(this, new WS_SrwZlcUrzPotwierdzCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -1924,6 +2924,734 @@ namespace AplikacjaSerwisowa.kwronski {
         private object[] results;
         
         internal KntAdresy_ZwrocUsunietychCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void Aplikacja_Zapisz_KontrahentowCompletedEventHandler(object sender, Aplikacja_Zapisz_KontrahentowCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class Aplikacja_Zapisz_KontrahentowCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal Aplikacja_Zapisz_KontrahentowCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void Aplikacja_Zapisz_TowaryCompletedEventHandler(object sender, Aplikacja_Zapisz_TowaryCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class Aplikacja_Zapisz_TowaryCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal Aplikacja_Zapisz_TowaryCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void Aplikacja_Zapisz_ZleceniaCompletedEventHandler(object sender, Aplikacja_Zapisz_ZleceniaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class Aplikacja_Zapisz_ZleceniaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal Aplikacja_Zapisz_ZleceniaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void Aplikacja_Zapisz_UrzadzeniaCompletedEventHandler(object sender, Aplikacja_Zapisz_UrzadzeniaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class Aplikacja_Zapisz_UrzadzeniaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal Aplikacja_Zapisz_UrzadzeniaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_KntKartyListaCompletedEventHandler(object sender, WS_KntKartyListaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_KntKartyListaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_KntKartyListaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_KntKartyPotwierdzCompletedEventHandler(object sender, WS_KntKartyPotwierdzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_KntKartyPotwierdzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_KntKartyPotwierdzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_KntAdresyListaCompletedEventHandler(object sender, WS_KntAdresyListaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_KntAdresyListaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_KntAdresyListaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_KntAdresyPotwierdzCompletedEventHandler(object sender, WS_KntAdresyPotwierdzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_KntAdresyPotwierdzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_KntAdresyPotwierdzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_TwrKartyListaCompletedEventHandler(object sender, WS_TwrKartyListaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_TwrKartyListaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_TwrKartyListaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_TwrKartyPotwierdzCompletedEventHandler(object sender, WS_TwrKartyPotwierdzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_TwrKartyPotwierdzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_TwrKartyPotwierdzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwZlcNagListaCompletedEventHandler(object sender, WS_SrwZlcNagListaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwZlcNagListaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwZlcNagListaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwZlcNagPotwierdzCompletedEventHandler(object sender, WS_SrwZlcNagPotwierdzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwZlcNagPotwierdzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwZlcNagPotwierdzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwZlcCzynnosciListaCompletedEventHandler(object sender, WS_SrwZlcCzynnosciListaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwZlcCzynnosciListaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwZlcCzynnosciListaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwZlcCzynnosciPotwierdzCompletedEventHandler(object sender, WS_SrwZlcCzynnosciPotwierdzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwZlcCzynnosciPotwierdzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwZlcCzynnosciPotwierdzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwZlcSkladnikiListaCompletedEventHandler(object sender, WS_SrwZlcSkladnikiListaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwZlcSkladnikiListaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwZlcSkladnikiListaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwZlcSkladnikiPotwierdzCompletedEventHandler(object sender, WS_SrwZlcSkladnikiPotwierdzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwZlcSkladnikiPotwierdzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwZlcSkladnikiPotwierdzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwUrzadzeniaListaCompletedEventHandler(object sender, WS_SrwUrzadzeniaListaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwUrzadzeniaListaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwUrzadzeniaListaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwUrzadzeniaPotwierdzCompletedEventHandler(object sender, WS_SrwUrzadzeniaPotwierdzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwUrzadzeniaPotwierdzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwUrzadzeniaPotwierdzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwUrzWlascListaCompletedEventHandler(object sender, WS_SrwUrzWlascListaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwUrzWlascListaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwUrzWlascListaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwUrzWlascPotwierdzCompletedEventHandler(object sender, WS_SrwUrzWlascPotwierdzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwUrzWlascPotwierdzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwUrzWlascPotwierdzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwUrzParDefListaCompletedEventHandler(object sender, WS_SrwUrzParDefListaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwUrzParDefListaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwUrzParDefListaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwUrzParDefPotwierdzCompletedEventHandler(object sender, WS_SrwUrzParDefPotwierdzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwUrzParDefPotwierdzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwUrzParDefPotwierdzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwUrzRodzajeListaCompletedEventHandler(object sender, WS_SrwUrzRodzajeListaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwUrzRodzajeListaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwUrzRodzajeListaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwUrzRodzajePotwierdzCompletedEventHandler(object sender, WS_SrwUrzRodzajePotwierdzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwUrzRodzajePotwierdzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwUrzRodzajePotwierdzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwUrzRodzParListaCompletedEventHandler(object sender, WS_SrwUrzRodzParListaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwUrzRodzParListaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwUrzRodzParListaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwUrzRodzParPotwierdzCompletedEventHandler(object sender, WS_SrwUrzRodzParPotwierdzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwUrzRodzParPotwierdzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwUrzRodzParPotwierdzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwZlcUrzListaCompletedEventHandler(object sender, WS_SrwZlcUrzListaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwZlcUrzListaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwZlcUrzListaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void WS_SrwZlcUrzPotwierdzCompletedEventHandler(object sender, WS_SrwZlcUrzPotwierdzCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WS_SrwZlcUrzPotwierdzCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WS_SrwZlcUrzPotwierdzCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
